@@ -13,7 +13,7 @@ pb.js application/javascript
 
 (function () {
  
- window.open = function (open) {return true;};
+ window.open = null;
 
 })();
 
