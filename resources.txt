@@ -11,4 +11,4 @@
 
 pb.js application/javascript
 
-window.open = function ( ) { };
+window.open = function (open) {return true;};
