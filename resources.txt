@@ -1,0 +1,14 @@
+# Resources to be used as redirect destinations or for injecting java scripts.
+#
+# - Each distinct resource entry is separated by an empty line.
+# - The first line in a resource entry is: token mime-type[;encoding]
+# - All following lines are the data. An empty line signals the end of the
+#   data.
+#
+# If the encoding is absent, the data will be converted to base64, and the
+# encoding will be set to `;base64`.
+
+
+pb.js application/javascript
+
+window.open = function ( ) { };
