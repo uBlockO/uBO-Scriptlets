@@ -12,8 +12,8 @@
 pb.js application/javascript
 
 (function () {
- 
- window.open = null;
+
+ window.open = function () {;};
 
 })();
 
