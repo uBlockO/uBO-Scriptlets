@@ -13,7 +13,7 @@ pb.js application/javascript
 
 (function () {
 
- window.open = function () {;};
+ window.open = function ( ) { };
 
 })();
 
