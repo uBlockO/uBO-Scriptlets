@@ -18,7 +18,6 @@ window.open = function ( ) { };
 
 
 adb.js application/javascript
-
 (function() {
 	
 window.check_adblock = true;
