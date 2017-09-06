@@ -9,7 +9,7 @@
 # encoding will be set to `;base64`.
 
 # popups default patch
-pb.js application/javascript
+open-defuser.js application/javascript
 window.open = function ( ) { };
 
 # kisscartoon.io
