@@ -10,7 +10,7 @@
 
 # kisscartoon.io
 adb.js application/javascript
-window.check_adblock = true;
+window.check_adblock = function() {};
 
 
 
