@@ -16,6 +16,10 @@ window.check_adblock = function () {};
 od.js application/javascript
 window.open = function () {};
 
+# confirm-defuser
+cd.js application/javascript
+window.confirm = function () {};
+
 
 
 
