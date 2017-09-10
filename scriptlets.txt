@@ -10,7 +10,11 @@
 
 # kisscartoon.io
 adb.js application/javascript
-window.check_adblock = function() {};
+window.check_adblock = function () {};
+
+# popups/unders
+od.js application/javascript
+window.open = function () {};
 
 
 
