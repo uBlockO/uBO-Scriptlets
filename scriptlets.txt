@@ -8,7 +8,7 @@
 # If the encoding is absent, the data will be converted to base64, and the
 # encoding will be set to `;base64`.
 
-# kisscartoon.io
+# kisscartoon.*
 adb.js application/javascript
 window.check_adblock = function () {};
 
