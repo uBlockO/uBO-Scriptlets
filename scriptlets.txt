@@ -20,6 +20,9 @@ window.open = function () {};
 cd.js application/javascript
 window.confirm = function () {};
 
+proxy.js application/javascript
+window.performance = function () {};
+
 
 
 
