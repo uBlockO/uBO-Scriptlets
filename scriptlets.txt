@@ -24,6 +24,10 @@ window.confirm = function () {};
 pd.js application/javascript
 window.performance = function () {};
 
+# linkbucks
+adb.js application/javascript
+window['__noAdBlock'] = function () {};
+
 
 
 
