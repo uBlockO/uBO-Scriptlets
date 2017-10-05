@@ -28,6 +28,10 @@ window.performance = function () {};
 gj.js application/javascript
 window.google_jobrunner = function () {};
 
+# tune.pk
+tu.pk application/javascript
+window.ad_blocker = function () {};
+
 
 
 
