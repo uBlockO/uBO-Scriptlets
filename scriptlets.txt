@@ -30,7 +30,7 @@ window.google_jobrunner = function () {};
 
 # tune.pk
 tu.pk application/javascript
-window.ad_blocker = function () {};
+ad_blocker = false;
 
 
 
