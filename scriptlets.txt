@@ -28,9 +28,9 @@ window.performance = function () {};
 gj.js application/javascript
 window.google_jobrunner = function () {};
 
-# tune.pk
-tu.pk application/javascript
-ad_blocker = false;
+# WebAssembly
+ws.js application/javascript
+window.WebAssembly = function () {};
 
 
 
