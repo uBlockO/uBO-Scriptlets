@@ -32,6 +32,10 @@ window.google_jobrunner = function () {};
 ws.js application/javascript
 window.WebAssembly = function () {};
 
+# BetterJsPop
+bp.js application/javascript
+window.BetterJsPop = function () {};
+
 
 
 
