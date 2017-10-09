@@ -36,6 +36,20 @@ window.WebAssembly = function () {};
 bp.js application/javascript
 window.BetterJsPop = function () {};
 
+# Location
+lo.js application/javascript
+(function () {
+
+  var _window = window;
+  var window = {};
+   Object.defineProperty(window, 'location', {
+      get: function () { return _window.location; },
+      set: function () {}
+    });
+    window.__proto__ = _window;
+    window.location = "blah";
+}());
+
 
 
 
