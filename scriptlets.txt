@@ -1,18 +1,9 @@
-# Resources to be used as redirect destinations or for injecting java scripts.
-#
-# - Each distinct resource entry is separated by an empty line.
-# - The first line in a resource entry is: token mime-type[;encoding]
-# - All following lines are the data. An empty line signals the end of the
-#   data.
-#
-# If the encoding is absent, the data will be converted to base64, and the
-# encoding will be set to `;base64`.
 
-# kisscartoon.*
+# kisscartoon.io-defuser
 adb.js application/javascript
 window.check_adblock = function () {};
 
-# popups/unders
+# popups/unders-defuser
 od.js application/javascript
 window.open = function () {};
 
@@ -28,28 +19,15 @@ window.performance = function () {};
 gj.js application/javascript
 window.google_jobrunner = function () {};
 
-# WebAssembly
+# WebAssembly-defuser
 ws.js application/javascript
 window.WebAssembly = function () {};
 
-# BetterJsPop
+# BetterJsPop-defuser
 bp.js application/javascript
 window.BetterJsPop = function () {};
 
-# Location
-lo.js application/javascript
-(function () {
-
-  var _window = window;
-  var window = {};
-   Object.defineProperty(window, 'location', {
-      get: function () { return _window.location; },
-      set: function () {}
-    });
-    window.__proto__ = _window;
-    window.location = "blah";
-}());
-
-
-
+# Imgur-defuser
+img.js application/javascript
+window.ADBLOCKED = function () {};
 
