@@ -29,5 +29,5 @@ window.BetterJsPop = function () {};
 
 # Imgur-defuser
 img.js application/javascript
-window.ADBLOCKED = function () {};
+window.ADBLOCKED = false;
 
