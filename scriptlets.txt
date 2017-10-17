@@ -31,3 +31,7 @@ window.BetterJsPop = function () {};
 img.js application/javascript
 window.ADBLOCKED = false;
 
+# XMLHttpRequest-defuser
+xhr.js application/javascript
+window.XMLHttpRequest = function () {};
+
