@@ -27,9 +27,9 @@ window.WebAssembly = function () {};
 bp.js application/javascript
 window.BetterJsPop = function () {};
 
-# Imgur-defuser
-img.js application/javascript
-window.ADBLOCKED = false;
+# adsbygoogle-defuser
+ga.js application/javascript
+window.adsbygoogle = function () {};
 
 # XMLHttpRequest-defuser
 xhr.js application/javascript
