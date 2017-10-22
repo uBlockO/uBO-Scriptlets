@@ -35,3 +35,8 @@ window.adsbygoogle = function () {};
 xhr.js application/javascript
 window.XMLHttpRequest = function () {};
 
+# autoplay-defuser
+ap.js application/javascript
+(function() {
+ var autoplay = 0;
+})(); 
