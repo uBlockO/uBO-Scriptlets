@@ -37,6 +37,9 @@ window.XMLHttpRequest = function () {};
 
 # autoplay-defuser
 ap.js application/javascript
-(function() {
- var autoplay = 0;
+(function() observe (d) {
+  let url = d.url;
+  if (url.indexOf('autoplay=') !== -1) {
+    url = url.replace('autoplay=1', 'autoplay=0');
+  }
 })(); 
