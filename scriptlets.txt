@@ -35,12 +35,6 @@ window.adsbygoogle = function () {};
 xhr.js application/javascript
 window.XMLHttpRequest = function () {};
 
-# autoplay-defuser
-ap.js application/javascript
-(function observe(d) {
-  let url = d.url;
-  if (url.indexOf('autoplay=') !== -1) {
-   url = url.replace('autoplay=1', 'autoplay=0');
-   url = url.replace('enablejsapi=1', 'enablejsapi=0');
-  }
-}); 
+# fetch-defuser
+ft.js application/javascript
+window.fetch = function () {};
