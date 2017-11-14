@@ -38,3 +38,8 @@ window.XMLHttpRequest = function () {};
 # fetch-defuser
 ft.js application/javascript
 window.fetch = function () {};
+
+# fuckadblock-defuser
+fadb.js application/javascript
+window.fuckadblock = function () {};
+
