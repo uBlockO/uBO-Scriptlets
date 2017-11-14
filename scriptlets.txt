@@ -41,5 +41,5 @@ window.fetch = function () {};
 
 # fuckadblock-defuser
 fadb.js application/javascript
-window.fuckadblock = function () {};
+window.adBlockDetected = function () {};
 
