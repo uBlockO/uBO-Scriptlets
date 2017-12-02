@@ -47,3 +47,10 @@ window.adBlockDetected = function () {};
 prom.js application/javascript
 window.Promise = function () {};
 
+# noscroll-defuser
+nos.js application/javascript
+document.body.style.overflow = 'auto';
+document.documentElement.style.overflow = 'auto';
+document.getElementById.scrolling = 'yes';
+document.body.scroll = "yes";
+
