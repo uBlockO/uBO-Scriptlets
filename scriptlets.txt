@@ -25,7 +25,7 @@ window.WebAssembly = function () {};
 
 # BetterJsPop-defuser
 bp.js application/javascript
-window.BetterJsPop = noopfn;
+window.BetterJsPop = function () {};
 
 # adsbygoogle-defuser
 ga.js application/javascript
