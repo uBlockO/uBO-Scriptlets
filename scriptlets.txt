@@ -27,10 +27,6 @@ window.XMLHttpRequest = function () {};
 ft.js application/javascript
 window.fetch = function () {};
 
-# fuckadblock-defuser
-fadb.js application/javascript
-window.adBlockDetected = function () {};
-
 # Promise-defuser
 prom.js application/javascript
 window.Promise = function () {};
