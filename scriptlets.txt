@@ -55,3 +55,65 @@ document.documentElement.style.overflow = 'auto';
 document.getElementById.scrolling = 'yes';
 document.body.scroll = "yes";
 
+# setTimeout-booster
+sTb.js application/javascript
+(function() {
+	console.log('setTimeout-booster was injected!');
+	var z = window.setTimeout,
+		needle = '{{1}}',
+		delay = parseInt('{{2}}', 10),
+		boost = parseInt('{{3}}', 10);
+	if ( needle === '' || needle === '{{1}}' ) {
+		needle = '.?';
+	} else if ( needle.charAt(0) === '/' && needle.slice(-1) === '/' ) {
+		needle = needle.slice(1, -1);
+	} else {
+		needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+	}
+	needle = new RegExp(needle);
+	if ( isNaN(delay) ) {
+		delay = 1000;
+	}
+	if ( isNaN(boost) || boost < 0.01 ) {
+		boost = 0.0001;
+	}
+	window.setTimeout = function(a, b) {
+		if ( b === delay && needle.test(a.toString()) ) {
+			b *= boost;
+		}
+		return z.apply(this, arguments);
+	}.bind(window);
+})();
+
+rDo.js application/javascript
+(function() {
+	console.warn('readonly-property was injected!');
+	var name = '{{1}}';
+	var data = '{{2}}';
+	if ( data === '' || data === '{{2}}' ) {
+		return;
+	}
+	var define = function(payload) {
+	try {
+			Object.defineProperty(window, name, {
+				configurable: false,
+				set: function() {
+					;
+				},
+				get: function() {
+					return payload;
+				}
+			});
+		} catch ( err ) { }
+	};
+	switch ( data ) {
+		case 'true':		return define(true);
+		case 'false':		return define(false);
+		case '1':		return define(1);
+		case '0':		return define(0);
+		case 'NaN':		return define(NaN);
+		case 'undefined':	return define(undefined);
+		default:		return;
+	}
+})();
+
