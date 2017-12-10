@@ -1,8 +1,4 @@
 
-# kisscartoon.io-defuser
-adb.js application/javascript
-window.check_adblock = noopfn;
-
 # popups/unders-defuser
 od.js application/javascript
 window.open = function () {};
@@ -15,10 +11,6 @@ window.confirm = function () {};
 pd.js application/javascript
 window.performance = function () {};
 
-# google_jobrunner-defuser
-gj.js application/javascript
-window.google_jobrunner = function () {};
-
 # WebAssembly-defuser
 ws.js application/javascript
 window.WebAssembly = function () {};
@@ -26,10 +18,6 @@ window.WebAssembly = function () {};
 # BetterJsPop-defuser
 bp.js application/javascript
 window.BetterJsPop = function () {};
-
-# adsbygoogle-defuser
-ga.js application/javascript
-window.adsbygoogle = function () {};
 
 # XMLHttpRequest-defuser
 xhr.js application/javascript
