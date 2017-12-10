@@ -85,6 +85,7 @@ sTb.js application/javascript
 	}.bind(window);
 })();
 
+# read-Only-property defuser
 rDo.js application/javascript
 (function() {
 	console.warn('readonly-property was injected!');
