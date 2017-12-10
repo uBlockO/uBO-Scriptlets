@@ -56,9 +56,9 @@ document.getElementById.scrolling = 'yes';
 document.body.scroll = "yes";
 
 # setTimeout-booster
-sTb.js application/javascript
+stb.js application/javascript
 (function() {
-	console.log('setTimeout-booster was injected!');
+	console.log('setTimeout-booster injected!');
 	var z = window.setTimeout,
 		needle = '{{1}}',
 		delay = parseInt('{{2}}', 10),
@@ -86,9 +86,9 @@ sTb.js application/javascript
 })();
 
 # read-Only-property defuser
-rDo.js application/javascript
+rdo.js application/javascript
 (function() {
-	console.warn('readonly-property was injected!');
+	console.log('readonly-property injected!');
 	var name = '{{1}}';
 	var data = '{{2}}';
 	if ( data === '' || data === '{{2}}' ) {
@@ -116,5 +116,22 @@ rDo.js application/javascript
 		case 'undefined':	return define(undefined);
 		default:		return;
 	}
+})();
+
+# element-baiter
+bait.js application/javascript
+(function() {
+	console.log('bait-element injected!');
+	var identifier = '{{1}}';
+	var element = document.createElement('div');
+	if ( identifier.charAt(0) === '#' ) {
+		element.id = identifier.substring(1);
+	} else if ( identifier.charAt(0) === '.' ) {
+		element.className = identifier.substring(1);
+	} else {
+		return;
+	}
+	element.style.display = 'none';
+	document.documentElement.appendChild(element);
 })();
 
