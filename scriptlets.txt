@@ -135,3 +135,54 @@ bait.js application/javascript
 	document.documentElement.appendChild(element);
 })();
 
+# setInterval-booster
+sib.js application/javascript
+(function() {
+	console.log('setInterval-booster injected');
+	var z = window.setInterval,
+		needle = '{{1}}',
+		delay = parseInt('{{2}}', 10),
+		boost = parseInt('{{3}}', 10);
+	if ( needle === '' || needle === '{{1}}' ) {
+		needle = '.?';
+	} else if ( needle.charAt(0) === '/' && needle.slice(-1) === '/' ) {
+		needle = needle.slice(1, -1);
+	} else {
+		needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+	}
+	needle = new RegExp(needle);
+	if ( isNaN(delay) ) {
+		delay = 1000;
+	}
+	if ( isNaN(boost) || boost < 0.01 ) {
+		boost = 0.0001;
+	}
+	window.setInterval = function(a, b) {
+		if ( b === delay && needle.test(a.toString()) ) {
+			b *= boost;
+		}
+		return z.apply(this, arguments);
+	}.bind(window);
+})();
+
+# element-remover
+reor.js application/javascript
+(function() {
+	console.log('remove-element injected!');
+	var selector = '{{1}}';
+	if ( selector === '' || selector === '{{1}}' ) {
+		return;
+	}
+	var remove = function() {
+		var elements = document.querySelectorAll(selector);
+		for ( let element of elements ) {
+			element.remove();
+		}
+	};
+	if ( document.readyState === 'interactive' || document.readyState === 'complete' ) {
+		remove();
+	} else {
+		window.addEventListener('DOMContentLoaded', remove);
+	}
+})();
+
