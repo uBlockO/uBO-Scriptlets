@@ -168,5 +168,6 @@ AAAAHGZ0eXBNNFYgAAACAGlzb21pc28yYXZjMQAAAAhmcmVlAAAGF21kYXTeBAAAbGliZmFhYyAxLjI4
 # cookie-inserter
 cookie.js application/javascript
 document.cookie = '{{1}}={{2}}';
+console.log('Cookie inserted!');
 
 
