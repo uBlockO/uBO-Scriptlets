@@ -167,7 +167,6 @@ AAAAHGZ0eXBNNFYgAAACAGlzb21pc28yYXZjMQAAAAhmcmVlAAAGF21kYXTeBAAAbGliZmFhYyAxLjI4
 
 # cookie-inserter
 cookie.js application/javascript
-(function() {
-	   document.cookie = '{{1}}={{2}}';
-})();	
+document.cookie = '{{1}}={{2}}';
+
 
