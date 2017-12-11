@@ -170,6 +170,6 @@ cookie.js application/javascript
 (function() {
 	var name = '{{1}}';
 	var value = '{{2}}';
-	document.cookie = name + value;
+	document.cookie = 'name=value';
 })();	
 
