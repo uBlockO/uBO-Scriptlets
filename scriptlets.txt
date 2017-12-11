@@ -39,7 +39,7 @@ document.documentElement.style.overflow = 'auto';
 document.getElementById.scrolling = 'yes';
 document.body.scroll = "yes";
 
-# setTimeout-booster
+# setTimeout-booster --by jspenguin2017
 stb.js application/javascript
 (function() {
 	console.log('setTimeout-booster injected!');
@@ -69,7 +69,7 @@ stb.js application/javascript
 	}.bind(window);
 })();
 
-# read-Only-property defuser
+# read-Only-property defuser --by jspenguin2017
 rdo.js application/javascript
 (function() {
 	console.log('readonly-property injected!');
@@ -102,7 +102,7 @@ rdo.js application/javascript
 	}
 })();
 
-# element-baiter
+# element-baiter -- by jspenguin2017
 bait.js application/javascript
 (function() {
 	console.log('bait-element injected!');
@@ -119,7 +119,7 @@ bait.js application/javascript
 	document.documentElement.appendChild(element);
 })();
 
-# setInterval-booster
+# setInterval-booster --by jspenguin2017
 sib.js application/javascript
 (function() {
 	console.log('setInterval-booster injected');
@@ -149,7 +149,7 @@ sib.js application/javascript
 	}.bind(window);
 })();
 
-# element-remover
+# element-remover --by jspenguin2017
 reor.js application/javascript
 (function() {
 	console.log('remove-element injected!');
