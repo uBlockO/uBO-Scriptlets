@@ -1,28 +1,3 @@
-
-# popups/unders-defuser
-od.js application/javascript
-window.open = function () {};
-
-# performance-defuser
-pd.js application/javascript
-window.performance = function () {};
-
-# WebAssembly-defuser
-ws.js application/javascript
-window.WebAssembly = function () {};
-
-# BetterJsPop-defuser
-bp.js application/javascript
-window.BetterJsPop = function () {};
-
-# XMLHttpRequest-defuser
-xhr.js application/javascript
-window.XMLHttpRequest = function () {};
-
-# Promise-defuser
-prom.js application/javascript
-window.Promise = function () {};
-
 # noscroll-defuser
 nos.js application/javascript
 document.body.style.setProperty('overflow', 'auto');
@@ -64,14 +39,11 @@ stb.js application/javascript
 # read-Only-property defuser --by jspenguin2017
 rdo.js application/javascript
 (function() {
-	console.log('readonly-property injected!');
+	console.log('readonly-property inject!');
 	var name = '{{1}}';
 	var data = '{{2}}';
-	if ( data === '' || data === '{{2}}' ) {
-		return;
-	}
 	var define = function(payload) {
-	try {
+		try {
 			Object.defineProperty(window, name, {
 				configurable: false,
 				set: function() {
@@ -88,8 +60,8 @@ rdo.js application/javascript
 		case 'false':		return define(false);
 		case '1':		return define(1);
 		case '0':		return define(0);
-		case 'NaN':		return define(NaN);
 		case 'undefined':	return define(undefined);
+		case 'noopFunc':	return define(function() { ; });
 		default:		return;
 	}
 })();
