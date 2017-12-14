@@ -62,6 +62,7 @@ rdo.js application/javascript
 		case '0':		return define(0);
 		case 'undefined':	return define(undefined);
 		case 'noopFunc':	return define(function() { ; });
+		case '{{2}}':           return define({{2}});
 		default:		return;
 	}
 })();
