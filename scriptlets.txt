@@ -9,7 +9,6 @@ document.body.scroll = "yes";
 # setTimeout-booster
 stb.js application/javascript
 (function() {
-	console.log('setTimeout-booster injected!');
 	var z = window.setTimeout,
 		needle = '{{1}}',
 		delay = parseInt('{{2}}', 10),
@@ -34,12 +33,12 @@ stb.js application/javascript
 		}
 		return z.apply(this, arguments);
 	}.bind(window);
+	console.log('setTimeout-booster injected!');
 })();
 
 # read-Only-property defuser
 rdo.js application/javascript
 (function() {
-	console.log('readonly-property injected!');
 	var name = '{{1}}';
 	var data = '{{2}}';
 	var define = function(payload) {
@@ -64,12 +63,12 @@ rdo.js application/javascript
 		case 'noopFunc':	return define(function() { ; });
 		default:		return;
 	}
+	console.log('readonly-property injected!');
 })();
 
 # element-baiter
 bait.js application/javascript
 (function() {
-	console.log('bait-element injected!');
 	var identifier = '{{1}}';
 	var element = document.createElement('div');
 	if ( identifier.charAt(0) === '#' ) {
@@ -81,12 +80,12 @@ bait.js application/javascript
 	}
 	element.style.display = 'none';
 	document.documentElement.appendChild(element);
+	console.log('element baiter injected!');
 })();
 
 # setInterval-booster
 sib.js application/javascript
 (function() {
-	console.log('setInterval-booster injected');
 	var z = window.setInterval,
 		needle = '{{1}}',
 		delay = parseInt('{{2}}', 10),
@@ -111,12 +110,12 @@ sib.js application/javascript
 		}
 		return z.apply(this, arguments);
 	}.bind(window);
+	console.log('setInterval-booster injected');
 })();
 
 # element-remover
 reor.js application/javascript
 (function() {
-	console.log('remove-element injected!');
 	var selector = '{{1}}';
 	if ( selector === '' || selector === '{{1}}' ) {
 		return;
@@ -132,6 +131,7 @@ reor.js application/javascript
 	} else {
 		window.addEventListener('DOMContentLoaded', remove);
 	}
+	console.log('element-remover injected!');
 })();
 
 noopmp4 video/mp4;base64
