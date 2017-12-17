@@ -39,7 +39,7 @@ stb.js application/javascript
 # read-Only-property defuser
 rdo.js application/javascript
 (function() {
-	console.log('readonly-property inject!');
+	console.log('readonly-property injected!');
 	var name = '{{1}}';
 	var data = '{{2}}';
 	var define = function(payload) {
