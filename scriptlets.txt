@@ -33,7 +33,6 @@ stb.js application/javascript
 		}
 		return z.apply(this, arguments);
 	}.bind(window);
-	console.log('setTimeout-booster injected!');
 })();
 
 # read-Only-property defuser
@@ -63,7 +62,6 @@ rdo.js application/javascript
 		case 'noopFunc':	return define(function() { ; });
 		default:		return;
 	}
-	console.log('readonly-property injected!');
 })();
 
 # element-baiter
@@ -80,7 +78,6 @@ bait.js application/javascript
 	}
 	element.style.display = 'none';
 	document.documentElement.appendChild(element);
-	console.log('element baiter injected!');
 })();
 
 # setInterval-booster
@@ -110,7 +107,6 @@ sib.js application/javascript
 		}
 		return z.apply(this, arguments);
 	}.bind(window);
-	console.log('setInterval-booster injected');
 })();
 
 # element-remover
@@ -131,7 +127,6 @@ reor.js application/javascript
 	} else {
 		window.addEventListener('DOMContentLoaded', remove);
 	}
-	console.log('element-remover injected!');
 })();
 
 noopmp4 video/mp4;base64
@@ -140,6 +135,5 @@ AAAAHGZ0eXBNNFYgAAACAGlzb21pc28yYXZjMQAAAAhmcmVlAAAGF21kYXTeBAAAbGliZmFhYyAxLjI4
 # cookie-inserter
 cookie.js application/javascript
 document.cookie = '{{1}}={{2}}';
-console.log('Cookie inserted!');
 
 
