@@ -21,10 +21,10 @@ stb.js application/javascript
 		needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 	}
 	needle = new RegExp(needle);
-	if ( isNaN(delay) ) {
+	if ( isNaN(delay) || !isFinite(delay)) {
 		delay = 1000;
 	}
-	if ( isNaN(boost) || boost < 0.01 ) {
+	if ( isNaN(boost) || !isFinite(boost) || boost < 0.01 ) {
 		boost = 0.0001;
 	}
 	window.setTimeout = function(a, b) {
@@ -95,10 +95,10 @@ sib.js application/javascript
 		needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 	}
 	needle = new RegExp(needle);
-	if ( isNaN(delay) ) {
+	if ( isNaN(delay) || !isFinite(delay)) {
 		delay = 1000;
 	}
-	if ( isNaN(boost) || boost < 0.01 ) {
+	if ( isNaN(boost) || !isFinite(boost) || boost < 0.01 ) {
 		boost = 0.0001;
 	}
 	window.setInterval = function(a, b) {
