@@ -164,7 +164,7 @@ frd.js application/javascript
 	}
 	function removeBody() {
 		try {
-			document.body.parentNode.removeChild(document.body);
+			document.body.innerHTML = '';
 			return true;
 		} catch (e) {};
 		return false;
