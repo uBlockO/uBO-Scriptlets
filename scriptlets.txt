@@ -136,8 +136,64 @@ AAAAHGZ0eXBNNFYgAAACAGlzb21pc28yYXZjMQAAAAhmcmVlAAAGF21kYXTeBAAAbGliZmFhYyAxLjI4
 cookie.js application/javascript
 document.cookie = '{{1}}={{2}}';
 
-# Webstore-defuser
-web.js application/javascript
-delete chrome.webstore;
+# frame-defuser
+frd.js application/javascript
+(function() {
+	var log = console.log.bind(console);
+	var removedHead = {
+		async: false,
+		result: false
+	};
+	var removedBody = removedHead;
+	var url = 'unknown';
+	try {
+		url = window.location.href || url;
+	} catch (e) {};
+	function inIframe() {
+		try {
+			return window.self !== window.top;
+		} catch (e) {};
+		return true;
+	}
+	function removeHead() {
+		try {
+			document.head.innerHTML = '';
+			return true;
+		} catch (e) {};
+		return false;
+	}
+	function removeBody() {
+		try {
+			document.body.parentNode.removeChild(document.body);
+			return true;
+		} catch (e) {};
+		return false;
+	}
+	if (inIframe()) {
+		if (document.head) {
+			removedHead.result = removeHead();
+		} else {
+			setTimeout(function() {
+				removedHead.async = true;
+				removedHead.result = removeHead();
+			}, 0);
+		}
+		if (document.body) {
+			removedBody.result = removeBody();
+		} else {
+			setTimeout(function() {
+				removedBody.async = true;
+				removedBody.result = removeBody();
+			}, 0);
+		}
+		setTimeout(function() {
+			log('uBO> Removed frame content [HEAD:%s] [BODY:%s] [URL:%s]',
+				removedHead.result + (removedHead.async ? ',async' : ''),
+				removedBody.result + (removedBody.async ? ',async' : ''),
+				url
+			);
+		}, 10);
+	}
+})();
 
 
