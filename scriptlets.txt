@@ -58,10 +58,12 @@ rdo.js application/javascript
 		case 'false':		return define(false);
 		case '1':		return define(1);
 		case '0':		return define(0);
+		case 'null':            return define(null);
 		case 'undefined':	return define(undefined);
 		case 'noopFunc':	return define(function() { });
 		case 'trueFunc':        return define(function() { return true; });
 		case 'falseFunc':       return define(function() { return false; });
+		case 'nullFunc':        return define(function() { return null; });
 		default:		return;
 	}
 })();
