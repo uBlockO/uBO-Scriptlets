@@ -59,7 +59,9 @@ rdo.js application/javascript
 		case '1':		return define(1);
 		case '0':		return define(0);
 		case 'undefined':	return define(undefined);
-		case 'noopFunc':	return define(function() { ; });
+		case 'noopFunc':	return define(function() { });
+		case 'trueFunc':        return define(function() { return true; });
+		case 'falseFunc':       return define(function() { return false; });
 		default:		return;
 	}
 })();
@@ -134,7 +136,7 @@ AAAAHGZ0eXBNNFYgAAACAGlzb21pc28yYXZjMQAAAAhmcmVlAAAGF21kYXTeBAAAbGliZmFhYyAxLjI4
 
 # cookie-inserter
 cookie.js application/javascript
-document.cookie = '{{1}}={{2}}';
+document.cookie = '{{1}}={{2}}; expires=Fri, 31 Dec 2099 23:59:59 GMT; path=/;';
 
 # frame-defuser
 frd.js application/javascript
