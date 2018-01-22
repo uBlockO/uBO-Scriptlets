@@ -200,4 +200,24 @@ frd.js application/javascript
 	}
 })();
 
+# atob-defuser
+noatob-if.js application/javascript
+(function() {
+	var needle = '{{1}}';
+	if ( needle === '' || needle === '{{1}}' ) {
+		needle = '.?';
+	} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
+		needle = needle.slice(1,-1);
+	} else {
+		needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+	}
+	needle = new RegExp(needle);
+	realNoAtob = window.atob;
+	window.atob = function(a) {
+		if ( !needle.test(a.toString()) ) {
+			realNoAtob.call(window, a);
+		}
+	}.bind(window);
+})();
+
 
