@@ -220,4 +220,15 @@ noatob-if.js application/javascript
 	}.bind(window);
 })();
 
+# atob-logger
+atob-logger.js application/javascript
+(function() {
+	var z = window.atob,
+		log = console.log.bind(console);
+	window.atob = function(a) {
+		log('uBO: atob("%s")', a.toString());
+		return z.apply(this, arguments);
+	}.bind(window);
+})();
+
 
