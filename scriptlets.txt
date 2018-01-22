@@ -216,7 +216,6 @@ noatob-if.js application/javascript
 	window.atob = function(a) {
 		if ( !needle.test(a.toString()) ) {
 			realNoAtob.call(window, a);
-			console.log('Document tried to atob... \n' + a);
 		}
 	}.bind(window);
 })();
