@@ -201,7 +201,7 @@ frd.js application/javascript
 })();
 
 # atob-defuser
-noatob-if.js application/javascript
+noatob.js application/javascript
 (function() {
 	var needle = '{{1}}';
 	if ( needle === '' || needle === '{{1}}' ) {
@@ -232,7 +232,7 @@ atob-logger.js application/javascript
 })();
 
 # btoa-defuser
-nobtoa-if.js application/javascript
+nobtoa.js application/javascript
 (function() {
 	var needle = '{{1}}';
 	if ( needle === '' || needle === '{{1}}' ) {
@@ -261,5 +261,69 @@ btoa-logger.js application/javascript
 		return z.apply(this, arguments);
 	}.bind(window);
 })();
+
+# decodeURIComponent-defuser
+noduc.js application/javascript
+(function() {
+	var needle = '{{1}}';
+	if ( needle === '' || needle === '{{1}}' ) {
+		needle = '.?';
+	} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
+		needle = needle.slice(1,-1);
+	} else {
+		needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+	}
+	needle = new RegExp(needle);
+	realnoduc = window.decodeURIComponent;
+	window.decodeURIComponent = function(a) {
+		if ( !needle.test(a.toString()) ) {
+			realnoduc.call(window, a);
+		}
+	}.bind(window);
+})();
+
+# decodeURIComponent-logger
+duc-logger.js application/javascript
+(function() {
+	var z = window.decodeURIComponent,
+		log = console.log.bind(console);
+	window.decodeURIComponent = function(a) {
+		log('uBO: decodeURIComponent("%s")', a.toString());
+		return z.apply(this, arguments);
+	}.bind(window);
+})();
+
+# encodeURIComponent-defuser
+noeuc.js application/javascript
+(function() {
+	var needle = '{{1}}';
+	if ( needle === '' || needle === '{{1}}' ) {
+		needle = '.?';
+	} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
+		needle = needle.slice(1,-1);
+	} else {
+		needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+	}
+	needle = new RegExp(needle);
+	realnoeuc = window.encodeURIComponent;
+	window.encodeURIComponent = function(a) {
+		if ( !needle.test(a.toString()) ) {
+			realnoeuc.call(window, a);
+		}
+	}.bind(window);
+})();
+
+# encodeURIComponent-logger
+euc-logger.js application/javascript
+(function() {
+	var z = window.encodeURIComponent,
+		log = console.log.bind(console);
+	window.encodeURIComponent = function(a) {
+		log('uBO: encodeURIComponent("%s")', a.toString());
+		return z.apply(this, arguments);
+	}.bind(window);
+})();
+
+
 
 
