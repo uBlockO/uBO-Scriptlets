@@ -6,6 +6,14 @@ document.documentElement.style.overflow = 'auto';
 document.getElementById.scrolling = 'yes';
 document.body.scroll = "yes";
 
+# eval-logger 
+eval-logger.js application/javascript
+(function() {
+	window.eval = function(s) {
+		console.log('uBO: eval\n' + s);
+	}
+})();
+
 # setTimeout-booster
 stb.js application/javascript
 (function() {
