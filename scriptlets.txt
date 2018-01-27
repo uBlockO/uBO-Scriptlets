@@ -9,9 +9,12 @@ document.body.scroll = "yes";
 # eval-logger 
 eval-logger.js application/javascript
 (function() {
-	window.eval = function(s) {
-		console.log('uBO: eval\n' + s);
-	}
+	var z = window.eval,
+		log = console.log.bind(console);
+	window.eval = function(a) {
+		log('uBO: eval("%s")', a.toString());
+		return z.apply(this, arguments);
+	}.bind(window);
 })();
 
 # setTimeout-booster
