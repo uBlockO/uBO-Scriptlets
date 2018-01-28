@@ -366,7 +366,7 @@ nopi-logger.js application/javascript
 	}.bind(window);
 })();
 
-# String.fromCharCode-defuser
+# String.prototype.charCodeAt-defuser
 schar.js application/javascript
 (function() {
 	var needle = '{{1}}';
@@ -378,21 +378,21 @@ schar.js application/javascript
 		needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 	}
 	needle = new RegExp(needle);
-	realschar = window.String.fromCharCode;
-	window.String.fromCharCode = function(a) {
+	realschar = window.String.prototype.charCodeAt;
+	window.String.prototype.charCodeAt = function(a) {
 		if ( !needle.test(a.toString()) ) {
 			realschar.call(window, a);
 		}
 	}.bind(window);
 })();
 
-# String.fromCharCode-logger
+# String.prototype.charCodeAt-logger
 schar-logger.js application/javascript
 (function() {
-	var z = window.String.fromCharCode,
+	var z = window.String.prototype.charCodeAt,
 		log = console.log.bind(console);
-	window.String.fromCharCode = function(a) {
-		log('uBO: String.fromCharCode("%s")', a.toString());
+	window.String.prototype.charCodeAt = function(a) {
+		log('uBO: String.prototype.charCodeAt("%s")', a.toString());
 		return z.apply(this, arguments);
 	}.bind(window);
 })();
