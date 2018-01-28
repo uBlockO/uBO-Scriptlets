@@ -1,4 +1,4 @@
-# Resources to be used for injection/redirection.
+# Collection of scriptlets to be used for injection/redirection on specific domains.
 #
 # - Each distinct resource entry is separated by an empty line.
 # - The first line in a resource entry is: token mime-type[;encoding]
@@ -402,7 +402,7 @@ schar-logger.js application/javascript
 	var z = window.String.prototype.charCodeAt,
 		log = console.log.bind(console);
 	window.String.prototype.charCodeAt = function(a) {
-		log('uBO: String.prototype.charCodeAt("%x")', a.toString());
+		log('uBO: String.prototype.charCodeAt("%s")', a.toString());
 		return z.apply(this, arguments);
 	}.bind(window);
 })();
