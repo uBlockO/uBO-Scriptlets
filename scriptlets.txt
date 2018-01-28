@@ -392,7 +392,7 @@ schar-logger.js application/javascript
 	var z = window.String.prototype.charCodeAt,
 		log = console.log.bind(console);
 	window.String.prototype.charCodeAt = function(a) {
-		log('uBO: String.prototype.charCodeAt("%d")', a.toString());
+		log('uBO: String.prototype.charCodeAt("%x")', a.toString());
 		return z.apply(this, arguments);
 	}.bind(window);
 })();
