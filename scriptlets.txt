@@ -407,8 +407,8 @@ schar-logger.js application/javascript
 	}.bind(window);
 })();
 
-# $.ajax-defuser
-noajax.js application/javascript
+# document.write-defuser
+dwrite.js application/javascript
 (function() {
 	var needle = '{{1}}';
 	if ( needle === '' || needle === '{{1}}' ) {
@@ -419,11 +419,22 @@ noajax.js application/javascript
 		needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 	}
 	needle = new RegExp(needle);
-	realajax = window.$.ajax;
-	window.$.ajax = function(a) {
+	dwrite = window.document.write;
+	window.document.write = function(a) {
 		if ( !needle.test(a.toString()) ) {
-			realajax.call(window, a);
+			dwrite.call(window, a);
 		}
+	}.bind(window);
+})();
+
+# document.write-logger
+dwrite-logger.js application/javascript
+(function() {
+	var z = window.document.write,
+		log = console.log.bind(console);
+	window.document.write = function(a) {
+		log('uBO: document.write("%s")', a.toString());
+		return z.apply(this, arguments);
 	}.bind(window);
 })();
 
