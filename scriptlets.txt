@@ -419,10 +419,10 @@ dwrite.js application/javascript
 		needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 	}
 	needle = new RegExp(needle);
-	dwrite = window.document.write;
+	rdwrite = window.document.write;
 	window.document.write = function(a) {
 		if ( !needle.test(a.toString()) ) {
-			dwrite.call(window, a);
+			rdwrite.call(window, a);
 		}
 	}.bind(window);
 })();
