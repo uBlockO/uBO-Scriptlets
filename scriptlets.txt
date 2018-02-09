@@ -438,10 +438,35 @@ dwrite-logger.js application/javascript
 	}.bind(window);
 })();
 
-# console-defuser
-noconsole.js application/javascript
+# document.getElementById-defuser
+dgebi.js application/javascript
 (function() {
-	window.console = function() {}.bind(window);
+	var needle = '{{1}}';
+	if ( needle === '' || needle === '{{1}}' ) {
+		needle = '.?';
+	} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
+		needle = needle.slice(1,-1);
+	} else {
+		needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+	}
+	needle = new RegExp(needle);
+	rdgebi = window.document.getElementById;
+	window.document.getElementById = function(a) {
+		if ( !needle.test(a.toString()) ) {
+			rdgebi.call(window, a);
+		}
+	}.bind(window);
+})();
+
+# document.getElementById-logger
+dgebi-logger.js application/javascript
+(function() {
+	var z = window.document.getElementById,
+		log = console.log.bind(console);
+	window.document.getElementById = function(a) {
+		log('uBO: document.getElementById("%s")', a.toString());
+		return z.apply(this, arguments);
+	}.bind(window);
 })();
 
 
