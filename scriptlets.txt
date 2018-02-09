@@ -438,6 +438,14 @@ dwrite-logger.js application/javascript
 	}.bind(window);
 })();
 
+# console-defuser
+noconsole.js application/javascript
+(function() {
+	window.console = function(s) {
+		console.log('uBO: console: + s);
+	}.bind(window);
+})();
+
 
 
 
