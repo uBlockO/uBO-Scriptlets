@@ -441,9 +441,7 @@ dwrite-logger.js application/javascript
 # console-defuser
 noconsole.js application/javascript
 (function() {
-	window.console = function(s) {
-		console.log('uBO: console: + s);
-	}.bind(window);
+	window.console = function() {}.bind(window);
 })();
 
 
