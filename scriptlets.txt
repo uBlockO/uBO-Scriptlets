@@ -430,7 +430,7 @@ dwrite.js application/javascript
 # document.write-logger
 dwrite-logger.js application/javascript
 (function() {
-	var z = window.document.write,
+	var z = window.document.write.bind(document),
 		log = console.log.bind(console);
 	window.document.write = function(a) {
 		log('uBO: document.write("%s")', a.toString());
@@ -461,7 +461,7 @@ dgebi.js application/javascript
 # document.getElementById-logger
 dgebi-logger.js application/javascript
 (function() {
-	var z = window.document.getElementById,
+	var z = window.document.getElementById.bind(document),
 		log = console.log.bind(console);
 	window.document.getElementById = function(a) {
 		log('uBO: document.getElementById("%s")', a.toString());
