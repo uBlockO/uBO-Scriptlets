@@ -469,8 +469,8 @@ dgebi-logger.js application/javascript
 	}.bind(window);
 })();
 
-# document.cookie-defuser
-dck.js application/javascript
+# window.alert-defuser
+alt.js application/javascript
 (function() {
 	var needle = '{{1}}';
 	if ( needle === '' || needle === '{{1}}' ) {
@@ -481,21 +481,21 @@ dck.js application/javascript
 		needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 	}
 	needle = new RegExp(needle);
-	rdck = window.document.cookie;
-	window.document.cookie = function(a) {
+	ralt = window.alert;
+	window.alert = function(a) {
 		if ( !needle.test(a.toString()) ) {
-			rdck.call(window, a);
+			ralt.call(window, a);
 		}
 	}.bind(window);
 })();
 
-# document.cookie-logger
-dck-logger.js application/javascript
+# window.alert-logger
+alt-logger.js application/javascript
 (function() {
-	var z = window.document.cookie,
+	var z = window.alert,
 		log = console.log.bind(console);
-	window.document.cookie = function(a) {
-		log('uBO: document.cookie("%s")', a.toString());
+	window.alert = function(a) {
+		log('uBO: window.alert("%s")', a.toString());
 		return z.apply(this, arguments);
 	}.bind(window);
 })();
