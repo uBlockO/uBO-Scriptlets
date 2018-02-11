@@ -554,7 +554,7 @@ xhr.js application/javascript
 # XMLHttpRequest-logger
 xhr-logger.js application/javascript
 (function() {
-	var z = window.XMLHttpRequest,
+	var z = window.XMLHttpRequest.bind(window),
 		log = console.log.bind(console);
 	window.XMLHttpRequest = function(a) {
 		log('uBO: XMLHttpRequest("%s")', a.toString());
