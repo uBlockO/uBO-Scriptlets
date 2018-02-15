@@ -562,6 +562,37 @@ drs-logger.js application/javascript
 	}.bind(window);
 })();
 
+# document.querySelector-defuser
+dqs.js application/javascript
+(function() {
+	var needle = '{{1}}';
+	if ( needle === '' || needle === '{{1}}' ) {
+		needle = '.?';
+	} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
+		needle = needle.slice(1,-1);
+	} else {
+		needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+	}
+	needle = new RegExp(needle);
+	rdqs = window.document.querySelector.bind(document);
+	window.document.querySelector = function(a) {
+		if ( !needle.test(a.toString()) ) {
+			rdqs.call(window, a);
+		}
+	}.bind(window);
+})();
+
+# document.querySelector-logger
+dqs-logger.js application/javascript
+(function() {
+	var z = window.document.querySelector.bind(document),
+		log = console.log.bind(console);
+	window.document.querySelector = function(a) {
+		log('uBO: document.querySelector("%s")', a.toString());
+		return z.apply(this, arguments);
+	}.bind(window);
+})();
+
 
 
 
