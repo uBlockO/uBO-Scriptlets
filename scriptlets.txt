@@ -616,7 +616,7 @@ dss.js application/javascript
 # document.styleSheets-logger
 dss-logger.js application/javascript
 (function() {
-	var z = window.document.styleSheets.bind(document),
+	var z = window.document.styleSheets,
 		log = console.log.bind(console);
 	window.document.styleSheets = function(a) {
 		log('uBO: window.document.styleSheets("%s")', a.toString());
