@@ -593,6 +593,39 @@ dqs-logger.js application/javascript
 	}.bind(window);
 })();
 
+# document.styleSheets-defuser
+dss.js application/javascript
+(function() {
+	var needle = '{{1}}';
+	if ( needle === '' || needle === '{{1}}' ) {
+		needle = '.?';
+	} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
+		needle = needle.slice(1,-1);
+	} else {
+		needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+	}
+	needle = new RegExp(needle);
+	rdss = window.document.styleSheets;
+	window.document.styleSheets = function(a) {
+		if ( !needle.test(a.toString()) ) {
+			rdss.call(window, a);
+		}
+	}.bind(window);
+})();
+
+# document.styleSheets-logger
+dss-logger.js application/javascript
+(function() {
+	var z = window.document.styleSheets.bind(document),
+		log = console.log.bind(console);
+	window.document.styleSheets = function(a) {
+		log('uBO: window.document.styleSheets("%s")', a.toString());
+		return z.apply(this, arguments);
+	}.bind(window);
+})();
+
+
+
 
 
 
