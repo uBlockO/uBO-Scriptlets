@@ -450,7 +450,7 @@ dgebi.js application/javascript
 		needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 	}
 	needle = new RegExp(needle);
-	rdgebi = window.document.getElementById;
+	rdgebi = window.document.getElementById.bind(document);
 	window.document.getElementById = function(a) {
 		if ( !needle.test(a.toString()) ) {
 			rdgebi.call(window, a);
