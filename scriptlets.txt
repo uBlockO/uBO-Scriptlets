@@ -102,7 +102,7 @@ bait.js application/javascript
 		return;
 	}
 	element.style.display = 'none';
-	document.documentElement.appendChild(element);
+	document.body.appendChild(element);
 })();
 
 # setInterval-booster
