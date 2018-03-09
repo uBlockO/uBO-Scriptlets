@@ -637,6 +637,10 @@ function urlencode(str){str=(str+'').toString();return encodeURIComponent(str).r
 function scroll_load(Scrollonly,donde){var screen=$(window).width();if(screen<=767){var sizes=57;}else{var sizes=85;}
 $('html,body').stop().animate({scrollTop:donde.offset().top-sizes},'slow');if(Scrollonly!='Scrollonly'){donde.html('<div class="vh_loading_effect"></div>');}}
 function closeads(){$("#ad_link").click(function(){$("#ad_player").hide();});}
+$(document).ready(function(){function adBlockDetected(){function () { };}
+function adBlockNotDetected(){function () { };}
+if($('#showaviso').length==1){function () {};});if(typeof fuckAdBlock==='undefined'){adBlockDetected();}else{fuckAdBlock.setOption({debug:false});fuckAdBlock.onDetected(adBlockDetected).onNotDetected(adBlockNotDetected);}}
+function checkAgain(){$('#fuck-adb-enabled').hide();$('#fuck-adb-not-enabled').hide();setTimeout(function(){if(typeof fuckAdBlock==='undefined'){adBlockDetected();}else{fuckAdBlock.onDetected(adBlockDetected).onNotDetected(adBlockNotDetected);fuckAdBlock.check();}},300);}
 if(window.location.href.indexOf('#_=_')>0){window.location=window.location.href.replace(/#.*/,'');}
 $('[data-toggle="tooltip"]').tooltip()
 if(window.location.hash){var donde=$(".loaded_player");scroll_load("Scrollonly",donde)}
