@@ -8,14 +8,6 @@
 # If the encoding is absent, the data will be converted to base64, and the
 # encoding will be set to `;base64`.
 
-# noscroll-defuser
-nos.js application/javascript
-document.body.style.setProperty('overflow', 'auto');
-document.body.style.overflow = 'auto';
-document.documentElement.style.overflow = 'auto';
-document.getElementById.scrolling = 'yes';
-document.body.scroll = "yes";
-
 # eval-logger 
 eval-logger.js application/javascript
 (function() {
