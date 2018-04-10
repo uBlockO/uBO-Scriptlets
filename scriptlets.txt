@@ -1436,6 +1436,11 @@ dqsa-logger.js application/javascript
 	}.bind(window);
 })();
 
+# document.oncontextmenu-defuser
+nocm.js application/javascript
+(function() {
+          window.document.oncontextmenu = return true;
+})();
 
 
 
