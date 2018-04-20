@@ -971,7 +971,7 @@ G2RhdGEAAAABAAAAAExhdmY1NC4yMC40
 
 # cookie-inserter
 cookie.js application/javascript
-document.cookie = '{{1}}={{2}}; expires=Fri, 31 Dec 2099 23:59:59 GMT; path=/;';
+document.cookie = '{{1}}={{2}}; expires=Fri, 31 Dec 3018 23:59:59 GMT; path=/;';
 
 # frame-defuser
 frd.js application/javascript
@@ -1262,7 +1262,7 @@ dgebi.js application/javascript
 		needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 	}
 	needle = new RegExp(needle);
-	rdgebi = window.document.getElementById.bind(document);
+	rdgebi = document.getElementById.bind(document);
 	window.document.getElementById = function(a) {
 		if ( !needle.test(a.toString()) ) {
 			rdgebi.call(window, a);
@@ -1324,7 +1324,7 @@ dce.js application/javascript
 		needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 	}
 	needle = new RegExp(needle);
-	rdce = window.document.createElement.bind(document);
+	rdce = document.createElement.bind(document);
 	window.document.createElement = function(a) {
 		if ( !needle.test(a.toString()) ) {
 			rdce.call(window, a);
@@ -1355,7 +1355,7 @@ drs.js application/javascript
 		needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 	}
 	needle = new RegExp(needle);
-	rdrs = window.document.readyState.bind(document);
+	rdrs = document.readyState.bind(document);
 	window.document.readyState = function(a) {
 		if ( !needle.test(a.toString()) ) {
 			rdrs.call(window, a);
@@ -1386,7 +1386,7 @@ dqs.js application/javascript
 		needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 	}
 	needle = new RegExp(needle);
-	rdqs = window.document.querySelector.bind(document);
+	rdqs = document.querySelector.bind(document);
 	window.document.querySelector = function(a) {
 		if ( !needle.test(a.toString()) ) {
 			rdqs.call(window, a);
@@ -1417,7 +1417,7 @@ dqsa.js application/javascript
 		needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 	}
 	needle = new RegExp(needle);
-	rdqsa = window.document.querySelectorAll.bind(document);
+	rdqsa = document.querySelectorAll.bind(document);
 	window.document.querySelectorAll = function(a) {
 		if ( !needle.test(a.toString()) ) {
 			rdqsa.call(window, a);
@@ -1434,12 +1434,6 @@ dqsa-logger.js application/javascript
 		log('uBO: document.querySelectorAll("%s")', a.toString());
 		return z.apply(this, arguments);
 	}.bind(window);
-})();
-
-# document.oncontextmenu-defuser
-nocm.js application/javascript
-(function() {
-          window.document.oncontextmenu = return true;
 })();
 
 
