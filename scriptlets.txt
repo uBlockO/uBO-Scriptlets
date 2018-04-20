@@ -1231,7 +1231,7 @@ dwrite.js application/javascript
 		needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 	}
 	needle = new RegExp(needle);
-	rdwrite = window.document.write;
+	rdwrite = document.write.bind(document);
 	window.document.write = function(a) {
 		if ( !needle.test(a.toString()) ) {
 			rdwrite.call(window, a);
