@@ -25,7 +25,7 @@ stb.js application/javascript
 	var z = window.setTimeout,
 		needle = '{{1}}',
 		delay = parseInt('{{2}}', 10),
-		boost = parseInt('{{3}}', 10);
+		boost = parseFloat('{{3}}');
 	if ( needle === '' || needle === '{{1}}' ) {
 		needle = '.?';
 	} else if ( needle.charAt(0) === '/' && needle.slice(-1) === '/' ) {
@@ -143,7 +143,7 @@ sib.js application/javascript
 	var z = window.setInterval,
 		needle = '{{1}}',
 		delay = parseInt('{{2}}', 10),
-		boost = parseInt('{{3}}', 10);
+		boost = parseFloat('{{3}}');
 	if ( needle === '' || needle === '{{1}}' ) {
 		needle = '.?';
 	} else if ( needle.charAt(0) === '/' && needle.slice(-1) === '/' ) {
