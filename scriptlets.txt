@@ -19,35 +19,6 @@ eval-logger.js application/javascript
 	}.bind(window);
 })();
 
-# setTimeout-booster
-stb.js application/javascript
-(function() {
-	var z = window.setTimeout,
-		needle = '{{1}}',
-		delay = parseInt('{{2}}', 10),
-		boost = parseFloat('{{3}}');
-	if ( needle === '' || needle === '{{1}}' ) {
-		needle = '.?';
-	} else if ( needle.charAt(0) === '/' && needle.slice(-1) === '/' ) {
-		needle = needle.slice(1, -1);
-	} else {
-		needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-	}
-	needle = new RegExp(needle);
-	if ( isNaN(delay) || !isFinite(delay)) {
-		delay = 1000;
-	}
-	if ( isNaN(boost) || !isFinite(boost) || boost < 0.01 ) {
-		boost = 0.0001;
-	}
-	window.setTimeout = function(a, b) {
-		if ( b === delay && needle.test(a.toString()) ) {
-			b *= boost;
-		}
-		return z.apply(this, arguments);
-	}.bind(window);
-})();
-
 # read-Only-property defuser
 rdo.js application/javascript
 (function() {
@@ -135,35 +106,6 @@ ebait.js application/javascript
 	}
 	element.style.display = 'none';
 	document.documentElement.appendChild(element);
-})();
-
-# setInterval-booster
-sib.js application/javascript
-(function() {
-	var z = window.setInterval,
-		needle = '{{1}}',
-		delay = parseInt('{{2}}', 10),
-		boost = parseFloat('{{3}}');
-	if ( needle === '' || needle === '{{1}}' ) {
-		needle = '.?';
-	} else if ( needle.charAt(0) === '/' && needle.slice(-1) === '/' ) {
-		needle = needle.slice(1, -1);
-	} else {
-		needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-	}
-	needle = new RegExp(needle);
-	if ( isNaN(delay) || !isFinite(delay)) {
-		delay = 1000;
-	}
-	if ( isNaN(boost) || !isFinite(boost) || boost < 0.01 ) {
-		boost = 0.0001;
-	}
-	window.setInterval = function(a, b) {
-		if ( b === delay && needle.test(a.toString()) ) {
-			b *= boost;
-		}
-		return z.apply(this, arguments);
-	}.bind(window);
 })();
 
 # element-remover
