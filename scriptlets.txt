@@ -19,6 +19,26 @@ eval-logger.js application/javascript
 	}.bind(window);
 })();
 
+# element-dblclicker
+edblclick.js application/javascript
+(function() {
+	var selector = '{{1}}';
+	if ( selector === '' || selector === '{{1}}' ) {
+		return;
+	}
+	var dblclick = function() {
+		var elements = document.querySelectorAll(selector);
+		for ( var element of elements ) {
+			element.dblclick();
+		}
+	};
+	if ( document.readyState === 'interactive' || document.readyState === 'complete' ) {
+		dblclick();
+	} else {
+		addEventListener('DOMContentLoaded', dblclick);
+	}
+})();
+
 # element-clicker
 eclick.js application/javascript
 (function() {
