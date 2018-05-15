@@ -29,7 +29,8 @@ edblclick.js application/javascript
 	var dblclick = function() {
 		var elements = document.querySelectorAll(selector);
 		for ( var element of elements ) {
-			element.doubleClick();
+			element.click();
+			element.click();
 		}
 	};
 	if ( document.readyState === 'interactive' || document.readyState === 'complete' ) {
