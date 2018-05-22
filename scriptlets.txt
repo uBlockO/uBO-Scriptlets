@@ -180,7 +180,7 @@ ebait.js application/javascript
 })();
 
 # element-remover
-reor.js application/javascript
+eremove.js application/javascript
 (function() {
 	var selector = '{{1}}';
 	if ( selector === '' || selector === '{{1}}' ) {
