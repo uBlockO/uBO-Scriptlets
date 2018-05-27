@@ -29,7 +29,7 @@ edblclick.js application/javascript
 	var dblclick = function() {
 		var elements = document.querySelectorAll(selector);
 		for ( var element of elements ) {
-			var evt = new Event('dblclick');
+			var evt = new Event('ondblclick');
 			element.dispatchEvent(evt);
 		}
 	};
