@@ -36,7 +36,7 @@ edblclick.js application/javascript
 	if ( document.readyState === 'interactive' || document.readyState === 'complete' ) {
 		dblclick();
 	} else {
-		addEventListener('DOMContentLoaded', dblclick);
+		addEventListener('DOMContentLoaded', ondblclick);
 	}
 })();
 
