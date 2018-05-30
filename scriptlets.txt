@@ -67,7 +67,7 @@ frun.js application/javascript
 	if ( needle === '') {
 		return;
 	} 
-	window.onload = {{1}};
+	window.onload = needle;
 			
 })();
 
