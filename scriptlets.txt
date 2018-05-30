@@ -60,6 +60,17 @@ eclick.js application/javascript
 	}
 })();
 
+# function-runner // experimental
+frun.js application/javascript
+(function() {
+	var selector = '{{1}}';
+	if ( selector === '') 
+	{
+		return;
+	}
+	window.onload = {{1}};
+})();
+
 # script-defuser
 script-defuser.js application/javascript
 (function() {
