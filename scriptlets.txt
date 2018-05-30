@@ -67,8 +67,9 @@ frun.js application/javascript
 	if ( selector === '') 
 	{
 		return;
-	}
-	window.onload = {{1}};
+	} else {
+		window.onload = {{1}};
+	}		
 })();
 
 # script-defuser
