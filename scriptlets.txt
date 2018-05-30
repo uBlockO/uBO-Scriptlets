@@ -63,13 +63,12 @@ eclick.js application/javascript
 # function-runner // experimental
 frun.js application/javascript
 (function() {
-	var selector = '{{1}}';
-	if ( selector === '') 
-	{
+	var needle = '{{1}}';
+	if ( needle === '') {
 		return;
-	} else {
-		window.onload = {{1}};
-	}		
+	} 
+	window.onload = {{1}};
+			
 })();
 
 # script-defuser
