@@ -36,7 +36,7 @@ edblclick.js application/javascript
 	if ( document.readyState === 'interactive' || document.readyState === 'complete' ) {
 		dblclick();
 	} else {
-		addEventListener('DOMContentLoaded', ondblclick);
+		addEventListener('DOMContentLoaded', dblclick);
 	}
 })();
 
@@ -67,8 +67,7 @@ frun.js application/javascript
 	if ( needle === '') {
 		return;
 	} 
-	window.onload = '{{1}}';
-			
+	element.addEventListener("DOMContentLoaded", needle);
 })();
 
 # script-defuser
