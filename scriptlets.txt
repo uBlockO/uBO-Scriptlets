@@ -60,16 +60,6 @@ eclick.js application/javascript
 	}
 })();
 
-# function-runner // experimental
-frun.js application/javascript
-(function() {
-	var needle = '{{1}}';
-	if ( needle === '') {
-		return;
-	} 
-	element.addEventListener("DOMContentLoaded", needle);
-})();
-
 # script-defuser
 script-defuser.js application/javascript
 (function() {
