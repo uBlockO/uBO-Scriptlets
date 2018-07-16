@@ -21,9 +21,8 @@ eval-logger.js application/javascript
 
 # fingerprint-defuser
 fp-defuser.js application/javascript
-(function() {
-             var Fingerprint2 = function() { return Fingerprint2.prototype = { get:function(){} } };
-})();
+var Fingerprint2 = function() { return Fingerprint2.prototype = { get:function(){} } };
+
 
 # element-dblclicker
 edblclick.js application/javascript
