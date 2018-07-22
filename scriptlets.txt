@@ -11,7 +11,7 @@
 # eval-logger 
 eval-logger.js application/javascript
 (function() {
-	var z = window.eval,
+	let z = window.eval,
 		log = console.log.bind(console);
 	window.eval = function(a) {
 		log('uBO: eval("%s")', a.toString());
@@ -22,14 +22,14 @@ eval-logger.js application/javascript
 # element-dblclicker
 edblclick.js application/javascript
 (function() {
-	var selector = '{{1}}';
+	let selector = '{{1}}';
 	if ( selector === '' || selector === '{{1}}' ) {
 		return;
 	}
-	var dblclick = function() {
-		var elements = document.querySelectorAll(selector);
-		for ( var element of elements ) {
-			var evt = new Event('ondblclick');
+	let dblclick = function() {
+		let elements = document.querySelectorAll(selector);
+		for ( let element of elements ) {
+			let evt = new Event('ondblclick');
 			element.dispatchEvent(evt);
 		}
 	};
@@ -43,13 +43,13 @@ edblclick.js application/javascript
 # element-clicker
 eclick.js application/javascript
 (function() {
-	var selector = '{{1}}';
+	let selector = '{{1}}';
 	if ( selector === '' || selector === '{{1}}' ) {
 		return;
 	}
-	var click = function() {
-		var elements = document.querySelectorAll(selector);
-		for ( var element of elements ) {
+	let click = function() {
+		let elements = document.querySelectorAll(selector);
+		for ( let element of elements ) {
 			element.click();
 		}
 	};
@@ -63,8 +63,8 @@ eclick.js application/javascript
 # script-defuser
 script-defuser.js application/javascript
 (function() {
-    var _createElement = document.createElement;
-    var needle = '{{1}}';
+    let _createElement = document.createElement;
+    let needle = '{{1}}';
     if ( needle === '' || needle === '{{1}}' ) {
         needle = '.?';
     } else if ( needle.length > 2 &&
@@ -75,13 +75,13 @@ script-defuser.js application/javascript
     }
     needle = new RegExp(needle);
     document.createElement = function(name) {
-        var elem = _createElement.apply(this, arguments);
+        let elem = _createElement.apply(this, arguments);
         if ( name === 'script' ) {
             elem.addEventListener('error', function(e) {
                 if ( needle.test(elem.src) ) {
                     e.preventDefault();
                     e.stopPropagation();
-                    var ev = new Event('load');
+                    let ev = new Event('load');
                     elem.dispatchEvent(ev);
                 }
             });
@@ -93,18 +93,18 @@ script-defuser.js application/javascript
 # read-Only-property defuser
 rdo.js application/javascript
 (function() {
-	var name = '{{1}}';
-	var data = '{{2}}';
-	var Object = window.Object.bind(window);
-	var descriptor = window.Object.getOwnPropertyDescriptor.bind(window.Object);
-	var defineProperty = window.Object.defineProperty.bind(window.Object);
-	var finalSetter = function() { };
-	var finalGetter = function() { return data; };
-	var trustedSetters = {};
-	var makeProxy = function(parent, chain) {
-		var i = chain.indexOf('.');
+	let name = '{{1}}';
+	let data = '{{2}}';
+	let Object = window.Object.bind(window);
+	let descriptor = window.Object.getOwnPropertyDescriptor.bind(window.Object);
+	let defineProperty = window.Object.defineProperty.bind(window.Object);
+	let finalSetter = function() { };
+	let finalGetter = function() { return data; };
+	let trustedSetters = {};
+	let makeProxy = function(parent, chain) {
+		let i = chain.indexOf('.');
 		if ( i === -1 ) {
-			var current = descriptor(parent, chain);
+			let current = descriptor(parent, chain);
 			if ( !current || current.set !== finalSetter || current.get !== finalGetter ) {
 				defineProperty(parent, chain, {
 					configurable: false,
@@ -113,15 +113,15 @@ rdo.js application/javascript
 				});
 			}
 		} else {
-			var name = chain.slice(0, i);
-			var val = parent[name];
+			let name = chain.slice(0, i);
+			let val = parent[name];
 			chain = chain.substring(i + 1);
 			if ( val instanceof Object ) {
 				makeProxy(val, chain);
 			} else {
-				var current = descriptor(parent, name);
+				let current = descriptor(parent, name);
 				if ( !current || !trustedSetters[chain] || trustedSetters[chain] !== current.set ) {
-					var setter = function(value) {
+					let setter = function(value) {
 						if ( value instanceof Object ) {
 							try {
 								makeProxy(value, chain);
@@ -139,7 +139,7 @@ rdo.js application/javascript
 			}
 		}
 	};
-	var define = function(payload) {
+	let define = function(payload) {
 		data = payload;
 		try {
 			makeProxy(window, name);
@@ -166,8 +166,8 @@ rdo.js application/javascript
 # element-baiter
 ebait.js application/javascript
 (function() {
-	var identifier = '{{1}}';
-	var element = document.createElement('div');
+	let identifier = '{{1}}';
+	let element = document.createElement('div');
 	if ( identifier.charAt(0) === '#' ) {
 		element.id = identifier.substring(1);
 	} else if ( identifier.charAt(0) === '.' ) {
@@ -182,13 +182,13 @@ ebait.js application/javascript
 # element-remover
 eremove.js application/javascript
 (function() {
-	var selector = '{{1}}';
+	let selector = '{{1}}';
 	if ( selector === '' || selector === '{{1}}' ) {
 		return;
 	}
-	var remove = function() {
-		var elements = document.querySelectorAll(selector);
-		for ( var element of elements ) {
+	let remove = function() {
+		let elements = document.querySelectorAll(selector);
+		for ( let element of elements ) {
 			element.remove();
 		}
 	};
@@ -202,10 +202,10 @@ eremove.js application/javascript
 # cookie-inserter
 cookie.js application/javascript
 (function() {
-    var data = '{{1}}';
-    var path = '{{2}}';
-    var domain = '{{3}}';
-    var secure = '{{4}}';
+    let data = '{{1}}';
+    let path = '{{2}}';
+    let domain = '{{3}}';
+    let secure = '{{4}}';
     if ( data.indexOf('=') === -1 ) {
         return;
     }
@@ -225,13 +225,13 @@ cookie.js application/javascript
 # frame-defuser
 frd.js application/javascript
 (function() {
-	var log = console.log.bind(console);
-	var removedHead = {
+	let log = console.log.bind(console);
+	let removedHead = {
 		async: false,
 		result: false
 	};
-	var removedBody = removedHead;
-	var url = 'unknown';
+	let removedBody = removedHead;
+	let url = 'unknown';
 	try {
 		url = window.location.href || url;
 	} catch (e) {};
@@ -285,7 +285,7 @@ frd.js application/javascript
 # atob-defuser
 noatob.js application/javascript
 (function() {
-	var needle = '{{1}}';
+	let needle = '{{1}}';
 	if ( needle === '' || needle === '{{1}}' ) {
 		needle = '.?';
 	} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
@@ -305,7 +305,7 @@ noatob.js application/javascript
 # atob-logger
 atob-logger.js application/javascript
 (function() {
-	var z = window.atob,
+	let z = window.atob,
 		log = console.log.bind(console);
 	window.atob = function(a) {
 		log('uBO: atob("%s")', a.toString());
@@ -316,7 +316,7 @@ atob-logger.js application/javascript
 # btoa-defuser
 nobtoa.js application/javascript
 (function() {
-	var needle = '{{1}}';
+	let needle = '{{1}}';
 	if ( needle === '' || needle === '{{1}}' ) {
 		needle = '.?';
 	} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
@@ -336,7 +336,7 @@ nobtoa.js application/javascript
 # btoa-logger
 btoa-logger.js application/javascript
 (function() {
-	var z = window.btoa,
+	let z = window.btoa,
 		log = console.log.bind(console);
 	window.btoa = function(a) {
 		log('uBO: btoa("%s")', a.toString());
@@ -347,7 +347,7 @@ btoa-logger.js application/javascript
 # decodeURIComponent-defuser
 noduc.js application/javascript
 (function() {
-	var needle = '{{1}}';
+	let needle = '{{1}}';
 	if ( needle === '' || needle === '{{1}}' ) {
 		needle = '.?';
 	} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
@@ -367,7 +367,7 @@ noduc.js application/javascript
 # decodeURIComponent-logger
 duc-logger.js application/javascript
 (function() {
-	var z = window.decodeURIComponent,
+	let z = window.decodeURIComponent,
 		log = console.log.bind(console);
 	window.decodeURIComponent = function(a) {
 		log('uBO: decodeURIComponent("%s")', a.toString());
@@ -378,7 +378,7 @@ duc-logger.js application/javascript
 # encodeURIComponent-defuser
 noeuc.js application/javascript
 (function() {
-	var needle = '{{1}}';
+	let needle = '{{1}}';
 	if ( needle === '' || needle === '{{1}}' ) {
 		needle = '.?';
 	} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
@@ -398,7 +398,7 @@ noeuc.js application/javascript
 # encodeURIComponent-logger
 euc-logger.js application/javascript
 (function() {
-	var z = window.encodeURIComponent,
+	let z = window.encodeURIComponent,
 		log = console.log.bind(console);
 	window.encodeURIComponent = function(a) {
 		log('uBO: encodeURIComponent("%s")', a.toString());
@@ -409,7 +409,7 @@ euc-logger.js application/javascript
 # parseInt-defuser
 nopi.js application/javascript
 (function() {
-	var needle = '{{1}}';
+	let needle = '{{1}}';
 	if ( needle === '' || needle === '{{1}}' ) {
 		needle = '.?';
 	} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
@@ -429,7 +429,7 @@ nopi.js application/javascript
 # parseInt-logger
 nopi-logger.js application/javascript
 (function() {
-	var z = window.parseInt,
+	let z = window.parseInt,
 		log = console.log.bind(console);
 	window.parseInt = function(a) {
 		log('uBO: parseInt("%s")', a.toString());
@@ -440,7 +440,7 @@ nopi-logger.js application/javascript
 # String.fromCharCode-defuser
 schar.js application/javascript
 (function() {
-	var needle = '{{1}}';
+	let needle = '{{1}}';
 	if ( needle === '' || needle === '{{1}}' ) {
 		needle = '.?';
 	} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
@@ -460,7 +460,7 @@ schar.js application/javascript
 # String.fromCharCode-logger
 schar-logger.js application/javascript
 (function() {
-	var z = window.String.fromCharCode,
+	let z = window.String.fromCharCode,
 		log = console.log.bind(console);
 	window.String.fromCharCode = function(a) {
 		log('uBO: String.fromCharCode("%s")', a.toString());
@@ -471,7 +471,7 @@ schar-logger.js application/javascript
 # document.write-defuser
 dwrite.js application/javascript
 (function() {
-	var needle = '{{1}}';
+	let needle = '{{1}}';
 	if ( needle === '' || needle === '{{1}}' ) {
 		needle = '.?';
 	} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
@@ -491,7 +491,7 @@ dwrite.js application/javascript
 # document.write-logger
 dwrite-logger.js application/javascript
 (function() {
-	var z = window.document.write.bind(document),
+	let z = window.document.write.bind(document),
 		log = console.log.bind(console);
 	window.document.write = function(a) {
 		log('uBO: document.write("%s")', a.toString());
@@ -502,7 +502,7 @@ dwrite-logger.js application/javascript
 # document.getElementById-defuser
 dgebi.js application/javascript
 (function() {
-	var needle = '{{1}}';
+	let needle = '{{1}}';
 	if ( needle === '' || needle === '{{1}}' ) {
 		needle = '.?';
 	} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
@@ -522,7 +522,7 @@ dgebi.js application/javascript
 # document.getElementById-logger
 dgebi-logger.js application/javascript
 (function() {
-	var z = window.document.getElementById.bind(document),
+	let z = window.document.getElementById.bind(document),
 		log = console.log.bind(console);
 	window.document.getElementById = function(a) {
 		log('uBO: document.getElementById("%s")', a.toString());
@@ -533,7 +533,7 @@ dgebi-logger.js application/javascript
 # window.alert-defuser
 alt.js application/javascript
 (function() {
-	var needle = '{{1}}';
+	let needle = '{{1}}';
 	if ( needle === '' || needle === '{{1}}' ) {
 		needle = '.?';
 	} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
@@ -553,7 +553,7 @@ alt.js application/javascript
 # window.alert-logger
 alt-logger.js application/javascript
 (function() {
-	var z = window.alert,
+	let z = window.alert,
 		log = console.log.bind(console);
 	window.alert = function(a) {
 		log('uBO: window.alert("%s")', a.toString());
@@ -564,7 +564,7 @@ alt-logger.js application/javascript
 # document.createElement-defuser
 dce.js application/javascript
 (function() {
-	var needle = '{{1}}';
+	let needle = '{{1}}';
 	if ( needle === '' || needle === '{{1}}' ) {
 		needle = '.?';
 	} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
@@ -584,7 +584,7 @@ dce.js application/javascript
 # document.createElement-logger
 dce-logger.js application/javascript
 (function() {
-	var z = window.document.createElement.bind(document),
+	let z = window.document.createElement.bind(document),
 		log = console.log.bind(console);
 	window.document.createElement = function(a) {
 		log('uBO: document.createElement("%s")', a.toString());
@@ -595,7 +595,7 @@ dce-logger.js application/javascript
 # document.readyState-defuser
 drs.js application/javascript
 (function() {
-	var needle = '{{1}}';
+	let needle = '{{1}}';
 	if ( needle === '' || needle === '{{1}}' ) {
 		needle = '.?';
 	} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
@@ -615,7 +615,7 @@ drs.js application/javascript
 # document.readyState-logger
 drs-logger.js application/javascript
 (function() {
-	var z = window.document.readyState,
+	let z = window.document.readyState,
 		log = console.log.bind(console);
 	window.document.readyState = function(a) {
 		log('uBO: document.readyState("%s")', a.toString());
@@ -626,7 +626,7 @@ drs-logger.js application/javascript
 # document.querySelector-defuser
 dqs.js application/javascript
 (function() {
-	var needle = '{{1}}';
+	let needle = '{{1}}';
 	if ( needle === '' || needle === '{{1}}' ) {
 		needle = '.?';
 	} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
@@ -646,7 +646,7 @@ dqs.js application/javascript
 # document.querySelector-logger
 dqs-logger.js application/javascript
 (function() {
-	var z = window.document.querySelector.bind(document),
+	let z = window.document.querySelector.bind(document),
 		log = console.log.bind(console);
 	window.document.querySelector = function(a) {
 		log('uBO: document.querySelector("%s")', a.toString());
@@ -657,7 +657,7 @@ dqs-logger.js application/javascript
 # document.querySelectorAll-defuser
 dqsa.js application/javascript
 (function() {
-	var needle = '{{1}}';
+	let needle = '{{1}}';
 	if ( needle === '' || needle === '{{1}}' ) {
 		needle = '.?';
 	} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
@@ -677,7 +677,7 @@ dqsa.js application/javascript
 # document.querySelectorAll-logger
 dqsa-logger.js application/javascript
 (function() {
-	var z = window.document.querySelectorAll.bind(document),
+	let z = window.document.querySelectorAll.bind(document),
 		log = console.log.bind(console);
 	window.document.querySelectorAll = function(a) {
 		log('uBO: document.querySelectorAll("%s")', a.toString());
@@ -688,7 +688,7 @@ dqsa-logger.js application/javascript
 # document.getElementsByClassName-defuser
 dgebcn.js application/javascript
 (function() {
-	var needle = '{{1}}';
+	let needle = '{{1}}';
 	if ( needle === '' || needle === '{{1}}' ) {
 		needle = '.?';
 	} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
@@ -708,7 +708,7 @@ dgebcn.js application/javascript
 # document.getElementsByClassName-logger
 dgebcn-logger.js application/javascript
 (function() {
-	var z = window.document.getElementsByClassName.bind(document),
+	let z = window.document.getElementsByClassName.bind(document),
 		log = console.log.bind(console);
 	window.document.getElementsByClassName = function(a) {
 		log('uBO: document.getElementsByClassName("%s")', a.toString());
@@ -719,7 +719,7 @@ dgebcn-logger.js application/javascript
 # document.getElementsByName-defuser
 dgebn.js application/javascript
 (function() {
-	var needle = '{{1}}';
+	let needle = '{{1}}';
 	if ( needle === '' || needle === '{{1}}' ) {
 		needle = '.?';
 	} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
@@ -739,7 +739,7 @@ dgebn.js application/javascript
 # document.getElementsByName-logger
 dgebn-logger.js application/javascript
 (function() {
-	var z = window.document.getElementsByName.bind(document),
+	let z = window.document.getElementsByName.bind(document),
 		log = console.log.bind(console);
 	window.document.getElementsByName = function(a) {
 		log('uBO: document.getElementsByName("%s")', a.toString());
@@ -750,7 +750,7 @@ dgebn-logger.js application/javascript
 # document.getElementsByTagName-defuser
 dgebtn.js application/javascript
 (function() {
-	var needle = '{{1}}';
+	let needle = '{{1}}';
 	if ( needle === '' || needle === '{{1}}' ) {
 		needle = '.?';
 	} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
@@ -770,7 +770,7 @@ dgebtn.js application/javascript
 # document.getElementsByTagName-logger
 dgebtn-logger.js application/javascript
 (function() {
-	var z = window.document.getElementsByTagName.bind(document),
+	let z = window.document.getElementsByTagName.bind(document),
 		log = console.log.bind(console);
 	window.document.getElementsByTagName = function(a) {
 		log('uBO: document.getElementsByTagName("%s")', a.toString());
