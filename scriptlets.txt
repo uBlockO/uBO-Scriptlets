@@ -179,19 +179,29 @@ eadd.js application/javascript
 	document.documentElement.appendChild(element);
 })();
 
-# element-deleter //experimental
-edel.js application/javascript
+# element-replacer //experimental
+ereplace.js application/javascript
 (function() {
-	let selector = '{{1}}';
-	let element = document.getElementById('div');
-	if ( selector.charAt(0) === '#' ) {
-		element.id = selector.substring(1);
-	} else if ( selector.charAt(0) === '.' ) {
-		element.className = selector.substring(1);
+	let identifier = '{{1}}';
+	let selector = '{{2}}';
+	let newelement = document.createElement('div');
+	if ( identifier.charAt(0) === '#' ) {
+		newelement.id = identifier.substring(1);
+	} else if ( identifier.charAt(0) === '.' ) {
+		newelement.className = identifier.substring(1);
 	} else {
 		return;
 	}
-	document.documentElement.removeChild(element);
+	let oldelement = document.getElementById('div');
+	if ( selector.charAt(0) === '#' ) {
+		oldelement.id = selector.substring(1);
+	} else if ( selector.charAt(0) === '.' ) {
+		oldelement.className = selector.substring(1);
+	} else {
+		return;
+	}
+	newelement.style.display = 'block';
+	document.documentElement.replaceChild(newelement, oldelement);
 })();
 
 # element-remover
