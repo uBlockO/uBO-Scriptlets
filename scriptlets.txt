@@ -163,8 +163,8 @@ rdo.js application/javascript
 	}
 })();
 
-# element-baiter
-ebait.js application/javascript
+# element-adder
+eadd.js application/javascript
 (function() {
 	let identifier = '{{1}}';
 	let element = document.createElement('div');
