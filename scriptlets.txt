@@ -179,6 +179,21 @@ eadd.js application/javascript
 	document.documentElement.appendChild(element);
 })();
 
+# element-deleter //experimental
+edel.js application/javascript
+(function() {
+	let identifier = '{{1}}';
+	let element = document.getElementById('div');
+	if ( identifier.charAt(0) === '#' ) {
+		element.id = identifier.substring(1);
+	} else if ( identifier.charAt(0) === '.' ) {
+		element.className = identifier.substring(1);
+	} else {
+		return;
+	}
+	document.documentElement.removeChild(element);
+})();
+
 # element-remover
 eremove.js application/javascript
 (function() {
