@@ -226,26 +226,8 @@ eremove.js application/javascript
 
 # cookie-inserter
 cookie.js application/javascript
-(function() {
-    let data = '{{1}}';
-    let path = '{{2}}';
-    let domain = '{{3}}';
-    let secure = '{{4}}';
-    if ( data.indexOf('=') === -1 ) {
-        return;
-    }
-    data += ';max-age=2592000'; // 30 days
-    if ( path !== '' && path !== '{{2}}' ) {
-        data += ';path=' + path;
-    }
-    if ( domain !== '' && domain !== '{{3}}' ) {
-        data += ';domain=' + domain;
-    }
-    if ( secure === 'true' ) {
-        data += ';secure';
-    }
-    document.cookie = data;
-})();
+document.cookie = '{{1}}={{2}}';
+
 
 # frame-defuser
 frd.js application/javascript
