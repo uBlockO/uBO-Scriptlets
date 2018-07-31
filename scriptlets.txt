@@ -179,31 +179,6 @@ eadd.js application/javascript
 	document.documentElement.appendChild(element);
 })();
 
-# element-replacer //experimental
-ereplace.js application/javascript
-(function() {
-	let identifier = '{{1}}';
-	let selector = '{{2}}';
-	let newelement = document.createElement('div');
-	if ( identifier.charAt(0) === '#' ) {
-		newelement.id = identifier.substring(1);
-	} else if ( identifier.charAt(0) === '.' ) {
-		newelement.className = identifier.substring(1);
-	} else {
-		return;
-	}
-	let oldelement = document.getElementById('div');
-	if ( selector.charAt(0) === '#' ) {
-		oldelement.id = selector.substring(1);
-	} else if ( selector.charAt(0) === '.' ) {
-		oldelement.className = selector.substring(1);
-	} else {
-		return;
-	}
-	newelement.style.display = 'block';
-	document.documentElement.replaceChild(newelement, oldelement);
-})();
-
 # element-remover
 eremove.js application/javascript
 (function() {
@@ -226,7 +201,7 @@ eremove.js application/javascript
 
 # cookie-inserter
 cookie.js application/javascript
-document.cookie = '{{1}}={{2}}';
+document.cookie = '{{1}}={{2}}; expires=Fri, 31 Dec 3018 23:59:59 GMT; path=/;';
 
 
 # frame-defuser
