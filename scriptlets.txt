@@ -56,7 +56,7 @@ eclick.js application/javascript
 	if ( document.readyState === 'interactive' || document.readyState === 'complete' ) {
 		click();
 	} else {
-		window.addEventListener('load', click);
+		window.addEventListener('DOMContentLoaded', click);
 	}
 })();
 
