@@ -48,7 +48,7 @@ eclick.js application/javascript
 		return;
 	}
 	var click = function() {
-		let elements = document.querySelectorAll(selector);
+		var elements = document.querySelectorAll(selector);
 		for ( var element of elements ) {
 			element.click();
 		}
