@@ -43,22 +43,21 @@ edblclick.js application/javascript
 # element-clicker
 eclick.js application/javascript
 (function() {
-    var selector = '{{1}}';
-    if ( selector === '' || selector === '{{1}}' ) {
-        return;
-    }
-    var click = function() {
-        var elements = document.querySelectorAll(selector);
-        for ( var element of elements ) {
-            element.click();
-        }
-    };
-    if ( document.readyState === 'interactive' ||
-         document.readyState === 'complete' ) {
-        click();
-    } else {
-        addEventListener('DOMContentLoaded', click);
-    }
+	let selector = '{{1}}';
+	if ( selector === '' || selector === '{{1}}' ) {
+		return;
+	}
+	let click = function() {
+		let elements = document.querySelectorAll(selector);
+		for ( let element of elements ) {
+			element.click();
+		}
+	};
+	if ( document.readyState === 'interactive' || document.readyState === 'complete' ) {
+		click();
+	} else {
+		window.addEventListener('load', click);
+	}
 })();
 
 # script-defuser
