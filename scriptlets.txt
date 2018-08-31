@@ -92,10 +92,9 @@ script-defuser.js application/javascript
 
 # referrer-setter
 ref.js application/javascript
-(function() {
-		let needle = '{{1}}';
-		window.Object.defineProperty(document, "referrer", {configurable: true, writable: false, get : function() { return needle; } });
-})();
+let needle = '{{1}}';
+Object.defineProperty(document, "referrer", {configurable: true, writable: true, get : function() { return needle; } });
+
 
 # read-Only-property defuser
 rdo.js application/javascript
