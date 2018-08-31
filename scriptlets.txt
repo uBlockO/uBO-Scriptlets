@@ -90,11 +90,11 @@ script-defuser.js application/javascript
     };
 })();
 
-# document.referrer-setter
+# referrer-setter
 ref.js application/javascript
 (function() {
-		var needle = '{{1}}',
-		Object.defineProperty(document, "referrer", {configurable: true, get : function(){ return needle; }})
+		let needle = '{{1}}';
+		window.Object.defineProperty(document, "referrer", {configurable: true, get : function() { return needle; } })
 })();
 
 # read-Only-property defuser
