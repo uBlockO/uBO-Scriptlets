@@ -90,11 +90,11 @@ script-defuser.js application/javascript
     };
 })();
 
-# referrer-setter
-ref.js application/javascript
-let needle = '{{1}}';
-Object.defineProperty(document, "referrer", {configurable: true, writable: true, get : function() { return needle; } });
+noopvast-2.0 text/xml
+<VAST version="2.0"></VAST>
 
+noopvast-3.0 text/xml
+<VAST version="3.0"></VAST>
 
 # read-Only-property defuser
 rdo.js application/javascript
