@@ -228,6 +228,7 @@ eremove2.js application/javascript
 ereplace.js application/javascript
 (function() {
 	let selector = '{{1}}';
+	let element = document.createElement('div');
 	if ( selector === '' || selector === '{{1}}' ) {
 		return;
 	}
