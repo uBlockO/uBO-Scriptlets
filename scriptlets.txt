@@ -191,7 +191,7 @@ ereplace.js application/javascript
 	if ( selector === '' || selector === '{{1}}' ) {
 		return;
 	}
-	let noop = document.createElement('noop')
+	let noop = document.createElement('noop');
 	let replace = function() {
 		let elements = document.querySelectorAll(selector);
 		for ( let element of elements ) {
