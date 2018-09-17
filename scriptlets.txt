@@ -198,7 +198,7 @@ ereplace.js application/javascript
 			element.replaceWith(noop);
 		}
 	};
-	if (document.readyState === 'loading' || document.readyState === 'interactive' || document.readyState === 'complete') {
+	if (document.readyState === 'interactive' || document.readyState === 'complete') {
 		replace();
 	} else {
 		window.addEventListener('DOMContentLoaded', replace);
