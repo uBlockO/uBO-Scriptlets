@@ -59,34 +59,25 @@ eclick.js application/javascript
 	}
 })();
 
-# script-defuser-experimental
-script-defuser.js application/javascript
+# element-replacer-onload
+ereplace.js application/javascript
 (function() {
-    let _createElement = document.createElement;
-    let needle = '{{1}}';
-    if ( needle === '' || needle === '{{1}}' ) {
-        needle = '.?';
-    } else if ( needle.length > 2 &&
-                needle.startsWith('/') && needle.endsWith('/') ) {
-        needle = needle.slice(1,-1);
-    } else {
-        needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    }
-    needle = new RegExp(needle);
-    document.createElement = function(name) {
-        let elem = _createElement.apply(this, arguments);
-        if ( name === 'script' ) {
-            elem.addEventListener('error', function(e) {
-                if ( needle.test(elem.src) ) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    let ev = new Event('load');
-                    elem.dispatchEvent(ev);
-                }
-            });
-        }
-        return elem;
-    };
+	let selector = '{{1}}';
+	if ( selector === '' || selector === '{{1}}' ) {
+		return;
+	}
+	let noop = document.createElement('noop');
+	let replace = function() {
+		let elements = document.querySelectorAll(selector);
+		for ( let element of elements ) {
+			element.replaceWith(noop);
+		}
+	};
+	if (document.readyState === 'complete') {
+		replace();
+	} else {
+		window.addEventListener('load', replace);
+	}
 })();
 
 noopvast-2.0 text/xml
