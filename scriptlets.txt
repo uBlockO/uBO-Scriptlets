@@ -80,7 +80,7 @@ ereplace.js application/javascript
 	}
 })();
 
-# autoplay-defuser
+# autoplay-setter
 aplay.js application/javascript
 (function() {
 	let selector = '{{1}}';
@@ -90,7 +90,13 @@ aplay.js application/javascript
 	let aplay = function() {
 		let elements = document.querySelectorAll(selector);
 		for ( let element of elements ) {
-			element.autoplay = false;
+		        let play = '{{2}}';
+			if (play !== 'true' || play !== 'false') {
+				return;
+			}
+		        else {
+				element.autoplay = play;
+			     }
 		}
 	};
 	if (document.readyState === 'interactive' || document.readyState === 'complete') {
