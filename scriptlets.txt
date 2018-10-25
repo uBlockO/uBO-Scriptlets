@@ -59,6 +59,47 @@ eclick.js application/javascript
 	}
 })();
 
+# element-replacer
+ereplace.js application/javascript
+(function() {
+	let selector = '{{1}}';
+	if ( selector === '' || selector === '{{1}}' ) {
+		return;
+	}
+	let noop = document.createElement('noop');
+	let replace = function() {
+		let elements = document.querySelectorAll(selector);
+		for ( let element of elements ) {
+			element.replaceWith(noop);
+		}
+	};
+	if (document.readyState === 'interactive' || document.readyState === 'complete') {
+		replace();
+	} else {
+		window.addEventListener('DOMContentLoaded', replace);
+	}
+})();
+
+# autoplay-defuser
+aplay.js application/javascript
+(function() {
+	let selector = '{{1}}';
+	if ( selector === '' || selector === '{{1}}' ) {
+		return;
+	}
+	let aplay = function() {
+		let elements = document.querySelectorAll(selector);
+		for ( let element of elements ) {
+			element.autoplay = false;
+		}
+	};
+	if (document.readyState === 'interactive' || document.readyState === 'complete') {
+		aplay();
+	} else {
+		window.addEventListener('DOMContentLoaded', aplay);
+	}
+})();
+
 # element-replacer-onload
 ereplace2.js application/javascript
 (function() {
@@ -80,11 +121,6 @@ ereplace2.js application/javascript
 	}
 })();
 
-noopvast-2.0 text/xml
-<VAST version="2.0"></VAST>
-
-noopvast-3.0 text/xml
-<VAST version="3.0"></VAST>
 
 # read-Only-property defuser
 rdo.js application/javascript
@@ -174,28 +210,6 @@ eadd.js application/javascript
 	element.style.display = 'none';
 	document.documentElement.appendChild(element);
 })();
-
-# element-replacer
-ereplace.js application/javascript
-(function() {
-	let selector = '{{1}}';
-	if ( selector === '' || selector === '{{1}}' ) {
-		return;
-	}
-	let noop = document.createElement('noop');
-	let replace = function() {
-		let elements = document.querySelectorAll(selector);
-		for ( let element of elements ) {
-			element.replaceWith(noop);
-		}
-	};
-	if (document.readyState === 'interactive' || document.readyState === 'complete') {
-		replace();
-	} else {
-		window.addEventListener('DOMContentLoaded', replace);
-	}
-})();
-	
 
 # element-remover
 eremove.js application/javascript
