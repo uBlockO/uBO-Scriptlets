@@ -197,7 +197,7 @@ rdo.js application/javascript
 		case 'unFunc':          return define(function() { return undefined; });
 		case 'oneFunc':         return define(function() { return 1; });
 		case 'zeFunc':          return define(function() { return 0; });
-		case '{{2}}':           return define({{2}});
+		case '/(\w+)/':           return define(/(\w+)/);
 		default:		return;
 	}
 })();
