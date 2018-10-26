@@ -96,7 +96,7 @@ referrer-policy.js application/javascript
 	let docu = document;
 	if ( docu.head === null ) { return; }
 	let meta = docu.createElement('meta');
-	meta.setAttribute('http-equiv', 'Referrer-Policy');
+	meta.setAttribute('http-equiv', 'referrer');
 	meta.setAttribute('content', '{{1}}');
 	docu.head.appendChild(meta);
 })();
