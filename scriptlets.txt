@@ -80,7 +80,7 @@ ereplace.js application/javascript
 	}
 })();
 
-# referrer-defuser
+# referrer-setter
 referrer-setter.js application/javascript
 (function () {
 	let myRefer = '{{1}}';
@@ -88,6 +88,17 @@ referrer-setter.js application/javascript
 	window.document.__defineGetter__('referrer', function () {
 		return myRefer;
 	});
+})();
+
+# referrer-policy-setter
+referrer-policy.js application/javascript
+(function() {
+	let doc = document;
+	if ( doc.head === null ) { return; }
+	let meta = doc.createElement('meta');
+	meta.setAttribute('http-equiv', 'Referrer-Policy');
+	meta.setAttribute('content', '{{1}}');
+	doc.head.appendChild(meta);
 })();
 
 # element-replacer-onload
