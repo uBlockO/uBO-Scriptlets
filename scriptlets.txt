@@ -81,11 +81,12 @@ ereplace.js application/javascript
 })();
 
 # referrer-defuser
-no-referrer.js application/javascript
+referrer-setter.js application/javascript
 (function() {
-   		delete window.document.referrer;
+   		let myRefer = '{{1}}';
+		delete window.document.referrer;
        		window.document.__defineGetter__('referrer', function () {
-            	return "no-referrer";
+            	return myRefer;
                 });
 })();
 
@@ -180,7 +181,6 @@ rdo.js application/javascript
 		case 'unFunc':          return define(function() { return undefined; });
 		case 'oneFunc':         return define(function() { return 1; });
 		case 'zeFunc':          return define(function() { return 0; });
-		case '/(\w+)/':           return define(/(\w+)/);
 		default:		return;
 	}
 })();
