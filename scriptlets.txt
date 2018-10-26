@@ -80,30 +80,13 @@ ereplace.js application/javascript
 	}
 })();
 
-# autoplay-setter
-aplay.js application/javascript
+# referrer-defuser
+no-referrer.js application/javascript
 (function() {
-	let selector = '{{1}}';
-	if ( selector === '' || selector === '{{1}}' ) {
-		return;
-	}
-	let aplay = function() {
-		let elements = document.querySelectorAll(selector);
-		for ( let element of elements ) {
-		        let play = '{{2}}';
-			if (play !== 'true' || play !== 'false') {
-				return;
-			}
-		        else {
-				element.autoplay = play;
-			     }
-		}
-	};
-	if (document.readyState === 'interactive' || document.readyState === 'complete') {
-		aplay();
-	} else {
-		window.addEventListener('DOMContentLoaded', aplay);
-	}
+   		delete window.document.referrer;
+       		window.document.__defineGetter__('referrer', function () {
+            	return "no-referrer";
+                });
 })();
 
 # element-replacer-onload
