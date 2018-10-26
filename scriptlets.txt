@@ -82,12 +82,12 @@ ereplace.js application/javascript
 
 # referrer-defuser
 referrer-setter.js application/javascript
-(function() {
-   		let myRefer = '{{1}}';
-		delete window.document.referrer;
-       		window.document.__defineGetter__('referrer', function () {
-            	return myRefer;
-                });
+(function () {
+	let myRefer = '{{1}}';
+	delete window.document.referrer;
+	window.document.__defineGetter__('referrer', function () {
+		return myRefer;
+	});
 })();
 
 # element-replacer-onload
