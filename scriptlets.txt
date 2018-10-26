@@ -98,7 +98,6 @@ referrer-policy.js application/javascript
 	let meta = docu.createElement('meta');
 	meta.setAttribute('name', 'referrer');
 	meta.setAttribute('content', '{{1}}');
-	docu.head.appendChild(meta);
 })();
 
 # element-replacer-onload
