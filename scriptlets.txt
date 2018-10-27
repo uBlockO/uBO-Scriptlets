@@ -259,9 +259,8 @@ cookie-set.js application/javascript
 		let value = '{{2}}';
 		if (data.indexOf('=') === -1 ) {
 			return;
-		} else {
-			document.cookie = 'data=value; expires=Fri, 31 Dec 3018 23:59:59 GMT; path=/;';
-		}
+		} 
+		document.cookie = 'data=value; expires=Fri, 31 Dec 3018 23:59:59 GMT; path=/;';
 })();		
 
 # atob-defuser
