@@ -98,12 +98,12 @@ referrer-setter.js application/javascript
 # referrer-policy-setter
 referrer-policy.js application/javascript
 (function() {
-	let docu = document;
-	if ( docu.head === null ) { return; }
-	let meta = docu.createElement('meta');
+	let head = document.head;
+	if (!head) { return; }
+	let meta = head.createElement('meta');
 	meta.setAttribute('name', 'referrer');
 	meta.setAttribute('content', '{{1}}');
-	docu.head.appendChild(meta);
+	head.appendChild(meta);
 })();
 
 # element-replacer-onload
