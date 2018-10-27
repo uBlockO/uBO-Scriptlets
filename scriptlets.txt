@@ -254,14 +254,15 @@ eremove2.js application/javascript
 
 # cookie-inserter
 cookie-set.js application/javascript
-let cookie = '{{1}}';
-let attribute = '{{2}}';
-if (cookie.indexOf('=') === -1 ) {
-	return;
-} 
-document.cookie = 'cookie=attribute; expires=Fri, 31 Dec 3018 23:59:59 GMT; path=/;';
+(function() {
+		let c = '{{1}}';
+		let v = '{{2}}';
+		if (c.indexOf('=') === -1 ) {
+			return;
+		} 
+		document.cookie = 'c=v; expires=Fri, 31 Dec 3018 23:59:59 GMT; path=/;';
+})();
 		
-
 # atob-defuser
 noatob.js application/javascript
 (function() {
