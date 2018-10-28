@@ -19,10 +19,16 @@ eval-logger.js application/javascript
 	}.bind(window);
 })();
 
-# cookie-inserter
+# cookie-setter
 cookie-set.js application/javascript
 document.cookie = '{{1}}={{2}}; expires=Fri, 31 Dec 3018 23:59:59 GMT; path=/;';
 
+# cookie-blocker
+cookie-block.js application/javascript
+(function () {
+		document.__defineGetter__("cookie", function() { return '';} );
+		document.__defineSetter__("cookie", function() {} );
+})();		
 
 # element-clicker-onload
 eclick2.js application/javascript
