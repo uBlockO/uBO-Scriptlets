@@ -27,7 +27,9 @@ document.cookie = '{{1}}={{2}}; expires=Fri, 31 Dec 3018 23:59:59 GMT; path=/;';
 uas.js application/javascript
 (function() {
 	let xhr = new XMLHttpRequest();
+	xhr.open('POST', url, true);
 	xhr.setRequestHeader("User-Agent", '{{1}}');
+	xhr.send();
 })();
 		
 
