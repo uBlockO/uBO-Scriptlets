@@ -25,11 +25,23 @@ document.cookie = '{{1}}={{2}}; expires=Fri, 31 Dec 3018 23:59:59 GMT; path=/;';
 
 # UA-setter
 uas.js application/javascript
-(function() {
-	let xhr = new XMLHttpRequest();
-	xhr.open('POST', url, true);
-	xhr.setRequestHeader("User-Agent", '{{1}}');
-	xhr.send();
+(function () {
+	let myUA = '{{1}}';
+	let myAV = '{{2}}';
+	let myPF = '{{3}}';
+	let myVD = '{{4}}';
+	window.navigator.__defineGetter__('userAgent', function () {
+		return myUA;
+	});
+	window.navigator.__defineGetter__('appVersion', function () {
+		return myAV;
+	});
+	window.navigator.__defineGetter__('platform', function () {
+		return myPF;
+	});
+	window.navigator.__defineGetter__('vendor', function () {
+		return myVD;
+	});
 })();
 		
 
