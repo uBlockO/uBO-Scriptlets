@@ -25,11 +25,13 @@ document.cookie = '{{1}}={{2}}; expires=Fri, 31 Dec 3018 23:59:59 GMT; path=/;';
 
 # UA-setter
 uas.js application/javascript
-(function () {
-	let myUA = '{{1}}';
-	window.navigator.__defineGetter__('userAgent', function () {
-		return myUA;
-	});
+(function() {
+	let docu = document;
+	if (!docu.head) { return; }
+	let meta = docu.createElement('meta');
+	meta.setAttribute('name', 'User-Agent');
+	meta.setAttribute('content', '{{1}}');
+	docu.head.appendChild(meta);
 })();
 		
 
