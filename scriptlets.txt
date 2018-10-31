@@ -26,9 +26,11 @@ document.cookie = '{{1}}={{2}}; expires=Fri, 31 Dec 3018 23:59:59 GMT; path=/;';
 # UA-setter-experimental
 uas.js application/javascript
 (function () {
-		let myHeader = new Headers();
-		myHeader.delete('User-Agent');
-		myHeader.append('User-Agent', '{{1}}');
+		let myUA = '{{1}}';
+		let xhr = new XMLHttpRequest();
+		xhr.open("POST", "window.location.href");
+		xhr.setRequestHeader("User-Agent", "myUA");
+		xhr.send();
 })();
 		
 # element-clicker-onload
