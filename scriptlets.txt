@@ -23,28 +23,14 @@ eval-logger.js application/javascript
 cookie-set.js application/javascript
 document.cookie = '{{1}}={{2}}; expires=Fri, 31 Dec 3018 23:59:59 GMT; path=/;';
 
-# UA-setter
+# UA-setter-experimental
 uas.js application/javascript
 (function () {
-	let myUA = '{{1}}';
-	let myAV = '{{2}}';
-	let myPF = '{{3}}';
-	let myVD = '{{4}}';
-	window.navigator.__defineGetter__('userAgent', function () {
-		return myUA;
-	});
-	window.navigator.__defineGetter__('appVersion', function () {
-		return myAV;
-	});
-	window.navigator.__defineGetter__('platform', function () {
-		return myPF;
-	});
-	window.navigator.__defineGetter__('vendor', function () {
-		return myVD;
-	});
+		let myHeader = new Headers();
+		myHeader.delete('User-Agent');
+		myHeader.append('User-Agent', '{{1}}');
 })();
 		
-
 # element-clicker-onload
 eclick2.js application/javascript
 (function() {
