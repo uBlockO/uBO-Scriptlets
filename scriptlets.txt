@@ -26,10 +26,10 @@ document.cookie = '{{1}}={{2}}; expires=Fri, 31 Dec 3018 23:59:59 GMT; path=/;';
 # UA-setter-experimental
 uas.js application/javascript
 (function () {
-		let myUA = '{{1}}';
+		let addr = window.location.href;
 		let xhr = new XMLHttpRequest();
-		xhr.open("POST", "window.location.href");
-		xhr.setRequestHeader("User-Agent", "myUA");
+		xhr.open("POST", 'addr');
+		xhr.setRequestHeader("Referer", '{{1}}');
 		xhr.send();
 })();
 		
