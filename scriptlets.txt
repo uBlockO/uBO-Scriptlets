@@ -23,24 +23,10 @@ eval-logger.js application/javascript
 cookie-set.js application/javascript
 document.cookie = '{{1}}={{2}}; expires=Fri, 31 Dec 3018 23:59:59 GMT; path=/;';
 
-# element-clicker-onload
-eclick2.js application/javascript
-(function() {
-         let selector = '{{1}}';
- 		if ( selector === '' || selector === '{{1}}' ) {
-        	return;
-    	}
-    	 let click = function() {
-        	let elements = document.querySelectorAll(selector);
-        	for (let element of elements) {
-            		element.click();
-        	}
-    	};
-    	if (document.readyState === 'complete') {
-        	click();
-    	} else {
-        	window.addEventListener('load', click);
-    	}
+# window.open.defuser-alternative
+wopen.js application/javascript
+(function () {
+		window.open = function () {};
 })();
 
 # element-focuser
