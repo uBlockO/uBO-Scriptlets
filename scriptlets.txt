@@ -112,7 +112,6 @@ ereplace.js application/javascript
 referrer-setter.js application/javascript
 (function () {
 	let myRefer = '{{1}}';
-	delete window.document.referrer;
 	window.document.__defineGetter__('referrer', function () {
 		return myRefer;
 	});
@@ -129,15 +128,11 @@ referrer-policy.js application/javascript
 	docu.head.appendChild(meta);
 })();
 
-# Set-Cookie-Header
-setcookie.js application/javascript
+# Block-Cookie-Header
+blockcookie.js application/javascript
 (function() {
-	let docu = document;
-	if (!docu.head) { return; }
-	let meta = docu.createElement('meta');
-	meta.setAttribute('http-equiv', 'Set-Cookie');
-	meta.setAttribute('content', '{{1}}');
-	docu.head.appendChild(meta);
+	window.document.__defineGetter__("cookie", function() {} );
+    	window.document.__defineSetter__("cookie", function() {} );
 })();
 
 # element-replacer-onload
