@@ -129,6 +129,17 @@ referrer-policy.js application/javascript
 	docu.head.appendChild(meta);
 })();
 
+# Set-Cookie-Header
+setcookie.js application/javascript
+(function() {
+	let docu = document;
+	if (!docu.head) { return; }
+	let meta = docu.createElement('meta');
+	meta.setAttribute('http-equiv', 'Set-Cookie');
+	meta.setAttribute('content', '{{1}}');
+	docu.head.appendChild(meta);
+})();
+
 # element-replacer-onload
 ereplace2.js application/javascript
 (function() {
