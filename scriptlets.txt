@@ -131,8 +131,8 @@ referrer-policy.js application/javascript
 # Block-Cookie-Header
 blockcookie.js application/javascript
 (function() {
-	window.document.__defineGetter__("cookie", function() {} );
-    	window.document.__defineSetter__("cookie", function() {} );
+	window.document.__defineGetter__('cookie', function() {} );
+    	window.document.__defineSetter__('cookie', function() {} );
 })();
 
 # element-replacer-onload
