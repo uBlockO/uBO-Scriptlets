@@ -123,7 +123,7 @@ referrer-policy.js application/javascript
 	let docu = document;
 	if (!docu.head) { return; }
 	let meta = docu.createElement('meta');
-	meta.setAttribute('name', 'Referrer-Policy');
+	meta.setAttribute('http-equiv', 'Referrer-Policy');
 	meta.setAttribute('content', '{{1}}');
 	docu.head.appendChild(meta);
 })();
