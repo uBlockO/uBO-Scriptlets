@@ -117,13 +117,13 @@ referrer-setter.js application/javascript
 	});
 })();
 
-# referrer-policy-setter
-referrer-policy.js application/javascript
+# feature-policy-setter
+fp.js application/javascript
 (function() {
 	let docu = document;
 	if (!docu.head) { return; }
 	let meta = docu.createElement('meta');
-	meta.setAttribute('name', 'referer');
+	meta.setAttribute('http-equiv', 'Feature-Policy');
 	meta.setAttribute('content', '{{1}}');
 	docu.head.appendChild(meta);
 })();
