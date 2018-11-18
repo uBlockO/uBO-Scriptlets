@@ -84,7 +84,7 @@ stattr.js application/javascript
 		try {
 			let nodes = document.querySelectorAll(selector), i = nodes.length;
 			while ( i-- ) {
-				var node = nodes[i], j = attrs.length;
+				let node = nodes[i], j = attrs.length;
 				while ( j-- ) { node.setAttribute(attrs[j], '{{3}}'); }
 			}
 		} catch(ex) {
@@ -96,7 +96,6 @@ stattr.js application/javascript
 		stattr();
 	}
 })();
-
 
 # element-focusser
 efocus.js application/javascript
