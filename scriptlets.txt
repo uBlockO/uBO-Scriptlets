@@ -69,6 +69,27 @@ eclick.js application/javascript
 	}
 })();
 
+# element-attribute
+eattr.js application/javascript
+(function() {
+	let selector = '{{1}}';
+	if ( selector === '' || selector === '{{1}}' ) {
+		return;
+	}
+	let stattr = function() {
+		let elements = document.querySelectorAll(selector);
+		for (let element of elements) {
+			element.setAttribute('{{2}}', '{{3}}');
+		}
+	};
+	if ( document.readyState === 'interactive' || document.readyState === 'complete' ) {
+		stattr();
+	} else {
+		window.addEventListener('loading', stattr);
+	}
+})();
+
+
 # element-focusser
 efocus.js application/javascript
 (function() {
@@ -128,13 +149,6 @@ fp.js application/javascript
 	meta.setAttribute('http-equiv', 'Feature-Policy');
 	meta.setAttribute('content', '{{1}}');
 	docu.head.appendChild(meta);
-})();
-
-# Block-Cookie-Header
-blockcookie.js application/javascript
-(function() {
-	window.document.__defineGetter__('cookie', function() {} );
-    	window.document.__defineSetter__('cookie', function() {} );
 })();
 
 # element-replacer-onload
