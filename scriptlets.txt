@@ -77,8 +77,10 @@ efocus.js application/javascript
 		return;
 	}
 	let focus = function() {
-		let element = document.querySelector(selector);
-		element.focus();
+		let elements = document.querySelectorAll(selector);
+		for ( let element of elements ) {
+			element.focus();
+		}
 	};
 	if ( document.readyState === 'interactive' || document.readyState === 'complete' ) {
 		focus();
