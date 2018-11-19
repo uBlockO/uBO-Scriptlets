@@ -70,7 +70,7 @@ eclick.js application/javascript
 })();
 
 # element-setAttribute
-stattr.js application/javascript
+set-attr.js application/javascript
 (function() {
 	let attr = '{{1}}';
 	if ( attr === '' || attr === '{{1}}' ) { return; }
