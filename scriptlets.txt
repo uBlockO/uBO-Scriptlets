@@ -72,11 +72,11 @@ eclick.js application/javascript
 # element-setAttribute
 set-attr.js application/javascript
 (function() {
-	let attr = '{{1}}';
-	if ( attr === '' || attr === '{{1}}' ) { return; }
+	let attr = '{{2}}';
+	if ( attr === '' || attr === '{{2}}' ) { return; }
 	let attrs = attr.split(/\s*\|\s*/);
-	let selector = '{{2}}';
-	if ( selector === '' || selector === '{{2}}' ) {
+	let selector = '{{1}}';
+	if ( selector === '' || selector === '{{1}}' ) {
 		selector = '[' + attrs.join('],[') + ']';
 	}
 	let stattr = function(ev) {
@@ -134,7 +134,7 @@ ereplace.js application/javascript
 	if (document.readyState === 'interactive' || document.readyState === 'complete') {
 		replace();
 	} else {
-		window.addEventListener('DOMContentLoaded', replace);
+		window.addEventListener('loading', replace);
 	}
 })();
 
@@ -285,7 +285,7 @@ eremove.js application/javascript
 	if ( document.readyState === 'interactive' || document.readyState === 'complete' ) {
 		remove();
 	} else {
-		window.addEventListener('DOMContentLoaded', remove);
+		window.addEventListener('loading', remove);
 	}
 })();
 
