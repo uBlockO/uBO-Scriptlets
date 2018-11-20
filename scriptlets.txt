@@ -62,10 +62,10 @@ eclick.js application/javascript
 			element.click();
 		}
 	};
-	if ( document.readyState === 'interactive' || document.readyState === 'complete' ) {
-		click();
-	} else {
+	if ( document.readyState === 'loading' || document.readyState === 'interactive' ) {
 		window.addEventListener('DOMContentLoaded', click);
+	} else {
+		click();
 	}
 })();
 
