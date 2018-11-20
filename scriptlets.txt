@@ -180,7 +180,7 @@ ereplace2.js application/javascript
 })();
 
 
-# read-Only-property defuser
+# value-setter
 rdo.js application/javascript
 (function() {
 	let name = '{{1}}';
@@ -248,7 +248,8 @@ rdo.js application/javascript
 		case 'nullFunc':        return define(function() { return null; });
 		case 'unFunc':          return define(function() { return undefined; });
 		case 'oneFunc':         return define(function() { return 1; });
-		case 'zeFunc':          return define(function() { return 0; });
+		case 'zeFunc':		return define(function() { return 0; });
+		case '{{3}}':           return define({{3}});
 		default:		return;
 	}
 })();
