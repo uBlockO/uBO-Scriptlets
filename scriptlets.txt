@@ -52,11 +52,23 @@ eclick2.js application/javascript
 
 # background-image-setter
 bis.js application/javascript
-(function () {
-		document.body.style.backgroundImage = '{{1}}';
-	
+(function() {
+         let selector = '{{1}}';
+ 		if ( selector === '' || selector === '{{1}}' ) {
+        	return;
+    	}
+    	 let bis = function() {
+        	let elements = document.querySelectorAll(selector);
+        	for (let element of elements) {
+            		element.style.backgroundImage = '{{2}}';
+        	}
+    	};
+    	if (document.readyState === 'loading' || document.readyState === 'interactive') {
+        	bis();
+    	} else {
+        	window.addEventListener('DOMContentLoaded', bis);
+    	}
 })();
-
 
 # element-clicker
 eclick.js application/javascript
