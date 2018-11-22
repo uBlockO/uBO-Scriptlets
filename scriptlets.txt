@@ -47,7 +47,16 @@ eclick2.js application/javascript
     	} else {
         	window.addEventListener('load', click);
     	}
-})();	
+})();
+
+
+# background-image-setter
+bis.js application/javascript
+(function () {
+		document.body.style.backgroundImage = '{{1}}';
+	
+})();
+
 
 # element-clicker
 eclick.js application/javascript
