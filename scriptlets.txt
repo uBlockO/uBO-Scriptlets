@@ -58,12 +58,10 @@ bis.js application/javascript
         	return;
     	}
     	 let bis = function() {
-        	let elements = document.querySelectorAll(selector);
-        	for (let element of elements) {
-            		element.style.backgroundImage = '{{2}}';
-        	}
-    	};
-    	if (document.readyState === 'interactive' || document.readyState === 'complete') {
+        	let element = document.querySelector(selector);
+        	element.style.backgroundImage = '{{2}}';
+        };
+    	if (document.readyState === 'loading' || document.readyState === 'interactive') {
         	window.addEventListener('DOMContentLoaded', bis);
     	} else {
         	bis();
