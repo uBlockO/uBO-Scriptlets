@@ -274,7 +274,7 @@ eadd.js application/javascript
 	} else {
 		return;
 	}
-	element.style.display = 'none';
+	element.style.display = '{{2}}';
 	document.documentElement.appendChild(element);
 })();
 
