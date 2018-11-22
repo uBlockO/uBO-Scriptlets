@@ -37,11 +37,9 @@ eclick2.js application/javascript
         	return;
     	}
     	 let click = function() {
-        	let elements = document.querySelectorAll(selector);
-        	for (let element of elements) {
-            		element.click();
-        	}
-    	};
+        	let element = document.querySelector(selector);
+        	element.click();
+        };
     	if (document.readyState === 'complete') {
         	click();
     	} else {
@@ -76,10 +74,8 @@ eclick.js application/javascript
 		return;
 	}
 	let click = function() {
-		let elements = document.querySelectorAll(selector);
-		for (let element of elements) {
-			element.click();
-		}
+		let element = document.querySelector(selector);
+		element.click();
 	};
 	if ( document.readyState === 'loading' || document.readyState === 'interactive' ) {
 		window.addEventListener('DOMContentLoaded', click);
@@ -124,15 +120,13 @@ efocus.js application/javascript
 		return;
 	}
 	let focus = function() {
-		let elements = document.querySelectorAll(selector);
-		for ( let element of elements ) {
-			element.focus();
-		}
+		let element = document.querySelector(selector);
+		element.focus();
 	};
 	if ( document.readyState === 'interactive' || document.readyState === 'complete' ) {
-		focus();
-	} else {
 		window.addEventListener('DOMContentLoaded', focus);
+	} else {
+		focus();
 	}
 })();
 
@@ -145,15 +139,13 @@ ereplace.js application/javascript
 	}
 	let noop = document.createElement('noop');
 	let replace = function() {
-		let elements = document.querySelectorAll(selector);
-		for ( let element of elements ) {
-			element.replaceWith(noop);
-		}
+		let element = document.querySelector(selector);
+		element.replaceWith(noop);
 	};
 	if (document.readyState === 'interactive' || document.readyState === 'complete') {
 		replace();
 	} else {
-		window.addEventListener('loading', replace);
+		window.addEventListener('DOMContentLoaded', replace);
 	}
 })();
 
@@ -177,17 +169,6 @@ fp.js application/javascript
 	docu.head.appendChild(meta);
 })();
 
-# Cookie header-blocker
-bc.js application/javascript
-(function() {
-	let docu = document;
-	if (!docu.head) { return; }
-	let meta = docu.createElement('meta');
-	meta.setAttribute('name', 'Cookie');
-	meta.setAttribute('content', '');
-	docu.head.appendChild(meta);
-})();
-
 # element-replacer-onload
 ereplace2.js application/javascript
 (function() {
@@ -197,10 +178,8 @@ ereplace2.js application/javascript
 	}
 	let noop = document.createElement('noop');
 	let replace = function() {
-		let elements = document.querySelectorAll(selector);
-		for ( let element of elements ) {
-			element.replaceWith(noop);
-		}
+		let element = document.querySelector(selector);
+		element.replaceWith(noop);
 	};
 	if (document.readyState === 'complete') {
 		replace();
@@ -307,15 +286,13 @@ eremove.js application/javascript
 		return;
 	}
 	let remove = function() {
-		let elements = document.querySelectorAll(selector);
-		for ( let element of elements ) {
-			element.remove();
-		}
+		let element = document.querySelector(selector);
+		element.remove();
 	};
 	if ( document.readyState === 'interactive' || document.readyState === 'complete' ) {
 		remove();
 	} else {
-		window.addEventListener('loading', remove);
+		window.addEventListener('DOMContentLoaded', remove);
 	}
 })();
 
@@ -327,10 +304,8 @@ eremove2.js application/javascript
 		return;
 	}
 	let remove = function() {
-		let elements = document.querySelectorAll(selector);
-		for ( let element of elements ) {
-			element.remove();
-		}
+		let element = document.querySelector(selector);
+		element.remove();
 	};
 	if ( document.readyState === 'complete' ) {
 		remove();
