@@ -63,7 +63,7 @@ bis.js application/javascript
             		element.style.backgroundImage = '{{2}}';
         	}
     	};
-    	if (document.readyState === 'loading' || document.readyState === 'interactive') {
+    	if (document.readyState === 'loading') {
         	bis();
     	} else {
         	window.addEventListener('DOMContentLoaded', bis);
