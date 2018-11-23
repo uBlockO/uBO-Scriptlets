@@ -263,19 +263,22 @@ rdo.js application/javascript
 })();
 
 # element-adder
-eadd.js application/javascript
+eaddr.js application/javascript
 (function() {
-	let identifier = '{{1}}';
-	let element = document.createElement('div');
-	if ( identifier.charAt(0) === '#' ) {
-		element.id = identifier.substring(1);
-	} else if ( identifier.charAt(0) === '.' ) {
-		element.className = identifier.substring(1);
-	} else {
+	let selector = '{{1}}';
+	if ( selector === '' || selector === '{{1}}' ) {
 		return;
 	}
-	element.style.display = '{{2}}';
-	document.documentElement.appendChild(element);
+	let add = function() {
+		let element = document.querySelector(selector);
+		element.style.display = '{{2}}';
+		document.documentElement.appendChild(element);
+	};
+	if ( document.readyState === 'interactive' || document.readyState === 'complete' ) {
+		add();
+	} else {
+		window.addEventListener('DOMContentLoaded', add);
+	}
 })();
 
 # element-remover
