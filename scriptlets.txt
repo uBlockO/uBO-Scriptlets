@@ -169,6 +169,17 @@ fp.js application/javascript
 	docu.head.appendChild(meta);
 })();
 
+# CORS-setter
+cors.js application/javascript
+(function() {
+	let docu = document;
+	if (!docu.head) { return; }
+	let meta = docu.createElement('meta');
+	meta.setAttribute('http-equiv', 'Access-Control-Allow-Headers');
+	meta.setAttribute('content', '{{1}}');
+	docu.head.appendChild(meta);
+})();
+
 # cookie-blocker-experimental
 cb.js application/javascript
 (function() {
