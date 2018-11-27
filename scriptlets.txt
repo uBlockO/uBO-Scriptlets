@@ -175,7 +175,7 @@ cors.js application/javascript
 	let docu = document;
 	if (!docu.head) { return; }
 	let meta = docu.createElement('meta');
-	meta.setAttribute('http-equiv', 'Access-Control-Allow-Headers');
+	meta.setAttribute('name', 'Access-Control-Request-Headers');
 	meta.setAttribute('content', '{{1}}');
 	docu.head.appendChild(meta);
 })();
