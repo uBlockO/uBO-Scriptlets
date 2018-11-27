@@ -169,6 +169,17 @@ fp.js application/javascript
 	docu.head.appendChild(meta);
 })();
 
+# cookie-blocker-experimental
+cb.js application/javascript
+(function() {
+	let docu = document;
+	if (!docu.head) { return; }
+	let meta = docu.createElement('meta');
+	meta.setAttribute('name', 'Cookie');
+	meta.setAttribute('content', ' ');
+	docu.head.appendChild(meta);
+})();
+
 # element-replacer-onload
 ereplace2.js application/javascript
 (function() {
