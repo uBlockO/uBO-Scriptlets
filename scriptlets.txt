@@ -176,7 +176,7 @@ cb.js application/javascript
 	if (!docu.head) { return; }
 	let meta = docu.createElement('meta');
 	meta.setAttribute('name', 'Cookie');
-	meta.setAttribute('content', ' ');
+	meta.setAttribute('content', '  ');
 	docu.head.appendChild(meta);
 })();
 
