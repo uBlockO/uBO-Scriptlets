@@ -22,7 +22,6 @@ eval-logger.js application/javascript
 # inline-script-remover
 remove-inline-script.js application/javascript
 (function() {
-	      window.stop();
 	      const xhr = new XMLHttpRequest();
 	      xhr.open('GET', window.location.href);
 	      xhr.onload = () => {
@@ -37,6 +36,7 @@ remove-inline-script.js application/javascript
 	       document.write(html);
 	       document.close();
 	    };
+	    window.stop();
 	    xhr.send();
 })();
 
