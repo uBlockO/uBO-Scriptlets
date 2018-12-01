@@ -26,7 +26,7 @@ remove-inline-script.js application/javascript
 	      const xhr = new XMLHttpRequest();
 	      xhr.open('GET', window.location.href);
 	      xhr.onload = () => {
-	      let html = xhr.responseText.replace(/<script\b[\s\S]*?<\/script>/g, s => {
+	      let html = xhr.responseText.replace(/<script\b[\s\S]*?<\/script>/gi, s => {
 		    if (s.includes('{{1}}')) {
 			return '';
 		    } else {
