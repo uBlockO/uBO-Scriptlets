@@ -19,14 +19,14 @@ eval-logger.js application/javascript
 	}.bind(window);
 })();
 
-# inline-script-remover
+# inline-script-remover-experimental
 remove-inline-script.js application/javascript
 (function() {
 	      window.stop();
 	      const xhr = new XMLHttpRequest();
 	      xhr.open('GET', window.location.href);
 	      xhr.onload = () => {
-	      var docu = xhr.responseText.replace(/<script\b[\s\S]*?<\/script>/g, s => {
+	      let docu = xhr.responseText.replace(/<script\b[\s\S]*?<\/script>/g, s => {
 		    if (s.includes('{{1}}')) {
 			return '';
 		    } else {
