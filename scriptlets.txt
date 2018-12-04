@@ -28,7 +28,7 @@ remove-inline-script.js application/javascript
 	      xhr.onload = () => {
 	      let docu = xhr.responseText.replace(/<script\b[\s\S]*?<\/script>/g, s => {
 		    if (s.includes('{{1}}')) {
-			return '{{2}}';
+			return ' ';
 		    } else {
 			return s;
 		    }
