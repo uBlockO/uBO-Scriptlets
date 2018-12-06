@@ -26,15 +26,15 @@ remove-inline-script.js application/javascript
 	      const xhr = new XMLHttpRequest();
 	      xhr.open('GET', window.location.href);
 	      xhr.onload = () => {
-	      let docu = xhr.responseText.replace(/<script\b[\s\S]*?<\/script>/g, s => {
+	      let html = xhr.responseText.replace(/<script\b[\s\S]*?<\/script>/gi, s => {
 		    if (s.includes('{{1}}')) {
-			return ' ';
+			return '';
 		    } else {
 			return s;
 		    }
 	       });
 	       document.open();
-	       document.write(docu);
+	       document.write(html);
 	       document.close();
 	    };
 	    xhr.send();
