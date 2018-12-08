@@ -27,15 +27,17 @@ remove-inline-script.js application/javascript
 		xhr.open('GET', window.location.href);
 		xhr.onload = () => {
 		let html = xhr.responseText.replace(/<script\b[\s\S]*?<\/script>/gi, s => {
-		    if (s.includes('{{1}}')) {
+		if (s.includes('{{1}}')) {
 			return '';
 		    } else {
 			return s;
 		    }
 		});
-		document.open();
-		document.write(html);
-		document.close();
+		if (document.readyState === 'loading') {
+        		window.addEventListener('DOMContentLoaded', html);
+		} else {
+        		html();	
+    		}
 		};
 		xhr.send();
 })();
