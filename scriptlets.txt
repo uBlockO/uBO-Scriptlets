@@ -51,7 +51,7 @@ wopen.js application/javascript
 		window.open = () => {};
 		this.open = () => {};
 		parent.open = () => {};
-		open = () => {};
+		window.opener = () => {};
 })();
 
 # element-clicker-onload
