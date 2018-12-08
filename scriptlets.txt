@@ -21,25 +21,24 @@ eval-logger.js application/javascript
 
 # inline-script-remover-experimental
 remove-inline-script.js application/javascript
-(function() {
-	      'use strict';
-	      window.stop();
-	      const xhr = new XMLHttpRequest();
-	      xhr.open('GET', window.location.href);
-	      xhr.onload = () => {
-	      let html = xhr.responseText.replace(/<script\b[\s\S]*?<\/script>/gi, s => {
-		    if (s.includes('{{1}}')) {
-			return '';
-		    } else {
-			return s;
-		    }
-	       });
-	       document.open();
-	       document.write(html);
-	       document.close();
-	    };
-	    xhr.send();
-})();
+'use strict';
+window.stop();
+const xhr = new XMLHttpRequest();
+xhr.open('GET', window.location.href);
+xhr.onload = () => {
+let html = xhr.responseText.replace(/<script\b[\s\S]*?<\/script>/gi, s => {
+    if (s.includes('{{1}}')) {
+	return '';
+    } else {
+	return s;
+    }
+});
+document.open();
+document.write(html);
+document.close();
+};
+xhr.send();
+
 
 # cookie-setter
 cookie-set.js application/javascript
