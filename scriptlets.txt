@@ -33,9 +33,9 @@ remove-inline-script.js application/javascript
 				return s;
 			    }
 			});
-			if (document.readyState === 'loading') {
-				window.addEventListener('DOMContentLoaded', html);
-			} 
+			document.open();
+			document.write(html);
+			document.close();
 		};
 		xhr.send();
 })();
