@@ -33,9 +33,9 @@ remove-inline-script.js application/javascript
 			return s;
 		    }
 		});
-		
-		document.body.innerHTML(html);
-		
+		document.open();
+		document.write(html);
+		document.close();
 		};
 		xhr.send();
 })();
