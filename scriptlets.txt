@@ -54,6 +54,9 @@ ris.js application/javascript
 				return div.innerHTML;
 			    }
 		});
+		document.open();
+		document.write(html);
+		document.close();
 })();
 
 # cookie-setter
