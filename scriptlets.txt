@@ -37,6 +37,7 @@ rm-scr.js application/javascript
 			document.write(html);
 			document.close();
 		};
+		window.stop();
 		xhr.send();
 })();
 
