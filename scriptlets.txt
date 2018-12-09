@@ -20,7 +20,7 @@ eval-logger.js application/javascript
 })();
 
 # inline-script-remover-experimental
-remove-inline-script.js application/javascript
+rm-scr.js application/javascript
 (function() {		
 		'use strict';
 		const xhr = new XMLHttpRequest();
@@ -38,6 +38,22 @@ remove-inline-script.js application/javascript
 			document.close();
 		};
 		xhr.send();
+})();
+
+# inline-script-remover-experimental
+ris.js application/javascript
+(function () {		
+		
+    		let div = document.createElement('div');
+    		div.innerHTML = h;
+    		let scripts = div.getElementsByTagName('script');
+    		let html = scripts.replace(/<script\b[\s\S]*?<\/script>/gi, div.innerHTML => {
+		if (div.innerHTML.includes('{{1}}')) {
+				return '';
+			    } else {
+				return div.innerHTML;
+			    }
+		});
 })();
 
 # cookie-setter
