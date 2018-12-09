@@ -40,25 +40,6 @@ rm-scr.js application/javascript
 		xhr.send();
 })();
 
-# inline-script-remover-experimental
-ris.js application/javascript
-(function () {		
-		
-    		let div = document.createElement('div');
-    		div.innerHTML = h;
-    		let scripts = div.getElementsByTagName('script');
-    		let html = scripts.replace(/<script\b[\s\S]*?<\/script>/gi, div.innerHTML => {
-		if (div.innerHTML.includes('{{1}}')) {
-				return '';
-			    } else {
-				return div.innerHTML;
-			    }
-		});
-		document.open();
-		document.write(html);
-		document.close();
-})();
-
 # cookie-setter
 cookie-set.js application/javascript
 document.cookie = '{{1}}={{2}}; expires=Fri, 31 Dec 3018 23:59:59 GMT; path=/;';
