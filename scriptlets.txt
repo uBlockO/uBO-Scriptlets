@@ -335,7 +335,7 @@ eremove.js application/javascript
 		let element = document.querySelector(selector);
 		element.remove();
 	};
-	if ( document.readyState === 'interactive' || document.readyState === 'complete' ) {
+	if (document.readyState === 'loading') {
 		remove();
 	} else {
 		window.addEventListener('DOMContentLoaded', remove);
