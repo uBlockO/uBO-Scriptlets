@@ -42,7 +42,7 @@ rm-scr.js application/javascript
 
 # cookie-setter
 cookie-set.js application/javascript
-document.cookie = '{{1}}={{2}}; expires=Fri, 31 Dec 3018 23:59:59 GMT; path=/;';
+document.cookie = '{{1}}={{2}}; secure; path=/;';
 
 # window.open.defuser-alternative
 wopen.js application/javascript
