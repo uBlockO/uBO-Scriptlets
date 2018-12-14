@@ -42,7 +42,7 @@ rm-scr.js application/javascript
 
 # cookie-setter
 cookie-set.js application/javascript
-document.cookie = '{{1}}={{2}}; max-age=2147483647; secure; path=/;';
+document.cookie = '{{1}}={{2}}; max-age={{3}}; secure; path=/;';
 
 # window.open.defuser-alternative
 wopen.js application/javascript
