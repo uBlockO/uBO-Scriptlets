@@ -100,8 +100,8 @@ css-rm.js application/javascript
         	return;
     	}
     	 let css = function() {
-        	let element = document.querySelector(selector);
-        	element.style.removeAttribute("style");
+        	let element = document.querySelectorAll(selector);
+        	element.removeAttribute("style");
         };
     	if (document.readyState === 'loading') {
         	window.addEventListener('DOMContentLoaded', css);
