@@ -558,10 +558,10 @@ stcharat-defuser.js application/javascript
 		needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 	}
 	needle = new RegExp(needle);
-	realschar = window.String.prototype.charCodeAt;
+	realstcharat = window.String.prototype.charCodeAt;
 	window.String.prototype.charCodeAt = function(a) {
 		if ( !needle.test(a.toString()) ) {
-			realschar.call(window, a);
+			realstcharat.call(window, a);
 		}
 	}.bind(window);
 })();
