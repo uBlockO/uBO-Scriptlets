@@ -101,7 +101,7 @@ css-rm.js application/javascript
     	}
     	 let css = function() {
         	let element = document.querySelectorAll(selector);
-        	element.style.cssText = null;
+        	element.style.cssText = '{{2}}';
         };
     	if (document.readyState === 'loading') {
         	window.addEventListener('DOMContentLoaded', css);
@@ -352,7 +352,7 @@ eremove.js application/javascript
 		return;
 	}
 	let remove = function() {
-		let element = document.querySelector(selector);
+		let element = document.querySelectorAll(selector);
 		element.remove();
 	};
 	if (document.readyState === 'loading') {
@@ -370,7 +370,7 @@ eremove2.js application/javascript
 		return;
 	}
 	let remove = function() {
-		let element = document.querySelector(selector);
+		let element = document.querySelectorAll(selector);
 		element.remove();
 	};
 	if ( document.readyState === 'complete' ) {
