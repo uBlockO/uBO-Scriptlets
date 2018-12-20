@@ -101,7 +101,7 @@ css-rm.js application/javascript
     	}
     	 let css = function() {
         	let element = document.querySelectorAll(selector);
-        	element.removeAttribute('style');
+        	element.style.cssText = null;
         };
     	if (document.readyState === 'loading') {
         	window.addEventListener('DOMContentLoaded', css);
