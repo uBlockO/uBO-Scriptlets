@@ -548,6 +548,39 @@ schar-logger.js application/javascript
 	}.bind(window);
 })();
 
+# String.prototype.charCodeAt-defuser
+stcharat-defuser.js application/javascript
+(function() {
+	let needle = '{{1}}';
+	if ( needle === '' || needle === '{{1}}' ) {
+		needle = '.?';
+	} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
+		needle = needle.slice(1,-1);
+	} else {
+		needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+	}
+	needle = new RegExp(needle);
+	realschar = window.String.prototype.charCodeAt;
+	window.String.prototype.charCodeAt = function(a) {
+		if ( !needle.test(a.toString()) ) {
+			realschar.call(window, a);
+		}
+	}.bind(window);
+})();
+
+
+# String.prototype.charCodeAt-logger 
+stcharat-logger.js application/javascript
+(function() {
+	let z = window.String.prototype.charCodeAt,
+		log = console.log.bind(console);
+	window.String.prototype.charCodeAt = function(a) {
+		log('uBO: String.prototype.charCodeAt("%s")', a.toString());
+		return z.apply(this, arguments);
+	}.bind(window);
+})();
+
+
 # document.write-defuser
 dwrite.js application/javascript
 (function() {
