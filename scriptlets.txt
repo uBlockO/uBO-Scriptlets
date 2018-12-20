@@ -100,7 +100,7 @@ css-rm.js application/javascript
         	return;
     	}
     	 let css = function() {
-        	let element = document.querySelectorAll(selector);
+        	let element = document.querySelector(selector);
         	element.style.cssText = '{{2}}';
         };
     	if (document.readyState === 'loading') {
