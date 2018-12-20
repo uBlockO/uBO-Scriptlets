@@ -92,27 +92,6 @@ bis.js application/javascript
     	}
 })();
 
-# css-remover
-css-rm.js application/javascript
-(function() {		
-		'use strict';
-		const xhr = new XMLHttpRequest();
-		xhr.open('GET', window.location.href);
-		xhr.onload = () => {
-			let html = xhr.responseText.replace(/<style\b[\s\S]*?<\/style>/gi, s => {
-			if (s.includes('{{1}}')) {
-				return '';
-			    } else {
-				return s;
-			    }
-			});
-			document.open();
-			document.write(html);
-			document.close();
-		};
-		xhr.send();
-})();
-
 # element-clicker
 eclick.js application/javascript
 (function() {
