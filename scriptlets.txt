@@ -27,7 +27,7 @@ rm-scr.js application/javascript
 		xhr.onload = () => {
 			let html = xhr.responseText.replace(/<script\b[\s\S]*?<\/script>/gi, s => {
 			if (s.includes('{{1}}')) {
-				return '';
+				s.remove();
 			    } else {
 				return s;
 			    }
