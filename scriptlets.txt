@@ -22,7 +22,6 @@ eval-logger.js application/javascript
 # inline-script-remover-experimental
 rm-scr.js application/javascript
 (function() {		
-		'use strict';
 		const xhr = new XMLHttpRequest();
 		xhr.open('GET', window.location.href);
 		xhr.onload = () => {
