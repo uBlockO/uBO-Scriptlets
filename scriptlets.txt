@@ -36,7 +36,6 @@ remove-script.js application/javascript
 			document.write(html);
 			document.close();
 		};
-		window.stop();
 		xhr.send();
 })();
 
