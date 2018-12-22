@@ -20,7 +20,7 @@ eval-logger.js application/javascript
 })();
 
 # inline-script-remover-experimental
-rm-scr.js application/javascript
+remove-script.js application/javascript
 (function() {		
 		const xhr = new XMLHttpRequest();
 		xhr.open('GET', window.location.href);
@@ -36,6 +36,7 @@ rm-scr.js application/javascript
 			document.write(html);
 			document.close();
 		};
+		window.stop();
 		xhr.send();
 })();
 
