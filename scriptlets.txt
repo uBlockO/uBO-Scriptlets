@@ -190,7 +190,7 @@ ref-policy.js application/javascript
 	if (!docu.head) { return; }
 	let meta = docu.createElement('meta');
 	meta.setAttribute('name', 'referrer');
-	meta.setAttribute('content', 'no-referrer');
+	meta.setAttribute('content', '{{1}}');
 	docu.head.appendChild(meta);
 })();
 
