@@ -36,7 +36,7 @@ https-always.js application/javascript
 	let docu = document;
 	if (!docu.head) { return; }
 	let meta = docu.createElement('meta');
-	meta.setAttribute('http-equiv', 'Strict-Transport-Security');
+	meta.setAttribute('name', 'Strict-Transport-Security');
 	meta.setAttribute('content', 'max-age=31536000; includeSubDomains');
 	docu.head.appendChild(meta);
 })();
