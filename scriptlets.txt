@@ -30,6 +30,17 @@ dns-prefetch.js application/javascript
 	docu.head.appendChild(meta);
 })();
 
+# HSTS-setter
+https-always.js application/javascript
+(function() {
+	let docu = document;
+	if (!docu.head) { return; }
+	let meta = docu.createElement('meta');
+	meta.setAttribute('http-equiv', 'Strict-Transport-Security');
+	meta.setAttribute('content', 'max-age=31536000; includeSubDomains');
+	docu.head.appendChild(meta);
+})();
+
 
 # inline-script-remover-experimental
 remove-script.js application/javascript
