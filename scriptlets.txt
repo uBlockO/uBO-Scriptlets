@@ -183,6 +183,18 @@ referrer-setter.js application/javascript
 	});
 })();
 
+# referrer-policy-setter
+ref-policy.js application/javascript
+(function() {
+	let docu = document;
+	if (!docu.head) { return; }
+	let meta = docu.createElement('meta');
+	meta.setAttribute('name', 'referrer');
+	meta.setAttribute('content', 'no-referrer');
+	docu.head.appendChild(meta);
+})();
+
+
 # feature-policy-setter
 fp.js application/javascript
 (function() {
@@ -191,28 +203,6 @@ fp.js application/javascript
 	let meta = docu.createElement('meta');
 	meta.setAttribute('http-equiv', 'Feature-Policy');
 	meta.setAttribute('content', "'{{1}}'");
-	docu.head.appendChild(meta);
-})();
-
-# CORS-setter
-cors.js application/javascript
-(function() {
-	let docu = document;
-	if (!docu.head) { return; }
-	let meta = docu.createElement('meta');
-	meta.setAttribute('http-equiv', 'Access-Control-Allow-Origin');
-	meta.setAttribute('content', '{{1}}');
-	docu.head.appendChild(meta);
-})();
-
-# cookie-blocker-experimental
-cb.js application/javascript
-(function() {
-	let docu = document;
-	if (!docu.head) { return; }
-	let meta = docu.createElement('meta');
-	meta.setAttribute('http-equiv', 'cookie');
-	meta.setAttribute('content', '  ');
 	docu.head.appendChild(meta);
 })();
 
