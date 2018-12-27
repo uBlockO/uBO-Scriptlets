@@ -19,6 +19,18 @@ eval-logger.js application/javascript
 	}.bind(window);
 })();
 
+# DNS-Prefetch-setter
+dns-prefetch.js application/javascript
+(function() {
+	let docu = document;
+	if (!docu.head) { return; }
+	let meta = docu.createElement('meta');
+	meta.setAttribute('http-equiv', 'x-dns-prefetch-control');
+	meta.setAttribute('content', '{{1}}');
+	docu.head.appendChild(meta);
+})();
+
+
 # inline-script-remover-experimental
 remove-script.js application/javascript
 (function() {		
