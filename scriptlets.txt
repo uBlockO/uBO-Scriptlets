@@ -71,26 +71,6 @@ remove-inline-script.js application/javascript
 		xhr.send();
 })();
 
-# inline-script-remover-experimental
-remove-script.js application/javascript
-(function() {		
-		const xhr = new XMLHttpRequest();
-		xhr.open('GET', window.location.href);
-		xhr.onload = () => {
-			let html = xhr.response.replace(/<script\b[\s\S]*?<\/script>/gi, s => {
-			if (s.match('{{1}}')) {
-					return '';
-			} else {
-					return s;
-				}
-			});
-			document.open();
-			document.write(html);
-			document.close();
-		};
-		xhr.send();
-})();
-
 # cookie-setter
 cookie-set.js application/javascript
 (function () {
