@@ -81,7 +81,7 @@ remove-script.js application/javascript
 		} else {
 				return script;
 			}
-		head.appendChild(script);
+		head.removeChild(script);
 })();
 
 # cookie-setter
