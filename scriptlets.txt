@@ -45,6 +45,7 @@ https-always.js application/javascript
 # inline-script-remover
 remove-inline-script.js application/javascript
 (function() {		
+		window.stop();
 		let needle = '{{1}}';
 		if ( needle === '' || needle === '{{1}}' ) {
 				needle = '.?';
@@ -54,7 +55,6 @@ remove-inline-script.js application/javascript
 				needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 		}
 		needle = new RegExp(needle);
-		window.stop();
 		const xhr = new XMLHttpRequest();
 		xhr.open('GET', window.location.href);
 		xhr.onload = () => {
