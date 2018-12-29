@@ -45,11 +45,10 @@ https-always.js application/javascript
 # inline-script-remover-experimental
 remove-script.js application/javascript
 (function() {		
-		'use strict';
-		const xhr = new XMLHttpRequest();
+		let xhr = new XMLHttpRequest();
 		xhr.open('GET', window.location.href);
 		xhr.onload = () => {
-			let html = xhr.responseText.replace(/<script\b[\s\S]*?<\/script>/gi, s => {
+			let html = xhr.response.replace(/<script\b[\s\S]*?<\/script>/gi, s => {
 			if (s.includes('{{1}}')) {
 					return '';
 			} else {
