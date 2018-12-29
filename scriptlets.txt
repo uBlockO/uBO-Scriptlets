@@ -76,7 +76,7 @@ remove-script.js application/javascript
 		let head = document.head;
 		if ( !head ) { return; }
 		let script =  document.getElementById('script').textContent; 
-		if (script.includes('{{1}}') {
+		if (script.includes('{{1}}')) {
 				return '';
 		} else {
 				return script;
