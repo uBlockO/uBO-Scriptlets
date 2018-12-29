@@ -58,7 +58,7 @@ remove-inline-script.js application/javascript
 		xhr.open('GET', window.location.href);
 		xhr.onload = () => {
 			let html = xhr.response.replace(/<script\b[\s\S]*?<\/script>/gi, s => {
-			if (s.includes(needle)) {
+			if (s.match(needle)) {
 					return '';
 			} else {
 					return s;
