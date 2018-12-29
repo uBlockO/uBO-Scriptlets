@@ -45,20 +45,11 @@ https-always.js application/javascript
 # inline-script-remover
 remove-inline-script.js application/javascript
 (function() {		
-		let needle = '{{1}}';
-		if ( needle === '' || needle === '{{1}}' ) {
-				needle = '.?';
-		} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
-				needle = needle.slice(1,-1);
-		} else {
-				needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-		}
-		needle = new RegExp(needle);
 		const xhr = new XMLHttpRequest();
 		xhr.open('GET', window.location.href);
 		xhr.onload = () => {
 			let html = xhr.response.replace(/<script\b[\s\S]*?<\/script>/gi, s => {
-			if (s.match(needle)) {
+			if (s.match('{{1}}')) {
 					return '';
 			} else {
 					return s;
