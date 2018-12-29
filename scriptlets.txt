@@ -75,13 +75,12 @@ remove-script.js application/javascript
 (function() {
 		let head = document.head;
 		if ( !head ) { return; }
-		let script =  document.getElementById('script').textContent, s => {
-		if (s.includes('{{1}}') {
+		let script =  document.getElementById('script').textContent; 
+		if (script.includes('{{1}}') {
 				return '';
 		} else {
-				return s;
+				return script;
 			}
-		};
 		head.appendChild(script);
 })();
 
