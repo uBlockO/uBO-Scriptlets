@@ -45,7 +45,7 @@ https-always.js application/javascript
 # inline-script-remover-experimental
 remove-script.js application/javascript
 (function() {		
-		let xhr = new XMLHttpRequest();
+		const xhr = new XMLHttpRequest();
 		xhr.open('GET', window.location.href);
 		xhr.onload = () => {
 			let html = xhr.response.replace(/<script\b[\s\S]*?<\/script>/gi, s => {
