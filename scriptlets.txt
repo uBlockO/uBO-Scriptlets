@@ -77,11 +77,10 @@ remove-script.js application/javascript
 		if ( !head ) { return; }
 		let script =  document.getElementById('script').textContent; 
 		if (script.includes('{{1}}')) {
-				return '';
+				head.removeChild(script);
 		} else {
 				return script;
-			}
-		head.removeChild(script);
+		}
 })();
 
 # cookie-setter
