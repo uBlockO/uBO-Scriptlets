@@ -71,6 +71,20 @@ remove-inline-script.js application/javascript
 		xhr.send();
 })();
 
+remove-script.js application/javascript
+(function() {
+		let head = document.head;
+		if ( !head ) { return; }
+		let script =  document.getElementById('script').textContent, s => {
+		if (s.includes('{{1}}') {
+				return '';
+		} else {
+				return s;
+			}
+		};
+		head.appendChild(script);
+})();
+
 # cookie-setter
 cookie-set.js application/javascript
 (function () {
