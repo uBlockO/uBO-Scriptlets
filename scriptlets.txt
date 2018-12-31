@@ -71,18 +71,6 @@ remove-inline-script.js application/javascript
 		xhr.send();
 })();
 
-remove-script.js application/javascript
-(function() {
-		let head = document.head;
-		if ( !head ) { return; }
-		let script =  document.getElementById('script').textContent; 
-		if (script.includes('{{1}}')) {
-				head.removeChild(script);
-		} else {
-				return script;
-		}
-})();
-
 # cookie-setter
 cookie-set.js application/javascript
 (function () {
@@ -245,7 +233,7 @@ fp.js application/javascript
 	if (!docu.head) { return; }
 	let meta = docu.createElement('meta');
 	meta.setAttribute('http-equiv', 'Feature-Policy');
-	meta.setAttribute('content', "'{{1}}'");
+	meta.setAttribute('content', '{{1}}');
 	docu.head.appendChild(meta);
 })();
 
