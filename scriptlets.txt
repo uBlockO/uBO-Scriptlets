@@ -33,8 +33,11 @@ dns-prefetch.js application/javascript
 # HTTP-Header-deleter
 header-delete.js application/javascript
 (function() {
-		let hdr = new Headers();
-		hdr.delete('{{1}}');
+		let doc = document;
+		if (!doc.head) { return; }
+		let meta = doc.createElement('meta');
+		meta.removeAttribute('{{1}}');
+		doc.head.appendChild(meta);
 })();
 	    
 # HTTP-Header-setter
