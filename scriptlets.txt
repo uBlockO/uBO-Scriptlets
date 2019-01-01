@@ -30,6 +30,13 @@ dns-prefetch.js application/javascript
 	docu.head.appendChild(meta);
 })();
 
+# Header-deleter-experimental
+header-delete.js application/javascript
+(function() {
+		let hdr = new Headers();
+		hdr.delete('{{1}}');
+})();
+	    
 # HSTS-setter
 https-always.js application/javascript
 (function() {
