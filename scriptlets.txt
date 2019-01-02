@@ -71,7 +71,7 @@ remove-inline-script.js application/javascript
 				needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 		}
 		needle = new RegExp(needle);
-		const xhr = new XMLHttpRequest();
+		let xhr = new XMLHttpRequest();
 		xhr.open('GET', window.location.href);
 		xhr.onload = () => {
 			let html = xhr.response.replace(/<script\b[\s\S]*?<\/script>/gi, script => {
