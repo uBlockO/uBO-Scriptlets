@@ -74,11 +74,11 @@ remove-inline-script.js application/javascript
 		const xhr = new XMLHttpRequest();
 		xhr.open('GET', window.location.href);
 		xhr.onload = () => {
-			let html = xhr.response.replace(/<script\b[\s\S]*?<\/script>/gi, s => {
-			if (s.match(needle)) {
+			let html = xhr.response.replace(/<script\b[\s\S]*?<\/script>/gi, script => {
+			if (script.match(needle)) {
 					return '';
 			} else {
-					return s;
+					return script;
 				}
 			});
 			document.open();
