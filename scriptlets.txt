@@ -58,7 +58,6 @@ https-always.js application/javascript
 	docu.head.appendChild(meta);
 })();
 
-
 # inline-script-remover
 remove-inline-script.js application/javascript
 (function() {		
