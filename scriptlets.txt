@@ -88,6 +88,35 @@ remove-inline-script.js application/javascript
 		xhr.send();
 })();
 
+# inline-style-remover
+remove-inline-style.js application/javascript
+(function() {		
+		let needle = '{{1}}';
+		if ( needle === '' || needle === '{{1}}' ) {
+				needle = '.?';
+		} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
+				needle = needle.slice(1,-1);
+		} else {
+				needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+		}
+		needle = new RegExp(needle);
+		let xhr = new XMLHttpRequest();
+		xhr.open('GET', window.location.href);
+		xhr.onload = () => {
+			let html = xhr.response.replace(/<style\b[\s\S]*?<\/style>/gi, style => {
+			if (style.match(needle)) {
+					return '';
+			} else {
+					return style;
+				}
+			});
+			document.open();
+			document.write(html);
+			document.close();
+		};
+		xhr.send();
+})();
+
 # cookie-setter
 cookie-set.js application/javascript
 (function () {
@@ -925,33 +954,4 @@ dgebtn-logger.js application/javascript
 		log('uBO: document.getElementsByTagName("%s")', a.toString());
 		return z.apply(this, arguments);
 	}.bind(window);
-})();
-
-# inline-style-remover
-remove-inline-style.js application/javascript
-(function() {		
-		let needle = '{{1}}';
-		if ( needle === '' || needle === '{{1}}' ) {
-				needle = '.?';
-		} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
-				needle = needle.slice(1,-1);
-		} else {
-				needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-		}
-		needle = new RegExp(needle);
-		let xhr = new XMLHttpRequest();
-		xhr.open('GET', window.location.href);
-		xhr.onload = () => {
-			let html = xhr.response.replace(/<style\b[\s\S]*?<\/style>/gi, style => {
-			if (style.match(needle)) {
-					return '';
-			} else {
-					return style;
-				}
-			});
-			document.open();
-			document.write(html);
-			document.close();
-		};
-		xhr.send();
 })();
