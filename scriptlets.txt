@@ -99,6 +99,34 @@ remove-inline-style.js application/javascript
 		xhr.send();
 })();
 
+# element-setAttribute
+set-attr.js application/javascript
+(function() {
+	let attr = '{{2}}';
+	if ( attr === '' || attr === '{{2}}' ) { return; }
+	let attrs = attr.split(/\s*\|\s*/);
+	let selector = '{{1}}';
+	if ( selector === '' || selector === '{{1}}' ) {
+		selector = '[' + attrs.join('],[') + ']';
+	}
+	let stattr = function(ev) {
+		if ( ev ) { window.removeEventListener(ev.type, stattr, true); }
+		try {
+			let nodes = document.querySelectorAll(selector), i = nodes.length;
+			while ( i-- ) {
+				let node = nodes[i], j = attrs.length;
+				while ( j-- ) { node.setAttribute(attrs[j], '{{3}}'); }
+			}
+		} catch(ex) {
+		}
+	};
+	if ( document.readyState === 'loading' ) {
+		window.addEventListener('DOMContentLoaded', stattr, true);
+	} else {
+		stattr();
+	}
+})();
+
 # cookie-setter
 cookie-set.js application/javascript
 (function () {
@@ -168,34 +196,6 @@ eclick.js application/javascript
 	}
 })();
 
-# element-setAttribute
-set-attr.js application/javascript
-(function() {
-	let attr = '{{2}}';
-	if ( attr === '' || attr === '{{2}}' ) { return; }
-	let attrs = attr.split(/\s*\|\s*/);
-	let selector = '{{1}}';
-	if ( selector === '' || selector === '{{1}}' ) {
-		selector = '[' + attrs.join('],[') + ']';
-	}
-	let stattr = function(ev) {
-		if ( ev ) { window.removeEventListener(ev.type, stattr, true); }
-		try {
-			let nodes = document.querySelectorAll(selector), i = nodes.length;
-			while ( i-- ) {
-				let node = nodes[i], j = attrs.length;
-				while ( j-- ) { node.setAttribute(attrs[j], '{{3}}'); }
-			}
-		} catch(ex) {
-		}
-	};
-	if ( document.readyState === 'loading' ) {
-		window.addEventListener('DOMContentLoaded', stattr, true);
-	} else {
-		stattr();
-	}
-})();
-
 # element-focusser
 efocus.js application/javascript
 (function() {
@@ -207,7 +207,7 @@ efocus.js application/javascript
 		let element = document.querySelector(selector);
 		element.focus();
 	};
-	if ( document.readyState === 'interactive' || document.readyState === 'complete' ) {
+	if ( document.readyState === 'loading' || document.readyState === 'interactive' ) {
 		window.addEventListener('DOMContentLoaded', focus);
 	} else {
 		focus();
