@@ -186,10 +186,10 @@ eclick.js application/javascript
 		return;
 	}
 	let click = function() {
-		let element = document.querySelectorAll(selector);
+		let element = document.querySelector(selector);
 		element.click();
 	};
-	if ( document.readyState === 'loading' || document.readyState === 'interactive' ) {
+	if ( document.readyState === 'interactive' || document.readyState === 'complete' ) {
 		window.addEventListener('DOMContentLoaded', click);
 	} else {
 		click();
