@@ -39,13 +39,6 @@ header-delete.js application/javascript
 		meta.removeAttribute('{{1}}');
 		doc.head.appendChild(meta);
 })();
-	    
-# HTTP-Header-setter
-header-set.js application/javascript
-(function() {
-		let hdr = new Headers();
-		hdr.set('{{1}}', '{{2}}');
-})();
 
 # HSTS-setter
 https-always.js application/javascript
