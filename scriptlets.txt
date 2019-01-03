@@ -150,13 +150,13 @@ eclick2.js application/javascript
         	return;
     	}
     	 let click = function() {
-        	let element = document.querySelector(selector);
+        	let element = document.querySelectorAll(selector);
         	element.click();
         };
     	if (document.readyState === 'complete') {
-        	click();
-    	} else {
         	window.addEventListener('load', click);
+    	} else {
+        	click();
     	}
 })();
 
@@ -186,7 +186,7 @@ eclick.js application/javascript
 		return;
 	}
 	let click = function() {
-		let element = document.querySelector(selector);
+		let element = document.querySelectorAll(selector);
 		element.click();
 	};
 	if ( document.readyState === 'loading' || document.readyState === 'interactive' ) {
