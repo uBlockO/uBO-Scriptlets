@@ -190,9 +190,9 @@ eclick.js application/javascript
 		element.click();
 	};
 	if ( document.readyState === 'loading' || document.readyState === 'interactive' ) {
-		window.addEventListener('DOMContentLoaded', click);
-	} else {
 		click();
+	} else {
+		window.addEventListener('DOMContentLoaded', click);
 	}
 })();
 
