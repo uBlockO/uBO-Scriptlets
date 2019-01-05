@@ -353,7 +353,7 @@ rdo.js application/javascript
 		case 'unFunc':          return define(function() { return undefined; });
 		case 'oneFunc':         return define(function() { return 1; });
 		case 'zeFunc':		return define(function() { return 0; });
-		default:		return '{{2}}';	
+		default:		return define('{{2}}');	
 	}
 })();
 
