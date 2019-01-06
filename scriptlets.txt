@@ -154,9 +154,9 @@ eclick2.js application/javascript
         	element.click();
         };
     	if (document.readyState === 'complete') {
-        	window.addEventListener('load', click);
-    	} else {
         	click();
+	} else {
+        	window.addEventListener('load', click);
     	}
 })();
 
