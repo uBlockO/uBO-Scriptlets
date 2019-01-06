@@ -352,7 +352,7 @@ set-value.js application/javascript
 remove-value.js application/javascript
 (function() {
   	      let removep = function () {
-                  delete '{{1}}'
+                  delete {{1}}
               };
               if (document.readyState === 'complete') {
                  	removep();
