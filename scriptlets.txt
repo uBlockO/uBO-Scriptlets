@@ -207,10 +207,10 @@ efocus.js application/javascript
 		let element = document.querySelector(selector);
 		element.focus();
 	};
-	if ( document.readyState === 'loading' || document.readyState === 'interactive' ) {
-		window.addEventListener('DOMContentLoaded', focus);
-	} else {
+	if ( document.readyState === 'interactive' || document.readyState === 'complete' ) {
 		focus();
+	} else {
+		window.addEventListener('DOMContentLoaded', focus);
 	}
 })();
 
