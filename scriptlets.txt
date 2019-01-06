@@ -189,7 +189,7 @@ eclick.js application/javascript
 		let element = document.querySelector(selector);
 		element.click();
 	};
-	if ( document.readyState === 'interactive' || document.readyState === 'complete' ) {
+	if ( document.readyState === 'loading' || document.readyState === 'interactive' ) {
 		click();
 	} else {
 		window.addEventListener('DOMContentLoaded', click);
