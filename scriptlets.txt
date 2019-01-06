@@ -330,6 +330,7 @@ set-value.js application/javascript
 		} catch ( err ) { }
 	};
 	switch ( data ) {
+		case '':                return;
 		case 'true':		return define(true);
 		case 'false':		return define(false);
 		case '1':		return define(1);
@@ -343,7 +344,6 @@ set-value.js application/javascript
 		case 'unFunc':          return define(function() { return undefined; });
 		case 'oneFunc':         return define(function() { return 1; });
 		case 'zeFunc':		return define(function() { return 0; });
-		case 'empty':           return define( );
 		default:		return define(data);	
 	}
 })();
