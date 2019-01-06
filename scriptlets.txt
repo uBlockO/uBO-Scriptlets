@@ -187,9 +187,7 @@ eclick.js application/javascript
 	}
 	let click = function() {
 		let element = document.querySelectorAll(selector);
-		for (let element of elements ) {
-			      element.click();
-	     }	
+		element.click();
 	};
 	if ( document.readyState === 'interactive' || document.readyState === 'complete' ) {
 		click();
