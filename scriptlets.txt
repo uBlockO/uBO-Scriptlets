@@ -351,8 +351,12 @@ set-value.js application/javascript
 # variable-remover
 remove-value.js application/javascript
 (function() {
-  	      let remove = function () {
-                  delete {{1}}
+  	      let needle = '{{1}}';
+	      if ( needle === '' || needle === '{{1}}' ) {
+		 return;
+	      }
+	      let remove = function () {
+                  delete needle
               };
               if (document.readyState === 'interactive' || document.readyState === 'complete') {
                  	remove();
