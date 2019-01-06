@@ -348,12 +348,6 @@ set-value.js application/javascript
 	}
 })();
 
-# variable-value-remover
-remove-value.js application/javascript
-(function() {
-		delete '{{1}}';
-})();	
-
 # element-adder
 eaddr.js application/javascript
 (function() {
