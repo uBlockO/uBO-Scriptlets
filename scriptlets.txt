@@ -348,6 +348,19 @@ set-value.js application/javascript
 	}
 })();
 
+# variable-remover
+remove-value.js application/javascript
+(function() {
+  	      let removep = function () {
+                  delete '{{1}}'
+              };
+              if (document.readyState === 'interactive' || document.readyState === 'complete') {
+                 	removep();
+              } else {
+                	window.addEventListener('DOMContentLoaded', removep);
+              }
+})();
+
 # element-adder
 eaddr.js application/javascript
 (function() {
