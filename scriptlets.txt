@@ -277,8 +277,8 @@ ereplace2.js application/javascript
 # variable-value-setter
 set-value.js application/javascript
 (function() {
-	var name = '{{1}}';
-	var data = '{{2}}';
+	let name = '{{1}}';
+	let data = '{{2}}';
 	let Object = window.Object.bind(window);
 	let descriptor = window.Object.getOwnPropertyDescriptor.bind(window.Object);
 	let defineProperty = window.Object.defineProperty.bind(window.Object);
