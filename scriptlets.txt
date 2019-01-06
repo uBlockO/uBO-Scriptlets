@@ -233,15 +233,6 @@ ereplace.js application/javascript
 	}
 })();
 
-# referrer-setter
-referrer-setter.js application/javascript
-(function () {
-	let myRefer = '{{1}}';
-	window.document.__defineGetter__('referrer', function () {
-		return myRefer;
-	});
-})();
-
 # referrer-policy-setter
 ref-policy.js application/javascript
 (function() {
@@ -252,7 +243,6 @@ ref-policy.js application/javascript
 	meta.setAttribute('content', '{{1}}');
 	docu.head.appendChild(meta);
 })();
-
 
 # feature-policy-setter
 fp.js application/javascript
@@ -284,8 +274,8 @@ ereplace2.js application/javascript
 	}
 })();
 
-# value-setter
-rdo.js application/javascript
+# variable-value-setter
+set-value.js application/javascript
 (function() {
 	let name = '{{1}}';
 	let data = '{{2}}';
