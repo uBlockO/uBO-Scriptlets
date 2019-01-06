@@ -330,7 +330,7 @@ set-value.js application/javascript
 		} catch ( err ) { }
 	};
 	switch ( data ) {
-		case '':                return;
+		case "''":              return define('');
 		case 'true':		return define(true);
 		case 'false':		return define(false);
 		case '1':		return define(1);
