@@ -352,7 +352,7 @@ set-value.js application/javascript
 remove-value.js application/javascript
 (function() {
   	      let needle = {{1}};
-	      if ( needle === '' || needle === '{{1}}' ) {
+	      if ( needle === '') {
 		 return;
 	      }
 	      let remove = function () {
