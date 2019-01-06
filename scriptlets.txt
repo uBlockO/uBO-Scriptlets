@@ -279,16 +279,16 @@ set-value.js application/javascript
 (function() {
 	const name = '{{1}}';
 	const data = '{{2}}';
-	const Object = window.Object.bind(window);
-	const descriptor = window.Object.getOwnPropertyDescriptor.bind(window.Object);
-	const defineProperty = window.Object.defineProperty.bind(window.Object);
-	const finalSetter = function() { };
-	const finalGetter = function() { return data; };
-	const trustedSetters = {};
-	const makeProxy = function(parent, chain) {
-		const i = chain.indexOf('.');
+	let Object = window.Object.bind(window);
+	let descriptor = window.Object.getOwnPropertyDescriptor.bind(window.Object);
+	let defineProperty = window.Object.defineProperty.bind(window.Object);
+	let finalSetter = function() { };
+	let finalGetter = function() { return data; };
+	let trustedSetters = {};
+	let makeProxy = function(parent, chain) {
+		let i = chain.indexOf('.');
 		if ( i === -1 ) {
-			const current = descriptor(parent, chain);
+			let current = descriptor(parent, chain);
 			if ( !current || current.set !== finalSetter || current.get !== finalGetter ) {
 				defineProperty(parent, chain, {
 					configurable: false,
@@ -297,15 +297,15 @@ set-value.js application/javascript
 				});
 			}
 		} else {
-			const name = chain.slice(0, i);
-			const val = parent[name];
+			let name = chain.slice(0, i);
+			let val = parent[name];
 			chain = chain.substring(i + 1);
 			if ( val instanceof Object ) {
 				makeProxy(val, chain);
 			} else {
-				const current = descriptor(parent, name);
+				let current = descriptor(parent, name);
 				if ( !current || !trustedSetters[chain] || trustedSetters[chain] !== current.set ) {
-					const setter = function(value) {
+					let setter = function(value) {
 						if ( value instanceof Object ) {
 							try {
 								makeProxy(value, chain);
@@ -323,7 +323,7 @@ set-value.js application/javascript
 			}
 		}
 	};
-	const define = function(payload) {
+	let define = function(payload) {
 		data = payload;
 		try {
 			makeProxy(window, name);
