@@ -277,18 +277,18 @@ ereplace2.js application/javascript
 # variable-value-setter
 set-value.js application/javascript
 (function() {
-	let name = '{{1}}';
-	let data = '{{2}}';
-	let Object = window.Object.bind(window);
-	let descriptor = window.Object.getOwnPropertyDescriptor.bind(window.Object);
-	let defineProperty = window.Object.defineProperty.bind(window.Object);
-	let finalSetter = function() { };
-	let finalGetter = function() { return data; };
-	let trustedSetters = {};
-	let makeProxy = function(parent, chain) {
-		let i = chain.indexOf('.');
+	const name = '{{1}}';
+	const data = '{{2}}';
+	const Object = window.Object.bind(window);
+	const descriptor = window.Object.getOwnPropertyDescriptor.bind(window.Object);
+	const defineProperty = window.Object.defineProperty.bind(window.Object);
+	const finalSetter = function() { };
+	const finalGetter = function() { return data; };
+	const trustedSetters = {};
+	const makeProxy = function(parent, chain) {
+		const i = chain.indexOf('.');
 		if ( i === -1 ) {
-			let current = descriptor(parent, chain);
+			const current = descriptor(parent, chain);
 			if ( !current || current.set !== finalSetter || current.get !== finalGetter ) {
 				defineProperty(parent, chain, {
 					configurable: false,
@@ -297,15 +297,15 @@ set-value.js application/javascript
 				});
 			}
 		} else {
-			let name = chain.slice(0, i);
-			let val = parent[name];
+			const name = chain.slice(0, i);
+			const val = parent[name];
 			chain = chain.substring(i + 1);
 			if ( val instanceof Object ) {
 				makeProxy(val, chain);
 			} else {
-				let current = descriptor(parent, name);
+				const current = descriptor(parent, name);
 				if ( !current || !trustedSetters[chain] || trustedSetters[chain] !== current.set ) {
-					let setter = function(value) {
+					const setter = function(value) {
 						if ( value instanceof Object ) {
 							try {
 								makeProxy(value, chain);
@@ -323,7 +323,7 @@ set-value.js application/javascript
 			}
 		}
 	};
-	let define = function(payload) {
+	const define = function(payload) {
 		data = payload;
 		try {
 			makeProxy(window, name);
