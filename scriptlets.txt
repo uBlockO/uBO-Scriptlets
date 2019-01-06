@@ -186,9 +186,9 @@ eclick.js application/javascript
 		return;
 	}
 	let click = function() {
-		let element = document.querySelector(selector);
+		let element = document.querySelectorAll(selector);
 		for (let element of elements ) {
-		element.click();
+			      element.click();
 	     }	
 	};
 	if ( document.readyState === 'interactive' || document.readyState === 'complete' ) {
