@@ -354,10 +354,10 @@ remove-value.js application/javascript
   	      let removep = function () {
                   delete '{{1}}'
               };
-              if (document.readyState === 'interactive' || document.readyState === 'complete') {
+              if (document.readyState === 'complete') {
                  	removep();
               } else {
-                	window.addEventListener('DOMContentLoaded', removep);
+                	window.addEventListener('load', removep);
               }
 })();
 
