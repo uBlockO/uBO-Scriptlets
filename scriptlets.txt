@@ -351,13 +351,13 @@ set-value.js application/javascript
 # variable-remover
 remove-value.js application/javascript
 (function() {
-  	      let removep = function () {
+  	      let remove = function () {
                   delete {{1}}
               };
-              if (document.readyState === 'complete') {
-                 	removep();
+              if (document.readyState === 'interactive' || document.readyState === 'complete') {
+                 	remove();
               } else {
-                	window.addEventListener('load', removep);
+                	window.addEventListener('DOMContentLoaded', remove);
               }
 })();
 
