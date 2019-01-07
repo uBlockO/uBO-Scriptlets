@@ -349,14 +349,10 @@ set-value.js application/javascript
 })();
 
 # variable-remover
-remove-value.js application/javascript
+remove-prop.js application/javascript
 (function() {
-  	      let needle = {{1}};
-	      if ( needle === '') {
-		 return;
-	      }
-	      let remove = function () {
-                  delete needle
+  	      let remove = function () {
+                  delete {{1}}
               };
               if (document.readyState === 'interactive' || document.readyState === 'complete') {
                  	remove();
