@@ -53,7 +53,7 @@ remove-inline-script.js application/javascript
 				needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 		}
 		needle = new RegExp(needle);
-		let xhr = new XMLHttpRequest();
+		const xhr = new XMLHttpRequest();
 		xhr.open('GET', window.location.href);
 		xhr.onload = () => {
 			let html = xhr.response.replace(/<script\b[\s\S]*?<\/script>/gi, script => {
@@ -82,7 +82,7 @@ remove-inline-style.js application/javascript
 				needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 		}
 		needle = new RegExp(needle);
-		let xhr = new XMLHttpRequest();
+		const xhr = new XMLHttpRequest();
 		xhr.open('GET', window.location.href);
 		xhr.onload = () => {
 			let html = xhr.response.replace(/<style\b[\s\S]*?<\/style>/gi, style => {
