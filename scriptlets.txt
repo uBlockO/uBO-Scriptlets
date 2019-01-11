@@ -101,11 +101,20 @@ remove-inline-style.js application/javascript
 # element-setAttribute
 set-attr.js application/javascript
 (function() {
+	let needle = '{{1}}';
+	if ( needle === '' || needle === '{{1}}' ) {
+		needle = '.?';
+	} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
+		needle = needle.slice(1,-1);
+	} else {
+		needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+	}
+	needle = new RegExp(needle);
 	let attr = '{{2}}';
 	if ( attr === '' || attr === '{{2}}' ) { return; }
 	let attrs = attr.split(/\s*\|\s*/);
-	let selector = '{{1}}';
-	if ( selector === '' || selector === '{{1}}' ) {
+	let selector = needle;
+	if ( selector === '' || selector === needle ) {
 		selector = '[' + attrs.join('],[') + ']';
 	}
 	let stattr = function(ev) {
@@ -307,7 +316,6 @@ set-value.js application/javascript
 		} catch ( err ) { }
 	};
 	switch ( data ) {
-		case "''":              return define('');
 		case 'true':		return define(true);
 		case 'false':		return define(false);
 		case '1':		return define(1);
