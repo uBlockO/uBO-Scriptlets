@@ -19,25 +19,24 @@ eval-logger.js application/javascript
 	}.bind(window);
 })();
 
-# DNS-Prefetch-setter
-dns-prefetch.js application/javascript
+# Response-Header-Setter
+set-respheader.js application/javascript
 (function() {
 	let docu = document;
 	if (!docu.head) { return; }
 	let meta = docu.createElement('meta');
-	meta.setAttribute('http-equiv', 'x-dns-prefetch-control');
-	meta.setAttribute('content', '{{1}}');
+	meta.setAttribute('http-equiv', '{{1}}');
+	meta.setAttribute('content', '{{2}}');
 	docu.head.appendChild(meta);
 })();
 
-# HSTS-setter
-https-always.js application/javascript
+# Referrer-Policy-Setter
 (function() {
 	let docu = document;
 	if (!docu.head) { return; }
 	let meta = docu.createElement('meta');
-	meta.setAttribute('name', 'Strict-Transport-Security');
-	meta.setAttribute('content', 'max-age=31536000; includeSubDomains');
+	meta.setAttribute('name', 'referrer');
+	meta.setAttribute('content', '{{1}}');
 	docu.head.appendChild(meta);
 })();
 
@@ -231,28 +230,6 @@ ereplace.js application/javascript
 	} else {
 		window.addEventListener('DOMContentLoaded', replace);
 	}
-})();
-
-# referrer-policy-setter
-ref-policy.js application/javascript
-(function() {
-	let docu = document;
-	if (!docu.head) { return; }
-	let meta = docu.createElement('meta');
-	meta.setAttribute('name', 'referrer');
-	meta.setAttribute('content', '{{1}}');
-	docu.head.appendChild(meta);
-})();
-
-# feature-policy-setter
-fp.js application/javascript
-(function() {
-	let docu = document;
-	if (!docu.head) { return; }
-	let meta = docu.createElement('meta');
-	meta.setAttribute('http-equiv', 'Feature-Policy');
-	meta.setAttribute('content', '{{1}}');
-	docu.head.appendChild(meta);
 })();
 
 # element-replacer-onload
