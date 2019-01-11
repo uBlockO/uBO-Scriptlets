@@ -70,16 +70,6 @@ remove-inline-script.js application/javascript
 		xhr.send();
 })();
 
-# User-Agent Spoofer
-set-UA.js application/javascript
-(function() {		
-		const xhr = new XMLHttpRequest();
-		xhr.open('GET', window.location.href);
-		xhr.setRequestHeader('User-Agent', '{{1}}');
-		xhr.setRequestHeader('Accept', '*/*');
-		xhr.send();
-})();
-
 # inline-style-remover
 remove-inline-style.js application/javascript
 (function() {		
