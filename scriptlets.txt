@@ -70,7 +70,8 @@ remove-inline-script.js application/javascript
 		xhr.send();
 })();
 
-useragent.js application/javascript
+# User-Agent Spoofer
+set-UA.js application/javascript
 (function() {		
 		const xhr = new XMLHttpRequest();
 		xhr.open('GET', window.location.href);
