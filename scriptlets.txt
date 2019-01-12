@@ -19,7 +19,7 @@ eval-logger.js application/javascript
 	}.bind(window);
 })();
 
-# Response-Header-Setter
+# response-header-setter
 set-respheader.js application/javascript
 (function() {
 	let docu = document;
@@ -30,7 +30,8 @@ set-respheader.js application/javascript
 	docu.head.appendChild(meta);
 })();
 
-# Referrer-Policy-Setter
+# referrer-policy-setter
+set-refpolicy.js application/javascript
 (function() {
 	let docu = document;
 	if (!docu.head) { return; }
