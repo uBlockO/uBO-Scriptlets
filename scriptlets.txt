@@ -53,9 +53,9 @@ remove-frame.js application/javascript
 			frame.parentNode.removeChild(frame);
 		};
 		if ( document.readyState === 'loading' || document.readyState === 'interactive' ) {
-		   	removeFrame();
-		} else {
 		   	window.addEventListener('DOMContentLoaded', removeFrame);
+		} else {
+		   	removeFrame();
 		}
 })();
 
