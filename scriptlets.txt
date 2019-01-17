@@ -47,7 +47,7 @@ remove-frame.js application/javascript
 		let removeFrame = function() {
  			let iframe = document.querySelector('{{1}}');
 			let iframeURL = iframe.contentDocument.location.href || iframe.contentWindow.document.location.href;
-			if (iframeURL == '{{2}}') {
+			if (iframeURL === '{{2}}') {
 			    iframe.parentNode.removeChild(iframe);
 			}	    
 		};
