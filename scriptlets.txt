@@ -45,10 +45,10 @@ set-refpolicy.js application/javascript
 remove-frame.js application/javascript
 (function() {
 		let removeFrame = function() {
- 			let iframe = document.querySelector('{{1}}');
-			let iframeURL = iframe.contentDocument.location.href || iframe.contentWindow.document.location.href;
-			if (iframeURL === '{{2}}') {
-			    iframe.parentNode.removeChild(iframe);
+ 			let frame = document.querySelector('{{1}}');
+			let frameURL = frame.contentDocument.location.href || frame.contentWindow.document.location.href;
+			if (frameURL === '{{2}}') {
+			    frame.parentNode.removeChild(frame);
 			}	    
 		};
 		if ( document.readyState === 'loading' || document.readyState === 'interactive' ) {
