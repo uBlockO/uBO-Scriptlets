@@ -50,7 +50,10 @@ remove-frame.js application/javascript
 		}
 		let removeFrame = function() {
  			let frame = document.querySelector(selector);
-			frame.parentNode.removeChild(frame);
+			let frameURL = frame.contentDocument.location
+			if ( frameURL === '{{2}}') {
+			     frame.parentNode.removeChild(frame);
+			}     
 		};
 		if ( document.readyState === 'loading' || document.readyState === 'interactive' ) {
 		   	window.addEventListener('DOMContentLoaded', removeFrame);
@@ -226,9 +229,9 @@ efocus.js application/javascript
 		element.focus();
 	};
 	if ( document.readyState === 'interactive' || document.readyState === 'complete' ) {
-		focus();
-	} else {
 		window.addEventListener('DOMContentLoaded', focus);
+	} else {
+		focus();
 	}
 })();
 
