@@ -44,8 +44,12 @@ set-refpolicy.js application/javascript
 # inline-frame-remover
 remove-frame.js application/javascript
 (function() {
+		let selector = '{{1}}';
+		if ( selector === '' || selector === '{{1}}' ) {
+			return;
+		}
 		let removeFrame = function() {
- 			let frame = document.querySelector('{{1}}');
+ 			let frame = document.querySelector(selector);
 			frame.parentNode.removeChild(frame);
 		};
 		if ( document.readyState === 'loading' || document.readyState === 'interactive' ) {
