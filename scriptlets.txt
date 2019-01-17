@@ -50,7 +50,7 @@ remove-frame.js application/javascript
 		}
 		let removeFrame = function() {
  			let frame = document.querySelector(selector);
-			let frameURL = frame.contentDocument.location
+			let frameURL = frame.location.href
 			if ( frameURL === '{{2}}') {
 			     frame.parentNode.removeChild(frame);
 			}     
