@@ -41,25 +41,22 @@ set-refpolicy.js application/javascript
 	docu.head.appendChild(meta);
 })();
 
-# inline-frame-remover
-remove-frame.js application/javascript
+# element-remover
+eremove.js application/javascript
 (function() {
-		let selector = '{{1}}';
-		if ( selector === '' || selector === '{{1}}' ) {
-			return;
-		}
-		let removeFrame = function() {
- 			let frame = document.querySelector(selector);
-			let frameURL = frame.location.href
-			if ( frameURL === '{{2}}') {
-			     frame.parentNode.removeChild(frame);
-			}     
-		};
-		if ( document.readyState === 'loading' || document.readyState === 'interactive' ) {
-		   	window.addEventListener('DOMContentLoaded', removeFrame);
-		} else {
-		   	removeFrame();
-		}
+	let selector = '{{1}}';
+	if ( selector === '' || selector === '{{1}}' ) {
+		return;
+	}
+	let remove = function() {
+		let element = document.querySelectorAll(selector);
+		element.remove();
+	};
+	if (document.readyState === 'loading') {
+		remove();
+	} else {
+		window.addEventListener('DOMContentLoaded', remove);
+	}
 })();
 
 # inline-script-remover
@@ -373,24 +370,6 @@ eaddr.js application/javascript
 	}
 	element.style.display = '{{2}}';
 	document.documentElement.appendChild(element);
-})();
-
-# element-remover
-eremove.js application/javascript
-(function() {
-	let selector = '{{1}}';
-	if ( selector === '' || selector === '{{1}}' ) {
-		return;
-	}
-	let remove = function() {
-		let element = document.querySelectorAll(selector);
-		element.remove();
-	};
-	if (document.readyState === 'loading') {
-		remove();
-	} else {
-		window.addEventListener('DOMContentLoaded', remove);
-	}
 })();
 
 # element-remover-onload
