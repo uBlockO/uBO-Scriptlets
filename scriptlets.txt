@@ -41,6 +41,20 @@ set-refpolicy.js application/javascript
 	docu.head.appendChild(meta);
 })();
 
+# inline-frame-remover
+remove-inline-frame.js application/javascript
+(function() {
+		let removeFrame = function() {
+ 			let frame = document.querySelector('#iframe');
+ 			frame.parentNode.removeChild(frame);
+		};
+		if ( document.readyState === 'loading' || document.readyState === 'interactive' ) {
+		   	window.addEventListener('DOMContentLoaded', removeFrame);
+		} else {
+		   	removeFrame();
+		}
+})();
+
 # inline-script-remover
 remove-inline-script.js application/javascript
 (function() {		
