@@ -45,8 +45,10 @@ set-refpolicy.js application/javascript
 remove-inline-frame.js application/javascript
 (function() {
 		let removeFrame = function() {
- 			let frame = document.querySelector('#iframe');
- 			frame.parentNode.removeChild(frame);
+ 			let frame = document.querySelector('iframe').contentWindow.location.href;
+			if (frame === '{{1}}') {
+			    frame.parentNode.removeChild(frame);
+			}	    
 		};
 		if ( document.readyState === 'loading' || document.readyState === 'interactive' ) {
 		   	window.addEventListener('DOMContentLoaded', removeFrame);
