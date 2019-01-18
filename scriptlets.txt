@@ -50,7 +50,9 @@ eremove.js application/javascript
 	}
 	let remove = function() {
 		let element = document.querySelectorAll(selector);
-		element.remove();
+		for ( let element of elements ) {
+            		element.remove();
+		}	
 	};
 	if (document.readyState === 'loading') {
 		remove();
