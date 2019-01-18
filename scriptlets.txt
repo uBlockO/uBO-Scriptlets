@@ -54,7 +54,7 @@ eremove.js application/javascript
 		      element.remove();
 		}      
 	};
-	if (document.readyState === 'loading' || document.readyState === 'interactive' ) {
+	if (document.readyState === 'interactive' || document.readyState === 'complete' ) {
 		remove();
 	} else {
 		window.addEventListener('DOMContentLoaded', remove);
