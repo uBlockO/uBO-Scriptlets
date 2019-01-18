@@ -239,7 +239,7 @@ ereplace.js application/javascript
 	if ( selector === '' || selector === '{{1}}' ) {
 		return;
 	}
-	let noop = document.createElement('noop');
+	let noop = document.createElement('div');
 	let replace = function() {
 		let element = document.querySelector(selector);
 		element.replaceWith(noop);
