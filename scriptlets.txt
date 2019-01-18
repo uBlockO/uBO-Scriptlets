@@ -49,10 +49,12 @@ eremove.js application/javascript
 		return;
 	}
 	let remove = function() {
-		let element = document.querySelectorAll(selector);
-		element.remove();
+		let elements = document.querySelectorAll(selector);
+		for ( let element of elements ) {
+		      element.remove();
+		}      
 	};
-	if (document.readyState === 'interactive' || document.readyState === 'complete' ) {
+	if (document.readyState === 'loading' || document.readyState === 'interactive' ) {
 		remove();
 	} else {
 		window.addEventListener('DOMContentLoaded', remove);
