@@ -54,7 +54,7 @@ eremove.js application/javascript
             		element.remove();
 		}	
 	};
-	if (document.readyState === 'loading') {
+	if (document.readyState === 'interactive') {
 		remove();
 	} else {
 		window.addEventListener('DOMContentLoaded', remove);
