@@ -241,10 +241,12 @@ ereplace.js application/javascript
 	if ( selector === '' || selector === '{{1}}' ) {
 		return;
 	}
-	let noop = document.createElement('div');
+	let div = document.createElement('div');
 	let replace = function() {
-		let element = document.querySelector(selector);
-		element.replaceWith(noop);
+		let elements = document.querySelectorAll(selector);
+		for ( let element of elements ) {
+		      element.replaceWith(div);
+		}      
 	};
 	if (document.readyState === 'interactive' || document.readyState === 'complete') {
 		replace();
@@ -260,10 +262,12 @@ ereplace2.js application/javascript
 	if ( selector === '' || selector === '{{1}}' ) {
 		return;
 	}
-	let noop = document.createElement('noop');
+	let div = document.createElement('div');
 	let replace = function() {
-		let element = document.querySelector(selector);
-		element.replaceWith(noop);
+		let elements = document.querySelectorAll(selector);
+		for ( let element of elements ) {
+		      element.replaceWith(noop);
+		}      
 	};
 	if (document.readyState === 'complete') {
 		replace();
@@ -329,12 +333,6 @@ set-value.js application/javascript
 	};
 	switch ( data ) {
 		default:		return define(data);
-		case 'true':		return define(true);
-		case 'false':		return define(false);
-		case '1':		return define(1);
-		case '0':		return define(0);
-		case 'null':            return define(null);
-		case 'undefined':	return define(undefined);
 		case 'noopFunc':	return define(function() { });
 		case 'trueFunc':        return define(function() { return true; });
 		case 'falseFunc':       return define(function() { return false; });
