@@ -65,14 +65,6 @@ eremove.js application/javascript
 remove-inline-script.js application/javascript
 (function() {		
 		let needle = '{{1}}';
-		if ( needle === '' || needle === '{{1}}' ) {
-				needle = '.?';
-		} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
-				needle = needle.slice(1,-1);
-		} else {
-				needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-		}
-		needle = new RegExp(needle);
 		const xhr = new XMLHttpRequest();
 		xhr.open('GET', window.location.href);
 		xhr.onload = () => {
