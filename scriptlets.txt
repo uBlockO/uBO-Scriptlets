@@ -103,7 +103,7 @@ remove-inline-frame.js application/javascript
 		}
 		needle = new RegExp(needle);
 		const xhr = new XMLHttpRequest();
-		xhr.open('GET', window.location.href, true);
+		xhr.open('GET', window.location.href, false);
 		xhr.onload = () => {
 			let html = xhr.response.replace(/<iframe\b[\s\S]*?<\/iframe>/gi, frame => {
 			if (frame.match(needle)) {
@@ -132,7 +132,7 @@ remove-inline-style.js application/javascript
 		}
 		needle = new RegExp(needle);
 		const xhr = new XMLHttpRequest();
-		xhr.open('GET', window.location.href, true);
+		xhr.open('GET', window.location.href, false);
 		xhr.onload = () => {
 			let html = xhr.response.replace(/<style\b[\s\S]*?<\/style>/gi, style => {
 			if (style.match(needle)) {
