@@ -65,7 +65,6 @@ eremove.js application/javascript
 remove-inline-script.js application/javascript
 (function() {		
 		let needle = '{{1}}';
-		let resource = '{{2}}';
 		if ( needle === '' || needle === '{{1}}' ) {
 				needle = '.?';
 		} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
@@ -77,11 +76,11 @@ remove-inline-script.js application/javascript
 		const xhr = new XMLHttpRequest();
 		xhr.open('GET', window.location.href, false);
 		xhr.onload = () => {
-			let html = xhr.response.replace(/<resource\b[\s\S]*?<\/resource>/gi, resources => {
-			if (resources.match(needle)) {
+			let html = xhr.response.replace(/<script\b[\s\S]*?<\/script>/gi, script => {
+			if (script.match(needle)) {
 					return '';
 			} else {
-					return resources;
+					return script;
 				}
 			});
 			document.open();
