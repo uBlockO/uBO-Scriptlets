@@ -161,7 +161,7 @@ set-attr.js application/javascript
 	let stattr = function(ev) {
 		if ( ev ) { window.removeEventListener(ev.type, stattr, true); }
 		try {
-			let nodes = document.querySelector(selector), i = nodes.length;
+			let nodes = document.querySelectorAll(selector), i = nodes.length;
 			while ( i-- ) {
 				let node = nodes[i], j = attrs.length;
 				while ( j-- ) { node.setAttribute(attrs[j], '{{3}}'); }
