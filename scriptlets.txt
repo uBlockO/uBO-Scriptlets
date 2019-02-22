@@ -196,6 +196,34 @@ eset-attr.js application/javascript
 	}
 })();
 
+element-toggleAttribute
+tog-attr.js application/javascript
+(function() {
+	let attr = '{{2}}';
+	if ( attr === '' || attr === '{{2}}' ) { return; }
+	let attrs = attr.split(/\s*\|\s*/);
+	let selector = '{{1}}';
+	if ( selector === '' || selector === '{{1}}' ) {
+		selector = '[' + attrs.join('],[') + ']';
+	}
+	let togattr = function(ev) {
+		if ( ev ) { window.removeEventListener(ev.type, togattr, true); }
+		try {
+			let nodes = document.querySelectorAll(selector), i = nodes.length;
+			while ( i-- ) {
+				let node = nodes[i], j = attrs.length;
+				while ( j-- ) { node.toggleAttribute(attrs[j], '{{3}}'); }
+			}
+		} catch(ex) {
+		}
+	};
+	if ( document.readyState === 'loading' || document.readyState === 'interactive' ) {
+		window.addEventListener('DOMContentLoaded', togattr, true);
+	} else {
+		togattr();
+	}
+})();
+
 # cookie-setter
 cookie-set.js application/javascript
 (function () {
@@ -778,192 +806,6 @@ dce-logger.js application/javascript
 		log = console.log.bind(console);
 	window.document.createElement = function(a) {
 		log('uBO: document.createElement("%s")', a.toString());
-		return z.apply(this, arguments);
-	}.bind(window);
-})();
-
-# document.readyState-defuser
-drs.js application/javascript
-(function() {
-	let needle = '{{1}}';
-	if ( needle === '' || needle === '{{1}}' ) {
-		needle = '.?';
-	} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
-		needle = needle.slice(1,-1);
-	} else {
-		needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-	}
-	needle = new RegExp(needle);
-	rdrs = document.readyState.bind(document);
-	window.document.readyState = function(a) {
-		if ( !needle.test(a.toString()) ) {
-			rdrs.call(window, a);
-		}
-	}.bind(window);
-})();
-
-# document.readyState-logger
-drs-logger.js application/javascript
-(function() {
-	let z = window.document.readyState,
-		log = console.log.bind(console);
-	window.document.readyState = function(a) {
-		log('uBO: document.readyState("%s")', a.toString());
-		return z.apply(this, arguments);
-	}.bind(window);
-})();
-
-# document.querySelector-defuser
-dqs.js application/javascript
-(function() {
-	let needle = '{{1}}';
-	if ( needle === '' || needle === '{{1}}' ) {
-		needle = '.?';
-	} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
-		needle = needle.slice(1,-1);
-	} else {
-		needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-	}
-	needle = new RegExp(needle);
-	rdqs = document.querySelector.bind(document);
-	window.document.querySelector = function(a) {
-		if ( !needle.test(a.toString()) ) {
-			rdqs.call(window, a);
-		}
-	}.bind(window);
-})();
-
-# document.querySelector-logger
-dqs-logger.js application/javascript
-(function() {
-	let z = window.document.querySelector.bind(document),
-		log = console.log.bind(console);
-	window.document.querySelector = function(a) {
-		log('uBO: document.querySelector("%s")', a.toString());
-		return z.apply(this, arguments);
-	}.bind(window);
-})();
-
-# document.querySelectorAll-defuser
-dqsa.js application/javascript
-(function() {
-	let needle = '{{1}}';
-	if ( needle === '' || needle === '{{1}}' ) {
-		needle = '.?';
-	} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
-		needle = needle.slice(1,-1);
-	} else {
-		needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-	}
-	needle = new RegExp(needle);
-	rdqsa = document.querySelectorAll.bind(document);
-	window.document.querySelectorAll = function(a) {
-		if ( !needle.test(a.toString()) ) {
-			rdqsa.call(window, a);
-		}
-	}.bind(window);
-})();
-
-# document.querySelectorAll-logger
-dqsa-logger.js application/javascript
-(function() {
-	let z = window.document.querySelectorAll.bind(document),
-		log = console.log.bind(console);
-	window.document.querySelectorAll = function(a) {
-		log('uBO: document.querySelectorAll("%s")', a.toString());
-		return z.apply(this, arguments);
-	}.bind(window);
-})();
-
-# document.getElementsByClassName-defuser
-dgebcn.js application/javascript
-(function() {
-	let needle = '{{1}}';
-	if ( needle === '' || needle === '{{1}}' ) {
-		needle = '.?';
-	} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
-		needle = needle.slice(1,-1);
-	} else {
-		needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-	}
-	needle = new RegExp(needle);
-	rdgebcn = document.getElementsByClassName.bind(document);
-	window.document.getElementsByClassName = function(a) {
-		if ( !needle.test(a.toString()) ) {
-			rdgebcn.call(window, a);
-		}
-	}.bind(window);
-})();
-
-# document.getElementsByClassName-logger
-dgebcn-logger.js application/javascript
-(function() {
-	let z = window.document.getElementsByClassName.bind(document),
-		log = console.log.bind(console);
-	window.document.getElementsByClassName = function(a) {
-		log('uBO: document.getElementsByClassName("%s")', a.toString());
-		return z.apply(this, arguments);
-	}.bind(window);
-})();
-
-# document.getElementsByName-defuser
-dgebn.js application/javascript
-(function() {
-	let needle = '{{1}}';
-	if ( needle === '' || needle === '{{1}}' ) {
-		needle = '.?';
-	} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
-		needle = needle.slice(1,-1);
-	} else {
-		needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-	}
-	needle = new RegExp(needle);
-	rdgebn = document.getElementsByName.bind(document);
-	window.document.getElementsByName = function(a) {
-		if ( !needle.test(a.toString()) ) {
-			rdgebn.call(window, a);
-		}
-	}.bind(window);
-})();
-
-# document.getElementsByName-logger
-dgebn-logger.js application/javascript
-(function() {
-	let z = window.document.getElementsByName.bind(document),
-		log = console.log.bind(console);
-	window.document.getElementsByName = function(a) {
-		log('uBO: document.getElementsByName("%s")', a.toString());
-		return z.apply(this, arguments);
-	}.bind(window);
-})();
-
-# document.getElementsByTagName-defuser
-dgebtn.js application/javascript
-(function() {
-	let needle = '{{1}}';
-	if ( needle === '' || needle === '{{1}}' ) {
-		needle = '.?';
-	} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
-		needle = needle.slice(1,-1);
-	} else {
-		needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-	}
-	needle = new RegExp(needle);
-	rdgebtn = document.getElementsByTagName.bind(document);
-	window.document.getElementsByTagName = function(a) {
-		if ( !needle.test(a.toString()) ) {
-			rdgebtn.call(window, a);
-		}
-	}.bind(window);
-})();
-
-# document.getElementsByTagName-logger
-dgebtn-logger.js application/javascript
-(function() {
-	let z = window.document.getElementsByTagName.bind(document),
-		log = console.log.bind(console);
-	window.document.getElementsByTagName = function(a) {
-		log('uBO: document.getElementsByTagName("%s")', a.toString());
 		return z.apply(this, arguments);
 	}.bind(window);
 })();
