@@ -196,7 +196,7 @@ eset-attr.js application/javascript
 	}
 })();
 
-# element-toggleAttribute
+# element-toggleAttribute-DOMContentLoaded
 tog-attr.js application/javascript
 (function() {
 	let attr = '{{1}}';
@@ -219,6 +219,26 @@ tog-attr.js application/javascript
 	};
 	if ( document.readyState === 'loading' || document.readyState === 'interactive' ) {
 		window.addEventListener('DOMContentLoaded', togattr, true);
+	} else {
+		togattr();
+	}
+})();
+
+# element-toggleAttribute-onload
+etog-attr.js application/javascript
+(function() {
+	let selector = '{{1}}';
+	if ( selector === '' || selector === '{{1}}' ) {
+		return;
+	}
+	let togattr = function() {
+		let elements = document.querySelectorAll(selector);
+		for ( let element of elements ) {
+		      element.toggleAttribute('{{2}}');
+		}      
+	};
+	if (document.readyState === 'loading' || document.readyState === 'interactive' ) {
+		window.addEventListener('load', togattr);
 	} else {
 		togattr();
 	}
@@ -717,37 +737,6 @@ dwrite-logger.js application/javascript
 	}.bind(window);
 })();
 
-# document.getElementById-defuser
-dgebi.js application/javascript
-(function() {
-	let needle = '{{1}}';
-	if ( needle === '' || needle === '{{1}}' ) {
-		needle = '.?';
-	} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
-		needle = needle.slice(1,-1);
-	} else {
-		needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-	}
-	needle = new RegExp(needle);
-	rdgebi = document.getElementById.bind(document);
-	window.document.getElementById = function(a) {
-		if ( !needle.test(a.toString()) ) {
-			rdgebi.call(window, a);
-		}
-	}.bind(window);
-})();
-
-# document.getElementById-logger
-dgebi-logger.js application/javascript
-(function() {
-	let z = window.document.getElementById.bind(document),
-		log = console.log.bind(console);
-	window.document.getElementById = function(a) {
-		log('uBO: document.getElementById("%s")', a.toString());
-		return z.apply(this, arguments);
-	}.bind(window);
-})();
-
 # window.alert-defuser
 alt.js application/javascript
 (function() {
@@ -775,37 +764,6 @@ alt-logger.js application/javascript
 		log = console.log.bind(console);
 	window.alert = function(a) {
 		log('uBO: window.alert("%s")', a.toString());
-		return z.apply(this, arguments);
-	}.bind(window);
-})();
-
-# document.createElement-defuser
-dce.js application/javascript
-(function() {
-	let needle = '{{1}}';
-	if ( needle === '' || needle === '{{1}}' ) {
-		needle = '.?';
-	} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
-		needle = needle.slice(1,-1);
-	} else {
-		needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-	}
-	needle = new RegExp(needle);
-	rdce = document.createElement.bind(document);
-	window.document.createElement = function(a) {
-		if ( !needle.test(a.toString()) ) {
-			rdce.call(window, a);
-		}
-	}.bind(window);
-})();
-
-# document.createElement-logger
-dce-logger.js application/javascript
-(function() {
-	let z = window.document.createElement.bind(document),
-		log = console.log.bind(console);
-	window.document.createElement = function(a) {
-		log('uBO: document.createElement("%s")', a.toString());
 		return z.apply(this, arguments);
 	}.bind(window);
 })();
