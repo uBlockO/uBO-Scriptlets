@@ -196,7 +196,7 @@ eset-attr.js application/javascript
 	}
 })();
 
-element-toggleAttribute
+# element-toggleAttribute
 tog-attr.js application/javascript
 (function() {
 	let attr = '{{1}}';
