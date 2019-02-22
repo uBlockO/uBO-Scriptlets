@@ -148,7 +148,7 @@ remove-inline-style.js application/javascript
 		xhr.send();
 })();
 
-# element-setAttribute
+# element-setAttribute-onload
 set-attr.js application/javascript
 (function() {
 	let attr = '{{1}}';
@@ -176,7 +176,7 @@ set-attr.js application/javascript
 	}
 })();
 
-# element-setAttribute-alternative
+# element-setAttribute-DOMContentLoaded
 eset-attr.js application/javascript
 (function() {
 	let selector = '{{1}}';
