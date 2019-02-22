@@ -170,7 +170,7 @@ set-attr.js application/javascript
 		}
 	};
 	if ( document.readyState === 'loading' || document.readyState === 'interactive' ) {
-		window.addEventListener('DOMContentLoaded', stattr, true);
+		window.addEventListener('load', stattr, true);
 	} else {
 		stattr();
 	}
