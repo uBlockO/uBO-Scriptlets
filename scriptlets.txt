@@ -768,7 +768,8 @@ alt-logger.js application/javascript
 	}.bind(window);
 })();
 
-
+# beforescriptexecute-defuser
+bse.js application/javascript
 (function() {
                 const Event = class {
                 constructor(script, target) {
@@ -849,7 +850,7 @@ alt-logger.js application/javascript
                     }
                 }
             };
-		  window.onbeforescriptexecute = (e) => {
+		window.onbeforescriptexecute = (e) => {
                 	if (!e.script.textContent) {
                     		return;
                 	}
