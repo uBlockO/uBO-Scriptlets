@@ -14,7 +14,7 @@ eval-logger.js application/javascript
 	let z = window.eval,
 		log = console.log.bind(console);
 	window.eval = function(a) {
-		log('uBO: eval("%s")', a.toString());
+		log('uBO: eval("%s")', String(a));
 		return z.apply(this, arguments);
 	}.bind(window);
 })();
@@ -501,7 +501,7 @@ noatob.js application/javascript
 	needle = new RegExp(needle);
 	realNoAtob = window.atob;
 	window.atob = function(a) {
-		if ( !needle.test(a.toString()) ) {
+		if ( !needle.test(String(a)) ) {
 			realNoAtob.call(window, a);
 		}
 	}.bind(window);
@@ -513,7 +513,7 @@ atob-logger.js application/javascript
 	let z = window.atob,
 		log = console.log.bind(console);
 	window.atob = function(a) {
-		log('uBO: atob("%s")', a.toString());
+		log('uBO: atob("%s")', String(a));
 		return z.apply(this, arguments);
 	}.bind(window);
 })();
@@ -532,7 +532,7 @@ nobtoa.js application/javascript
 	needle = new RegExp(needle);
 	realNoBtoa = window.btoa;
 	window.btoa = function(a) {
-		if ( !needle.test(a.toString()) ) {
+		if ( !needle.test(String(a)) ) {
 			realNoBtoa.call(window, a);
 		}
 	}.bind(window);
@@ -544,7 +544,7 @@ btoa-logger.js application/javascript
 	let z = window.btoa,
 		log = console.log.bind(console);
 	window.btoa = function(a) {
-		log('uBO: btoa("%s")', a.toString());
+		log('uBO: btoa("%s")', String(a));
 		return z.apply(this, arguments);
 	}.bind(window);
 })();
@@ -563,7 +563,7 @@ nopi.js application/javascript
 	needle = new RegExp(needle);
 	realnopi = window.parseInt;
 	window.parseInt = function(a) {
-		if ( !needle.test(a.toString()) ) {
+		if ( !needle.test(String(a)) ) {
 			realnopi.call(window, a);
 		}
 	}.bind(window);
@@ -575,7 +575,7 @@ nopi-logger.js application/javascript
 	let z = window.parseInt,
 		log = console.log.bind(console);
 	window.parseInt = function(a) {
-		log('uBO: parseInt("%s")', a.toString());
+		log('uBO: parseInt("%s")', String(a));
 		return z.apply(this, arguments);
 	}.bind(window);
 })();
@@ -594,7 +594,7 @@ schar.js application/javascript
 	needle = new RegExp(needle);
 	realschar = window.String.fromCharCode;
 	window.String.fromCharCode = function(a) {
-		if ( !needle.test(a.toString()) ) {
+		if ( !needle.test(String(a)) ) {
 			realschar.call(window, a);
 		}
 	}.bind(window);
@@ -606,7 +606,7 @@ schar-logger.js application/javascript
 	let z = window.String.fromCharCode,
 		log = console.log.bind(console);
 	window.String.fromCharCode = function(a) {
-		log('uBO: String.fromCharCode("%s")', a.toString());
+		log('uBO: String.fromCharCode("%s")', String(a));
 		return z.apply(this, arguments);
 	}.bind(window);
 })();
@@ -625,7 +625,7 @@ stcharat-defuser.js application/javascript
 	needle = new RegExp(needle);
 	realstcharat = window.String.prototype.charCodeAt;
 	window.String.prototype.charCodeAt = function(a) {
-		if ( !needle.test(a.toString()) ) {
+		if ( !needle.test(String(a)) ) {
 			realstcharat.call(window, a);
 		}
 	}.bind(window);
@@ -638,7 +638,7 @@ stcharat-logger.js application/javascript
 	let z = window.String.prototype.charCodeAt,
 		log = console.log.bind(console);
 	window.String.prototype.charCodeAt = function(a) {
-		log('uBO: String.prototype.charCodeAt("%s")', a.toString());
+		log('uBO: String.prototype.charCodeAt("%s")', String(a));
 		return z.apply(this, arguments);
 	}.bind(window);
 })();
@@ -658,7 +658,7 @@ dwrite.js application/javascript
 	needle = new RegExp(needle);
 	rdwrite = document.write.bind(document);
 	window.document.write = function(a) {
-		if ( !needle.test(a.toString()) ) {
+		if ( !needle.test(String(a)) ) {
 			rdwrite.call(window, a);
 		}
 	}.bind(window);
@@ -670,7 +670,7 @@ dwrite-logger.js application/javascript
 	let z = window.document.write.bind(document),
 		log = console.log.bind(console);
 	window.document.write = function(a) {
-		log('uBO: document.write("%s")', a.toString());
+		log('uBO: document.write("%s")', String(a));
 		return z.apply(this, arguments);
 	}.bind(window);
 })();
@@ -689,7 +689,7 @@ alt.js application/javascript
 	needle = new RegExp(needle);
 	ralt = window.alert;
 	window.alert = function(a) {
-		if ( !needle.test(a.toString()) ) {
+		if ( !needle.test(String(a)) ) {
 			ralt.call(window, a);
 		}
 	}.bind(window);
@@ -701,7 +701,7 @@ alt-logger.js application/javascript
 	let z = window.alert,
 		log = console.log.bind(console);
 	window.alert = function(a) {
-		log('uBO: window.alert("%s")', a.toString());
+		log('uBO: window.alert("%s")', String(a));
 		return z.apply(this, arguments);
 	}.bind(window);
 })();
