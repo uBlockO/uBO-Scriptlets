@@ -190,7 +190,7 @@ eset-attr.js application/javascript
 		}      
 	};
 	if (document.readyState === 'interactive' || document.readyState === 'complete' ) {
-		window.addEventListener('DOMContentLoaded', setattr, true);
+		window.addEventListener('DOMContentLoaded', setattr);
 	} else {
 		setattr();
 	}
@@ -218,7 +218,7 @@ tog-attr.js application/javascript
 		}
 	};
 	if ( document.readyState === 'loading' || document.readyState === 'interactive' ) {
-		window.addEventListener('DOMContentLoaded', togattr, true);
+		window.addEventListener('DOMContentLoaded', togattr);
 	} else {
 		togattr();
 	}
@@ -238,7 +238,7 @@ etog-attr.js application/javascript
 		}      
 	};
 	if (document.readyState === 'loading' || document.readyState === 'interactive' ) {
-		window.addEventListener('load', togattr, true);
+		window.addEventListener('load', togattr);
 	} else {
 		togattr();
 	}
