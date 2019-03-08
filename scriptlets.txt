@@ -190,7 +190,7 @@ eset-attr.js application/javascript
 		}      
 	};
 	if (document.readyState === 'interactive' || document.readyState === 'complete' ) {
-		window.addEventListener('DOMContentLoaded', setattr);
+		window.addEventListener('DOMContentLoaded', setattr, true);
 	} else {
 		setattr();
 	}
@@ -238,7 +238,7 @@ etog-attr.js application/javascript
 		}      
 	};
 	if (document.readyState === 'loading' || document.readyState === 'interactive' ) {
-		window.addEventListener('DOMContentLoaded', togattr);
+		window.addEventListener('load', togattr, true);
 	} else {
 		togattr();
 	}
