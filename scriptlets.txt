@@ -238,7 +238,7 @@ etog-attr.js application/javascript
 		}      
 	};
 	if (document.readyState === 'loading' || document.readyState === 'interactive' ) {
-		window.addEventListener('load', togattr);
+		window.addEventListener('DOMContentLoaded', togattr);
 	} else {
 		togattr();
 	}
