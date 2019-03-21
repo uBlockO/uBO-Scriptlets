@@ -458,7 +458,6 @@ set-value.js application/javascript
 		} catch ( err ) { }
 	};
 	switch ( data ) {
-		default:		return define(data);
 		case 'noopFunc':	return define(function() { });
 		case 'trueFunc':        return define(function() { return true; });
 		case 'falseFunc':       return define(function() { return false; });
@@ -466,10 +465,11 @@ set-value.js application/javascript
 		case 'unFunc':          return define(function() { return undefined; });
 		case 'oneFunc':         return define(function() { return 1; });
 		case 'zeFunc':		return define(function() { return 0; });
+		default:		return define(data);
 	}
 })();
 
-# variable-remover
+# property-remover
 remove-prop.js application/javascript
 (function() {
   	      let remove = function () {
