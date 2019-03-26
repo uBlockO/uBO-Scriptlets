@@ -218,7 +218,7 @@ eset-attr.js application/javascript
 		      element.setAttribute('{{2}}','{{3}}');
 		}      
 	};
-	if (document.readyState === 'interactive' || document.readyState === 'complete' ) {
+	if (document.readyState === 'loading' || document.readyState === 'interactive' ) {
 		window.addEventListener('DOMContentLoaded', setattr);
 	} else {
 		setattr();
