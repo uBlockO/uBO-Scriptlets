@@ -392,7 +392,7 @@ ereplace2.js application/javascript
 	let replace = function() {
 		let elements = document.querySelectorAll(selector);
 		for ( let element of elements ) {
-		      element.replaceWith(noop);
+		      element.replaceWith(div);
 		}      
 	};
 	if (document.readyState === 'complete') {
