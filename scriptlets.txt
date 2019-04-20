@@ -76,7 +76,7 @@ remove-inline-script.js application/javascript
 		const xhr = new XMLHttpRequest();
 		xhr.open('GET', window.location.href, false);
 		xhr.onload = () => {
-			let html = xhr.response.replace(/<script\b[\s\S]*?<\/script>/gi, script => {
+			let html = xhr.response.replace(/<script\b[\s\S]*?<\/script>/g, script => {
 			if (script.match(needle)) {
 					return '';
 			} else {
@@ -105,7 +105,7 @@ remove-inline-noscript.js application/javascript
 		const xhr = new XMLHttpRequest();
 		xhr.open('GET', window.location.href, false);
 		xhr.onload = () => {
-			let html = xhr.response.replace(/<noscript\b[\s\S]*?<\/noscript>/gi, noscript => {
+			let html = xhr.response.replace(/<noscript\b[\s\S]*?<\/noscript>/g, noscript => {
 			if (noscript.match(needle)) {
 					return '';
 			} else {
@@ -134,7 +134,7 @@ remove-inline-frame.js application/javascript
 		const xhr = new XMLHttpRequest();
 		xhr.open('GET', window.location.href, false);
 		xhr.onload = () => {
-			let html = xhr.response.replace(/<iframe\b[\s\S]*?<\/iframe>/gi, frame => {
+			let html = xhr.response.replace(/<iframe\b[\s\S]*?<\/iframe>/g, frame => {
 			if (frame.match(needle)) {
 					return '';
 			} else {
@@ -163,7 +163,7 @@ remove-inline-style.js application/javascript
 		const xhr = new XMLHttpRequest();
 		xhr.open('GET', window.location.href, false);
 		xhr.onload = () => {
-			let html = xhr.response.replace(/<style\b[\s\S]*?<\/style>/gi, style => {
+			let html = xhr.response.replace(/<style\b[\s\S]*?<\/style>/g, style => {
 			if (style.match(needle)) {
 					return '';
 			} else {
