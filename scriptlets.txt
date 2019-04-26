@@ -65,7 +65,7 @@ eremove.js application/javascript
 remove-inline-script.js application/javascript
 (function() {		
 		let needle = '{{1}}';
-		const xhr = new XMLHttpRequest();
+		let xhr = new XMLHttpRequest();
 		xhr.open('GET', window.location.href, false);
 		xhr.onload = () => {
 			let html = xhr.response.replace(/<script\b[\s\S]*?<\/script>/g, script => {
@@ -86,15 +86,7 @@ remove-inline-script.js application/javascript
 remove-inline-noscript.js application/javascript
 (function() {		
 		let needle = '{{1}}';
-		if ( needle === '' || needle === '{{1}}' ) {
-				needle = '.?';
-		} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
-				needle = needle.slice(1,-1);
-		} else {
-				needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-		}
-		needle = new RegExp(needle);
-		const xhr = new XMLHttpRequest();
+		let xhr = new XMLHttpRequest();
 		xhr.open('GET', window.location.href, false);
 		xhr.onload = () => {
 			let html = xhr.response.replace(/<noscript\b[\s\S]*?<\/noscript>/g, noscript => {
@@ -115,15 +107,7 @@ remove-inline-noscript.js application/javascript
 remove-inline-frame.js application/javascript
 (function() {		
 		let needle = '{{1}}';
-		if ( needle === '' || needle === '{{1}}' ) {
-				needle = '.?';
-		} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
-				needle = needle.slice(1,-1);
-		} else {
-				needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-		}
-		needle = new RegExp(needle);
-		const xhr = new XMLHttpRequest();
+		let xhr = new XMLHttpRequest();
 		xhr.open('GET', window.location.href, false);
 		xhr.onload = () => {
 			let html = xhr.response.replace(/<iframe\b[\s\S]*?<\/iframe>/g, frame => {
@@ -144,15 +128,7 @@ remove-inline-frame.js application/javascript
 remove-inline-style.js application/javascript
 (function() {		
 		let needle = '{{1}}';
-		if ( needle === '' || needle === '{{1}}' ) {
-				needle = '.?';
-		} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
-				needle = needle.slice(1,-1);
-		} else {
-				needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-		}
-		needle = new RegExp(needle);
-		const xhr = new XMLHttpRequest();
+		let xhr = new XMLHttpRequest();
 		xhr.open('GET', window.location.href, false);
 		xhr.onload = () => {
 			let html = xhr.response.replace(/<style\b[\s\S]*?<\/style>/g, style => {
