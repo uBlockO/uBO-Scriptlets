@@ -64,12 +64,11 @@ eremove.js application/javascript
 # inline-script-remover
 remove-inline-script.js application/javascript
 (function() {		
-		let needle = '{{1}}';
 		let xhr = new XMLHttpRequest();
 		xhr.open('GET', window.location.href, false);
 		xhr.onload = () => {
 			let html = xhr.response.replace(/<script\b[\s\S]*?<\/script>/g, script => {
-			if (script.match(needle)) {
+			if (script.match('{{1}}')) {
 					return '';
 			} else {
 					return script;
@@ -85,12 +84,11 @@ remove-inline-script.js application/javascript
 # inline-noscript-remover
 remove-inline-noscript.js application/javascript
 (function() {		
-		let needle = '{{1}}';
 		let xhr = new XMLHttpRequest();
 		xhr.open('GET', window.location.href, false);
 		xhr.onload = () => {
 			let html = xhr.response.replace(/<noscript\b[\s\S]*?<\/noscript>/g, noscript => {
-			if (noscript.match(needle)) {
+			if (noscript.match('{{1}}')) {
 					return '';
 			} else {
 					return noscript;
@@ -106,12 +104,11 @@ remove-inline-noscript.js application/javascript
 # inline-frame-remover
 remove-inline-frame.js application/javascript
 (function() {		
-		let needle = '{{1}}';
 		let xhr = new XMLHttpRequest();
 		xhr.open('GET', window.location.href, false);
 		xhr.onload = () => {
 			let html = xhr.response.replace(/<iframe\b[\s\S]*?<\/iframe>/g, frame => {
-			if (frame.match(needle)) {
+			if (frame.match('{{1}}')) {
 					return '';
 			} else {
 					return frame;
@@ -127,12 +124,11 @@ remove-inline-frame.js application/javascript
 # inline-style-remover
 remove-inline-style.js application/javascript
 (function() {		
-		let needle = '{{1}}';
 		let xhr = new XMLHttpRequest();
 		xhr.open('GET', window.location.href, false);
 		xhr.onload = () => {
 			let html = xhr.response.replace(/<style\b[\s\S]*?<\/style>/g, style => {
-			if (style.match(needle)) {
+			if (style.match('{{1}}')) {
 					return '';
 			} else {
 					return style;
