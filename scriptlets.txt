@@ -64,7 +64,7 @@ eremove.js application/javascript
 # inline-script-remover
 remove-inline-script.js application/javascript
 (function() {		
-		let xhr = new XMLHttpRequest();
+		const xhr = new XMLHttpRequest();
 		xhr.open('GET', window.location.href, false);
 		xhr.onload = () => {
 			let html = xhr.response.replace(/<script\b[\s\S]*?<\/script>/g, script => {
