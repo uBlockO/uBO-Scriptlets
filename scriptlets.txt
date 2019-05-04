@@ -237,6 +237,29 @@ etog-attr.js application/javascript
 	}
 })();
 
+# set-property on document.readyState
+set-prop.js application/javascript
+(function() {
+	    let chain = '{{1}}';
+	    let prop = '{{2}}';
+	    if ( chain === '' || chain === '{{1}}' ) {
+		return;
+	    }
+	    let set = function() {
+		let owner = window;
+		chain = chain.split('.');
+		for ( let i = 0; i < chain.length - 1; i++ ) {
+		    owner = owner[chain[i]];
+		}
+		owner[chain[chain.length - 1]] = prop;
+	    };
+	    if (document.readyState === 'interactive' || document.readyState === 'complete') {
+			set();
+	    	} else {
+			addEventListener('DOMContentLoaded', set);
+	    }
+})();
+
 # cookie-setter
 cookie-set.js application/javascript
 (function () {
