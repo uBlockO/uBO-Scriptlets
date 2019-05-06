@@ -456,7 +456,7 @@ set-value.js application/javascript
 	}
 })();
 
-# property-remover
+# property-remover on document.readyState
 remove-prop.js application/javascript
 (function() {
   	      let remove = function () {
