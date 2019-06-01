@@ -141,6 +141,20 @@ remove-inline-style.js application/javascript
 		xhr.send();
 })();
 
+# autoplay-blocker
+autoplay-defuser.js application/javascript
+(function() {
+	      let autoplay = function() {  
+		  	let video = HTMLMediaElement;
+			video.autoplay = 'false'; 
+	      };
+	      if (document.readyState === 'loading' || document.readyState === 'interactive' ) {
+		      autoplay();
+	      } else {
+		      window.addEventListener('DOMContentLoaded', autoplay);
+	      }
+})();
+
 # element-setAttribute-onload
 set-attr.js application/javascript
 (function() {
