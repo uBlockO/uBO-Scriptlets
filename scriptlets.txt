@@ -148,7 +148,7 @@ autoplay-defuser.js application/javascript
 		  	let video = HTMLMediaElement;
 			video.autoplay = 'false'; 
 	      };
-	      if (document.readyState === 'loading' || document.readyState === 'interactive' ) {
+	      if (document.readyState === 'interactive' || document.readyState === 'complete' ) {
 		      autoplay();
 	      } else {
 		      window.addEventListener('DOMContentLoaded', autoplay);
