@@ -65,6 +65,13 @@ eremove.js application/javascript
 remove-inline-script.js application/javascript
 (function() {		
 		let needle = '{{1}}';
+		if ( needle === '' || needle === '{{1}}' ) {
+			needle = '.?';
+		} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
+			needle = needle.slice(1,-1);
+		} else {
+			needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+		}
 		needle = new RegExp(needle);
 		let xhr = new XMLHttpRequest();
 		xhr.open('GET', window.location.href, false);
@@ -86,11 +93,20 @@ remove-inline-script.js application/javascript
 # inline-noscript-remover
 remove-inline-noscript.js application/javascript
 (function() {		
+		let needle = '{{1}}';
+		if ( needle === '' || needle === '{{1}}' ) {
+			needle = '.?';
+		} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
+			needle = needle.slice(1,-1);
+		} else {
+			needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+		}
+		needle = new RegExp(needle);
 		let xhr = new XMLHttpRequest();
 		xhr.open('GET', window.location.href, false);
 		xhr.onload = () => {
 			let html = xhr.response.replace(/<noscript\b[\s\S]*?<\/noscript>/g, noscript => {
-			if (noscript.match('{{1}}')) {
+			if (noscript.match(needle)) {
 					return '';
 			} else {
 					return noscript;
@@ -106,11 +122,20 @@ remove-inline-noscript.js application/javascript
 # inline-frame-remover
 remove-inline-frame.js application/javascript
 (function() {		
+		let needle = '{{1}}';
+		if ( needle === '' || needle === '{{1}}' ) {
+			needle = '.?';
+		} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
+			needle = needle.slice(1,-1);
+		} else {
+			needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+		}
+		needle = new RegExp(needle);
 		let xhr = new XMLHttpRequest();
 		xhr.open('GET', window.location.href, false);
 		xhr.onload = () => {
 			let html = xhr.response.replace(/<iframe\b[\s\S]*?<\/iframe>/g, frame => {
-			if (frame.match('{{1}}')) {
+			if (frame.match(needle)) {
 					return '';
 			} else {
 					return frame;
@@ -126,11 +151,20 @@ remove-inline-frame.js application/javascript
 # inline-style-remover
 remove-inline-style.js application/javascript
 (function() {		
+		let needle = '{{1}}';
+		if ( needle === '' || needle === '{{1}}' ) {
+			needle = '.?';
+		} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
+			needle = needle.slice(1,-1);
+		} else {
+			needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+		}
+		needle = new RegExp(needle);
 		let xhr = new XMLHttpRequest();
 		xhr.open('GET', window.location.href, false);
 		xhr.onload = () => {
 			let html = xhr.response.replace(/<style\b[\s\S]*?<\/style>/g, style => {
-			if (style.match('{{1}}')) {
+			if (style.match(needle)) {
 					return '';
 			} else {
 					return style;
