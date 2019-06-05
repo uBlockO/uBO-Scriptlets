@@ -719,6 +719,7 @@ query-stripper.js application/javascript
 			window.location.href = url;
 		}
 })();
+
 # window.alert-defuser
 alt.js application/javascript
 (function() {
