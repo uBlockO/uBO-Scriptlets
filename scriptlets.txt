@@ -713,15 +713,7 @@ stcharat-logger.js application/javascript
 query-stripper.js application/javascript
 (function() {
 		let query = '{{1}}';
-		if ( query === '' || query === '{{1}}' ) {
-			query = '.?';
-		} else if ( query.slice(0,1) === '/' && query.slice(-1) === '/' ) {
-			query = query.slice(1,-1);
-		} else {
-			query = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-		}
-		query = new RegExp(query);
-		if (location.search.indexOf.match(query + '=') !== -1) {
+		if (location.search.indexOf(query + '=') !== -1) {
 			let url = new URL(location);
 			url.searchParams.delete(query);
 			window.location.href = url;
