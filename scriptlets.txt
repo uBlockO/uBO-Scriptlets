@@ -721,7 +721,7 @@ query-stripper.js application/javascript
 			query = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 		}
 		query = new RegExp(query);
-		if (location.search.indexOf.search(query + '=') !== -1) {
+		if (location.search.indexOf.match(query + '=') !== -1) {
 			let url = new URL(location);
 			url.searchParams.delete(query);
 			window.location.href = url;
