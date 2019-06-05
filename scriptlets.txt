@@ -709,38 +709,16 @@ stcharat-logger.js application/javascript
 	}.bind(window);
 })();
 
-
-# document.write-defuser
-dwrite.js application/javascript
+# strip-queries from URLs
+query-stripper.js application/javascript
 (function() {
-	let needle = '{{1}}';
-	if ( needle === '' || needle === '{{1}}' ) {
-		needle = '.?';
-	} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
-		needle = needle.slice(1,-1);
-	} else {
-		needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-	}
-	needle = new RegExp(needle);
-	rdwrite = document.write.bind(document);
-	window.document.write = function(a) {
-		if ( !needle.test(String(a)) ) {
-			rdwrite.call(window, a);
+		let query = '{{1}}';
+		if (location.search.indexOf(query + '=') !== -1) {
+			let url = new URL(location);
+			url.searchParams.delete(query);
+			window.location.href = url;
 		}
-	}.bind(window);
 })();
-
-# document.write-logger
-dwrite-logger.js application/javascript
-(function() {
-	let z = window.document.write.bind(document),
-		log = console.log.bind(console);
-	window.document.write = function(a) {
-		log('uBO: document.write("%s")', String(a));
-		return z.apply(this, arguments);
-	}.bind(window);
-})();
-
 # window.alert-defuser
 alt.js application/javascript
 (function() {
