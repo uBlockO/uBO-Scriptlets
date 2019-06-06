@@ -713,8 +713,8 @@ stcharat-logger.js application/javascript
 query-stripper.js application/javascript
 (function() {
 		let query = '{{1}}';
-		if (location.search.indexOf(query + '=') !== -1) {
-			let url = new URL(location);
+		if (location.href.indexOf(query + '=') !== -1) {
+			let url = new URL(location.href);
 			url.searchParams.delete(query);
 			window.location.href = url;
 		}
