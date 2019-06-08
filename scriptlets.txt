@@ -287,7 +287,8 @@ etog-attr.js application/javascript
 	}
 })();
 
-# set-property on document.readyState
+# set-property on DOMContentLoaded
+# example.com##+js(set-prop.js, example, example)
 set-prop.js application/javascript
 (function() {
 	    let chain = '{{1}}';
@@ -311,12 +312,14 @@ set-prop.js application/javascript
 })();
 
 # cookie-setter
+# example.com##+js(cookie-set.js, name, value, age)
 cookie-set.js application/javascript
 (function () {
 	     document.cookie = '{{1}}={{2}}; max-age={{3}}; secure; path=/;';
 })();		
 
 # window.open.defuser-alternative
+# example.com##+js(wopen.js)
 wopen.js application/javascript
 (function () {
 	      window.open = () => {};
