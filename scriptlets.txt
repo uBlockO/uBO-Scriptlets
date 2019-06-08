@@ -522,7 +522,7 @@ set-value.js application/javascript
 	}
 })();
 
-# property-remover on document.readyState
+# remove-property on DOMContentLoaded
 remove-prop.js application/javascript
 (function() {
   	      let remove = function () {
@@ -546,7 +546,7 @@ eaddr.js application/javascript
 		element.className = identifier.substring(1);
 	} else {
 		return;
-	}
+	}	
 	element.style.display = '{{2}}';
 	document.documentElement.appendChild(element);
 })();
