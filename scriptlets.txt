@@ -201,7 +201,7 @@ autoplay-defuser.js application/javascript
 })();
 
 # element-setAttribute-onload
-# example.com##+js(preload, none, video)
+# example.com##+js(preload, none, video, complete)
 set-attr.js application/javascript
 (function() {
 	let attr = '{{1}}';
