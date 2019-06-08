@@ -8,7 +8,8 @@
 # If the encoding is absent, the data will be converted to base64, and the
 # encoding will be set to `;base64`.
 
-# eval-logger 
+# eval-logger
+# example.com##+js(eval-logger.js)
 eval-logger.js application/javascript
 (function() {
 	let z = window.eval,
@@ -20,6 +21,7 @@ eval-logger.js application/javascript
 })();
 
 # response-header-setter
+# example.com##+js(set-respheader.js, Cross-Origin-Resource-Policy, samesite)
 set-respheader.js application/javascript
 (function() {
 	let docu = document;
