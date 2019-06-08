@@ -21,7 +21,7 @@ eval-logger.js application/javascript
 })();
 
 # response-header-setter
-# example.com##+js(set-respheader.js, Cross-Origin-Resource-Policy, samesite)
+# example.com##+js(set-respheader.js, Cross-Origin-Resource-Policy, same-site)
 set-respheader.js application/javascript
 (function() {
 	let docu = document;
@@ -33,6 +33,7 @@ set-respheader.js application/javascript
 })();
 
 # referrer-policy-setter
+# example.com##+js(set-refpolicy.js, no-referrer)
 set-refpolicy.js application/javascript
 (function() {
 	let docu = document;
@@ -44,6 +45,7 @@ set-refpolicy.js application/javascript
 })();
 
 # element-remover
+# example.com##+js(eremove.js, #example)
 eremove.js application/javascript
 (function() {
 	let selector = '{{1}}';
@@ -64,6 +66,7 @@ eremove.js application/javascript
 })();
 
 # inline-script-remover
+# example.com##+js(remove-inline-script.js, adblock)
 remove-inline-script.js application/javascript
 (function() {		
 		let needle = '{{1}}';
@@ -93,6 +96,7 @@ remove-inline-script.js application/javascript
 })();
 
 # inline-noscript-remover
+# example.com##+js(remove-inline-noscript.js, text)
 remove-inline-noscript.js application/javascript
 (function() {		
 		let needle = '{{1}}';
@@ -122,6 +126,7 @@ remove-inline-noscript.js application/javascript
 })();
 
 # inline-frame-remover
+# example.com##+js(remove-inline-frame.js, frame)
 remove-inline-frame.js application/javascript
 (function() {		
 		let needle = '{{1}}';
@@ -151,6 +156,7 @@ remove-inline-frame.js application/javascript
 })();
 
 # inline-style-remover
+# example.com##+js(remove-inline-style.js, notice)
 remove-inline-style.js application/javascript
 (function() {		
 		let needle = '{{1}}';
@@ -180,11 +186,12 @@ remove-inline-style.js application/javascript
 })();
 
 # autoplay-blocker
+# example.com##+js(autoplay-defuser.js)
 autoplay-defuser.js application/javascript
 (function() {
 	      let autoplay = function() {  
-		  	let video = HTMLMediaElement;
-			video.autoplay = 'false'; 
+		  	let media = HTMLMediaElement;
+			media.autoplay = 'false'; 
 	      };
 	      if (document.readyState === 'interactive' || document.readyState === 'complete' ) {
 		      autoplay();
@@ -194,6 +201,7 @@ autoplay-defuser.js application/javascript
 })();
 
 # element-setAttribute-onload
+# example.com##+js(preload, none, video)
 set-attr.js application/javascript
 (function() {
 	let attr = '{{1}}';
@@ -222,6 +230,7 @@ set-attr.js application/javascript
 })();
 
 # element-setAttribute-DOMContentLoaded
+# example.com##+js(eset-attr.js, video, autoplay, none, loading)
 eset-attr.js application/javascript
 (function() {
 	let selector = '{{1}}';
@@ -242,6 +251,7 @@ eset-attr.js application/javascript
 })();
 
 # element-toggleAttribute-DOMContentLoaded
+# example.com##+js(tog-attr.js, preload, video)
 tog-attr.js application/javascript
 (function() {
 	let attr = '{{1}}';
@@ -270,6 +280,7 @@ tog-attr.js application/javascript
 })();
 
 # element-toggleAttribute-onload
+# example.com##+js(tog-attr.js, video, autoplay)
 etog-attr.js application/javascript
 (function() {
 	let selector = '{{1}}';
