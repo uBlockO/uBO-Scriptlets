@@ -217,7 +217,7 @@ remove-link-tag.js application/javascript
 
 # meta tag remover
 # example.com##+js(remove-meta-tag.js, /refresh|referrer/)
-remove-link-tag.js application/javascript
+remove-meta-tag.js application/javascript
 (function() {		
 		let needle = '{{1}}';
 		if ( needle === '' || needle === '{{1}}' ) {
