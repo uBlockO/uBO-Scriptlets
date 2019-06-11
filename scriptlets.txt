@@ -185,6 +185,36 @@ remove-inline-style.js application/javascript
 		xhr.send();
 })();
 
+# link tag remover
+# example.com##+js(remove-link-tag.js, favicon)
+remove-link-tag.js application/javascript
+(function() {		
+		let needle = '{{1}}';
+		if ( needle === '' || needle === '{{1}}' ) {
+			needle = '.?';
+		} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
+			needle = needle.slice(1,-1);
+		} else {
+			needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+		}
+		needle = new RegExp(needle);
+		let xhr = new XMLHttpRequest();
+		xhr.open('GET', window.location.href, false);
+		xhr.onload = () => {
+			let html = xhr.response.replace(/<link\b[\s\S]*?>/g, link => {
+			if (link.match(needle)) {
+					return '';
+			} else {
+					return link;
+				}
+			});
+			document.open();
+			document.write(html);
+			document.close();
+		};
+		xhr.send();
+})();
+
 # autoplay-blocker
 # example.com##+js(autoplay-defuser.js)
 autoplay-defuser.js application/javascript
