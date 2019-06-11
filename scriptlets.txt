@@ -186,7 +186,7 @@ remove-inline-style.js application/javascript
 })();
 
 # link tag remover
-# example.com##+js(remove-link-tag.js, favicon)
+# example.com##+js(remove-link-tag.js, /prefetch|preload|prerender/)
 remove-link-tag.js application/javascript
 (function() {		
 		let needle = '{{1}}';
@@ -206,6 +206,36 @@ remove-link-tag.js application/javascript
 					return '';
 			} else {
 					return link;
+				}
+			});
+			document.open();
+			document.write(html);
+			document.close();
+		};
+		xhr.send();
+})();
+
+# meta tag remover
+# example.com##+js(remove-meta-tag.js, /refresh|referrer/)
+remove-link-tag.js application/javascript
+(function() {		
+		let needle = '{{1}}';
+		if ( needle === '' || needle === '{{1}}' ) {
+			needle = '.?';
+		} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
+			needle = needle.slice(1,-1);
+		} else {
+			needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+		}
+		needle = new RegExp(needle);
+		let xhr = new XMLHttpRequest();
+		xhr.open('GET', window.location.href, false);
+		xhr.onload = () => {
+			let html = xhr.response.replace(/<meta\b[\s\S]*?>/g, meta => {
+			if (meta.match(needle)) {
+					return '';
+			} else {
+					return meta;
 				}
 			});
 			document.open();
