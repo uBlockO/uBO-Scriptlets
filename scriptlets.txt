@@ -644,7 +644,6 @@ eremove2.js application/javascript
 query-stripper.js application/javascript
 (function() {
 		let query = '{{1}}';
-		let url = window.location.href;
 		if ( query === '' || query === '{{1}}' ) {
 			query = '.?';
 		} else if ( query.slice(0,1) === '/' && query.slice(-1) === '/' ) {
@@ -654,6 +653,7 @@ query-stripper.js application/javascript
 		}
 		query = new RegExp(query);
 		if (location.href.search(query) !== -1) {
+			let url = window.location.href;
 			let strippedurl = url.replace(query, '');
 			window.location.href = strippedurl;
 		}
