@@ -84,7 +84,10 @@ remove-inline-script.js application/javascript
 			let html = xhr.response.replace(/<script\b[\s\S]*?<\/script>/g, script => {
 			if (script.match(needle)) {
 					return '';
-			}});
+			} else {
+					return script;
+				}
+			});
 			document.open();
 			document.write(html);
 			document.close();
