@@ -640,7 +640,7 @@ eremove2.js application/javascript
 })();
 
 # strip-queries from URLs
-# example.com##+js(query-stripper.js, /&fbclid|&gclid|&utm/)
+# example.com##+js(query-stripper.js, /\?fbclid=\w+/)
 query-stripper.js application/javascript
 (function() {
 		let query = '{{1}}';
