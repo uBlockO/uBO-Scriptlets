@@ -21,6 +21,28 @@ eval-logger.js application/javascript
 	}.bind(window);
 })();
 
+# javascript-logger
+# example.com##+js(javascript-logger.js)
+javascript-logger.js application/javascript
+(function () { 
+		'use strict';
+		let logscript = function () {
+			let js = document.scripts;
+			for (let i = 0; i < js.length; i++) {
+				if (js[i].src) {
+  		     			console.info(i, js[i].src);
+		     		} else {
+					console.info(i, js[i].innerHTML);
+				}	
+			}
+		};
+		if (document.readyState === 'complete') {
+			logscript();
+		} else {
+			window.addEventListener('load', logscript);
+		}
+})();
+
 # response-header-setter
 # example.com##+js(set-respheader.js, Cross-Origin-Resource-Policy, same-site)
 set-respheader.js application/javascript
