@@ -26,7 +26,7 @@ eval-logger.js application/javascript
 js-logger.js application/javascript
 (function () { 
 		'use strict';
-		let logscript = function () {
+		let logscripts = function () {
 			let js = document.scripts;
 			let log = console.log.bind(console);
 			for (let i = 0; i < js.length; i++) {
@@ -38,9 +38,9 @@ js-logger.js application/javascript
 			}
 		};
 		if ( document.readyState === 'complete') {
-			logscript();
+			logscripts();
 		} else {
-			addEventListener('load', logscript);
+			addEventListener('load', logscripts);
 		}
 })();
 
