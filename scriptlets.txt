@@ -21,9 +21,9 @@ eval-logger.js application/javascript
 	}.bind(window);
 })();
 
-# javascript-logger
-# example.com##+js(javascript-logger)
-javascript-logger.js application/javascript
+# JavaScript-logger
+# example.com##+js(js-logger)
+js-logger.js application/javascript
 (function () { 
 		'use strict';
 		let logscript = function () {
