@@ -9,7 +9,7 @@
 # encoding will be set to `;base64`.
 
 # eval-logger
-# example.com##+js(eval-logger.js)
+# example.com##+js(eval-logger)
 eval-logger.js application/javascript
 (function() {
 	'use strict';
@@ -22,7 +22,7 @@ eval-logger.js application/javascript
 })();
 
 # javascript-logger
-# example.com##+js(javascript-logger.js)
+# example.com##+js(javascript-logger)
 javascript-logger.js application/javascript
 (function () { 
 		'use strict';
@@ -45,7 +45,7 @@ javascript-logger.js application/javascript
 })();
 
 # response-header-setter
-# example.com##+js(set-respheader.js, Cross-Origin-Resource-Policy, same-site)
+# example.com##+js(set-respheader, Cross-Origin-Resource-Policy, same-site)
 set-respheader.js application/javascript
 (function() {
 	'use strict';
@@ -58,7 +58,7 @@ set-respheader.js application/javascript
 })();
 
 # referrer-policy-setter
-# example.com##+js(set-refpolicy.js, no-referrer)
+# example.com##+js(set-refpolicy, no-referrer)
 set-refpolicy.js application/javascript
 (function() {
 	'use strict';
@@ -71,7 +71,7 @@ set-refpolicy.js application/javascript
 })();
 
 # element-remover
-# example.com##+js(eremove.js, #example)
+# example.com##+js(eremove, #example)
 eremove.js application/javascript
 (function() {
 	'use strict';
@@ -93,7 +93,7 @@ eremove.js application/javascript
 })();
 
 # inline-script-remover
-# example.com##+js(remove-inline-script.js, adblock)
+# example.com##+js(remove-inline-script, adblock)
 remove-inline-script.js application/javascript
 (function() {
 		'use strict';
@@ -124,7 +124,7 @@ remove-inline-script.js application/javascript
 })();
 
 # inline-noscript-remover
-# example.com##+js(remove-inline-noscript.js, text)
+# example.com##+js(remove-inline-noscript, text)
 remove-inline-noscript.js application/javascript
 (function() {
 		'use strict';
@@ -155,7 +155,7 @@ remove-inline-noscript.js application/javascript
 })();
 
 # inline-frame-remover
-# example.com##+js(remove-inline-frame.js, frame)
+# example.com##+js(remove-inline-frame, frame)
 remove-inline-frame.js application/javascript
 (function() {
 		'use strict';
@@ -186,7 +186,7 @@ remove-inline-frame.js application/javascript
 })();
 
 # inline-style-remover
-# example.com##+js(remove-inline-style.js, notice)
+# example.com##+js(remove-inline-style, notice)
 remove-inline-style.js application/javascript
 (function() {
 		'use strict';
@@ -217,7 +217,7 @@ remove-inline-style.js application/javascript
 })();
 
 # link tag remover
-# example.com##+js(remove-link-tag.js, /prefetch|preload|prerender/)
+# example.com##+js(remove-link-tag, /prefetch|preload|prerender/)
 remove-link-tag.js application/javascript
 (function() {
 		'use strict';
@@ -248,7 +248,7 @@ remove-link-tag.js application/javascript
 })();
 
 # meta tag remover
-# example.com##+js(remove-meta-tag.js, /refresh|referrer/)
+# example.com##+js(remove-meta-tag, /refresh|referrer/)
 remove-meta-tag.js application/javascript
 (function() {
 		'use strict';
@@ -279,11 +279,11 @@ remove-meta-tag.js application/javascript
 })();
 
 # autoplay-blocker
-# example.com##+js(autoplay-defuser.js)
+# example.com##+js(autoplay-defuser)
 autoplay-defuser.js application/javascript
 (function() {
 	      'use strict';
-	      let autoplay = function() {  
+	      let autoplay = function () {  
 		  	let media = HTMLMediaElement;
 			media.autoplay = 'false'; 
 	      };
@@ -295,7 +295,7 @@ autoplay-defuser.js application/javascript
 })();
 
 # element-setAttribute-onload
-# example.com##+js(preload, none, video, complete)
+# example.com##+js(set-attr, preload, none, video, complete)
 set-attr.js application/javascript
 (function() {
 	'use strict';
@@ -325,7 +325,7 @@ set-attr.js application/javascript
 })();
 
 # element-setAttribute-DOMContentLoaded
-# example.com##+js(eset-attr.js, video, autoplay, none, loading)
+# example.com##+js(eset-attr, video, autoplay, none, loading)
 eset-attr.js application/javascript
 (function() {
 	'use strict';
@@ -347,7 +347,7 @@ eset-attr.js application/javascript
 })();
 
 # element-toggleAttribute-DOMContentLoaded
-# example.com##+js(tog-attr.js, preload, video)
+# example.com##+js(tog-attr, preload, video)
 tog-attr.js application/javascript
 (function() {
 	'use strict';
@@ -377,7 +377,7 @@ tog-attr.js application/javascript
 })();
 
 # element-toggleAttribute-onload
-# example.com##+js(tog-attr.js, video, autoplay)
+# example.com##+js(tog-attr, video, autoplay)
 etog-attr.js application/javascript
 (function() {
 	'use strict';
@@ -399,32 +399,32 @@ etog-attr.js application/javascript
 })();
 
 # set-property on DOMContentLoaded
-# example.com##+js(set-prop.js, example, example)
+# example.com##+js(set-prop, example, example)
 set-prop.js application/javascript
 (function() {
-	    'use strict';
-	    let chain = '{{1}}';
-	    let prop = '{{2}}';
-	    if ( chain === '' || chain === '{{1}}' ) {
-		return;
-	    }
-	    let set = function() {
-		let owner = window;
-		chain = chain.split('.');
-		for ( let i = 0; i < chain.length - 1; i++ ) {
-		    owner = owner[chain[i]];
-		}
-		owner[chain[chain.length - 1]] = prop;
-	    };
-	    if (document.readyState === 'interactive' || document.readyState === 'complete') {
-			set();
-	    	} else {
-			addEventListener('DOMContentLoaded', set);
-	    }
+		    'use strict';
+		    let chain = '{{1}}';
+		    let prop = '{{2}}';
+		    if ( chain === '' || chain === '{{1}}' ) {
+			return;
+		    }
+		    let set = function() {
+			let owner = window;
+			chain = chain.split('.');
+			for ( let i = 0; i < chain.length - 1; i++ ) {
+			    owner = owner[chain[i]];
+			}
+			owner[chain[chain.length - 1]] = prop;
+		    };
+		    if (document.readyState === 'interactive' || document.readyState === 'complete') {
+			     set();
+		    } else {
+			     addEventListener('DOMContentLoaded', set);
+		    }
 })();
 
 # cookie-setter
-# example.com##+js(cookie-set.js, name, value, age)
+# example.com##+js(cookie-set, name, value, age)
 cookie-set.js application/javascript
 (function () {
 	     'use strict';
@@ -432,7 +432,7 @@ cookie-set.js application/javascript
 })();		
 
 # window.open.defuser-alternative
-# example.com##+js(wopen.js)
+# example.com##+js(wopen)
 wopen.js application/javascript
 (function () {
 	     'use strict';
@@ -443,7 +443,7 @@ wopen.js application/javascript
 })();
 
 # element-clicker
-# example.com##+js(eclick.js, #example)
+# example.com##+js(eclick, #example)
 eclick.js application/javascript
 (function() {
 	'use strict';
@@ -463,182 +463,182 @@ eclick.js application/javascript
 })();
 
 # element-clicker-onload
-# example.com##+js(eclick2.js, .example)
+# example.com##+js(eclick2, .example)
 eclick2.js application/javascript
 (function() {
-	'use strict';
-         let selector = '{{1}}';
- 		if ( selector === '' || selector === '{{1}}' ) {
-        	return;
-    	}
-    	 let click = function() {
-        	let element = document.querySelector(selector);
-        	element.click();
-        };
-    	if (document.readyState === 'complete') {
-        	click();
-	} else {
-        	window.addEventListener('load', click);
-    	}
+		'use strict';
+		 let selector = '{{1}}';
+			if ( selector === '' || selector === '{{1}}' ) {
+			return;
+		}
+		 let click = function() {
+			let element = document.querySelector(selector);
+			element.click();
+		};
+		if (document.readyState === 'complete') {
+			click();
+		} else {
+			window.addEventListener('load', click);
+		}
 })();
 
 # background-image-setter
-# example.com##+js(bis.js, body, url(https://i.imgur.com/r5ZuuBn.jpg))
+# example.com##+js(bis, body, url(https://example.com/example.jpg))
 bis.js application/javascript
 (function() {
-	'use strict';
-         let selector = '{{1}}';
- 		if ( selector === '' || selector === '{{1}}' ) {
-        	return;
-    	}
-    	 let bis = function() {
-        	let element = document.querySelector(selector);
-        	element.style.backgroundImage = '{{2}}';
-        };
-    	if (document.readyState === 'loading') {
-        	window.addEventListener('DOMContentLoaded', bis);
-    	} else {
-        	bis();
-    	}
+		'use strict';
+		 let selector = '{{1}}';
+			if ( selector === '' || selector === '{{1}}' ) {
+			return;
+		}
+		 let bis = function() {
+			let element = document.querySelector(selector);
+			element.style.backgroundImage = '{{2}}';
+		};
+		if (document.readyState === 'loading') {
+			window.addEventListener('DOMContentLoaded', bis);
+		} else {
+			bis();
+		}
 })();
 
 # element-focusser
-# example.com##+js(efocus.js, #element)
+# example.com##+js(efocus, #element)
 efocus.js application/javascript
 (function() {
-	'use strict';
-	let selector = '{{1}}';
-	if ( selector === '' || selector === '{{1}}' ) {
-		return;
-	}
-	let focus = function() {
-		let element = document.querySelector(selector);
-		element.focus();
-	};
-	if ( document.readyState === 'interactive' || document.readyState === 'complete' ) {
-		window.addEventListener('DOMContentLoaded', focus);
-	} else {
-		focus();
-	}
+		'use strict';
+		let selector = '{{1}}';
+		if ( selector === '' || selector === '{{1}}' ) {
+			return;
+		}
+		let focus = function() {
+			let element = document.querySelector(selector);
+			element.focus();
+		};
+		if ( document.readyState === 'interactive' || document.readyState === 'complete' ) {
+			window.addEventListener('DOMContentLoaded', focus);
+		} else {
+			focus();
+		}
 })();
 
 # element-replacer
-# example.com##+js(ereplace.js, .element)
+# example.com##+js(ereplace, .element)
 ereplace.js application/javascript
 (function() {
-	'use strict';
-	let selector = '{{1}}';
-	if ( selector === '' || selector === '{{1}}' ) {
-		return;
-	}
-	let div = document.createElement('div');
-	let replace = function() {
-		let elements = document.querySelectorAll(selector);
-		for ( let element of elements ) {
-		      element.replaceWith(div);
-		}      
-	};
-	if (document.readyState === 'interactive' || document.readyState === 'complete') {
-		replace();
-	} else {
-		window.addEventListener('DOMContentLoaded', replace);
-	}
+		'use strict';
+		let selector = '{{1}}';
+		if ( selector === '' || selector === '{{1}}' ) {
+			return;
+		}
+		let div = document.createElement('div');
+		let replace = function() {
+			let elements = document.querySelectorAll(selector);
+			for ( let element of elements ) {
+			      element.replaceWith(div);
+			}      
+		};
+		if (document.readyState === 'interactive' || document.readyState === 'complete') {
+			replace();
+		} else {
+			window.addEventListener('DOMContentLoaded', replace);
+		}
 })();
 
 # element-replacer-onload
-# example.com##+js(ereplace2.js, #element)
+# example.com##+js(ereplace2, #element)
 ereplace2.js application/javascript
 (function() {
-	'use strict';
-	let selector = '{{1}}';
-	if ( selector === '' || selector === '{{1}}' ) {
-		return;
-	}
-	let div = document.createElement('div');
-	let replace = function() {
-		let elements = document.querySelectorAll(selector);
-		for ( let element of elements ) {
-		      element.replaceWith(div);
-		}      
-	};
-	if (document.readyState === 'complete') {
-		replace();
-	} else {
-		window.addEventListener('load', replace);
-	}
+		'use strict';
+		let selector = '{{1}}';
+		if ( selector === '' || selector === '{{1}}' ) {
+			return;
+		}
+		let div = document.createElement('div');
+		let replace = function() {
+			let elements = document.querySelectorAll(selector);
+			for ( let element of elements ) {
+			      element.replaceWith(div);
+			}      
+		};
+		if (document.readyState === 'complete') {
+			replace();
+		} else {
+			window.addEventListener('load', replace);
+		}
 })();
 
 # variable-value-setter
-# example.com##+js(set-value.js, property, value)
+# example.com##+js(set-value, property, value)
 set-value.js application/javascript
 (function() {
-	'use strict';
-	let name = '{{1}}';
-	let data = '{{2}}';
-	let Object = window.Object.bind(window);
-	let descriptor = window.Object.getOwnPropertyDescriptor.bind(window.Object);
-	let defineProperty = window.Object.defineProperty.bind(window.Object);
-	let finalSetter = function() { };
-	let finalGetter = function() { return data; };
-	let trustedSetters = {};
-	let makeProxy = function(parent, chain) {
-		let i = chain.indexOf('.');
-		if ( i === -1 ) {
-			let current = descriptor(parent, chain);
-			if ( !current || current.set !== finalSetter || current.get !== finalGetter ) {
-				defineProperty(parent, chain, {
-					configurable: false,
-					set: finalSetter,
-					get: finalGetter
-				});
-			}
-		} else {
-			let name = chain.slice(0, i);
-			let val = parent[name];
-			chain = chain.substring(i + 1);
-			if ( val instanceof Object ) {
-				makeProxy(val, chain);
-			} else {
-				let current = descriptor(parent, name);
-				if ( !current || !trustedSetters[chain] || trustedSetters[chain] !== current.set ) {
-					let setter = function(value) {
-						if ( value instanceof Object ) {
-							try {
-								makeProxy(value, chain);
-								val = value;
-							} catch ( err ) { }
-						}
-					};
-					trustedSetters[chain] = setter;
-					defineProperty(parent, name, {
+		'use strict';
+		let name = '{{1}}';
+		let data = '{{2}}';
+		let Object = window.Object.bind(window);
+		let descriptor = window.Object.getOwnPropertyDescriptor.bind(window.Object);
+		let defineProperty = window.Object.defineProperty.bind(window.Object);
+		let finalSetter = function() { };
+		let finalGetter = function() { return data; };
+		let trustedSetters = {};
+		let makeProxy = function(parent, chain) {
+			let i = chain.indexOf('.');
+			if ( i === -1 ) {
+				let current = descriptor(parent, chain);
+				if ( !current || current.set !== finalSetter || current.get !== finalGetter ) {
+					defineProperty(parent, chain, {
 						configurable: false,
-						set: setter,
-						get: function() { return val; }
+						set: finalSetter,
+						get: finalGetter
 					});
 				}
+			} else {
+				let name = chain.slice(0, i);
+				let val = parent[name];
+				chain = chain.substring(i + 1);
+				if ( val instanceof Object ) {
+					makeProxy(val, chain);
+				} else {
+					let current = descriptor(parent, name);
+					if ( !current || !trustedSetters[chain] || trustedSetters[chain] !== current.set ) {
+						let setter = function(value) {
+							if ( value instanceof Object ) {
+								try {
+									makeProxy(value, chain);
+									val = value;
+								} catch ( err ) { }
+							}
+						};
+						trustedSetters[chain] = setter;
+						defineProperty(parent, name, {
+							configurable: false,
+							set: setter,
+							get: function() { return val; }
+						});
+					}
+				}
 			}
+		};
+		let define = function(payload) {
+			data = payload;
+			try {
+				makeProxy(window, name);
+			} catch ( err ) { }
+		};
+		switch ( data ) {
+			case 'noopFunc':	return define(function() { });
+			case 'trueFunc':        return define(function() { return true; });
+			case 'falseFunc':       return define(function() { return false; });
+			case 'nullFunc':        return define(function() { return null; });
+			case 'unFunc':          return define(function() { return undefined; });
+			case 'oneFunc':         return define(function() { return 1; });
+			case 'zeFunc':		return define(function() { return 0; });
+			default:		return define(data);
 		}
-	};
-	let define = function(payload) {
-		data = payload;
-		try {
-			makeProxy(window, name);
-		} catch ( err ) { }
-	};
-	switch ( data ) {
-		case 'noopFunc':	return define(function() { });
-		case 'trueFunc':        return define(function() { return true; });
-		case 'falseFunc':       return define(function() { return false; });
-		case 'nullFunc':        return define(function() { return null; });
-		case 'unFunc':          return define(function() { return undefined; });
-		case 'oneFunc':         return define(function() { return 1; });
-		case 'zeFunc':		return define(function() { return 0; });
-		default:		return define(data);
-	}
 })();
 
 # remove-property on DOMContentLoaded
-# example.com##+js(remove-prop.js, foo.bar)
+# example.com##+js(remove-prop, foo.bar)
 remove-prop.js application/javascript
 (function() {
 	      'use strict';
@@ -653,45 +653,45 @@ remove-prop.js application/javascript
 })();
 
 # element-adder
-# example.com##+js(eaddr.js, #element, block)
+# example.com##+js(eaddr, #element, block)
 eaddr.js application/javascript
 (function() {
-	'use strict';
-	let identifier = '{{1}}';
-	let element = document.createElement('div');
-	if ( identifier.charAt(0) === '#' ) {
-		element.id = identifier.substring(1);
-	} else if ( identifier.charAt(0) === '.' ) {
-		element.className = identifier.substring(1);
-	} else {
-		return;
-	}	
-	element.style.display = '{{2}}';
-	document.documentElement.appendChild(element);
+		'use strict';
+		let identifier = '{{1}}';
+		let element = document.createElement('div');
+		if ( identifier.charAt(0) === '#' ) {
+			element.id = identifier.substring(1);
+		} else if ( identifier.charAt(0) === '.' ) {
+			element.className = identifier.substring(1);
+		} else {
+			return;
+		}	
+		element.style.display = '{{2}}';
+		document.documentElement.appendChild(element);
 })();
 
 # element-remover-onload
-# example.com##+js(eremove2.js, .div)
+# example.com##+js(eremove2, .div)
 eremove2.js application/javascript
 (function() {
-	'use strict';
-	let selector = '{{1}}';
-	if ( selector === '' || selector === '{{1}}' ) {
-		return;
-	}
-	let remove = function() {
-		let element = document.querySelectorAll(selector);
-		element.remove();
-	};
-	if ( document.readyState === 'complete' ) {
-		remove();
-	} else {
-		window.addEventListener('load', remove);
-	}
+		'use strict';
+		let selector = '{{1}}';
+		if ( selector === '' || selector === '{{1}}' ) {
+			return;
+		}
+		let remove = function() {
+			let element = document.querySelectorAll(selector);
+			element.remove();
+		};
+		if ( document.readyState === 'complete' ) {
+			remove();
+		} else {
+			window.addEventListener('load', remove);
+		}
 })();
 
 # strip-queries from URLs
-# example.com##+js(query-stripper.js, /\?fbclid=\w+/)
+# example.com##+js(query-stripper, /\?fbclid=\w+/)
 query-stripper.js application/javascript
 (function() {
 		'use strict';
@@ -712,36 +712,36 @@ query-stripper.js application/javascript
 })();
 
 # alert-defuser
-# example.com##+js(alt-defuser.js, notice)
+# example.com##+js(alt-defuser, notice)
 alt-defuser.js application/javascript
 (function() {
-	'use strict';
-	let needle = '{{1}}';
-	if ( needle === '' || needle === '{{1}}' ) {
-		needle = '.?';
-	} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
-		needle = needle.slice(1,-1);
-	} else {
-		needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-	}
-	needle = new RegExp(needle);
-	ralt = window.alert;
-	window.alert = function(a) {
-		if ( !needle.test(String(a)) ) {
-			ralt.call(window, a);
+		'use strict';
+		let needle = '{{1}}';
+		if ( needle === '' || needle === '{{1}}' ) {
+			needle = '.?';
+		} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
+			needle = needle.slice(1,-1);
+		} else {
+			needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 		}
-	}.bind(window);
+		needle = new RegExp(needle);
+		ralt = window.alert;
+		window.alert = function(a) {
+			if ( !needle.test(String(a)) ) {
+				ralt.call(window, a);
+			}
+		}.bind(window);
 })();
 
 # alert-logger
-# example.com##+js(alt-logger.js)
+# example.com##+js(alt-logger)
 alt-logger.js application/javascript
 (function() {
-	'use strict';
-	let z = window.alert,
-		log = console.log.bind(console);
-	window.alert = function(a) {
-		log('uBO: window.alert("%s")', String(a));
-		return z.apply(this, arguments);
-	}.bind(window);
+		'use strict';
+		let z = window.alert,
+			log = console.log.bind(console);
+		window.alert = function(a) {
+			log('uBO: window.alert("%s")', String(a));
+			return z.apply(this, arguments);
+		}.bind(window);
 })();
