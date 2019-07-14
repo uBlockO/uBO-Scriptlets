@@ -28,15 +28,16 @@ javascript-logger.js application/javascript
 		'use strict';
 		let logscript = function () {
 			let js = document.scripts;
+			let log = console.log.bind(console);
 			for (let i = 0; i < js.length; i++) {
 				if (js[i].src) {
-  		     			console.info(i, js[i].src);
-		     		} else {
-					console.info(i, js[i].innerHTML);
+				        log('uBO: javascript("%s")', String(js[i].src));
+  		     		} else {
+					log('uBO: javascript("%s")', String(js[i].innerHTML));
 				}	
 			}
 		};
-		if (document.readyState === 'complete') {
+		if ( document.readyState === 'complete') {
 			logscript();
 		} else {
 			window.addEventListener('load', logscript);
