@@ -31,16 +31,16 @@ js-logger.js application/javascript
 			let log = console.log.bind(console);
 			for (let i = 0; i < js.length; i++) {
 				if (js[i].src) {
-				        log('uBO: javascript("%s")', String(js[i].src));
+				        log('uBO: javascript("%s")', js[i].src);
   		     		} else {
-					log('uBO: javascript("%s")', String(js[i].innerHTML));
+					log('uBO: javascript("%s")', js[i].innerHTML);
 				}	
 			}
 		};
 		if ( document.readyState === 'complete') {
 			logscript();
 		} else {
-			window.addEventListener('load', logscript);
+			addEventListener('load', logscript);
 		}
 })();
 
