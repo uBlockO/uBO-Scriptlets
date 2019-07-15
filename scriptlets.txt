@@ -37,7 +37,7 @@ js-logger.js application/javascript
 				}	
 			}
 		};
-		if ( document.readyState === 'complete') {
+		if (document.readyState === 'complete') {
 			logscripts();
 		} else {
 			addEventListener('load', logscripts);
@@ -88,7 +88,7 @@ eremove.js application/javascript
 	if (document.readyState === 'interactive' || document.readyState === 'complete' ) {
 		remove();
 	} else {
-		window.addEventListener('DOMContentLoaded', remove);
+		addEventListener('DOMContentLoaded', remove);
 	}
 })();
 
@@ -290,7 +290,7 @@ autoplay-defuser.js application/javascript
 	      if (document.readyState === 'interactive' || document.readyState === 'complete' ) {
 		      autoplay();
 	      } else {
-		      window.addEventListener('DOMContentLoaded', autoplay);
+		      addEventListener('DOMContentLoaded', autoplay);
 	      }
 })();
 
@@ -307,7 +307,7 @@ set-attr.js application/javascript
 		selector = '[' + attrs.join('],[') + ']';
 	}
 	let stattr = function(ev) {
-		if ( ev ) { window.removeEventListener(ev.type, stattr, true); }
+		if ( ev ) { removeEventListener(ev.type, stattr, true); }
 		try {
 			let nodes = document.querySelectorAll(selector), i = nodes.length;
 			while ( i-- ) {
@@ -318,7 +318,7 @@ set-attr.js application/javascript
 		}
 	};
 	if (document.readyState === '{{4}}') {
-		window.addEventListener('load', stattr);
+		addEventListener('load', stattr);
 	} else {
 		stattr();
 	}
@@ -340,7 +340,7 @@ eset-attr.js application/javascript
 		}      
 	};
 	if (document.readyState === '{{4}}') {
-		window.addEventListener('DOMContentLoaded', setattr);
+		addEventListener('DOMContentLoaded', setattr);
 	} else {
 		setattr();
 	}
@@ -359,7 +359,7 @@ tog-attr.js application/javascript
 		selector = '[' + attrs.join('],[') + ']';
 	}
 	let togattr = function(ev) {
-		if ( ev ) { window.removeEventListener(ev.type, togattr, true); }
+		if ( ev ) {removeEventListener(ev.type, togattr, true);}
 		try {
 			let nodes = document.querySelectorAll(selector), i = nodes.length;
 			while ( i-- ) {
@@ -370,7 +370,7 @@ tog-attr.js application/javascript
 		}
 	};
 	if ( document.readyState === 'loading' || document.readyState === 'interactive' ) {
-		window.addEventListener('DOMContentLoaded', togattr);
+		addEventListener('DOMContentLoaded', togattr);
 	} else {
 		togattr();
 	}
@@ -392,7 +392,7 @@ etog-attr.js application/javascript
 		}      
 	};
 	if (document.readyState === 'loading' || document.readyState === 'interactive' ) {
-		window.addEventListener('load', togattr);
+		addEventListener('load', togattr);
 	} else {
 		togattr();
 	}
@@ -458,7 +458,7 @@ eclick.js application/javascript
 	if ( document.readyState === 'interactive' || document.readyState === 'complete' ) {
 		click();
 	} else {
-		window.addEventListener('DOMContentLoaded', click);
+		addEventListener('DOMContentLoaded', click);
 	}
 })();
 
@@ -478,7 +478,7 @@ eclick2.js application/javascript
 		if (document.readyState === 'complete') {
 			click();
 		} else {
-			window.addEventListener('load', click);
+			addEventListener('load', click);
 		}
 })();
 
@@ -496,7 +496,7 @@ bis.js application/javascript
 			element.style.backgroundImage = '{{2}}';
 		};
 		if (document.readyState === 'loading') {
-			window.addEventListener('DOMContentLoaded', bis);
+			addEventListener('DOMContentLoaded', bis);
 		} else {
 			bis();
 		}
@@ -516,7 +516,7 @@ efocus.js application/javascript
 			element.focus();
 		};
 		if ( document.readyState === 'interactive' || document.readyState === 'complete' ) {
-			window.addEventListener('DOMContentLoaded', focus);
+			addEventListener('DOMContentLoaded', focus);
 		} else {
 			focus();
 		}
@@ -541,7 +541,7 @@ ereplace.js application/javascript
 		if (document.readyState === 'interactive' || document.readyState === 'complete') {
 			replace();
 		} else {
-			window.addEventListener('DOMContentLoaded', replace);
+			addEventListener('DOMContentLoaded', replace);
 		}
 })();
 
@@ -564,7 +564,7 @@ ereplace2.js application/javascript
 		if (document.readyState === 'complete') {
 			replace();
 		} else {
-			window.addEventListener('load', replace);
+			addEventListener('load', replace);
 		}
 })();
 
@@ -648,7 +648,7 @@ remove-prop.js application/javascript
               if (document.readyState === 'interactive' || document.readyState === 'complete') {
                  	remove();
               } else {
-                	window.addEventListener('DOMContentLoaded', remove);
+                	addEventListener('DOMContentLoaded', remove);
               }
 })();
 
@@ -686,7 +686,7 @@ eremove2.js application/javascript
 		if ( document.readyState === 'complete' ) {
 			remove();
 		} else {
-			window.addEventListener('load', remove);
+			addEventListener('load', remove);
 		}
 })();
 
@@ -707,7 +707,7 @@ query-stripper.js application/javascript
 		if (location.href.search(query) !== -1) {
 			let url = window.location.href;
 			let strippedurl = url.replace(query, '');
-			window.location.href = strippedurl;
+			location.href = strippedurl;
 		}
 })();
 
