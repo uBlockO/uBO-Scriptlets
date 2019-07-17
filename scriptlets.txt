@@ -27,13 +27,13 @@ js-logger.js application/javascript
 (function () { 
 		'use strict';
 		let logscripts = function () {
-			let js = document.scripts;
+			let js = document.querySelectorAll('script');
 			let log = console.log.bind(console);
 			for (let i = 0; i < js.length; i++) {
-				if (js[i].src) {
-				        log('uBO: javascript("%s")', js[i].src);
+				if (js[i].outerHTML) {
+				        log('uBO: javascript("%s")', js[i].outerHTML);
   		     		} else {
-					log('uBO: javascript("%s")', js[i].innerHTML);
+					return;
 				}	
 			}
 		};
@@ -44,16 +44,17 @@ js-logger.js application/javascript
 		}
 })();
 
-# cascadingstylesheets-logger
+# cascading-stylesheets-logger
 # example.com##+js(css-logger)
 css-logger.js application/javascript
 (function () { 
 		'use strict';
 		let logcss = function () {
-			let css = document.styleSheets;
+			let css = document.querySelectorAll('style');
+			let log = console.log.bind(console);
 			for (let i = 0; i < css.length; i++) {
-				if (css[i].ownerNode) {
-				         console.log(i, css[i].ownerNode);
+				if (css[i].outerHTML) {
+				         log('uBO: stylesheet("%s")', css[i].outerHTML);
   		     		} else {
 					 return;
 				}	
