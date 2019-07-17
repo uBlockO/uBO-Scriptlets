@@ -21,7 +21,7 @@ eval-logger.js application/javascript
 	}.bind(window);
 })();
 
-# JavaScript-logger
+# javascript-logger
 # example.com##+js(js-logger)
 js-logger.js application/javascript
 (function () { 
@@ -41,6 +41,28 @@ js-logger.js application/javascript
 			logscripts();
 		} else {
 			addEventListener('load', logscripts);
+		}
+})();
+
+# cascadingstylesheets-logger
+# example.com##+js(css-logger)
+css-logger.js application/javascript
+(function () { 
+		'use strict';
+		let logcss = function () {
+			let css = document.styleSheets;
+			for (let i = 0; i < css.length; i++) {
+				if (css[i].ownerNode) {
+				         console.log(i, css[i].ownerNode);
+  		     		} else {
+					 return;
+				}	
+			}
+		};
+		if (document.readyState === 'complete') {
+			logcss();
+		} else {
+			addEventListener('load', logcss);
 		}
 })();
 
