@@ -27,11 +27,11 @@ js-logger.js application/javascript
 (function () { 
 		'use strict';
 		let logscripts = function () {
-			let js = document.querySelectorAll('script');
+			let scripts = document.querySelectorAll('script');
 			let log = console.log.bind(console);
-			for (let i = 0; i < js.length; i++) {
-				if (js[i].outerHTML) {
-				        log('uBO: javascript("%s")', js[i].outerHTML);
+			for (let script of scripts) {
+				if (script.outerHTML) {
+				        log('uBO: javascript("%s")', script.outerHTML);
   		     		} else {
 					return;
 				}	
@@ -50,11 +50,11 @@ css-logger.js application/javascript
 (function () { 
 		'use strict';
 		let logcss = function () {
-			let css = document.querySelectorAll('style');
+			let stylesheets = document.querySelectorAll('style');
 			let log = console.log.bind(console);
-			for (let i = 0; i < css.length; i++) {
-				if (css[i].outerHTML) {
-				         log('uBO: stylesheet("%s")', css[i].outerHTML);
+			for (let stylesheet of stylesheets ) {
+				if (stylesheet.outerHTML) {
+				         log('uBO: stylesheet("%s")', stylesheet.outerHTML);
   		     		} else {
 					 return;
 				}	
@@ -73,11 +73,11 @@ noscript-logger.js application/javascript
 (function () { 
 		'use strict';
 		let lognoscript = function () {
-			let noscript = document.querySelectorAll('noscript');
+			let noscripts = document.querySelectorAll('noscript');
 			let log = console.log.bind(console);
-			for (let i = 0; i < noscript.length; i++) {
-				if (noscript[i].outerHTML) {
-				         log('uBO: noscript("%s")', noscript[i].outerHTML);
+			for (let noscript of noscripts) {
+				if (noscript.outerHTML) {
+				         log('uBO: noscript("%s")', noscript.outerHTML);
   		     		} else {
 					 return;
 				}	
