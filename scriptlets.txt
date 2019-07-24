@@ -15,9 +15,9 @@ eval-logger.js application/javascript
 	'use strict';
 	let z = window.eval,
 		log = console.log.bind(console);
-	window.eval = (a) => {
+	window.eval = a => {
 		log('uBO: eval("%s")', String(a));
-		return z.apply(this, arguments);
+		z.apply(this, arguments);
 	}.bind(window);
 })();
 
