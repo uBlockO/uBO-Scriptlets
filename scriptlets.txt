@@ -11,11 +11,11 @@
 # eval-logger
 # example.com##+js(eval-logger)
 eval-logger.js application/javascript
-(function() {
+(() => {
 	'use strict';
 	let z = window.eval,
 		log = console.log.bind(console);
-	window.eval = function(a) {
+	window.eval = (a) => {
 		log('uBO: eval("%s")', String(a));
 		return z.apply(this, arguments);
 	}.bind(window);
@@ -24,9 +24,9 @@ eval-logger.js application/javascript
 # javascript-logger
 # example.com##+js(js-logger)
 js-logger.js application/javascript
-(function () { 
+(() => { 
 		'use strict';
-		let logscripts = function () {
+		let logscripts = () => {
 			let scripts = document.querySelectorAll('script');
 			let log = console.log.bind(console);
 			for (let script of scripts) {
@@ -47,9 +47,9 @@ js-logger.js application/javascript
 # cascading-stylesheets-logger
 # example.com##+js(css-logger)
 css-logger.js application/javascript
-(function () { 
+(() => { 
 		'use strict';
-		let logcss = function () {
+		let logcss = () => {
 			let stylesheets = document.querySelectorAll('style');
 			let log = console.log.bind(console);
 			for (let stylesheet of stylesheets ) {
@@ -70,9 +70,9 @@ css-logger.js application/javascript
 # noscript-logger
 # example.com##+js(noscript-logger)
 noscript-logger.js application/javascript
-(function () { 
+(() => { 
 		'use strict';
-		let lognoscript = function () {
+		let lognoscript = () => {
 			let noscripts = document.querySelectorAll('noscript');
 			let log = console.log.bind(console);
 			for (let noscript of noscripts) {
@@ -93,7 +93,7 @@ noscript-logger.js application/javascript
 # response-header-setter
 # example.com##+js(set-respheader, Cross-Origin-Resource-Policy, same-site)
 set-respheader.js application/javascript
-(function() {
+(() => {
 	'use strict';
 	let docu = document;
 	if (!docu.head) { return; }
@@ -106,7 +106,7 @@ set-respheader.js application/javascript
 # referrer-policy-setter
 # example.com##+js(set-refpolicy, no-referrer)
 set-refpolicy.js application/javascript
-(function() {
+(() => {
 	'use strict';
 	let docu = document;
 	if (!docu.head) { return; }
@@ -119,13 +119,13 @@ set-refpolicy.js application/javascript
 # element-remover
 # example.com##+js(eremove, #example)
 eremove.js application/javascript
-(function() {
+(() => {
 	'use strict';
 	let selector = '{{1}}';
 	if ( selector === '' || selector === '{{1}}' ) {
 		return;
 	}
-	let remove = function() {
+	let remove = () => {
 		let elements = document.querySelectorAll(selector);
 		for ( let element of elements ) {
 		      element.remove();
@@ -141,7 +141,7 @@ eremove.js application/javascript
 # inline-script-remover
 # example.com##+js(remove-inline-script, adblock)
 remove-inline-script.js application/javascript
-(function() {
+(() => {
 		'use strict';
 		let needle = '{{1}}';
 		if ( needle === '' || needle === '{{1}}' ) {
@@ -172,7 +172,7 @@ remove-inline-script.js application/javascript
 # inline-noscript-remover
 # example.com##+js(remove-inline-noscript, text)
 remove-inline-noscript.js application/javascript
-(function() {
+(() => {
 		'use strict';
 		let needle = '{{1}}';
 		if ( needle === '' || needle === '{{1}}' ) {
@@ -203,7 +203,7 @@ remove-inline-noscript.js application/javascript
 # inline-frame-remover
 # example.com##+js(remove-inline-frame, frame)
 remove-inline-frame.js application/javascript
-(function() {
+(() => {
 		'use strict';
 		let needle = '{{1}}';
 		if ( needle === '' || needle === '{{1}}' ) {
@@ -234,7 +234,7 @@ remove-inline-frame.js application/javascript
 # inline-style-remover
 # example.com##+js(remove-inline-style, notice)
 remove-inline-style.js application/javascript
-(function() {
+(() => {
 		'use strict';
 		let needle = '{{1}}';
 		if ( needle === '' || needle === '{{1}}' ) {
@@ -265,7 +265,7 @@ remove-inline-style.js application/javascript
 # link tag remover
 # example.com##+js(remove-link-tag, /prefetch|preload|prerender/)
 remove-link-tag.js application/javascript
-(function() {
+(() => {
 		'use strict';
 		let needle = '{{1}}';
 		if ( needle === '' || needle === '{{1}}' ) {
@@ -296,7 +296,7 @@ remove-link-tag.js application/javascript
 # meta tag remover
 # example.com##+js(remove-meta-tag, /refresh|referrer/)
 remove-meta-tag.js application/javascript
-(function() {
+(() => {
 		'use strict';
 		let needle = '{{1}}';
 		if ( needle === '' || needle === '{{1}}' ) {
@@ -327,9 +327,9 @@ remove-meta-tag.js application/javascript
 # autoplay-blocker
 # example.com##+js(autoplay-defuser)
 autoplay-defuser.js application/javascript
-(function() {
+(() => {
 	      'use strict';
-	      let autoplay = function () {  
+	      let autoplay = () => {  
 		  	let media = HTMLMediaElement;
 			media.autoplay = 'false'; 
 	      };
@@ -343,7 +343,7 @@ autoplay-defuser.js application/javascript
 # element-setAttribute-onload
 # example.com##+js(set-attr, preload, none, video, complete)
 set-attr.js application/javascript
-(function() {
+(() => {
 	'use strict';
 	let attr = '{{1}}';
 	if ( attr === '' || attr === '{{1}}' ) { return; }
@@ -352,7 +352,7 @@ set-attr.js application/javascript
 	if ( selector === '' || selector === '{{3}}' ) {
 		selector = '[' + attrs.join('],[') + ']';
 	}
-	let stattr = function(ev) {
+	let stattr = (ev) => {
 		if ( ev ) { removeEventListener(ev.type, stattr, true); }
 		try {
 			let nodes = document.querySelectorAll(selector), i = nodes.length;
@@ -373,13 +373,13 @@ set-attr.js application/javascript
 # element-setAttribute-DOMContentLoaded
 # example.com##+js(eset-attr, video, autoplay, none, loading)
 eset-attr.js application/javascript
-(function() {
+(() => {
 	'use strict';
 	let selector = '{{1}}';
 	if ( selector === '' || selector === '{{1}}' ) {
 		return;
 	}
-	let setattr = function() {
+	let setattr = () => {
 		let elements = document.querySelectorAll(selector);
 		for ( let element of elements ) {
 		      element.setAttribute('{{2}}','{{3}}');
@@ -395,7 +395,7 @@ eset-attr.js application/javascript
 # element-toggleAttribute-DOMContentLoaded
 # example.com##+js(tog-attr, preload, video)
 tog-attr.js application/javascript
-(function() {
+(() => {
 	'use strict';
 	let attr = '{{1}}';
 	if ( attr === '' || attr === '{{1}}' ) { return; }
@@ -404,7 +404,7 @@ tog-attr.js application/javascript
 	if ( selector === '' || selector === '{{2}}' ) {
 		selector = '[' + attrs.join('],[') + ']';
 	}
-	let togattr = function(ev) {
+	let togattr = (ev) => {
 		if ( ev ) {removeEventListener(ev.type, togattr, true);}
 		try {
 			let nodes = document.querySelectorAll(selector), i = nodes.length;
@@ -425,13 +425,13 @@ tog-attr.js application/javascript
 # element-toggleAttribute-onload
 # example.com##+js(tog-attr, video, autoplay)
 etog-attr.js application/javascript
-(function() {
+(() => {
 	'use strict';
 	let selector = '{{1}}';
 	if ( selector === '' || selector === '{{1}}' ) {
 		return;
 	}
-	let togattr = function() {
+	let togattr = () => {
 		let elements = document.querySelectorAll(selector);
 		for ( let element of elements ) {
 		      element.toggleAttribute('{{2}}');
@@ -447,14 +447,14 @@ etog-attr.js application/javascript
 # set-property on DOMContentLoaded
 # example.com##+js(set-prop, example, example)
 set-prop.js application/javascript
-(function() {
+(() => {
 		    'use strict';
 		    let chain = '{{1}}';
 		    let prop = '{{2}}';
 		    if ( chain === '' || chain === '{{1}}' ) {
 			return;
 		    }
-		    let set = function() {
+		    let set = () => {
 			let owner = window;
 			chain = chain.split('.');
 			for ( let i = 0; i < chain.length - 1; i++ ) {
@@ -472,7 +472,7 @@ set-prop.js application/javascript
 # cookie-setter
 # example.com##+js(cookie-set, name, value, age)
 cookie-set.js application/javascript
-(function () {
+(() => {
 	     'use strict';
 	     document.cookie = '{{1}}={{2}}; max-age={{3}}; secure; path=/;';
 })();		
@@ -480,7 +480,7 @@ cookie-set.js application/javascript
 # window.open.defuser-alternative
 # example.com##+js(wopen)
 wopen.js application/javascript
-(function () {
+(() => {
 	     'use strict';
 	      window.open = () => {};
 	      this.open = () => {};
@@ -491,13 +491,13 @@ wopen.js application/javascript
 # element-clicker
 # example.com##+js(eclick, #example)
 eclick.js application/javascript
-(function() {
+(() => {
 	'use strict';
 	let selector = '{{1}}';
 	if ( selector === '' || selector === '{{1}}' ) {
 		return;
 	}
-	let click = function() {
+	let click = () => {
 		let element = document.querySelector(selector);
 		element.click();
 	};
@@ -511,13 +511,13 @@ eclick.js application/javascript
 # element-clicker-onload
 # example.com##+js(eclick2, .example)
 eclick2.js application/javascript
-(function() {
+(() => {
 		'use strict';
 		 let selector = '{{1}}';
 			if ( selector === '' || selector === '{{1}}' ) {
 			return;
 		}
-		 let click = function() {
+		 let click = () => {
 			let element = document.querySelector(selector);
 			element.click();
 		};
@@ -531,13 +531,13 @@ eclick2.js application/javascript
 # background-image-setter
 # example.com##+js(bis, body, url(https://example.com/example.jpg))
 bis.js application/javascript
-(function() {
+(() => {
 		'use strict';
 		 let selector = '{{1}}';
 			if ( selector === '' || selector === '{{1}}' ) {
 			return;
 		}
-		 let bis = function() {
+		 let bis = () => {
 			let element = document.querySelector(selector);
 			element.style.backgroundImage = '{{2}}';
 		};
@@ -551,13 +551,13 @@ bis.js application/javascript
 # element-focusser
 # example.com##+js(efocus, #element)
 efocus.js application/javascript
-(function() {
+(() => {
 		'use strict';
 		let selector = '{{1}}';
 		if ( selector === '' || selector === '{{1}}' ) {
 			return;
 		}
-		let focus = function() {
+		let focus = () => {
 			let element = document.querySelector(selector);
 			element.focus();
 		};
@@ -571,14 +571,14 @@ efocus.js application/javascript
 # element-replacer
 # example.com##+js(ereplace, .element)
 ereplace.js application/javascript
-(function() {
+(() => {
 		'use strict';
 		let selector = '{{1}}';
 		if ( selector === '' || selector === '{{1}}' ) {
 			return;
 		}
 		let div = document.createElement('div');
-		let replace = function() {
+		let replace = () => {
 			let elements = document.querySelectorAll(selector);
 			for ( let element of elements ) {
 			      element.replaceWith(div);
@@ -594,14 +594,14 @@ ereplace.js application/javascript
 # element-replacer-onload
 # example.com##+js(ereplace2, #element)
 ereplace2.js application/javascript
-(function() {
+(() => {
 		'use strict';
 		let selector = '{{1}}';
 		if ( selector === '' || selector === '{{1}}' ) {
 			return;
 		}
 		let div = document.createElement('div');
-		let replace = function() {
+		let replace = () => {
 			let elements = document.querySelectorAll(selector);
 			for ( let element of elements ) {
 			      element.replaceWith(div);
@@ -617,17 +617,17 @@ ereplace2.js application/javascript
 # variable-value-setter
 # example.com##+js(set-value, property, value)
 set-value.js application/javascript
-(function() {
+(() => {
 		'use strict';
 		let name = '{{1}}';
 		let data = '{{2}}';
 		let Object = window.Object.bind(window);
 		let descriptor = window.Object.getOwnPropertyDescriptor.bind(window.Object);
 		let defineProperty = window.Object.defineProperty.bind(window.Object);
-		let finalSetter = function() { };
-		let finalGetter = function() { return data; };
+		let finalSetter = () => { };
+		let finalGetter = () => { return data; };
 		let trustedSetters = {};
-		let makeProxy = function(parent, chain) {
+		let makeProxy = (parent, chain) => {
 			let i = chain.indexOf('.');
 			if ( i === -1 ) {
 				let current = descriptor(parent, chain);
@@ -647,7 +647,7 @@ set-value.js application/javascript
 				} else {
 					let current = descriptor(parent, name);
 					if ( !current || !trustedSetters[chain] || trustedSetters[chain] !== current.set ) {
-						let setter = function(value) {
+						let setter = (value) => {
 							if ( value instanceof Object ) {
 								try {
 									makeProxy(value, chain);
@@ -659,26 +659,26 @@ set-value.js application/javascript
 						defineProperty(parent, name, {
 							configurable: false,
 							set: setter,
-							get: function() { return val; }
+							get: () => { return val; }
 						});
 					}
 				}
 			}
 		};
-		let define = function(payload) {
+		let define = (payload) => {
 			data = payload;
 			try {
 				makeProxy(window, name);
 			} catch ( err ) { }
 		};
 		switch ( data ) {
-			case 'noopFunc':	return define(function() { });
-			case 'trueFunc':        return define(function() { return true; });
-			case 'falseFunc':       return define(function() { return false; });
-			case 'nullFunc':        return define(function() { return null; });
-			case 'unFunc':          return define(function() { return undefined; });
-			case 'oneFunc':         return define(function() { return 1; });
-			case 'zeFunc':		return define(function() { return 0; });
+			case 'noopFunc':	return define(() => { });
+			case 'trueFunc':        return define(() => { return true; });
+			case 'falseFunc':       return define(() => { return false; });
+			case 'nullFunc':        return define(() => { return null; });
+			case 'unFunc':          return define(() => { return undefined; });
+			case 'oneFunc':         return define(() => { return 1; });
+			case 'zeFunc':		return define(() => { return 0; });
 			default:		return define(data);
 		}
 })();
@@ -686,9 +686,9 @@ set-value.js application/javascript
 # remove-property on DOMContentLoaded
 # example.com##+js(remove-prop, foo.bar)
 remove-prop.js application/javascript
-(function() {
+(() => {
 	      'use strict';
-  	      let remove = function () {
+  	      let remove = () => {
                   delete {{1}}
               };
               if (document.readyState === 'interactive' || document.readyState === 'complete') {
@@ -701,7 +701,7 @@ remove-prop.js application/javascript
 # element-adder
 # example.com##+js(eaddr, #element, block)
 eaddr.js application/javascript
-(function() {
+(() => {
 		'use strict';
 		let identifier = '{{1}}';
 		let element = document.createElement('div');
@@ -719,15 +719,17 @@ eaddr.js application/javascript
 # element-remover-onload
 # example.com##+js(eremove2, .div)
 eremove2.js application/javascript
-(function() {
+(() => {
 		'use strict';
 		let selector = '{{1}}';
 		if ( selector === '' || selector === '{{1}}' ) {
 			return;
 		}
-		let remove = function() {
-			let element = document.querySelectorAll(selector);
-			element.remove();
+		let remove = () => {
+			let elements = document.querySelectorAll(selector);
+			for (let element of elements) {
+				element.remove();
+			}		
 		};
 		if ( document.readyState === 'complete' ) {
 			remove();
@@ -739,7 +741,7 @@ eremove2.js application/javascript
 # strip-queries from URLs
 # example.com##+js(query-stripper, /\?fbclid=\w+/)
 query-stripper.js application/javascript
-(function() {
+(() => {
 		'use strict';
 		let query = '{{1}}';
 		if ( query === '' || query === '{{1}}' ) {
@@ -760,7 +762,7 @@ query-stripper.js application/javascript
 # alert-defuser
 # example.com##+js(alt-defuser, notice)
 alt-defuser.js application/javascript
-(function() {
+(() => {
 		'use strict';
 		let needle = '{{1}}';
 		if ( needle === '' || needle === '{{1}}' ) {
@@ -772,7 +774,7 @@ alt-defuser.js application/javascript
 		}
 		needle = new RegExp(needle);
 		ralt = window.alert;
-		window.alert = function(a) {
+		window.alert = (a) => {
 			if ( !needle.test(String(a)) ) {
 				ralt.call(window, a);
 			}
@@ -782,11 +784,11 @@ alt-defuser.js application/javascript
 # alert-logger
 # example.com##+js(alt-logger)
 alt-logger.js application/javascript
-(function() {
+(() => {
 		'use strict';
 		let z = window.alert,
 			log = console.log.bind(console);
-		window.alert = function(a) {
+		window.alert = (a) => {
 			log('uBO: window.alert("%s")', String(a));
 			return z.apply(this, arguments);
 		}.bind(window);
