@@ -774,7 +774,7 @@ alt-defuser.js application/javascript
 		}
 		needle = new RegExp(needle);
 		ralt = window.alert;
-		window.alert = (a) => {
+		window.alert = function(a) {
 			if ( !needle.test(String(a)) ) {
 				ralt.call(window, a);
 			}
@@ -788,7 +788,7 @@ alt-logger.js application/javascript
 		'use strict';
 		let z = window.alert,
 			log = console.log.bind(console);
-		window.alert = (a) => {
+		window.alert = function(a) {
 			log('uBO: window.alert("%s")', String(a));
 			return z.apply(this, arguments);
 		}.bind(window);
