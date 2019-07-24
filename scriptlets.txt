@@ -17,7 +17,7 @@ eval-logger.js application/javascript
 		log = console.log.bind(console);
 	window.eval = a => {
 		log('uBO: eval("%s")', String(a));
-		z.apply(this, arguments);
+		return z.apply(this, arguments);
 	}.bind(window);
 })();
 
