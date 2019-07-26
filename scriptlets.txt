@@ -44,6 +44,23 @@ js-logger.js application/javascript
 		}
 })();
 
+# hyperlink-setter
+# example.com##+js(hyperlink-setter)
+hyperlink-setter.js application/javascript
+(() => {
+		let linksetter = () => {
+			let hosts = document.getElementsByClassName('host');
+			for (let host of hosts) {
+				 host.setAttribute('href', host.getAttribute('link'));
+                        }	 
+		};
+		if (document.readyState === 'interactive' || document.readyState === 'complete') {
+			linksetter();
+		} else {
+			addEventListener('DOMContentLoaded', linksetter);
+		}
+})();
+
 # cascading-stylesheets-logger
 # example.com##+js(css-logger)
 css-logger.js application/javascript
