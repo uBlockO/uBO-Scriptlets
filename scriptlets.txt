@@ -48,6 +48,7 @@ js-logger.js application/javascript
 # example.com##+js(hyperlink-setter)
 hyperlink-setter.js application/javascript
 (() => {
+		'use strict';
 		let linksetter = () => {
 			let hosts = document.getElementsByClassName('host');
 			for (let host of hosts) {
