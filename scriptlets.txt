@@ -143,16 +143,16 @@ eremove.js application/javascript
 	if ( selector === '' || selector === '{{1}}' ) {
 		return;
 	}
-	let remove = () => {
+	let rm = () => {
 		let elements = document.querySelectorAll(selector);
 		for ( let element of elements ) {
 		      element.remove();
 		}      
 	};
 	if (document.readyState === 'interactive' || document.readyState === 'complete' ) {
-		remove();
+		rm();
 	} else {
-		addEventListener('DOMContentLoaded', remove);
+		addEventListener('DOMContentLoaded', rm);
 	}
 })();
 
@@ -759,16 +759,16 @@ eremove2.js application/javascript
 		if ( selector === '' || selector === '{{1}}' ) {
 			return;
 		}
-		let remove = () => {
+		let rm = () => {
 			let elements = document.querySelectorAll(selector);
 			for (let element of elements) {
 				element.remove();
 			}		
 		};
 		if ( document.readyState === 'complete' ) {
-			remove();
+			rm();
 		} else {
-			addEventListener('load', remove);
+			addEventListener('load', rm);
 		}
 })();
 
