@@ -217,34 +217,32 @@ ris.js application/javascript
 })();
 
 # inline-noscript-remover
-# example.com##+js(remove-inline-noscript, text)
+# example.com##+js(remove-inline-noscript, /text/)
 remove-inline-noscript.js application/javascript
-(() => {
-		'use strict';
-		let needle = '{{1}}';
-		if ( needle === '' || needle === '{{1}}' ) {
-			needle = '.?';
-		} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
-			needle = needle.slice(1,-1);
-		} else {
-			needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-		}
-		needle = new RegExp(needle);
-		let xhr = new XMLHttpRequest();
-		xhr.open('GET', window.location.href, false);
-		xhr.onload = () => {
-			let html = xhr.response.replace(/<noscript\b[\s\S]*?<\/noscript>/g, noscript => {
-			if (noscript.match(needle)) {
-					return '';
-			} else {
-					return noscript;
-				}
-			});
-			document.open();
-			document.write(html);
-			document.close();
-		};
-		xhr.send();
+(() => { 
+          'use-strict';
+	  let needle = '{{1}}';
+          if ( needle === '' || needle === '{{1}}' ) {
+              needle = '.?';
+          } else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
+              needle = needle.slice(1,-1);
+          } else {
+              needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+          }
+          needle = new RegExp(needle);
+          let nssnode = () => {
+                                let nss = document.querySelectorAll('noscript');
+                                for (let ns of nss) {
+                                        if (ns.outerHTML.match(needle)) {
+                                                         ns.remove();
+                                        }		
+                                }
+          };
+          if (document.readyState === 'interactive' || document.readyState === 'complete') {
+                   nssnode();
+          } else {
+                   addEventListener('DOMContentLoaded', nssnode);
+          }
 })();
 
 # inline-frame-remover
@@ -279,41 +277,11 @@ remove-inline-frame.js application/javascript
 })();
 
 # inline-style-remover
-# example.com##+js(remove-inline-style, notice)
+# example.com##+js(remove-inline-style, /cookie-notice/)
 remove-inline-style.js application/javascript
-(() => {
-		'use strict';
-		let needle = '{{1}}';
-		if ( needle === '' || needle === '{{1}}' ) {
-			needle = '.?';
-		} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
-			needle = needle.slice(1,-1);
-		} else {
-			needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-		}
-		needle = new RegExp(needle);
-		let xhr = new XMLHttpRequest();
-		xhr.open('GET', window.location.href, false);
-		xhr.onload = () => {
-			let html = xhr.response.replace(/<style\b[\s\S]*?<\/style>/g, style => {
-			if (style.match(needle)) {
-					return '';
-			} else {
-					return style;
-				}
-			});
-			document.open();
-			document.write(html);
-			document.close();
-		};
-		xhr.send();
-})();
-
-# inline-style-remover-alternative
-# example.com##+js(riss, cookie-notice)
-riss.js application/javascript
 (() => { 
-          let needle = '{{1}}';
+          'use-strict';
+	  let needle = '{{1}}';
           if ( needle === '' || needle === '{{1}}' ) {
               needle = '.?';
           } else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
