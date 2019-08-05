@@ -24,7 +24,7 @@ eval-logger.js application/javascript
 # javascript-logger
 # example.com##+js(js-logger)
 js-logger.js application/javascript
-(() => { 
+(() => {
 		'use strict';
 		let logscripts = () => {
 			let scripts = document.querySelectorAll('script');
@@ -32,9 +32,7 @@ js-logger.js application/javascript
 			for (let script of scripts) {
 				if (script.outerHTML) {
 				        log('uBO: javascript("%s")', script.outerHTML);
-  		     		} else {
-					return;
-				}	
+  		     		}	
 			}
 		};
 		if (document.readyState === 'complete') {
@@ -65,7 +63,7 @@ hyperlink-setter.js application/javascript
 # cascading-stylesheets-logger
 # example.com##+js(css-logger)
 css-logger.js application/javascript
-(() => { 
+(() => {
 		'use strict';
 		let logcss = () => {
 			let stylesheets = document.querySelectorAll('style');
@@ -73,9 +71,7 @@ css-logger.js application/javascript
 			for (let stylesheet of stylesheets ) {
 				if (stylesheet.outerHTML) {
 				         log('uBO: stylesheet("%s")', stylesheet.outerHTML);
-  		     		} else {
-					 return;
-				}	
+  		     		}
 			}
 		};
 		if (document.readyState === 'complete') {
@@ -96,9 +92,7 @@ noscript-logger.js application/javascript
 			for (let noscript of noscripts) {
 				if (noscript.outerHTML) {
 				         log('uBO: noscript("%s")', noscript.outerHTML);
-  		     		} else {
-					 return;
-				}	
+  		     		}
 			}
 		};
 		if (document.readyState === 'complete') {
