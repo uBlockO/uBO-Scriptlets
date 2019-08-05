@@ -156,40 +156,9 @@ eremove.js application/javascript
 	}
 })();
 
-# inline-script-remover
-# example.com##+js(remove-inline-script, adblock)
+# script-tag-remover
+# example.com##+js(remove-inline-script, /adblock|adsense/)
 remove-inline-script.js application/javascript
-(() => {
-		'use strict';
-		let needle = '{{1}}';
-		if ( needle === '' || needle === '{{1}}' ) {
-			needle = '.?';
-		} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
-			needle = needle.slice(1,-1);
-		} else {
-			needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-		}
-		needle = new RegExp(needle);
-		let xhr = new XMLHttpRequest();
-		xhr.open('GET', location.href, false);
-		xhr.onload = () => {
-			let html = xhr.response.replace(/<script\b[\s\S]*?<\/script>/g, script => {
-			if (script.match(needle)) {
-					return '';
-			} else {
-					return script;
-				}
-			});
-			document.open();
-			document.write(html);
-			document.close();
-		};
-		xhr.send();
-})();
-
-# inline-script-remover-alternative
-# example.com##+js(ris, /adsbygoogle|googletag/)
-ris.js application/javascript
 (() => { 
           'use strict';
 	  let needle = '{{1}}';
