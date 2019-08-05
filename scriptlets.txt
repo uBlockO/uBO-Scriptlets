@@ -188,8 +188,8 @@ remove-inline-script.js application/javascript
 })();
 
 # inline-script-remover-alternative
-# example.com##+js(rim, /adsbygoogle|googletag/)
-rim.js application/javascript
+# example.com##+js(ris, /adsbygoogle|googletag/)
+ris.js application/javascript
 (() => { 
           'use strict';
 	  let needle = '{{1}}';
