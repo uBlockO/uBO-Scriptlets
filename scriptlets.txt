@@ -191,7 +191,8 @@ remove-inline-script.js application/javascript
 # example.com##+js(rim, /adsbygoogle|googletag/)
 rim.js application/javascript
 (() => { 
-          let needle = '{{1}}';
+          'use strict';
+	  let needle = '{{1}}';
           if ( needle === '' || needle === '{{1}}' ) {
               needle = '.?';
           } else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
