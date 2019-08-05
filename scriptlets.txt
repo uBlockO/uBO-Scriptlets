@@ -216,7 +216,7 @@ ris.js application/javascript
           }
 })();
 
-# inline-style-remover
+# style-tag-remover
 # example.com##+js(remove-inline-style, /cookie-notice/)
 remove-inline-style.js application/javascript
 (() => { 
@@ -245,7 +245,7 @@ remove-inline-style.js application/javascript
           }
 })();
 
-# inline-noscript-remover
+# noscript-tag-remover
 # example.com##+js(remove-inline-noscript, /text/)
 remove-inline-noscript.js application/javascript
 (() => { 
@@ -274,7 +274,7 @@ remove-inline-noscript.js application/javascript
           }
 })();
 
-# inline-frame-remover
+# frame-tag-remover
 # example.com##+js(remove-inline-frame, /frame/)
 remove-inline-frame.js application/javascript
 (() => { 
@@ -303,7 +303,7 @@ remove-inline-frame.js application/javascript
           }
 })();
 
-# link tag remover
+# link-tag-remover
 # example.com##+js(remove-link-tag, /prefetch|preload|prerender/)
 remove-link-tag.js application/javascript
 (() => { 
@@ -332,7 +332,7 @@ remove-link-tag.js application/javascript
           }
 })();
 
-# meta tag remover
+# meta-tag-remover
 # example.com##+js(remove-meta-tag, /refresh|referrer/)
 remove-meta-tag.js application/javascript
 (() => { 
