@@ -216,6 +216,35 @@ ris.js application/javascript
           }
 })();
 
+# inline-style-remover
+# example.com##+js(remove-inline-style, /cookie-notice/)
+remove-inline-style.js application/javascript
+(() => { 
+          'use-strict';
+	  let needle = '{{1}}';
+          if ( needle === '' || needle === '{{1}}' ) {
+              needle = '.?';
+          } else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
+              needle = needle.slice(1,-1);
+          } else {
+              needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+          }
+          needle = new RegExp(needle);
+          let cssnode = () => {
+                                let css = document.querySelectorAll('style');
+                                for (let cs of css) {
+                                        if (cs.outerHTML.match(needle)) {
+                                                         cs.remove();
+                                        }		
+                                }
+          };
+          if (document.readyState === 'interactive' || document.readyState === 'complete') {
+                   cssnode();
+          } else {
+                   addEventListener('DOMContentLoaded', cssnode);
+          }
+})();
+
 # inline-noscript-remover
 # example.com##+js(remove-inline-noscript, /text/)
 remove-inline-noscript.js application/javascript
@@ -246,39 +275,8 @@ remove-inline-noscript.js application/javascript
 })();
 
 # inline-frame-remover
-# example.com##+js(remove-inline-frame, frame)
+# example.com##+js(remove-inline-frame, /frame/)
 remove-inline-frame.js application/javascript
-(() => {
-		'use strict';
-		let needle = '{{1}}';
-		if ( needle === '' || needle === '{{1}}' ) {
-			needle = '.?';
-		} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
-			needle = needle.slice(1,-1);
-		} else {
-			needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-		}
-		needle = new RegExp(needle);
-		let xhr = new XMLHttpRequest();
-		xhr.open('GET', window.location.href, false);
-		xhr.onload = () => {
-			let html = xhr.response.replace(/<iframe\b[\s\S]*?<\/iframe>/g, frame => {
-			if (frame.match(needle)) {
-					return '';
-			} else {
-					return frame;
-				}
-			});
-			document.open();
-			document.write(html);
-			document.close();
-		};
-		xhr.send();
-})();
-
-# inline-style-remover
-# example.com##+js(remove-inline-style, /cookie-notice/)
-remove-inline-style.js application/javascript
 (() => { 
           'use-strict';
 	  let needle = '{{1}}';
@@ -290,81 +288,77 @@ remove-inline-style.js application/javascript
               needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
           }
           needle = new RegExp(needle);
-          let cssnode = () => {
-                                let css = document.querySelectorAll('style');
-                                for (let cs of css) {
-                                        if (cs.outerHTML.match(needle)) {
-                                                         cs.remove();
+          let framenode = () => {
+                                let frames = document.querySelectorAll('iframe');
+                                for (let frame of frames) {
+                                        if (frame.outerHTML.match(needle)) {
+                                                         frame.remove();
                                         }		
                                 }
           };
           if (document.readyState === 'interactive' || document.readyState === 'complete') {
-                   cssnode();
+                   framenode();
           } else {
-                   addEventListener('DOMContentLoaded', cssnode);
+                   addEventListener('DOMContentLoaded', framenode);
           }
 })();
 
 # link tag remover
 # example.com##+js(remove-link-tag, /prefetch|preload|prerender/)
 remove-link-tag.js application/javascript
-(() => {
-		'use strict';
-		let needle = '{{1}}';
-		if ( needle === '' || needle === '{{1}}' ) {
-			needle = '.?';
-		} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
-			needle = needle.slice(1,-1);
-		} else {
-			needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-		}
-		needle = new RegExp(needle);
-		let xhr = new XMLHttpRequest();
-		xhr.open('GET', window.location.href, false);
-		xhr.onload = () => {
-			let html = xhr.response.replace(/<link\b[\s\S]*?>/g, link => {
-			if (link.match(needle)) {
-					return '';
-			} else {
-					return link;
-				}
-			});
-			document.open();
-			document.write(html);
-			document.close();
-		};
-		xhr.send();
+(() => { 
+          'use-strict';
+	  let needle = '{{1}}';
+          if ( needle === '' || needle === '{{1}}' ) {
+              needle = '.?';
+          } else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
+              needle = needle.slice(1,-1);
+          } else {
+              needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+          }
+          needle = new RegExp(needle);
+          let linknode = () => {
+                                let links = document.querySelectorAll('link');
+                                for (let link of links) {
+                                        if (link.outerHTML.match(needle)) {
+                                                         link.remove();
+                                        }		
+                                }
+          };
+          if (document.readyState === 'interactive' || document.readyState === 'complete') {
+                   linknode();
+          } else {
+                   addEventListener('DOMContentLoaded', linknode);
+          }
 })();
 
 # meta tag remover
 # example.com##+js(remove-meta-tag, /refresh|referrer/)
 remove-meta-tag.js application/javascript
-(() => {
-		'use strict';
-		let needle = '{{1}}';
-		if ( needle === '' || needle === '{{1}}' ) {
-			needle = '.?';
-		} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
-			needle = needle.slice(1,-1);
-		} else {
-			needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-		}
-		needle = new RegExp(needle);
-		let xhr = new XMLHttpRequest();
-		xhr.open('GET', window.location.href, false);
-		xhr.onload = () => {
-			let html = xhr.response.replace(/<meta\b[\s\S]*?>/g, meta => {
-			if (meta.match(needle)) {
-					return '';
-			} else {
-					return meta;
-				}
-			});
-			document.open();
-			document.write(html);
-			document.close();
-		};
-		xhr.send();
+(() => { 
+          'use-strict';
+	  let needle = '{{1}}';
+          if ( needle === '' || needle === '{{1}}' ) {
+              needle = '.?';
+          } else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
+              needle = needle.slice(1,-1);
+          } else {
+              needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+          }
+          needle = new RegExp(needle);
+          let metanode = () => {
+                                let metas = document.querySelectorAll('meta');
+                                for (let meta of metas) {
+                                        if (meta.outerHTML.match(needle)) {
+                                                         meta.remove();
+                                        }		
+                                }
+          };
+          if (document.readyState === 'interactive' || document.readyState === 'complete') {
+                   metanode();
+          } else {
+                   addEventListener('DOMContentLoaded', metanode);
+          }
 })();
 
 # autoplay-blocker
