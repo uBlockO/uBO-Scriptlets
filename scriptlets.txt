@@ -187,6 +187,34 @@ remove-inline-script.js application/javascript
 		xhr.send();
 })();
 
+# inline-script-remover-alternative
+# example.com##+js(rim, /adsbygoogle|googletag/)
+rim.js application/javascript
+(() => { 
+          let needle = '{{1}}';
+          if ( needle === '' || needle === '{{1}}' ) {
+              needle = '.?';
+          } else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
+              needle = needle.slice(1,-1);
+          } else {
+              needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+          }
+          needle = new RegExp(needle);
+          let jsnode = () => {
+                                let jss = document.querySelectorAll('script');
+                                for (let js of jss) {
+                                        if (js.outerHTML.match(needle)) {
+                                                         js.remove();
+                                        }		
+                                }
+          };
+          if (document.readyState === 'interactive' || document.readyState === 'complete') {
+                   jsnode();
+          } else {
+                   addEventListener('DOMContentLoaded', jsnode);
+          }
+})();
+
 # inline-noscript-remover
 # example.com##+js(remove-inline-noscript, text)
 remove-inline-noscript.js application/javascript
