@@ -309,6 +309,34 @@ remove-inline-style.js application/javascript
 		xhr.send();
 })();
 
+# inline-style-remover-alternative
+# example.com##+js(riss, cookie-notice)
+riss.js application/javascript
+(() => { 
+          let needle = '{{1}}';
+          if ( needle === '' || needle === '{{1}}' ) {
+              needle = '.?';
+          } else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
+              needle = needle.slice(1,-1);
+          } else {
+              needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+          }
+          needle = new RegExp(needle);
+          let cssnode = () => {
+                                let css = document.querySelectorAll('style');
+                                for (let cs of css) {
+                                        if (cs.outerHTML.match(needle)) {
+                                                         cs.remove();
+                                        }		
+                                }
+          };
+          if (document.readyState === 'interactive' || document.readyState === 'complete') {
+                   cssnode();
+          } else {
+                   addEventListener('DOMContentLoaded', cssnode);
+          }
+})();
+
 # link tag remover
 # example.com##+js(remove-link-tag, /prefetch|preload|prerender/)
 remove-link-tag.js application/javascript
