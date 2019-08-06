@@ -805,38 +805,3 @@ query-stripper.js application/javascript
 			location.href = strippedurl;
 		}
 })();
-
-# alert-defuser
-# example.com##+js(alt-defuser, notice)
-alt-defuser.js application/javascript
-(() => {
-		'use strict';
-		let needle = '{{1}}';
-		if ( needle === '' || needle === '{{1}}' ) {
-			needle = '.?';
-		} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
-			needle = needle.slice(1,-1);
-		} else {
-			needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-		}
-		needle = new RegExp(needle);
-		ralt = window.alert;
-		window.alert = function(a) {
-			if ( !needle.test(String(a)) ) {
-				ralt.call(window, a);
-			}
-		}.bind(window);
-})();
-
-# alert-logger
-# example.com##+js(alt-logger)
-alt-logger.js application/javascript
-(() => {
-		'use strict';
-		let z = window.alert,
-			log = console.log.bind(console);
-		window.alert = function(a) {
-			log('uBO: window.alert("%s")', String(a));
-			return z.apply(this, arguments);
-		}.bind(window);
-})();
