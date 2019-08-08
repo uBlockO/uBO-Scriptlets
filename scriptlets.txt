@@ -137,25 +137,24 @@ set-refpolicy.js application/javascript
 eremove.js application/javascript
 (() => {
 		'use strict';
-		let selector = '{{1}}';
+		const selector = '{{1}}';
 		if ( selector === '' || selector === '{{1}}' ) {
 			return;
-		}
-		let rm = function (ev) { 
-					  if (ev) { window.removeEventListener(ev.type, rm, true); }
-					  try {
-					  	let elements = document.querySelectorAll(selector);
-						for (let element of elements) {
-			      					element.remove();
-						}
-					  } catch (ex) {
-					  } 
-					 
+		}	
+		const rm = function(ev) {
+					   if (ev) { window.removeEventListener(ev.type, rm, true); }
+					   try {
+					   	const elements = document.querySelectorAll(selector);
+					   	for (const element of elements) {
+		      					element.remove();
+					   	}
+					   } catch(ex) {
+					   }
 		};
 		if (document.readyState === 'loading') {
-			window.addEventListener('DOMContentLoaded', rm, true);
+			 window.addEventListener('DOMContentLoaded', rm, true);
 		} else {
-			rm();
+			 rm();
 		}
 })();
 
@@ -164,7 +163,7 @@ eremove.js application/javascript
 remove-inline-script.js application/javascript
 (() => { 
           'use strict';
-	  let needle = '{{1}}';
+	  const needle = '{{1}}';
           if ( needle === '' || needle === '{{1}}' ) {
               needle = '.?';
           } else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
@@ -173,7 +172,7 @@ remove-inline-script.js application/javascript
               needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
           }
           needle = new RegExp(needle);
-          const jsnode = function (ev) {
+          const jsnode = function(ev) {
                                         if (ev) { window.removeEventListener(ev.type, jsnode, true); }
                                    	try {
                                           	const jss = document.querySelectorAll('script');
@@ -182,7 +181,7 @@ remove-inline-script.js application/javascript
                                                                 	js.remove();
                                               		}			
                                           	}
-                                   	} catch (ex) {
+                                   	} catch(ex) {
                                     	}
           };
           if (document.readyState === 'loading') {
