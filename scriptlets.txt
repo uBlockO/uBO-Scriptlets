@@ -141,7 +141,7 @@ eremove.js application/javascript
 		if ( selector === '' || selector === '{{1}}' ) {
 			return;
 		}
-		const rm = function (ev) { 
+		let rm = function (ev) { 
 					  if (ev) { window.removeEventListener(ev.type, rm, true); }
 					  try {
 					  	const elements = document.querySelectorAll(selector);
