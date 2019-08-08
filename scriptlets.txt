@@ -522,20 +522,24 @@ cookie-set.js application/javascript
 # example.com##+js(eclick, #example)
 eclick.js application/javascript
 (() => {
-	'use strict';
-	let selector = '{{1}}';
-	if ( selector === '' || selector === '{{1}}' ) {
-		return;
-	}
-	let click = () => {
-		let element = document.querySelector(selector);
-		element.click();
-	};
-	if ( document.readyState === 'interactive' || document.readyState === 'complete' ) {
-		click();
-	} else {
-		addEventListener('DOMContentLoaded', click);
-	}
+		'use strict';
+		let selector = '{{1}}';
+		if ( selector === '' || selector === '{{1}}' ) {
+			return;
+		}
+		const click = function(ev) {
+						if (ev) { window.removeEventListener(ev.type, click, true);}
+						try {
+							const element = document.querySelector(selector);
+							element.click();
+						} catch(ex) {
+						}
+		};
+		if ( document.readyState === 'loading') {
+			 window.addEventListener('DOMContentLoaded', click, true);
+		} else {
+			 click();
+		}
 })();
 
 # element-replacer
@@ -547,17 +551,21 @@ ereplace.js application/javascript
 		if ( selector === '' || selector === '{{1}}' ) {
 			return;
 		}
-		let div = document.createElement('div');
-		let replace = () => {
-			let elements = document.querySelectorAll(selector);
-			for ( let element of elements ) {
-			      element.replaceWith(div);
-			}      
+		const div = document.createElement('div');
+		const replace = function(ev) {
+						if (ev) { window.removeEventListener(ev.type, replace, true); }
+						try {
+							const elements = document.querySelectorAll(selector);
+							for ( const element of elements ) {
+			      					element.replaceWith(div);
+							}
+						} catch(ex) {
+						}
 		};
-		if (document.readyState === 'interactive' || document.readyState === 'complete') {
-			replace();
+		if (document.readyState === 'loading) {
+			 window.addEventListener('DOMContentLoaded', replace, true);
 		} else {
-			addEventListener('DOMContentLoaded', replace);
+			 replace();
 		}
 })();
 
@@ -568,16 +576,16 @@ set-value.js application/javascript
 		'use strict';
 		let name = '{{1}}';
 		let data = '{{2}}';
-		let Object = window.Object.bind(window);
-		let descriptor = window.Object.getOwnPropertyDescriptor.bind(window.Object);
-		let defineProperty = window.Object.defineProperty.bind(window.Object);
-		let finalSetter = () => { };
-		let finalGetter = () => { return data; };
-		let trustedSetters = {};
-		let makeProxy = (parent, chain) => {
-			let i = chain.indexOf('.');
+		const Object = window.Object.bind(window);
+		const descriptor = window.Object.getOwnPropertyDescriptor.bind(window.Object);
+		const defineProperty = window.Object.defineProperty.bind(window.Object);
+		const finalSetter = () => { };
+		const finalGetter = () => { return data; };
+		const trustedSetters = {};
+		const makeProxy = (parent, chain) => {
+			const i = chain.indexOf('.');
 			if ( i === -1 ) {
-				let current = descriptor(parent, chain);
+				const current = descriptor(parent, chain);
 				if ( !current || current.set !== finalSetter || current.get !== finalGetter ) {
 					defineProperty(parent, chain, {
 						configurable: false,
@@ -592,9 +600,9 @@ set-value.js application/javascript
 				if ( val instanceof Object ) {
 					makeProxy(val, chain);
 				} else {
-					let current = descriptor(parent, name);
+					const current = descriptor(parent, name);
 					if ( !current || !trustedSetters[chain] || trustedSetters[chain] !== current.set ) {
-						let setter = (value) => {
+						const setter = (value) => {
 							if ( value instanceof Object ) {
 								try {
 									makeProxy(value, chain);
@@ -612,7 +620,7 @@ set-value.js application/javascript
 				}
 			}
 		};
-		let define = (payload) => {
+		const define = (payload) => {
 			data = payload;
 			try {
 				makeProxy(window, name);
@@ -635,13 +643,17 @@ set-value.js application/javascript
 remove-prop.js application/javascript
 (() => {
 	      'use strict';
-  	      let remove = () => {
-                  delete {{1}}
+  	      const remove = function(ev) {
+	      				    if (ev) { window.removeEventListener(ev.type, remove, true); }
+					    try {
+                  				  delete {{1}}
+					    } catch(ex) {
+					    }
               };
-              if (document.readyState === 'interactive' || document.readyState === 'complete') {
-                 	remove();
+              if (document.readyState === 'loading') {
+                       window.addEventListener('DOMContentLoaded', remove, true);
               } else {
-                	addEventListener('DOMContentLoaded', remove);
+                       remove();
               }
 })();
 
@@ -651,7 +663,7 @@ eaddr.js application/javascript
 (() => {
 		'use strict';
 		let identifier = '{{1}}';
-		let element = document.createElement('div');
+		const element = document.createElement('div');
 		if ( identifier.charAt(0) === '#' ) {
 			element.id = identifier.substring(1);
 		} else if ( identifier.charAt(0) === '.' ) {
@@ -678,8 +690,8 @@ query-stripper.js application/javascript
 		}
 		query = new RegExp(query);
 		if (location.href.search(query) !== -1) {
-			let url = window.location.href;
-			let strippedurl = url.replace(query, '');
+			const url = window.location.href;
+			const strippedurl = url.replace(query, '');
 			location.href = strippedurl;
 		}
 })();
