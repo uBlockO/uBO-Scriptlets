@@ -595,7 +595,7 @@ set-value.js application/javascript
 				}
 			} else {
 				let name = chain.slice(0, i);
-				let val = parent[name];
+				const val = parent[name];
 				chain = chain.substring(i + 1);
 				if ( val instanceof Object ) {
 					makeProxy(val, chain);
