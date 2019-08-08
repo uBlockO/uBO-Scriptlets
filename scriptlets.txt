@@ -164,18 +164,22 @@ remove-inline-script.js application/javascript
               needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
           }
           needle = new RegExp(needle);
-          let jsnode = () => {
-                                let jss = document.querySelectorAll('script');
-                                for (let js of jss) {
-                                        if (js.outerHTML.match(needle)) {
-                                                         js.remove();
-                                        }		
-                                }
+          const jsnode = function(ev) {
+                                        if (ev) { window.removeEventListener(ev.type, jsnode, true); }
+                                   	try {
+                                          	const jss = document.querySelectorAll('script');
+                                          	for (const js of jss) {
+                                              		if (js.outerHTML.match(needle)) {
+                                                                	js.remove();
+                                              		}			
+                                          	}
+                                   	} catch (ex) {
+                                    	}
           };
-          if (document.readyState === 'interactive' || document.readyState === 'complete') {
-                   jsnode();
+          if (document.readyState === 'loading') {
+                   window.addEventListener('DOMContentLoaded', jsnode, true);
           } else {
-                   addEventListener('DOMContentLoaded', jsnode);
+                   jsnode();
           }
 })();
 
@@ -214,7 +218,7 @@ rm-js.js application/javascript
 # example.com##+js(remove-inline-style, /cookie-notice/)
 remove-inline-style.js application/javascript
 (() => { 
-          'use-strict';
+          'use strict';
 	  let needle = '{{1}}';
           if ( needle === '' || needle === '{{1}}' ) {
               needle = '.?';
@@ -224,18 +228,22 @@ remove-inline-style.js application/javascript
               needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
           }
           needle = new RegExp(needle);
-          let cssnode = () => {
-                                let css = document.querySelectorAll('style');
-                                for (let cs of css) {
-                                        if (cs.outerHTML.match(needle)) {
-                                                         cs.remove();
-                                        }		
-                                }
+          const cssnode = function(ev) {
+                                         if (ev) { window.removeEventListener(ev.type, cssnode, true); }
+                                   	 try {
+                                          	const css = document.querySelectorAll('style');
+                                          	for (const cs of css) {
+                                              		if (cs.outerHTML.match(needle)) {
+                                                                	cs.remove();
+                                              		}			
+                                          	}
+                                   	 } catch (ex) {
+                                    	 }
           };
-          if (document.readyState === 'interactive' || document.readyState === 'complete') {
-                   cssnode();
+          if (document.readyState === 'loading') {
+                   window.addEventListener('DOMContentLoaded', cssnode, true);
           } else {
-                   addEventListener('DOMContentLoaded', cssnode);
+                   cssnode();
           }
 })();
 
@@ -243,7 +251,7 @@ remove-inline-style.js application/javascript
 # example.com##+js(remove-inline-noscript, /text/)
 remove-inline-noscript.js application/javascript
 (() => { 
-          'use-strict';
+          'use strict';
 	  let needle = '{{1}}';
           if ( needle === '' || needle === '{{1}}' ) {
               needle = '.?';
@@ -253,18 +261,22 @@ remove-inline-noscript.js application/javascript
               needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
           }
           needle = new RegExp(needle);
-          let nssnode = () => {
-                                let nss = document.querySelectorAll('noscript');
-                                for (let ns of nss) {
-                                        if (ns.outerHTML.match(needle)) {
-                                                         ns.remove();
-                                        }		
-                                }
+          const nosnode = function(ev) {
+                                         if (ev) { window.removeEventListener(ev.type, nosnode, true); }
+                                   	 try {
+                                          	const noss = document.querySelectorAll('noscript');
+                                          	for (const nos of noss) {
+                                              		if (nos.outerHTML.match(needle)) {
+                                                                	nos.remove();
+                                              		}			
+                                          	}
+                                   	 } catch (ex) {
+                                    	 }
           };
-          if (document.readyState === 'interactive' || document.readyState === 'complete') {
-                   nssnode();
+          if (document.readyState === 'loading') {
+                   window.addEventListener('DOMContentLoaded', nosnode, true);
           } else {
-                   addEventListener('DOMContentLoaded', nssnode);
+                   nosnode();
           }
 })();
 
@@ -272,7 +284,7 @@ remove-inline-noscript.js application/javascript
 # example.com##+js(remove-inline-frame, /frame/)
 remove-inline-frame.js application/javascript
 (() => { 
-          'use-strict';
+          'use strict';
 	  let needle = '{{1}}';
           if ( needle === '' || needle === '{{1}}' ) {
               needle = '.?';
@@ -282,18 +294,22 @@ remove-inline-frame.js application/javascript
               needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
           }
           needle = new RegExp(needle);
-          let framenode = () => {
-                                let frames = document.querySelectorAll('iframe');
-                                for (let frame of frames) {
-                                        if (frame.outerHTML.match(needle)) {
-                                                         frame.remove();
-                                        }		
-                                }
+          const framenode = function(ev) {
+                                           if (ev) { window.removeEventListener(ev.type, framenode, true); }
+                                   	   try {
+                                          	const frames = document.querySelectorAll('iframe');
+                                          	for (const frame of frames) {
+                                              		if (frame.outerHTML.match(needle)) {
+                                                                	frame.remove();
+                                              		}			
+                                          	}
+                                   	   } catch (ex) {
+                                    	   }
           };
-          if (document.readyState === 'interactive' || document.readyState === 'complete') {
-                   framenode();
+          if (document.readyState === 'loading') {
+                   window.addEventListener('DOMContentLoaded', framenode, true);
           } else {
-                   addEventListener('DOMContentLoaded', framenode);
+                   framenode();
           }
 })();
 
@@ -301,7 +317,7 @@ remove-inline-frame.js application/javascript
 # example.com##+js(remove-link-tag, /prefetch|preload|prerender/)
 remove-link-tag.js application/javascript
 (() => { 
-          'use-strict';
+          'use strict';
 	  let needle = '{{1}}';
           if ( needle === '' || needle === '{{1}}' ) {
               needle = '.?';
@@ -311,18 +327,22 @@ remove-link-tag.js application/javascript
               needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
           }
           needle = new RegExp(needle);
-          let linknode = () => {
-                                let links = document.querySelectorAll('link');
-                                for (let link of links) {
-                                        if (link.outerHTML.match(needle)) {
-                                                         link.remove();
-                                        }		
-                                }
+          const linknode = function(ev) {
+                                          if (ev) { window.removeEventListener(ev.type, linknode, true); }
+                                   	  try {
+                                          	const links = document.querySelectorAll('link');
+                                          	for (const link of links) {
+                                              		if (link.outerHTML.match(needle)) {
+                                                                	link.remove();
+                                              		}			
+                                          	}
+                                   	  } catch (ex) {
+                                    	  }
           };
-          if (document.readyState === 'interactive' || document.readyState === 'complete') {
-                   linknode();
+          if (document.readyState === 'loading') {
+                   window.addEventListener('DOMContentLoaded', linknode, true);
           } else {
-                   addEventListener('DOMContentLoaded', linknode);
+                   linknode();
           }
 })();
 
@@ -330,7 +350,7 @@ remove-link-tag.js application/javascript
 # example.com##+js(remove-meta-tag, /refresh|referrer/)
 remove-meta-tag.js application/javascript
 (() => { 
-          'use-strict';
+          'use strict';
 	  let needle = '{{1}}';
           if ( needle === '' || needle === '{{1}}' ) {
               needle = '.?';
@@ -340,18 +360,22 @@ remove-meta-tag.js application/javascript
               needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
           }
           needle = new RegExp(needle);
-          let metanode = () => {
-                                let metas = document.querySelectorAll('meta');
-                                for (let meta of metas) {
-                                        if (meta.outerHTML.match(needle)) {
-                                                         meta.remove();
-                                        }		
-                                }
+          const metanode = function(ev) {
+                                          if (ev) { window.removeEventListener(ev.type, metanode, true); }
+                                   	  try {
+                                          	const metas = document.querySelectorAll('meta');
+                                          	for (const meta of metas) {
+                                              		if (meta.outerHTML.match(needle)) {
+                                                                	meta.remove();
+                                              		}			
+                                          	}
+                                   	  } catch (ex) {
+                                    	  }
           };
-          if (document.readyState === 'interactive' || document.readyState === 'complete') {
-                   metanode();
+          if (document.readyState === 'loading') {
+                   window.addEventListener('DOMContentLoaded', metanode, true);
           } else {
-                   addEventListener('DOMContentLoaded', metanode);
+                   metanode();
           }
 })();
 
