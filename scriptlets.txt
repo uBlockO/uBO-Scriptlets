@@ -528,14 +528,14 @@ eclick.js application/javascript
 			return;
 		}
 		const click = function(ev) {
-						if (ev) { window.removeEventListener(ev.type, click, true);}
+						if (ev) { window.removeEventListener(ev.type, click, true); }
 						try {
 							const element = document.querySelector(selector);
 							element.click();
 						} catch(ex) {
 						}
 		};
-		if ( document.readyState === 'loading') {
+		if ( document.readyState === 'interactive') {
 			 window.addEventListener('DOMContentLoaded', click, true);
 		} else {
 			 click();
