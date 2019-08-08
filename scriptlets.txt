@@ -47,11 +47,15 @@ js-logger.js application/javascript
 hyperlink-setter.js application/javascript
 (() => {
 		'use strict';
-		const linksetter = () => {
-						const hosts = document.getElementsByClassName('host');
-						for (const host of hosts) {
-								host.setAttribute('href', host.getAttribute('link'));
-						}	 
+		const linksetter = function(ev) { 
+						     if (ev) { window.removeEventListener(ev.type, linksetter, true); }
+						     try {
+							   const hosts = document.getElementsByClassName('host');
+							   for (const host of hosts) {
+									host.setAttribute('href', host.getAttribute('link'));
+							   }
+						     } catch (ex) {
+						     }
 		};
 		if (document.readyState === 'loading') {
 			window.addEventListener('DOMContentLoaded', linksetter, true);
@@ -132,22 +136,27 @@ set-refpolicy.js application/javascript
 # example.com##+js(eremove, #example)
 eremove.js application/javascript
 (() => {
-	'use strict';
-	let selector = '{{1}}';
-	if ( selector === '' || selector === '{{1}}' ) {
-		return;
-	}
-	let rm = () => {
-		let elements = document.querySelectorAll(selector);
-		for ( let element of elements ) {
-		      element.remove();
-		}      
-	};
-	if (document.readyState === 'interactive' || document.readyState === 'complete' ) {
-		rm();
-	} else {
-		addEventListener('DOMContentLoaded', rm);
-	}
+		'use strict';
+		let selector = '{{1}}';
+		if ( selector === '' || selector === '{{1}}' ) {
+			return;
+		}
+		const rm = function(ev) { 
+					  if (ev) { window.removeEventListener(ev.type, rm, true); }
+					  try {
+					  	const elements = document.querySelectorAll(selector);
+						for (const element of elements) {
+			      					element.remove();
+						}
+					  } catch (ex) {
+					  } 
+					 
+		};
+		if (document.readyState === 'loading') {
+			window.addEventListener('DOMContentLoaded', rm, true);
+		} else {
+			rm();
+		}
 })();
 
 # script-tag-remover
@@ -197,10 +206,10 @@ rm-js.js application/javascript
 			needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 		}
 		needle = new RegExp(needle);
-		let xhr = new XMLHttpRequest();
+		const xhr = new XMLHttpRequest();
 		xhr.open('GET', window.location.href, false);
 		xhr.onload = () => {
-			let html = xhr.response.replace(/<script\b[\s\S]*?<\/script>/g, script => {
+			const html = xhr.response.replace(/<script\b[\s\S]*?<\/script>/g, script => {
 			if (script.match(needle)) {
 					return '';
 			} else {
@@ -400,29 +409,27 @@ autoplay-defuser.js application/javascript
 set-attr.js application/javascript
 (() => {
           'use strict';
-          let token = '{{1}}';
+          const token = '{{1}}';
           if ( token === '' || token === '{{1}}' ) { return; }
-          let tokens = token.split(/\s*\|\s*/);
+          const tokens = token.split(/\s*\|\s*/);
           let selector = '{{3}}';
           if ( selector === '' || selector === '{{3}}' ) {
               selector = `[${tokens.join('],[')}]`;
           }
-          let stattr = (ev) => {
-              if (ev) {
-                        removeEventListener(ev.type, stattr, true);
-              }
-              try {
-                    let nodes = document.querySelectorAll(selector);
-                    for (let node of nodes) {
-                        for (let attr of tokens) {
-                            node.setAttribute(attr, '{{2}}');
-                        }
-                    }
-              } catch(ex) {
-              }
+          const stattr = function(ev) {
+              				if (ev) { window.removeEventListener(ev.type, stattr, true); }
+              				try {
+                    				const nodes = document.querySelectorAll(selector);
+                    				for (const node of nodes) {
+                        				for (const attr of tokens) {
+                            					node.setAttribute(attr, '{{2}}');
+                        				}
+                    				}
+              				} catch(ex) {
+              				}
           };
-          if (document.readyState === 'loading' || document.readyState === 'interactive' || document.readyState === 'complete') {
-                   addEventListener('DOMContentLoaded', stattr, true);
+          if (document.readyState === 'loading') {
+                   window.addEventListener('DOMContentLoaded', stattr, true);
           } else {
                    stattr();
           }
