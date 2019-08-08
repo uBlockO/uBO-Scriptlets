@@ -137,7 +137,7 @@ set-refpolicy.js application/javascript
 eremove.js application/javascript
 (() => {
 		'use strict';
-		const selector = '{{1}}';
+		let selector = '{{1}}';
 		if ( selector === '' || selector === '{{1}}' ) {
 			return;
 		}	
@@ -163,7 +163,7 @@ eremove.js application/javascript
 remove-inline-script.js application/javascript
 (() => { 
           'use strict';
-	  const needle = '{{1}}';
+	  let needle = '{{1}}';
           if ( needle === '' || needle === '{{1}}' ) {
               needle = '.?';
           } else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
