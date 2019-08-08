@@ -47,16 +47,16 @@ js-logger.js application/javascript
 hyperlink-setter.js application/javascript
 (() => {
 		'use strict';
-		let linksetter = () => {
-			let hosts = document.getElementsByClassName('host');
-			for (let host of hosts) {
-				 host.setAttribute('href', host.getAttribute('link'));
-                        }	 
+		const linksetter = () => {
+						const hosts = document.getElementsByClassName('host');
+						for (const host of hosts) {
+								host.setAttribute('href', host.getAttribute('link'));
+						}	 
 		};
-		if (document.readyState === 'interactive' || document.readyState === 'complete') {
-			linksetter();
+		if (document.readyState === 'loading') {
+			window.addEventListener('DOMContentLoaded', linksetter, true);
 		} else {
-			addEventListener('DOMContentLoaded', linksetter);
+			linksetter();
 		}
 })();
 
