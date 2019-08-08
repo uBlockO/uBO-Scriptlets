@@ -26,19 +26,19 @@ eval-logger.js application/javascript
 js-logger.js application/javascript
 (() => {
 		'use strict';
-		let logscripts = () => {
-			let scripts = document.querySelectorAll('script');
-			let log = console.log.bind(console);
-			for (let script of scripts) {
+		const logscripts = () => {
+			const scripts = document.querySelectorAll('script');
+			const log = console.log.bind(console);
+			for (const script of scripts) {
 				if (script.outerHTML) {
 				        log('uBO: javascript("%s")', script.outerHTML);
   		     		}	
 			}
 		};
 		if (document.readyState === 'complete') {
-			logscripts();
+			window.addEventListener('load', logscripts);
 		} else {
-			addEventListener('load', logscripts);
+			logscripts();
 		}
 })();
 
@@ -69,19 +69,19 @@ hyperlink-setter.js application/javascript
 css-logger.js application/javascript
 (() => {
 		'use strict';
-		let logcss = () => {
-			let stylesheets = document.querySelectorAll('style');
-			let log = console.log.bind(console);
-			for (let stylesheet of stylesheets ) {
+		const logcss = () => {
+			const stylesheets = document.querySelectorAll('style');
+			const log = console.log.bind(console);
+			for (const stylesheet of stylesheets ) {
 				if (stylesheet.outerHTML) {
 				         log('uBO: stylesheet("%s")', stylesheet.outerHTML);
   		     		}
 			}
 		};
 		if (document.readyState === 'complete') {
-			logcss();
+			window.addEventListener('load', logcss);
 		} else {
-			addEventListener('load', logcss);
+			logcss();
 		}
 })();
 
@@ -90,19 +90,19 @@ css-logger.js application/javascript
 noscript-logger.js application/javascript
 (() => { 
 		'use strict';
-		let lognoscript = () => {
-			let noscripts = document.querySelectorAll('noscript');
-			let log = console.log.bind(console);
-			for (let noscript of noscripts) {
+		const lognoscript = () => {
+			const noscripts = document.querySelectorAll('noscript');
+			const log = console.log.bind(console);
+			for (const noscript of noscripts) {
 				if (noscript.outerHTML) {
 				         log('uBO: noscript("%s")', noscript.outerHTML);
   		     		}
 			}
 		};
 		if (document.readyState === 'complete') {
-			lognoscript();
+			window.addEventListener('load', lognoscript);
 		} else {
-			addEventListener('load', lognoscript);
+			lognoscript();
 		}
 })();
 
@@ -278,7 +278,7 @@ remove-inline-noscript.js application/javascript
                                                                 	nos.remove();
                                               		}			
                                           	}
-                                   	 } catch (ex) {
+                                   	 } catch(ex) {
                                     	 }
           };
           if (document.readyState === 'loading') {
@@ -311,7 +311,7 @@ remove-inline-frame.js application/javascript
                                                                 	frame.remove();
                                               		}			
                                           	}
-                                   	   } catch (ex) {
+                                   	   } catch(ex) {
                                     	   }
           };
           if (document.readyState === 'loading') {
@@ -344,7 +344,7 @@ remove-link-tag.js application/javascript
                                                                 	link.remove();
                                               		}			
                                           	}
-                                   	  } catch (ex) {
+                                   	  } catch(ex) {
                                     	  }
           };
           if (document.readyState === 'loading') {
@@ -377,7 +377,7 @@ remove-meta-tag.js application/javascript
                                                                 	meta.remove();
                                               		}			
                                           	}
-                                   	  } catch (ex) {
+                                   	  } catch(ex) {
                                     	  }
           };
           if (document.readyState === 'loading') {
@@ -392,14 +392,14 @@ remove-meta-tag.js application/javascript
 autoplay-defuser.js application/javascript
 (() => {
 	      'use strict';
-	      let autoplay = () => {  
-		  	let media = HTMLMediaElement;
+	      const autoplay = () => {  
+		  	const media = HTMLMediaElement;
 			media.autoplay = 'false'; 
 	      };
-	      if (document.readyState === 'interactive' || document.readyState === 'complete' ) {
-		      autoplay();
+	      if (document.readyState === 'loading') {
+		      window.addEventListener('DOMContentLoaded', autoplay, true);
 	      } else {
-		      addEventListener('DOMContentLoaded', autoplay);
+		      autoplay();
 	      }
 })();
 
@@ -434,91 +434,35 @@ set-attr.js application/javascript
           }
 })();
 
-# element-setAttribute-onload
-# example.com##+js(eset-attr, preload, none, video)
-eset-attr.js application/javascript
-(() => {
-	'use strict';
-	let token = '{{1}}';
-	if (token === '' || token === '{{1}}') { return; }
-	let tokens = token.split(/\s*\|\s*/);
-	let selector = '{{3}}';
-	if (selector === '' || selector === '{{3}}') {
-	    selector = `[${tokens.join('],[')}]`;
-	}
-	let setattr = () => {
-		let elements = document.querySelectorAll(selector);
-		for ( let element of elements ) {
-			for (let attr of tokens) {
-		      		element.setAttribute(attr, '{{2}}');
-			}	
-		}      
-	};
-	if (document.readyState === 'loading' || document.readyState === 'interactive' || document.readyState === 'complete') {
-		addEventListener('load', setattr);
-	} else {
-		setattr();
-	}
-})();
-
 # element-toggleAttribute-DOMContentLoaded
 # example.com##+js(tog-attr, preload, video)
 tog-attr.js application/javascript
 (() => {
           'use strict';
-          let token = '{{1}}';
+          const token = '{{1}}';
           if ( token === '' || token === '{{1}}' ) { return; }
-          let tokens = token.split(/\s*\|\s*/);
+          const tokens = token.split(/\s*\|\s*/);
           let selector = '{{2}}';
           if ( selector === '' || selector === '{{2}}' ) {
               selector = `[${tokens.join('],[')}]`;
           }
-          let togattr = (ev) => {
-              if (ev) {
-                        window.removeEventListener(ev.type, togattr, true);
-              }
-              try {
-                    let nodes = document.querySelectorAll(selector);
-                    for (let node of nodes) {
-                        for (let attr of tokens) {
-                            node.toggleAttribute(attr);
-                        }
-                    }
-              } catch(ex) {
-              }
+          const togattr = function(ev) {
+              				 if (ev) { window.removeEventListener(ev.type, togattr, true); }
+            				 try {
+                    				const nodes = document.querySelectorAll(selector);
+						    for (const node of nodes) {
+							for (const attr of tokens) {
+							    	node.toggleAttribute(attr);
+							}
+						    }
+					 } catch(ex) {
+					 }
           };
-          if (document.readyState === 'loading' || document.readyState === 'interactive' || document.readyState === 'complete') {
-                   addEventListener('DOMContentLoaded', togattr, true);
+          if (document.readyState === 'loading') {
+                   window.addEventListener('DOMContentLoaded', togattr, true);
           } else {
                    togattr();
           }
-})();
-
-# element-toggleAttribute-onload
-# example.com##+js(etog-attr, autoplay, video)
-etog-attr.js application/javascript
-(() => {
-	'use strict';
-	let token = '{{1}}';
-	if (token === '' || token === '{{1}}') { return; }
-	let tokens = token.split(/\s*\|\s*/);
-	let selector = '{{2}}';
-	if (selector === '' || selector === '{{2}}') {
-	    selector = `[${tokens.join('],[')}]`;
-	}
-	let togattr = () => {
-		let elements = document.querySelectorAll(selector);
-		for ( let element of elements ) {
-			for (let attr of tokens) {
-		      		element.toggleAttribute(attr);
-			}	
-		}      
-	};
-	if (document.readyState === 'loading' || document.readyState === 'interactive' || document.readyState === 'complete') {
-		addEventListener('load', togattr);
-	} else {
-		togattr();
-	}
 })();
 
 # set-property on DOMContentLoaded
@@ -585,26 +529,6 @@ eclick.js application/javascript
 	}
 })();
 
-# element-clicker-onload
-# example.com##+js(eclick2, .example)
-eclick2.js application/javascript
-(() => {
-		'use strict';
-		 let selector = '{{1}}';
-			if ( selector === '' || selector === '{{1}}' ) {
-			return;
-		}
-		 let click = () => {
-			let element = document.querySelector(selector);
-			element.click();
-		};
-		if (document.readyState === 'complete') {
-			click();
-		} else {
-			addEventListener('load', click);
-		}
-})();
-
 # background-image-setter
 # example.com##+js(bis, body, url(https://example.com/example.jpg))
 bis.js application/javascript
@@ -665,29 +589,6 @@ ereplace.js application/javascript
 			replace();
 		} else {
 			addEventListener('DOMContentLoaded', replace);
-		}
-})();
-
-# element-replacer-onload
-# example.com##+js(ereplace2, #element)
-ereplace2.js application/javascript
-(() => {
-		'use strict';
-		let selector = '{{1}}';
-		if ( selector === '' || selector === '{{1}}' ) {
-			return;
-		}
-		let div = document.createElement('div');
-		let replace = () => {
-			let elements = document.querySelectorAll(selector);
-			for ( let element of elements ) {
-			      element.replaceWith(div);
-			}      
-		};
-		if (document.readyState === 'complete') {
-			replace();
-		} else {
-			addEventListener('load', replace);
 		}
 })();
 
@@ -791,28 +692,6 @@ eaddr.js application/javascript
 		}	
 		element.style.display = '{{2}}';
 		document.documentElement.appendChild(element);
-})();
-
-# element-remover-onload
-# example.com##+js(eremove2, .div)
-eremove2.js application/javascript
-(() => {
-		'use strict';
-		let selector = '{{1}}';
-		if ( selector === '' || selector === '{{1}}' ) {
-			return;
-		}
-		let rm = () => {
-			let elements = document.querySelectorAll(selector);
-			for (let element of elements) {
-				element.remove();
-			}		
-		};
-		if ( document.readyState === 'complete' ) {
-			rm();
-		} else {
-			addEventListener('load', rm);
-		}
 })();
 
 # strip-queries from URLs
