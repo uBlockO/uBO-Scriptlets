@@ -26,19 +26,23 @@ eval-logger.js application/javascript
 js-logger.js application/javascript
 (() => {
 		'use strict';
-		const logscripts = () => {
-			const scripts = document.querySelectorAll('script');
-			const log = console.log.bind(console);
-			for (const script of scripts) {
-				if (script.outerHTML) {
-				        log('uBO: javascript("%s")', script.outerHTML);
-  		     		}	
-			}
+		const logscripts = function(ev) {
+							if (ev) { window.removeEventListener(ev.type, logscripts, true); }
+							try {
+								const scripts = document.querySelectorAll('script');
+								const log = console.log.bind(console);
+									for (const script of scripts) {
+										if (script.outerHTML) {
+											log('uBO: javascript("%s")', script.outerHTML);
+										}	
+									}
+							} catch(ex) {
+							}
 		};
 		if (document.readyState === 'complete') {
-			logscripts();
-		} else {
 			window.addEventListener('load', logscripts, true);
+		} else {
+			logscripts();
 		}
 })();
 
@@ -47,19 +51,23 @@ js-logger.js application/javascript
 css-logger.js application/javascript
 (() => {
 		'use strict';
-		const logcss = () => {
-			const stylesheets = document.querySelectorAll('style');
-			const log = console.log.bind(console);
-			for (const stylesheet of stylesheets ) {
-				if (stylesheet.outerHTML) {
-				         log('uBO: stylesheet("%s")', stylesheet.outerHTML);
-  		     		}
-			}
+		const logstylesheets = function(ev) {
+							if (ev) { window.removeEventListener(ev.type, logstylesheets, true); }
+							try {
+								const stylesheets = document.querySelectorAll('style');
+								const log = console.log.bind(console);
+									for (const stylesheet of stylesheets) {
+										if (stylesheet.outerHTML) {
+											log('uBO: stylesheet("%s")', stylesheet.outerHTML);
+										}	
+									}
+							} catch(ex) {
+							}
 		};
 		if (document.readyState === 'complete') {
-			logcss();
+			window.addEventListener('load', logstylesheets, true);
 		} else {
-			window.addEventListener('load', logcss);
+			logstylesheets();
 		}
 })();
 
@@ -392,9 +400,13 @@ remove-meta-tag.js application/javascript
 autoplay-defuser.js application/javascript
 (() => {
 	      'use strict';
-	      const autoplay = () => {  
-		  	const media = HTMLMediaElement;
-			media.autoplay = 'false'; 
+	      const autoplay = function(ev) {  
+		  				if (ev) { window.removeEventListener(ev.type, autoplay, true); }
+						try {
+							const media = HTMLMediaElement;
+							media.autoplay = 'false';
+						} catch(ex) {
+						}
 	      };
 	      if (document.readyState === 'loading') {
 		      window.addEventListener('DOMContentLoaded', autoplay, true);
@@ -475,18 +487,22 @@ set-prop.js application/javascript
 		    if ( chain === '' || chain === '{{1}}' ) {
 			return;
 		    }
-		    let set = () => {
-			let owner = window;
-			chain = chain.split('.');
-			for ( let i = 0; i < chain.length - 1; i++ ) {
-			    owner = owner[chain[i]];
-			}
-			owner[chain[chain.length - 1]] = prop;
+		    const set = function(ev) {
+						if (ev) { window.removeEventListener(ev.type, set, true); }
+						try {
+							const owner = window;
+							chain = chain.split('.');
+							for (const i = 0; i < chain.length - 1; i++) {
+			    				owner = owner[chain[i]];
+							
+						} catch(ex) {
+						}
+						owner[chain[chain.length - 1]] = prop;
 		    };
-		    if (document.readyState === 'interactive' || document.readyState === 'complete') {
-			     set();
+		    if (document.readyState === 'loading') {
+			     window.addEventListener('DOMContentLoaded', set, true);
 		    } else {
-			     addEventListener('DOMContentLoaded', set);
+			     set();
 		    }
 })();
 
@@ -497,17 +513,6 @@ cookie-set.js application/javascript
 	     'use strict';
 	     document.cookie = '{{1}}={{2}}; max-age={{3}}; secure; path=/;';
 })();		
-
-# window.open.defuser-alternative
-# example.com##+js(wopen)
-wopen.js application/javascript
-(() => {
-	     'use strict';
-	      window.open = () => {};
-	      this.open = () => {};
-	      parent.open = () => {};
-	      window.opener = () => {};
-})();
 
 # element-clicker
 # example.com##+js(eclick, #example)
@@ -546,26 +551,6 @@ bis.js application/javascript
 			addEventListener('DOMContentLoaded', bis);
 		} else {
 			bis();
-		}
-})();
-
-# element-focusser
-# example.com##+js(efocus, #element)
-efocus.js application/javascript
-(() => {
-		'use strict';
-		let selector = '{{1}}';
-		if ( selector === '' || selector === '{{1}}' ) {
-			return;
-		}
-		let focus = () => {
-			let element = document.querySelector(selector);
-			element.focus();
-		};
-		if ( document.readyState === 'interactive' || document.readyState === 'complete' ) {
-			addEventListener('DOMContentLoaded', focus);
-		} else {
-			focus();
 		}
 })();
 
