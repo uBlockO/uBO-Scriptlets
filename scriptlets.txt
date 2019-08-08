@@ -499,8 +499,9 @@ set-prop.js application/javascript
 							for (const i = 0; i < chain.length - 1; i++) {
 			    						owner = owner[chain[i]];
 							}
-						} catch(ex) { }
-						owner[chain[chain.length - 1]] = prop;
+							owner[chain[chain.length - 1]] = prop;
+						} catch(ex) {
+						}
 		    };
 		    if (document.readyState === 'loading') {
 			     window.addEventListener('DOMContentLoaded', set, true);
