@@ -141,7 +141,7 @@ eremove.js application/javascript
 		if ( selector === '' || selector === '{{1}}' ) {
 			return;
 		}
-		const rm = function(ev) { 
+		const rm = function (ev) { 
 					  if (ev) { window.removeEventListener(ev.type, rm, true); }
 					  try {
 					  	const elements = document.querySelectorAll(selector);
@@ -173,7 +173,7 @@ remove-inline-script.js application/javascript
               needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
           }
           needle = new RegExp(needle);
-          const jsnode = function(ev) {
+          const jsnode = function (ev) {
                                         if (ev) { window.removeEventListener(ev.type, jsnode, true); }
                                    	try {
                                           	const jss = document.querySelectorAll('script');
