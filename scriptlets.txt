@@ -399,26 +399,6 @@ remove-meta-tag.js application/javascript
           }
 })();
 
-# autoplay-blocker
-# example.com##+js(autoplay-defuser)
-autoplay-defuser.js application/javascript
-(() => {
-	      'use strict';
-	      const autoplay = function(ev) {  
-		  				if (ev) { window.removeEventListener(ev.type, autoplay, true); }
-						try {
-							const media = HTMLMediaElement;
-							media.autoplay = 'false';
-						} catch(ex) {
-						}
-	      };
-	      if (document.readyState === 'loading') {
-		      window.addEventListener('DOMContentLoaded', autoplay, true);
-	      } else {
-		      autoplay();
-	      }
-})();
-
 # element-setAttribute
 # example.com##+js(set-attr, preload, none, video)
 set-attr.js application/javascript
@@ -517,30 +497,6 @@ cookie-set.js application/javascript
 	     'use strict';
 	     document.cookie = '{{1}}={{2}}; max-age={{3}}; secure; path=/;';
 })();		
-
-# element-clicker
-# example.com##+js(eclick, #example)
-eclick.js application/javascript
-(() => {
-		'use strict';
-		let selector = '{{1}}';
-		if ( selector === '' || selector === '{{1}}' ) {
-			return;
-		}
-		const click = function(ev) {
-						if (ev) { window.removeEventListener(ev.type, click, true); }
-						try {
-							const element = document.querySelector(selector);
-							element.click();
-						} catch(ex) {
-						}
-		};
-		if ( document.readyState === 'interactive') {
-			 window.addEventListener('DOMContentLoaded', click, true);
-		} else {
-			 click();
-		}
-})();
 
 # element-replacer
 # example.com##+js(ereplace, .element)
