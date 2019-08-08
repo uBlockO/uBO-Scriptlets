@@ -27,22 +27,22 @@ js-logger.js application/javascript
 (() => {
 		'use strict';
 		const logscripts = function(ev) {
-							if (ev) { window.removeEventListener(ev.type, logscripts, true); }
-							try {
-								const scripts = document.querySelectorAll('script');
-								const log = console.log.bind(console);
-									for (const script of scripts) {
-										if (script.outerHTML) {
-											log('uBO: javascript("%s")', script.outerHTML);
-										}	
-									}
-							} catch(ex) {
-							}
+						  if (ev) { window.removeEventListener(ev.type, logscripts, true); }
+						  try {
+							const scripts = document.querySelectorAll('script');
+							const log = console.log.bind(console);
+								for (const script of scripts) {
+									if (script.outerHTML) {
+										log('uBO: javascript("%s")', script.outerHTML);
+									}	
+								}
+						  } catch(ex) {
+						  }
 		};
 		if (document.readyState === 'complete') {
-			window.addEventListener('load', logscripts, true);
+			logscripts(); 
 		} else {
-			logscripts();
+			window.addEventListener('load', logscripts, true);
 		}
 })();
 
@@ -65,9 +65,34 @@ css-logger.js application/javascript
 							}
 		};
 		if (document.readyState === 'complete') {
-			window.addEventListener('load', logstylesheets, true);
-		} else {
 			logstylesheets();
+		} else {
+			window.addEventListener('load', logstylesheets, true);
+		}
+})();
+
+# noscript-logger
+# example.com##+js(noscript-logger)
+noscript-logger.js application/javascript
+(() => {
+		'use strict';
+		const lognoscripts = function(ev) {
+						    if (ev) { window.removeEventListener(ev.type, lognoscripts, true); }
+						    try {
+							const noscripts = document.querySelectorAll('noscript');
+							const log = console.log.bind(console);
+								for (const noscript of noscripts) {
+									if (noscript.outerHTML) {
+										log('uBO: noscript("%s")', noscript.outerHTML);
+									}	
+								}
+						    } catch(ex) {
+						    }
+		};
+		if (document.readyState === 'complete') {
+			lognoscripts(); 
+		} else {
+			window.addEventListener('load', lognoscripts, true);
 		}
 })();
 
@@ -90,27 +115,6 @@ hyperlink-setter.js application/javascript
 			window.addEventListener('DOMContentLoaded', linksetter, true);
 		} else {
 			linksetter();
-		}
-})();
-
-# noscript-logger
-# example.com##+js(noscript-logger)
-noscript-logger.js application/javascript
-(() => { 
-		'use strict';
-		const lognoscript = () => {
-			const noscripts = document.querySelectorAll('noscript');
-			const log = console.log.bind(console);
-			for (const noscript of noscripts) {
-				if (noscript.outerHTML) {
-				         log('uBO: noscript("%s")', noscript.outerHTML);
-  		     		}
-			}
-		};
-		if (document.readyState === 'complete') {
-			lognoscript(); 
-		} else {
-			window.addEventListener('load', lognoscript, true);
 		}
 })();
 
@@ -532,26 +536,6 @@ eclick.js application/javascript
 	} else {
 		addEventListener('DOMContentLoaded', click);
 	}
-})();
-
-# background-image-setter
-# example.com##+js(bis, body, url(https://example.com/example.jpg))
-bis.js application/javascript
-(() => {
-		'use strict';
-		 let selector = '{{1}}';
-			if ( selector === '' || selector === '{{1}}' ) {
-			return;
-		}
-		 let bis = () => {
-			let element = document.querySelector(selector);
-			element.style.backgroundImage = '{{2}}';
-		};
-		if (document.readyState === 'loading') {
-			addEventListener('DOMContentLoaded', bis);
-		} else {
-			bis();
-		}
 })();
 
 # element-replacer
