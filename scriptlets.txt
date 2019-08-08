@@ -194,7 +194,7 @@ rm-js.js application/javascript
 		}
 		needle = new RegExp(needle);
 		let xhr = new XMLHttpRequest();
-		xhr.open('GET', location.href, false);
+		xhr.open('GET', window.location.href, false);
 		xhr.onload = () => {
 			let html = xhr.response.replace(/<script\b[\s\S]*?<\/script>/g, script => {
 			if (script.match(needle)) {
