@@ -123,9 +123,9 @@ hyperlink-setter.js application/javascript
 set-respheader.js application/javascript
 (() => {
 	'use strict';
-	let docu = document;
+	const docu = document;
 	if (!docu.head) { return; }
-	let meta = docu.createElement('meta');
+	const meta = docu.createElement('meta');
 	meta.setAttribute('http-equiv', '{{1}}');
 	meta.setAttribute('content', '{{2}}');
 	docu.head.appendChild(meta);
@@ -136,9 +136,9 @@ set-respheader.js application/javascript
 set-refpolicy.js application/javascript
 (() => {
 	'use strict';
-	let docu = document;
+	const docu = document;
 	if (!docu.head) { return; }
-	let meta = docu.createElement('meta');
+	const meta = docu.createElement('meta');
 	meta.setAttribute('name', 'referrer');
 	meta.setAttribute('content', '{{1}}');
 	docu.head.appendChild(meta);
