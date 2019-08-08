@@ -36,9 +36,30 @@ js-logger.js application/javascript
 			}
 		};
 		if (document.readyState === 'complete') {
-			window.addEventListener('load', logscripts);
-		} else {
 			logscripts();
+		} else {
+			window.addEventListener('load', logscripts, true);
+		}
+})();
+
+# cascading-stylesheets-logger
+# example.com##+js(css-logger)
+css-logger.js application/javascript
+(() => {
+		'use strict';
+		const logcss = () => {
+			const stylesheets = document.querySelectorAll('style');
+			const log = console.log.bind(console);
+			for (const stylesheet of stylesheets ) {
+				if (stylesheet.outerHTML) {
+				         log('uBO: stylesheet("%s")', stylesheet.outerHTML);
+  		     		}
+			}
+		};
+		if (document.readyState === 'complete') {
+			logcss();
+		} else {
+			window.addEventListener('load', logcss);
 		}
 })();
 
@@ -64,27 +85,6 @@ hyperlink-setter.js application/javascript
 		}
 })();
 
-# cascading-stylesheets-logger
-# example.com##+js(css-logger)
-css-logger.js application/javascript
-(() => {
-		'use strict';
-		const logcss = () => {
-			const stylesheets = document.querySelectorAll('style');
-			const log = console.log.bind(console);
-			for (const stylesheet of stylesheets ) {
-				if (stylesheet.outerHTML) {
-				         log('uBO: stylesheet("%s")', stylesheet.outerHTML);
-  		     		}
-			}
-		};
-		if (document.readyState === 'complete') {
-			window.addEventListener('load', logcss);
-		} else {
-			logcss();
-		}
-})();
-
 # noscript-logger
 # example.com##+js(noscript-logger)
 noscript-logger.js application/javascript
@@ -100,9 +100,9 @@ noscript-logger.js application/javascript
 			}
 		};
 		if (document.readyState === 'complete') {
-			window.addEventListener('load', lognoscript);
+			lognoscript(); 
 		} else {
-			lognoscript();
+			window.addEventListener('load', lognoscript, true);
 		}
 })();
 
