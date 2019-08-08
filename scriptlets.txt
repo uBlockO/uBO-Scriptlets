@@ -144,8 +144,8 @@ eremove.js application/javascript
 		let rm = function (ev) { 
 					  if (ev) { window.removeEventListener(ev.type, rm, true); }
 					  try {
-					  	const elements = document.querySelectorAll(selector);
-						for (const element of elements) {
+					  	let elements = document.querySelectorAll(selector);
+						for (let element of elements) {
 			      					element.remove();
 						}
 					  } catch (ex) {
