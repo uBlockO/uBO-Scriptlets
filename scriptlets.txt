@@ -267,6 +267,37 @@ remove-inline-style.js application/javascript
           }
 })();
 
+# style-tag-remover-alternative
+# example.com##+js(rm-css, /cookie-notice/)
+rm-css.js application/javascript
+(() => {
+		'use strict';
+		let needle = '{{1}}';
+		if ( needle === '' || needle === '{{1}}' ) {
+			needle = '.?';
+		} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
+			needle = needle.slice(1,-1);
+		} else {
+			needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+		}
+		needle = new RegExp(needle);
+		const xhr = new XMLHttpRequest();
+		xhr.open('GET', window.location.href, false);
+		xhr.onload = () => {
+			const html = xhr.response.replace(/<style\b[\s\S]*?<\/style>/g, style => {
+			if (style.match(needle)) {
+					return '';
+			} else {
+					return style;
+				}
+			});
+			document.open();
+			document.write(html);
+			document.close();
+		};
+		xhr.send();
+})();
+
 # noscript-tag-remover
 # example.com##+js(remove-inline-noscript, /text/)
 remove-inline-noscript.js application/javascript
