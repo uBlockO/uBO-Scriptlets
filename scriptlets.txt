@@ -682,3 +682,36 @@ query-stripper.js application/javascript
 			location.href = strippedurl;
 		}
 })();
+
+# div-tag-remover
+# example.com##+js(remove-div-tag, /DMCA/)
+remove-div-tag.js application/javascript
+(() => { 
+          'use strict';
+	  let needle = '{{1}}';
+          if ( needle === '' || needle === '{{1}}' ) {
+              needle = '.?';
+          } else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
+              needle = needle.slice(1,-1);
+          } else {
+              needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+          }
+          needle = new RegExp(needle);
+          const divnode = ev => {
+                                        if (ev) { window.removeEventListener(ev.type, divnode, true); }
+                                   	try {
+                                          	const divs = document.querySelectorAll('div');
+                                          	for (const div of divs) {
+                                              		if (div.outerHTML.match(needle)) {
+                                                                	div.remove();
+                                              		}			
+                                          	}
+                                   	} catch(ex) {
+                                    	}
+          };
+          if (document.readyState === 'loading') {
+                   window.addEventListener('DOMContentLoaded', divnode, true);
+          } else {
+                   divnode();
+          }
+})();
