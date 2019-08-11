@@ -189,7 +189,7 @@ remove-inline-script.js application/javascript
                                    	try {
                                           	const jss = document.querySelectorAll('script');
                                           	for (const js of jss) {
-                                              		if (js.outerHTML.match(needle)) {
+                                              		if (js.outerHTML.matchAll(needle)) {
                                                                 	js.remove();
                                               		}			
                                           	}
@@ -253,7 +253,7 @@ remove-inline-style.js application/javascript
                                    	 try {
                                           	const css = document.querySelectorAll('style');
                                           	for (const cs of css) {
-                                              		if (cs.outerHTML.match(needle)) {
+                                              		if (cs.outerHTML.matchAll(needle)) {
                                                                 	cs.remove();
                                               		}			
                                           	}
@@ -350,7 +350,7 @@ remove-inline-frame.js application/javascript
                                    	   try {
                                           	const frames = document.querySelectorAll('iframe');
                                           	for (const frame of frames) {
-                                              		if (frame.outerHTML.match(needle)) {
+                                              		if (frame.outerHTML.matchAll(needle)) {
                                                                 	frame.remove();
                                               		}			
                                           	}
@@ -383,7 +383,7 @@ remove-link-tag.js application/javascript
                                    	  try {
                                           	const links = document.querySelectorAll('link');
                                           	for (const link of links) {
-                                              		if (link.outerHTML.match(needle)) {
+                                              		if (link.outerHTML.matchAll(needle)) {
                                                                 	link.remove();
                                               		}			
                                           	}
@@ -416,7 +416,7 @@ remove-meta-tag.js application/javascript
                                    	  try {
                                           	const metas = document.querySelectorAll('meta');
                                           	for (const meta of metas) {
-                                              		if (meta.outerHTML.match(needle)) {
+                                              		if (meta.outerHTML.matchAll(needle)) {
                                                                 	meta.remove();
                                               		}			
                                           	}
