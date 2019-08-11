@@ -26,7 +26,7 @@ eval-logger.js application/javascript
 js-logger.js application/javascript
 (() => {
 		'use strict';
-		const logscripts = function(ev) {
+		const logscripts = ev => {
 						  if (ev) { window.removeEventListener(ev.type, logscripts, true); }
 						  try {
 							const scripts = document.querySelectorAll('script');
@@ -51,7 +51,7 @@ js-logger.js application/javascript
 css-logger.js application/javascript
 (() => {
 		'use strict';
-		const logstylesheets = function(ev) {
+		const logstylesheets = ev => {
 							if (ev) { window.removeEventListener(ev.type, logstylesheets, true); }
 							try {
 								const stylesheets = document.querySelectorAll('style');
@@ -76,7 +76,7 @@ css-logger.js application/javascript
 noscript-logger.js application/javascript
 (() => {
 		'use strict';
-		const lognoscripts = function(ev) {
+		const lognoscripts = ev => {
 						    if (ev) { window.removeEventListener(ev.type, lognoscripts, true); }
 						    try {
 							const noscripts = document.querySelectorAll('noscript');
@@ -101,7 +101,7 @@ noscript-logger.js application/javascript
 hyperlink-setter.js application/javascript
 (() => {
 		'use strict';
-		const linksetter = function(ev) { 
+		const linksetter = ev => { 
 						     if (ev) { window.removeEventListener(ev.type, linksetter, true); }
 						     try {
 							   const hosts = document.getElementsByClassName('host');
@@ -153,13 +153,13 @@ eremove.js application/javascript
 		if ( selector === '' || selector === '{{1}}' ) {
 			return;
 		}	
-		const rm = function(ev) {
+		const rm = ev => {
 					   if (ev) { window.removeEventListener(ev.type, rm, true); }
 					   try {
-					   	const elements = document.querySelectorAll(selector);
-					   	for (const element of elements) {
-		      					element.remove();
-					   	}
+						const elements = document.querySelectorAll(selector);
+						for (const element of elements) {
+							element.remove();
+						}
 					   } catch(ex) {
 					   }
 		};
@@ -184,7 +184,7 @@ remove-inline-script.js application/javascript
               needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
           }
           needle = new RegExp(needle);
-          const jsnode = function(ev) {
+          const jsnode = ev => {
                                         if (ev) { window.removeEventListener(ev.type, jsnode, true); }
                                    	try {
                                           	const jss = document.querySelectorAll('script');
@@ -248,7 +248,7 @@ remove-inline-style.js application/javascript
               needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
           }
           needle = new RegExp(needle);
-          const cssnode = function(ev) {
+          const cssnode = ev => {
                                          if (ev) { window.removeEventListener(ev.type, cssnode, true); }
                                    	 try {
                                           	const css = document.querySelectorAll('style');
@@ -312,7 +312,7 @@ remove-inline-noscript.js application/javascript
               needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
           }
           needle = new RegExp(needle);
-          const nosnode = function(ev) {
+          const nosnode = ev => {
                                          if (ev) { window.removeEventListener(ev.type, nosnode, true); }
                                    	 try {
                                           	const noss = document.querySelectorAll('noscript');
@@ -345,7 +345,7 @@ remove-inline-frame.js application/javascript
               needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
           }
           needle = new RegExp(needle);
-          const framenode = function(ev) {
+          const framenode = ev => {
                                            if (ev) { window.removeEventListener(ev.type, framenode, true); }
                                    	   try {
                                           	const frames = document.querySelectorAll('iframe');
@@ -378,7 +378,7 @@ remove-link-tag.js application/javascript
               needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
           }
           needle = new RegExp(needle);
-          const linknode = function(ev) {
+          const linknode = ev => {
                                           if (ev) { window.removeEventListener(ev.type, linknode, true); }
                                    	  try {
                                           	const links = document.querySelectorAll('link');
@@ -411,7 +411,7 @@ remove-meta-tag.js application/javascript
               needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
           }
           needle = new RegExp(needle);
-          const metanode = function(ev) {
+          const metanode = ev => {
                                           if (ev) { window.removeEventListener(ev.type, metanode, true); }
                                    	  try {
                                           	const metas = document.querySelectorAll('meta');
@@ -442,7 +442,7 @@ set-attr.js application/javascript
           if ( selector === '' || selector === '{{3}}' ) {
               selector = `[${tokens.join('],[')}]`;
           }
-          const stattr = function(ev) {
+          const stattr = ev => {
               				if (ev) { window.removeEventListener(ev.type, stattr, true); }
               				try {
                     				const nodes = document.querySelectorAll(selector);
@@ -473,7 +473,7 @@ tog-attr.js application/javascript
           if ( selector === '' || selector === '{{2}}' ) {
               selector = `[${tokens.join('],[')}]`;
           }
-          const togattr = function(ev) {
+          const togattr = ev => {
               				 if (ev) { window.removeEventListener(ev.type, togattr, true); }
             				 try {
                     				const nodes = document.querySelectorAll(selector);
@@ -502,7 +502,7 @@ set-prop.js application/javascript
 		    if ( chain === '' || chain === '{{1}}' ) {
 			return;
 		    }
-		    const set = function(ev) {
+		    const set = ev => {
 						if (ev) { window.removeEventListener(ev.type, set, true); }
 						try {
 							const owner = window;
@@ -539,7 +539,7 @@ ereplace.js application/javascript
 			return;
 		}
 		const div = document.createElement('div');
-		const replace = function(ev) {
+		const replace = ev => {
 						if (ev) { window.removeEventListener(ev.type, replace, true); }
 						try {
 							const elements = document.querySelectorAll(selector);
@@ -630,7 +630,7 @@ set-value.js application/javascript
 remove-prop.js application/javascript
 (() => {
 	      'use strict';
-  	      const remove = function(ev) {
+  	      const remove = ev => {
 	      				    if (ev) { window.removeEventListener(ev.type, remove, true); }
 					    try {
                   				  delete {{1}}
