@@ -221,7 +221,7 @@ rm-js.js application/javascript
 		xhr.open('GET', window.location.href, false);
 		xhr.onload = () => {
 			const html = xhr.response.replace(/<script\b[\s\S]*?<\/script>/g, script => {
-			if (script.matchAll(needle)) {
+			if (script.search(needle)) {
 					return '';
 			} else {
 					return script;
@@ -285,7 +285,7 @@ rm-css.js application/javascript
 		xhr.open('GET', window.location.href, false);
 		xhr.onload = () => {
 			const html = xhr.response.replace(/<style\b[\s\S]*?<\/style>/g, style => {
-			if (style.matchAll(needle)) {
+			if (style.search(needle)) {
 					return '';
 			} else {
 					return style;
