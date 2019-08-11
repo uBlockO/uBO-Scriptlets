@@ -189,7 +189,7 @@ remove-inline-script.js application/javascript
                                    	try {
                                           	const jss = document.querySelectorAll('script');
                                           	for (const js of jss) {
-                                              		if (js.outerHTML.matchAll(needle)) {
+                                              		if (js.outerHTML.match(needle)) {
                                                                 	js.remove();
                                               		}			
                                           	}
@@ -253,7 +253,7 @@ remove-inline-style.js application/javascript
                                    	 try {
                                           	const css = document.querySelectorAll('style');
                                           	for (const cs of css) {
-                                              		if (cs.outerHTML.matchAll(needle)) {
+                                              		if (cs.outerHTML.match(needle)) {
                                                                 	cs.remove();
                                               		}			
                                           	}
@@ -285,7 +285,7 @@ rm-css.js application/javascript
 		xhr.open('GET', window.location.href, false);
 		xhr.onload = () => {
 			const html = xhr.response.replace(/<style\b[\s\S]*?<\/style>/g, style => {
-			if (style.matchAll(needle)) {
+			if (style.match(needle)) {
 					return '';
 			} else {
 					return style;
@@ -350,7 +350,7 @@ remove-inline-frame.js application/javascript
                                    	   try {
                                           	const frames = document.querySelectorAll('iframe');
                                           	for (const frame of frames) {
-                                              		if (frame.outerHTML.matchAll(needle)) {
+                                              		if (frame.outerHTML.match(needle)) {
                                                                 	frame.remove();
                                               		}			
                                           	}
@@ -383,7 +383,7 @@ remove-link-tag.js application/javascript
                                    	  try {
                                           	const links = document.querySelectorAll('link');
                                           	for (const link of links) {
-                                              		if (link.outerHTML.matchAll(needle)) {
+                                              		if (link.outerHTML.match(needle)) {
                                                                 	link.remove();
                                               		}			
                                           	}
@@ -416,7 +416,7 @@ remove-meta-tag.js application/javascript
                                    	  try {
                                           	const metas = document.querySelectorAll('meta');
                                           	for (const meta of metas) {
-                                              		if (meta.outerHTML.matchAll(needle)) {
+                                              		if (meta.outerHTML.match(needle)) {
                                                                 	meta.remove();
                                               		}			
                                           	}
