@@ -221,7 +221,7 @@ rm-js.js application/javascript
 		xhr.open('GET', window.location.href, false);
 		xhr.onload = () => {
 			const html = xhr.response.replace(/<script\b[\s\S]*?<\/script>/g, script => {
-			if (script.search(needle)) {
+			if (script.match(needle)) {
 					return '';
 			} else {
 					return script;
