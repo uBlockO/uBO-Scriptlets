@@ -715,3 +715,28 @@ remove-div-tag.js application/javascript
                    divnode();
           }
 })();
+
+# div-tag-logger
+# example.com##+js(div-logger)
+div-logger.js application/javascript
+(() => {
+		'use strict';
+		const logdivs = ev => {
+					  if (ev) { window.removeEventListener(ev.type, logdivs, true); }
+					  try {
+						const divs = document.querySelectorAll('div');
+						const log = console.log.bind(console);
+						for (const div of divs) {
+							if (div.outerHTML) {
+								log('uBO: div("%s")', div.outerHTML);
+							}	
+						}
+					  } catch(ex) {
+					  }
+		};
+		if (document.readyState === 'complete') {
+			logdivs(); 
+		} else {
+			window.addEventListener('load', logdivs, true);
+		}
+})();
