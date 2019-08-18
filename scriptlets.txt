@@ -47,6 +47,31 @@ set-refpolicy.js application/javascript
 	docu.head.appendChild(meta);
 })();
 
+# readOnly-property-setter
+# example.com##+js(ro, canAds|runAds, true)
+ro.js application/javascript
+(() => {
+           'use strict';
+	   const prop = '{{1}}';
+	   if ( prop === '' || prop === '{{1}}' ) { 
+	   		return; 
+	   }			
+	   const props = prop.split(/\s*\|\s*/);
+	   const ps = ev => {
+	   			if (ev) { window.removeEventListener(ev.type, ps, true); }
+				try {
+	   				for (const propsetter of props) {
+						Object.defineProperty(window, propsetter, { get: () => { return '{{2}}'; } });
+					}
+	   			} catch (ex) { }
+	   };
+	   if (document.readyState === 'loading') {
+		    window.addEventListener('DOMContentLoaded', ps, true);
+	   } else {
+		    ps();
+	   }
+})();
+
 # element-remover
 # example.com##+js(eremove, #example)
 eremove.js application/javascript
