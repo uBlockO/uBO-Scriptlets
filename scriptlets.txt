@@ -23,18 +23,18 @@ ro.js application/javascript
 	   		return; 
 	   }			
 	   const props = prop.split(/\s*\|\s*/);
-	   const ps = ev => {
-	   			if (ev) { window.removeEventListener(ev.type, ps, true); }
+	   const ro = ev => {
+	   			if (ev) { window.removeEventListener(ev.type, ro, true); }
 				try {
 	   				for (const propsetter of props) {
-						Object.defineProperty(window, propsetter, { get: () => { return '{{2}}'; } });
+						Reflect.defineProperty(window, propsetter, { value: '{{2}}' });
 					}
 	   			} catch (ex) { }
 	   };
 	   if (document.readyState === 'loading') {
-		    window.addEventListener('DOMContentLoaded', ps, true);
+		    window.addEventListener('DOMContentLoaded', ro, true);
 	   } else {
-		    ps();
+		    ro();
 	   }
 })();
 
