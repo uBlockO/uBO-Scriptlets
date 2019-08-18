@@ -8,19 +8,6 @@
 # If the encoding is absent, the data will be converted to base64, and the
 # encoding will be set to `;base64`.
 
-# eval-logger
-# example.com##+js(eval-logger)
-eval-logger.js application/javascript
-(() => {
-	'use strict';
-	let z = window.eval,
-		log = console.log.bind(console);
-	window.eval = function(a) {
-		log('uBO: eval("%s")', String(a));
-		return z.apply(this, arguments);
-	}.bind(window);
-})();
-
 # response-header-setter
 # example.com##+js(set-respheader, Cross-Origin-Resource-Policy, same-site)
 set-respheader.js application/javascript
@@ -31,19 +18,6 @@ set-respheader.js application/javascript
 	const meta = docu.createElement('meta');
 	meta.setAttribute('http-equiv', '{{1}}');
 	meta.setAttribute('content', '{{2}}');
-	docu.head.appendChild(meta);
-})();
-
-# referrer-policy-setter
-# example.com##+js(set-refpolicy, no-referrer)
-set-refpolicy.js application/javascript
-(() => {
-	'use strict';
-	const docu = document;
-	if (!docu.head) { return; }
-	const meta = docu.createElement('meta');
-	meta.setAttribute('name', 'referrer');
-	meta.setAttribute('content', '{{1}}');
 	docu.head.appendChild(meta);
 })();
 
@@ -579,75 +553,6 @@ ereplace.js application/javascript
 			 window.addEventListener('DOMContentLoaded', replace, true);
 		} else {
 			 replace();
-		}
-})();
-
-# variable-value-setter
-# example.com##+js(set-value, property, value)
-set-value.js application/javascript
-(() => {
-		'use strict';
-		let name = '{{1}}';
-		let data = '{{2}}';
-		const Object = window.Object.bind(window);
-		const descriptor = window.Object.getOwnPropertyDescriptor.bind(window.Object);
-		const defineProperty = window.Object.defineProperty.bind(window.Object);
-		const finalSetter = () => { };
-		const finalGetter = () => { return data; };
-		const trustedSetters = {};
-		const makeProxy = (parent, chain) => {
-			const i = chain.indexOf('.');
-			if ( i === -1 ) {
-				const current = descriptor(parent, chain);
-				if ( !current || current.set !== finalSetter || current.get !== finalGetter ) {
-					defineProperty(parent, chain, {
-						configurable: false,
-						set: finalSetter,
-						get: finalGetter
-					});
-				}
-			} else {
-				let name = chain.slice(0, i);
-				const val = parent[name];
-				chain = chain.substring(i + 1);
-				if ( val instanceof Object ) {
-					makeProxy(val, chain);
-				} else {
-					const current = descriptor(parent, name);
-					if ( !current || !trustedSetters[chain] || trustedSetters[chain] !== current.set ) {
-						const setter = (value) => {
-							if ( value instanceof Object ) {
-								try {
-									makeProxy(value, chain);
-									val = value;
-								} catch ( err ) { }
-							}
-						};
-						trustedSetters[chain] = setter;
-						defineProperty(parent, name, {
-							configurable: false,
-							set: setter,
-							get: () => { return val; }
-						});
-					}
-				}
-			}
-		};
-		const define = (payload) => {
-			data = payload;
-			try {
-				makeProxy(window, name);
-			} catch ( err ) { }
-		};
-		switch ( data ) {
-			case 'noopFunc':	return define(() => { });
-			case 'trueFunc':        return define(() => { return true; });
-			case 'falseFunc':       return define(() => { return false; });
-			case 'nullFunc':        return define(() => { return null; });
-			case 'unFunc':          return define(() => { return undefined; });
-			case 'oneFunc':         return define(() => { return 1; });
-			case 'zeFunc':		return define(() => { return 0; });
-			default:		return define(data);
 		}
 })();
 
