@@ -43,13 +43,13 @@ ro.js application/javascript
 eremove.js application/javascript
 (() => {
 		'use strict';
-		let selector = '{{1}}';
+		const selector = '{{1}}';
 		if ( selector === '' || selector === '{{1}}' ) {
 			return;
 		}
-		const elements = document.querySelectorAll(selector);
 		const rm = ev => {
 					   if (ev) { window.removeEventListener(ev.type, rm, true); }
+					   const elements = document.querySelectorAll(selector);
 					   try {
 						  for (const element of elements) {
 							element.remove();
@@ -69,9 +69,9 @@ eremove.js application/javascript
 hyperlink-setter.js application/javascript
 (() => {
 		'use strict';
-		const hosts = document.getElementsByClassName('host');
 		const linksetter = ev => { 
 					     if (ev) { window.removeEventListener(ev.type, linksetter, true); }
+					     const hosts = document.getElementsByClassName('host');
 					     try {
 						  	for (const host of hosts) {
 								host.setAttribute('href', host.getAttribute('link'));
@@ -91,7 +91,7 @@ hyperlink-setter.js application/javascript
 remove-inline-script.js application/javascript
 (() => { 
           'use strict';
-	  let needle = '{{1}}';
+	  const needle = '{{1}}';
           if ( needle === '' || needle === '{{1}}' ) {
               needle = '.?';
           } else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
@@ -124,7 +124,7 @@ remove-inline-script.js application/javascript
 rm-js.js application/javascript
 (() => {
 		'use strict';
-		let needle = '{{1}}';
+		const needle = '{{1}}';
 		if ( needle === '' || needle === '{{1}}' ) {
 			needle = '.?';
 		} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
