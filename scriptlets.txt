@@ -46,14 +46,14 @@ eremove.js application/javascript
 		let selector = '{{1}}';
 		if ( selector === '' || selector === '{{1}}' ) {
 			return;
-		}	
+		}
+		const elements = document.querySelectorAll(selector);
 		const rm = ev => {
 					   if (ev) { window.removeEventListener(ev.type, rm, true); }
 					   try {
-						const elements = document.querySelectorAll(selector);
-						for (const element of elements) {
+						  for (const element of elements) {
 							element.remove();
-						}
+					       }
 					   } catch(ex) {
 					   }
 		};
@@ -69,11 +69,11 @@ eremove.js application/javascript
 hyperlink-setter.js application/javascript
 (() => {
 		'use strict';
+		const hosts = document.getElementsByClassName('host');
 		const linksetter = ev => { 
 					     if (ev) { window.removeEventListener(ev.type, linksetter, true); }
 					     try {
-						   const hosts = document.getElementsByClassName('host');
-						   for (const host of hosts) {
+						  	for (const host of hosts) {
 								host.setAttribute('href', host.getAttribute('link'));
 						   }
 					     } catch (ex) {
