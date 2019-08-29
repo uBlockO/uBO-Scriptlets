@@ -181,7 +181,7 @@ js-logger.js application/javascript
 remove-inline-style.js application/javascript
 (() => { 
           'use strict';
-	  let needle = '{{1}}';
+	  const needle = '{{1}}';
           if ( needle === '' || needle === '{{1}}' ) {
               needle = '.?';
           } else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
@@ -214,7 +214,7 @@ remove-inline-style.js application/javascript
 rm-css.js application/javascript
 (() => {
 		'use strict';
-		let needle = '{{1}}';
+		const needle = '{{1}}';
 		if ( needle === '' || needle === '{{1}}' ) {
 			needle = '.?';
 		} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
@@ -270,7 +270,7 @@ css-logger.js application/javascript
 remove-inline-noscript.js application/javascript
 (() => { 
           'use strict';
-	  let needle = '{{1}}';
+	  const needle = '{{1}}';
           if ( needle === '' || needle === '{{1}}' ) {
               needle = '.?';
           } else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
@@ -328,7 +328,7 @@ noscript-logger.js application/javascript
 remove-inline-frame.js application/javascript
 (() => { 
           'use strict';
-	  let needle = '{{1}}';
+	  const needle = '{{1}}';
           if ( needle === '' || needle === '{{1}}' ) {
               needle = '.?';
           } else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
@@ -361,7 +361,7 @@ remove-inline-frame.js application/javascript
 remove-link-tag.js application/javascript
 (() => { 
           'use strict';
-	  let needle = '{{1}}';
+	  const needle = '{{1}}';
           if ( needle === '' || needle === '{{1}}' ) {
               needle = '.?';
           } else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
@@ -394,7 +394,7 @@ remove-link-tag.js application/javascript
 remove-meta-tag.js application/javascript
 (() => { 
           'use strict';
-	  let needle = '{{1}}';
+	  const needle = '{{1}}';
           if ( needle === '' || needle === '{{1}}' ) {
               needle = '.?';
           } else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
@@ -526,7 +526,7 @@ cookie-set.js application/javascript
 ereplace.js application/javascript
 (() => {
 		'use strict';
-		let selector = '{{1}}';
+		const selector = '{{1}}';
 		if ( selector === '' || selector === '{{1}}' ) {
 			return;
 		}
@@ -572,7 +572,7 @@ remove-prop.js application/javascript
 eaddr.js application/javascript
 (() => {
 		'use strict';
-		let identifier = '{{1}}';
+		const identifier = '{{1}}';
 		const element = document.createElement('div');
 		if ( identifier.charAt(0) === '#' ) {
 			element.id = identifier.substring(1);
@@ -590,7 +590,7 @@ eaddr.js application/javascript
 query-stripper.js application/javascript
 (() => {
 		'use strict';
-		let query = '{{1}}';
+		const query = '{{1}}';
 		if ( query === '' || query === '{{1}}' ) {
 			query = '.?';
 		} else if ( query.slice(0,1) === '/' && query.slice(-1) === '/' ) {
@@ -611,7 +611,7 @@ query-stripper.js application/javascript
 remove-div-tag.js application/javascript
 (() => { 
           'use strict';
-	  let needle = '{{1}}';
+	  const needle = '{{1}}';
           if ( needle === '' || needle === '{{1}}' ) {
               needle = '.?';
           } else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
