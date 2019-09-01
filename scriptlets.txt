@@ -596,7 +596,7 @@ query-stripper.js application/javascript
 	   	}			
 	   	const needles = needle.split(/\s*\|\s*/);
 		const querystripper = ev => {
-					if (ev) { window.removeEventListener(ev.type, querystripper, true);}
+					if (ev) { window.removeEventListener(ev.type, querystripper, true); }
 					try {
 			  		      const url = new URL(location.href);
 					      const params = new URLSearchParams(url.search.slice(1));
