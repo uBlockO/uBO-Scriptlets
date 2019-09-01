@@ -671,3 +671,32 @@ div-logger.js application/javascript
 			window.addEventListener('load', logdivs, true);
 		}
 })();
+
+url-redirector.js application/javascript
+(() => {
+		'use strict';
+		const needle = '{{1}}';
+		if ( needle === '' || needle === '{{1}}' ) { 
+	   		return; 
+	   	}			
+	   	const needles = needle.split(/\s*\|\s*/);
+		const ur = ev => {
+					if (ev) { window.removeEventListener(ev.type, ur, true);}
+					const url = new URL(location.href);
+			  		const params = new URLSearchParams(url.search.slice(1));
+					try {
+			  			for (const needleremover of needles) {
+								if (params.has(needleremover)) {
+			       						const value = params.get(needleremover);
+			       						window.location.href = value;
+			  					}
+						}		
+					} catch (ex) { 
+					}
+		};		    
+		if (document.readyState === 'loading') {
+		    		window.addEventListener('DOMContentLoaded', ur, true);
+		  } else {
+				ur();
+		  }
+})();
