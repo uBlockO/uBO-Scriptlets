@@ -175,7 +175,6 @@ js-logger.js application/javascript
 		}
 })();
 
-
 # style-tag-remover
 # example.com##+js(remove-inline-style, /cookie-notice/)
 remove-inline-style.js application/javascript
@@ -614,6 +613,7 @@ query-stripper.js application/javascript
 		     	 querystripper();
 		}
 })();
+
 # div-tag-remover
 # example.com##+js(remove-div, /adblock|googad/)
 remove-div.js application/javascript
