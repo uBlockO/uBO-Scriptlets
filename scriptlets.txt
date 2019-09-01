@@ -633,7 +633,7 @@ remove-div.js application/javascript
                                    	try {
                                           	const divs = document.querySelectorAll('div');
                                           	for (const div of divs) {
-                                              		if (div.outerHTML.matchAll(needle)) {
+                                              		if (div.outerHTML.match(needle)) {
                                                                 	div.remove();
                                               		}			
                                           	}
