@@ -357,8 +357,8 @@ remove-inline-frame.js application/javascript
 })();
 
 # link-tag-remover
-# example.com##+js(remove-link-tag, /prefetch|preload|prerender/)
-remove-link-tag.js application/javascript
+# example.com##+js(remove-link, /prefetch|preload|prerender/)
+remove-link.js application/javascript
 (() => { 
           'use strict';
 	  let needle = '{{1}}';
@@ -390,8 +390,8 @@ remove-link-tag.js application/javascript
 })();
 
 # meta-tag-remover
-# example.com##+js(remove-meta-tag, /refresh|referrer/)
-remove-meta-tag.js application/javascript
+# example.com##+js(remove-meta, /refresh|referrer/)
+remove-meta.js application/javascript
 (() => { 
           'use strict';
 	  let needle = '{{1}}';
@@ -615,8 +615,8 @@ query-stripper.js application/javascript
 
 })();
 # div-tag-remover
-# example.com##+js(remove-div-tag, /DMCA/)
-remove-div-tag.js application/javascript
+# example.com##+js(remove-div, /adblock|googad/)
+remove-div.js application/javascript
 (() => { 
           'use strict';
 	  let needle = '{{1}}';
@@ -633,7 +633,7 @@ remove-div-tag.js application/javascript
                                    	try {
                                           	const divs = document.querySelectorAll('div');
                                           	for (const div of divs) {
-                                              		if (div.outerHTML.match(needle)) {
+                                              		if (div.outerHTML.matchAll(needle)) {
                                                                 	div.remove();
                                               		}			
                                           	}
