@@ -672,6 +672,8 @@ div-logger.js application/javascript
 		}
 })();
 
+# URL-Redirector
+# example.com##+js(url-redirector, link|url)
 url-redirector.js application/javascript
 (() => {
 		'use strict';
