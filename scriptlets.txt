@@ -590,29 +590,29 @@ eaddr.js application/javascript
 query-stripper.js application/javascript
 (() => {
 		'use strict';
-		const query = '{{1}}';
-		if ( query === '' || query === '{{1}}' ) {
-			return;
-		}
-		const querys = query.split(/\s*\|\s*/);
+		const needle = '{{1}}';
+		if ( needle === '' || needle === '{{1}}' ) { 
+	   		return; 
+	   	}			
+	   	const needles = needle.split(/\s*\|\s*/);
 		const querystripper = ev => {
-						if (ev) { window.removeEventListener(ev.type, querystripper, true); }
-						const url = new URL(location);
-						try {
-							for (const querysremover of querys) {
-								if (location.href.indexOf(querysremover + '=') !== -1) {
-										url.searchParams.delete(query);
-										window.location.href = url;
-								}
-							}	
-						} catch (ex) { }		
-		};
+					if (ev) { window.removeEventListener(ev.type, querystripper, true);}
+					try {
+			  		      const url = new URL(location.href);
+					      const params = new URLSearchParams(url.search.slice(1));
+					      for (const needleremover of needles) {
+					      		if (params.has(needleremover)) {
+								url.searchParams.delete(needleremover);
+			       					window.location.href = url;
+							}
+			  		      }		
+					} catch (ex) { }
+		};		    
 		if (document.readyState === 'loading') {
-			 window.addEventListener('DOMContentLoaded', querystripper, true);
+		    	 window.addEventListener('DOMContentLoaded', querystripper, true);
 		} else {
-			 querystripper();
+		     	 querystripper();
 		}
-
 })();
 # div-tag-remover
 # example.com##+js(remove-div, /adblock|googad/)
