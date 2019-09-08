@@ -623,9 +623,9 @@ query-stripper.js application/javascript
 		const querystripper = ev => {
 					if (ev) { window.removeEventListener(ev.type, querystripper, true); }
 					try {
-			  		      for (const needleremover of needles) {
-					      		const url = new URL(location.href);
-					      		const params = new URLSearchParams(url.search.slice(1));
+			  		      const url = new URL(location.href);
+					      const params = new URLSearchParams(url.search.slice(1));
+					      for (const needleremover of needles) {
 					      		if (params.has(needleremover)) {
 								url.searchParams.delete(needleremover);
 			       					window.location.href = url;
