@@ -594,7 +594,8 @@ add-elem.js application/javascript
 		    	 ea();
 	   	}
 })();
-# strip-queries from URLs
+
+# Query-Stripper from URLs
 # example.com##+js(query-stripper, fbclid|gclid)
 query-stripper.js application/javascript
 (() => {
