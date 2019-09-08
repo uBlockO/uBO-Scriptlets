@@ -623,9 +623,9 @@ query-stripper.js application/javascript
 		const querystripper = ev => {
 					if (ev) { window.removeEventListener(ev.type, querystripper, true); }
 					try {
-			  		      const url = new URL(location.href);
-					      const params = new URLSearchParams(url.search.slice(1));
-					      for (const needleremover of needles) {
+			  		      for (const needleremover of needles) {
+					      		const url = new URL(location.href);
+					      		const params = new URLSearchParams(url.search.slice(1));
 					      		if (params.has(needleremover)) {
 								url.searchParams.delete(needleremover);
 			       					window.location.href = url;
@@ -710,10 +710,10 @@ url-redirector.js application/javascript
 	   	const needles = needle.split(/\s*\|\s*/);
 		const ur = ev => {
 					if (ev) { window.removeEventListener(ev.type, ur, true);}
-					const url = new URL(location.href);
-			  		const params = new URLSearchParams(url.search.slice(1));
 					try {
 			  			for (const needleremover of needles) {
+								const url = new URL(location.href);
+			  					const params = new URLSearchParams(url.search.slice(1));
 								if (params.has(needleremover)) {
 			       						const value = params.get(needleremover);
 			       						window.location.href = value;
