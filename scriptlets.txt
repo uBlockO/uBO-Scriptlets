@@ -516,9 +516,19 @@ set-prop.js application/javascript
 # example.com##+js(cookie-set, name, value, age)
 cookie-set.js application/javascript
 (() => {
-	     'use strict';
-	     document.cookie = '{{1}}={{2}}; max-age={{3}}; secure; path=/;';
-})();		
+		'use strict';
+		const cs = ev => {
+					if (ev) { window.removeEventListener(ev.type, cs, true); }
+					try {
+						document.cookie = '{{1}}={{2}}; max-age={{3}}; secure; path=/;';
+					} catch (ex) { }
+	   	};
+	   	if (document.readyState === 'loading') {
+		    	 window.addEventListener('DOMContentLoaded', cs, true);
+	   	} else {
+		    	 cs();
+	   	}
+})();	
 
 # element-replacer
 # example.com##+js(ereplace, .element)
