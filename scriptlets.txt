@@ -567,26 +567,31 @@ remove-prop.js application/javascript
 })();
 
 # DOM-element-creator
-# example.com##+js(add-elem, #element, block)
+# example.com##+js(add-elem, #id|.className, block)
 add-elem.js application/javascript
 (() => {
 		'use strict';
 		const identifier = '{{1}}';
-		if ( identifier === '' || identifier === '{{1}}' ) { 
+		if (identifier === '' || identifier === '{{1}}') { 
 	   		return; 
-	        }	
+	        }
+		const identifiers = identifier.split(/\s*\|\s*/);
 		const ea = ev => {
-	   			if (ev) { window.removeEventListener(ev.type, ea, true); }
-				try {
-	   				const element = document.createElement('div');
-					if ( identifier.charAt(0) === '#' ) {
-						 element.id = identifier.substring(1);
-					} else {
-						 element.className = identifier.substring(1);
-					} 
-					element.style.display = '{{2}}';
-					document.documentElement.appendChild(element);
-	   			} catch (ex) { }
+					if (ev) { window.removeEventListener(ev.type, ea, true); }
+					try {
+						for (const identifieradder of identifiers) {
+							const element = document.createElement('div');
+							if (identifieradder.charAt(0) === '#') {
+								 element.id = identifieradder.substring(1);
+							} else if (identifieradder.charAt(0) === '.') {
+								 element.className = identifieradder.substring(1);
+							} else {
+								 return;
+							}	 
+							element.style.display = '{{2}}';
+							document.documentElement.appendChild(element);
+						}	
+					} catch (ex) { }
 	   	};
 	   	if (document.readyState === 'loading') {
 		    	 window.addEventListener('DOMContentLoaded', ea, true);
