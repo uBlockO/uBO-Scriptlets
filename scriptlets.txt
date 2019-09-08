@@ -566,24 +566,34 @@ remove-prop.js application/javascript
               }
 })();
 
-# element-adder
-# example.com##+js(eaddr, #element, block)
-eaddr.js application/javascript
+# DOM-element-creator
+# example.com##+js(add-elem, #element, block)
+add-elem.js application/javascript
 (() => {
 		'use strict';
 		const identifier = '{{1}}';
-		const element = document.createElement('div');
-		if ( identifier.charAt(0) === '#' ) {
-			element.id = identifier.substring(1);
-		} else if ( identifier.charAt(0) === '.' ) {
-			element.className = identifier.substring(1);
-		} else {
-			return;
-		}	
-		element.style.display = '{{2}}';
-		document.documentElement.appendChild(element);
+		if ( identifier === '' || identifier === '{{1}}' ) { 
+	   		return; 
+	        }	
+		const ea = ev => {
+	   			if (ev) { window.removeEventListener(ev.type, ea, true); }
+				try {
+	   				const element = document.createElement('div');
+					if ( identifier.charAt(0) === '#' ) {
+						 element.id = identifier.substring(1);
+					} else {
+						 element.className = identifier.substring(1);
+					} 
+					element.style.display = '{{2}}';
+					document.documentElement.appendChild(element);
+	   			} catch (ex) { }
+	   	};
+	   	if (document.readyState === 'loading') {
+		    	 window.addEventListener('DOMContentLoaded', ea, true);
+	   	} else {
+		    	 ea();
+	   	}
 })();
-
 # strip-queries from URLs
 # example.com##+js(query-stripper, fbclid|gclid)
 query-stripper.js application/javascript
