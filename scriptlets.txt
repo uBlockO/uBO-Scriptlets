@@ -566,13 +566,12 @@ remove-prop.js application/javascript
 	      				    if (ev) { window.removeEventListener(ev.type, remove, true); }
 					    try {
                   				  delete {{1}}
-					    } catch(ex) {
-					    }
+					    } catch(ex) { }
               };
               if (document.readyState === 'interactive') {
-                       window.addEventListener('DOMContentLoaded', remove, true);
+                       remove(); 
               } else {
-                       remove();
+                       window.addEventListener('DOMContentLoaded', remove, true);
               }
 })();
 
