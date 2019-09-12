@@ -70,8 +70,9 @@ ro.js application/javascript
 			} catch (ex) { }
 		};
 		switch (data) {
-			default:		return define(data);
-})();			
+			default:  			return define(data);
+		}
+})();		
 
 # element-remover
 # example.com##+js(eremove, #example)
