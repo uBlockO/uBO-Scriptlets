@@ -31,10 +31,10 @@ ro.js application/javascript
 					}
 	   			} catch (ex) { }
 	   };
-	   if (document.readyState === 'loading') {
-		    ro(); 
-	   } else {
+	   if (document.readyState === 'interactive') {
 		    window.addEventListener('DOMContentLoaded', ro, true);
+	   } else {
+		    ro();
 	   }
 })();
 
