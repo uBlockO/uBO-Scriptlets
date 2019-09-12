@@ -31,8 +31,8 @@ ro.js application/javascript
 					}
 	   			} catch (ex) { }
 	   };
-	   if (document.readyState === 'interactive') {
-		    window.addEventListener('DOMContentLoaded', ro, true);
+	   if (document.readyState === 'complete') {
+		    window.addEventListener('load', ro, true);
 	   } else {
 		    ro();
 	   }
