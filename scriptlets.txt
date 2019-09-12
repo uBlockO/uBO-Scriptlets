@@ -70,13 +70,6 @@ ro.js application/javascript
 			} catch (ex) { }
 		};
 		switch (data) {
-			case 'noopFunc':	return define(() => { });
-			case 'trueFunc':        return define(() => { return true; });
-			case 'falseFunc':       return define(() => { return false; });
-			case 'nullFunc':        return define(() => { return null; });
-			case 'unFunc':          return define(() => { return undefined; });
-			case 'oneFunc':         return define(() => { return 1; });
-			case 'zeFunc':          return define(() => { return 0; });
 			default:		return define(data);
 })();			
 
