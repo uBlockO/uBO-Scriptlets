@@ -17,7 +17,10 @@ set-respheader.js application/javascript
 # example.com##+js(ro, canAds, true)
 ro.js application/javascript
 (() => {
-		let name = '{{1}}';
+		let prop = '{{1}}';
+		if ( prop === '' || prop === '{{1}}' ) {
+			return;
+		}
 		let data = '{{2}}';
 		const Object = window.Object.bind(window);
 		const descriptor = window.Object.getOwnPropertyDescriptor.bind(window.Object);
@@ -37,13 +40,13 @@ ro.js application/javascript
 					});
 				}
 			} else {
-				let name = chain.slice(0, i);
-				let val = parent[name];
+				let prop = chain.slice(0, i);
+				let val = parent[prop];
 				chain = chain.substring(i + 1);
 				if ( val instanceof Object ) {
 					makeProxy(val, chain);
 				} else {
-					let current = descriptor(parent, name);
+					let current = descriptor(parent, prop);
 					if ( !current || !trustedSetters[chain] || trustedSetters[chain] !== current.set ) {
 						const setter = value => {
 							if ( value instanceof Object ) {
@@ -54,7 +57,7 @@ ro.js application/javascript
 							}
 						};
 						trustedSetters[chain] = setter;
-						defineProperty(parent, name, {
+						defineProperty(parent, prop, {
 							configurable: false,
 							set: setter,
 							get: () => { return val; }
@@ -66,11 +69,11 @@ ro.js application/javascript
 		const define = payload => {
 			data = payload;
 			try {
-				makeProxy(window, name);
+				makeProxy(window, prop);
 			} catch (ex) { }
 		};
 		switch (data) {
-			default:  			return define(data);
+			default: 		return define(data);
 		}
 })();		
 
