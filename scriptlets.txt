@@ -14,29 +14,71 @@ set-respheader.js application/javascript
 })();
 
 # readOnly-property-setter
-# example.com##+js(ro, canAds|runAds, true)
+# example.com##+js(ro, canAds, true)
 ro.js application/javascript
 (() => {
-           'use strict';
-	   const prop = '{{1}}';
-	   if ( prop === '' || prop === '{{1}}' ) { 
-	   		return; 
-	   }			
-	   const props = prop.split(/\s*\|\s*/);
-	   const ro = ev => {
-	   			if (ev) { window.removeEventListener(ev.type, ro, true); }
-				try {
-	   				for (const propsetter of props) {
-						Reflect.defineProperty(window, propsetter, { value: '{{2}}' });
+		let name = '{{1}}';
+		let data = '{{2}}';
+		const Object = window.Object.bind(window);
+		const descriptor = window.Object.getOwnPropertyDescriptor.bind(window.Object);
+		const defineProperty = window.Object.defineProperty.bind(window.Object);
+		const finalSetter = () => { };
+		const finalGetter = () => { return data; };
+		const trustedSetters = { };
+		const makeProxy = (parent, chain) => {
+			const i = chain.indexOf('.');
+			if ( i === -1 ) {
+				let current = descriptor(parent, chain);
+				if ( !current || current.set !== finalSetter || current.get !== finalGetter ) {
+					defineProperty(parent, chain, {
+						configurable: false,
+						set: finalSetter,
+						get: finalGetter
+					});
+				}
+			} else {
+				let name = chain.slice(0, i);
+				let val = parent[name];
+				chain = chain.substring(i + 1);
+				if ( val instanceof Object ) {
+					makeProxy(val, chain);
+				} else {
+					let current = descriptor(parent, name);
+					if ( !current || !trustedSetters[chain] || trustedSetters[chain] !== current.set ) {
+						const setter = value => {
+							if ( value instanceof Object ) {
+								try {
+									makeProxy(value, chain);
+									val = value;
+								} catch (ex) { }
+							}
+						};
+						trustedSetters[chain] = setter;
+						defineProperty(parent, name, {
+							configurable: false,
+							set: setter,
+							get: () => { return val; }
+						});
 					}
-	   			} catch (ex) { }
-	   };
-	   if (document.readyState === 'complete') {
-		    window.addEventListener('load', ro, true);
-	   } else {
-		    ro();
-	   }
-})();
+				}
+			}
+		};
+		const define = payload => {
+			data = payload;
+			try {
+				makeProxy(window, name);
+			} catch (ex) { }
+		};
+		switch (data) {
+			case 'noopFunc':	return define(() => { });
+			case 'trueFunc':        return define(() => { return true; });
+			case 'falseFunc':       return define(() => { return false; });
+			case 'nullFunc':        return define(() => { return null; });
+			case 'unFunc':          return define(() => { return undefined; });
+			case 'oneFunc':         return define(() => { return 1; });
+			case 'zeFunc':          return define(() => { return 0; });
+			default:		return define(data);
+})();			
 
 # element-remover
 # example.com##+js(eremove, #example)
