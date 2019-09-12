@@ -32,9 +32,9 @@ ro.js application/javascript
 	   			} catch (ex) { }
 	   };
 	   if (document.readyState === 'loading') {
-		    window.addEventListener('DOMContentLoaded', ro, true);
+		    ro(); 
 	   } else {
-		    ro();
+		    window.addEventListener('DOMContentLoaded', ro, true);
 	   }
 })();
 
