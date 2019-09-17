@@ -631,7 +631,7 @@ add-elem.js application/javascript
 							} else {
 								 return;
 							}	 
-							element.style.display = '{{2}}';
+							element.style.setProperty('display', '{{2}}', 'important');
 							document.documentElement.appendChild(element);
 						}	
 					} catch (ex) { }
