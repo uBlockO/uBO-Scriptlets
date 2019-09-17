@@ -688,22 +688,17 @@ remove-div-tag.js application/javascript
           }
           needle = new RegExp(needle);
           const divnode = ev => {
-                                        if (ev) { window.removeEventListener(ev.type, divnode, true); }
-                                   	try {
+                                        try {
                                           	const divs = document.querySelectorAll('div');
                                           	for (const div of divs) {
                                               		if (div.outerHTML.match(needle)) {
                                                                 	div.remove();
                                               		}			
                                           	}
-                                   	} catch(ex) {
-                                    	}
+                                   	} catch(ex) { }
           };
-          if (document.readyState === 'loading') {
-                   window.addEventListener('DOMContentLoaded', divnode, true);
-          } else {
-                   divnode();
-          }
+          const observer = new MutationObserver(divnode);
+	  observer.observe(document.documentElement, { childList: true, subtree: true });
 })();
 
 # div-tag-logger
