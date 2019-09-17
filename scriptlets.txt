@@ -87,8 +87,7 @@ eremove.js application/javascript
 			return;
 		}
 		const rm = ev => {
-					   if (ev) { window.removeEventListener(ev.type, rm, true); }
-					   const elements = document.querySelectorAll(selector);
+		 			   const elements = document.querySelectorAll(selector);
 					   try {
 						  for (const element of elements) {
 							element.remove();
@@ -96,11 +95,8 @@ eremove.js application/javascript
 					   } catch(ex) {
 					   }
 		};
-		if (document.readyState === 'loading') {
-			 window.addEventListener('DOMContentLoaded', rm, true);
-		} else {
-			 rm();
-		}
+		const observer = new MutationObserver(rm);
+    		observer.observe(document.documentElement, { childList: true, subtree: true });
 })();
 
 # hyperlink-setter
