@@ -96,7 +96,6 @@ eremove.js application/javascript
 		};
 		const observer = new MutationObserver(rm);
     		observer.observe(document.documentElement, { childList: true, subtree: true });
-		observer.disconnect();
 })();
 
 # hyperlink-setter
