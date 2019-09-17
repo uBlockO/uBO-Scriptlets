@@ -92,11 +92,11 @@ eremove.js application/javascript
 						  for (const element of elements) {
 							element.remove();
 					       }
-					   } catch(ex) {
-					   }
+					   } catch(ex) { }
 		};
 		const observer = new MutationObserver(rm);
     		observer.observe(document.documentElement, { childList: true, subtree: true });
+		observer.disconnect();
 })();
 
 # hyperlink-setter
