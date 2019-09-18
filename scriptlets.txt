@@ -757,58 +757,27 @@ url-redirector.js application/javascript
 		  }
 })();
 
-# ins-tag-remover
-# example.com##+js(remove-ins-tag, /adsbygoogle|adsense/)
-remove-ins-tag.js application/javascript
-(() => { 
-          'use strict';
-	  let needle = '{{1}}';
-          if ( needle === '' || needle === '{{1}}' ) {
-              needle = '.?';
-          } else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
-              needle = needle.slice(1,-1);
-          } else {
-              needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-          }
-          needle = new RegExp(needle);
-          const insnode = ev => {
-                                        if (ev) { window.removeEventListener(ev.type, insnode, true); }
-                                   	try {
-                                          	const inss = document.querySelectorAll('ins');
-                                          	for (const ins of inss) {
-                                              		if (ins.outerHTML.match(needle)) {
-								ins.remove();
-                                              		}			
-                                          	}
-                                   	} catch(ex) { }
-          };
-          if (document.readyState === 'loading') {
-                   window.addEventListener('DOMContentLoaded', insnode, true);
-          } else {
-                   insnode();
-          }
-})();
-
-# ins-tag-logger
-# example.com##+js(ins-logger)
-ins-logger.js application/javascript
+# innerHTML-setter
+# example.com##+js(set-innerHTML, #id, <span class="btext">Download</span>)
+set-innerHTML.js application/javascript
 (() => {
 		'use strict';
-		const logins = ev => {
-					  if (ev) { window.removeEventListener(ev.type, logins, true); }
-					  try {
-						const inss = document.querySelectorAll('ins');
-						const log = console.log.bind(console);
-						for (const ins of inss) {
-							if (ins.outerHTML) {
-								log('uBO: ins("%s")', ins.outerHTML);
-							}	
-						}
-					  } catch(ex) { }
+		const selector = '{{1}}';
+		if ( selector === '' || selector === '{{1}}' ) {
+			return;
+		}
+		const ihs = ev => {
+		 			   if (ev) { window.removeEventListener(ev.type, ihs, true); }
+					   const elements = document.querySelectorAll(selector);
+					   try {
+						  for (const element of elements) {
+							element.innerHTML = '{{2}}';
+					       	  }
+					   } catch(ex) { }
 		};
-		if (document.readyState === 'complete') {
-			logins(); 
+		if (document.readyState === 'loading') {
+			window.addEventListener('DOMContentLoaded', ihs, true);
 		} else {
-			window.addEventListener('load', logins, true);
+			ihs();
 		}
 })();
