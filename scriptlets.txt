@@ -632,7 +632,7 @@ add-elem.js application/javascript
 								 return;
 							}	 
 							element.style.setProperty('display', '{{2}}', 'important');
-							document.documentElement.appendChild(element);
+							document.body.appendChild(element);
 						}	
 					} catch (ex) { }
 	   	};
