@@ -95,7 +95,7 @@ eremove.js application/javascript
 					   } catch(ex) { }
 		};
 		const observer = new MutationObserver(rm);
-    		observer.observe(document.body, { childList: true, subtree: true });
+    		observer.observe(document.documentElement, { childList: true, subtree: true });
 })();
 
 # hyperlink-setter
@@ -698,7 +698,7 @@ remove-div-tag.js application/javascript
                                    	} catch(ex) { }
           };
           const observer = new MutationObserver(divnode);
-	  observer.observe(document.body, { childList: true, subtree: true });
+	  observer.observe(document.documentElement, { childList: true, subtree: true });
 })();
 
 # div-tag-logger
