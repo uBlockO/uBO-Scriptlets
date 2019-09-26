@@ -86,7 +86,7 @@ eremove.js application/javascript
 		if ( selector === '' || selector === '{{1}}' ) {
 			return;
 		}
-		const rm = ev => {
+		const rm = () => {
 		 			   const elements = document.querySelectorAll(selector);
 					   try {
 						  for (const element of elements) {
@@ -96,6 +96,34 @@ eremove.js application/javascript
 		};
 		const observer = new MutationObserver(rm);
     		observer.observe(document.documentElement, { childList: true, subtree: true });
+})();
+
+# attribute-remover
+# example.com##+js(rm-attr, allow, iframe)
+rm-attr.js application/javascript
+(() => {
+		    'use strict';
+		    const needle = '{{1}}';
+		    if ( needle === '' || needle === '{{1}}' ) { 
+		    		return; 
+		    }
+		    const needles = needle.split(/\s*\|\s*/);
+		    let selector = '{{2}}';
+		    if ( selector === '' || selector === '{{2}}' ) {
+			selector = `[${tokens.join('],[')}]`;
+		    }
+		    const rmattr = () => {
+						const nodes = document.querySelectorAll(selector);
+						try {
+			    				for ( const node of nodes ) {
+								for ( const attr of needles ) {
+				    					node.removeAttribute(attr);
+								}
+			    				}
+						} catch(ex) { }
+		    };
+		    const observer = new MutationObserver(rmattr);
+    		    observer.observe(document.documentElement, { childList: true, subtree: true });
 })();
 
 # hyperlink-setter
@@ -671,7 +699,7 @@ remove-div-tag.js application/javascript
               needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
           }
           needle = new RegExp(needle);
-          const divnode = ev => {
+          const divnode = () => {
                                         try {
                                           	const divs = document.querySelectorAll('div');
                                           	for (const div of divs) {
