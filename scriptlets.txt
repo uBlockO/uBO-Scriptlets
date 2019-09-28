@@ -70,7 +70,7 @@ ro.js application/javascript
 			data = payload;
 			try {
 				makeProxy(window, prop);
-			} catch (ex) { }
+			} catch { }
 		};
 		switch (data) {
 			default: 		return define(data);
@@ -92,7 +92,7 @@ eremove.js application/javascript
 						  for (const element of elements) {
 							element.remove();
 					       	  }
-					   } catch(ex) { }
+					   } catch { }
 		};
 		const observer = new MutationObserver(rm);
     		observer.observe(document.documentElement, { childList: true, subtree: true });
