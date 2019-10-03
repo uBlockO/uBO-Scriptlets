@@ -96,6 +96,7 @@ eremove.js application/javascript
 		};
 		const observer = new MutationObserver(rm);
     		observer.observe(document.documentElement, { childList: true, subtree: true });
+		if (document.readyState === 'complete') { observer.disconnect(); } 
 })();
 
 # attribute-remover
@@ -124,6 +125,7 @@ rm-attr.js application/javascript
 		    };
 		    const observer = new MutationObserver(rmattr);
     		    observer.observe(document.documentElement, { childList: true, subtree: true });
+		    if (document.readyState === 'complete') { observer.disconnect(); } 
 })();
 
 # hyperlink-setter
@@ -173,6 +175,7 @@ remove-inline-script.js application/javascript
 		  };
 		  const observer = new MutationObserver(jsnode);
 		  observer.observe(document.documentElement, { childList: true, subtree: true });
+		  if (document.readyState === 'complete') { observer.disconnect(); } 
 })();
 
 # script-tag-remover-alternative
@@ -256,6 +259,7 @@ remove-inline-style.js application/javascript
           };
           const observer = new MutationObserver(cssnode);
 	  observer.observe(document.documentElement, { childList: true, subtree: true });
+	  if (document.readyState === 'complete') { observer.disconnect(); } 
 })();
 
 # style-tag-remover-alternative
@@ -339,6 +343,7 @@ remove-inline-noscript.js application/javascript
           };
           const observer = new MutationObserver(nosnode);
 	  observer.observe(document.documentElement, { childList: true, subtree: true });
+	  if (document.readyState === 'complete') { observer.disconnect(); } 
 })();
 
 # noscript-logger
@@ -391,6 +396,7 @@ remove-inline-frame.js application/javascript
           };
           const observer = new MutationObserver(framenode);
 	  observer.observe(document.documentElement, { childList: true, subtree: true });
+	  if (document.readyState === 'complete') { observer.disconnect(); } 
 })();
 
 # link-tag-remover
@@ -419,6 +425,7 @@ remove-link.js application/javascript
           };
           const observer = new MutationObserver(linknode);
 	  observer.observe(document.documentElement, { childList: true, subtree: true });
+	  if (document.readyState === 'complete') { observer.disconnect(); } 
 })();
 
 # meta-tag-remover
@@ -447,6 +454,7 @@ remove-meta.js application/javascript
           };
           const observer = new MutationObserver(metanode);
 	  observer.observe(document.documentElement, { childList: true, subtree: true });
+	  if (document.readyState === 'complete') { observer.disconnect(); } 
 })();
 
 # element-setAttribute
@@ -687,6 +695,7 @@ remove-div-tag.js application/javascript
           };
           const observer = new MutationObserver(divnode);
 	  observer.observe(document.documentElement, { childList: true, subtree: true });
+	  if (document.readyState === 'complete') { observer.disconnect(); } 
 })();
 
 # div-tag-logger
