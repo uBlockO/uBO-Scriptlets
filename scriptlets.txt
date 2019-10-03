@@ -151,32 +151,28 @@ hyperlink-setter.js application/javascript
 # example.com##+js(remove-inline-script, /adblock|adsense/)
 remove-inline-script.js application/javascript
 (() => { 
-          'use strict';
-	  let needle = '{{1}}';
-          if ( needle === '' || needle === '{{1}}' ) {
-              needle = '.?';
-          } else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
-              needle = needle.slice(1,-1);
-          } else {
-              needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-          }
-          needle = new RegExp(needle);
-          const jsnode = ev => {
-                                        if (ev) { window.removeEventListener(ev.type, jsnode, true); }
-                                   	try {
-                                          	const jss = document.querySelectorAll('script');
-                                          	for (const js of jss) {
-                                              		if (js.outerHTML.matchAll(needle)) {
-                                                                	js.remove();
-                                              		}			
-                                          	}
-                                   	} catch { }
-          };
-          if (document.readyState === 'loading') {
-                   window.addEventListener('DOMContentLoaded', jsnode, true);
-          } else {
-                   jsnode();
-          }
+		  'use strict';
+		  let needle = '{{1}}';
+		  if ( needle === '' || needle === '{{1}}' ) {
+		      needle = '.?';
+		  } else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
+		      needle = needle.slice(1,-1);
+		  } else {
+		      needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+		  }
+		  needle = new RegExp(needle);
+		  const jsnode = () => {
+					    try {
+							const jss = document.querySelectorAll('script');
+							for (const js of jss) {
+								if (js.outerHTML.match(needle)) {
+										js.remove();
+								}			
+							}
+					    } catch { }
+		  };
+		  const observer = new MutationObserver(jsnode);
+		  observer.observe(document.documentElement, { childList: true, subtree: true });
 })();
 
 # script-tag-remover-alternative
@@ -248,22 +244,18 @@ remove-inline-style.js application/javascript
               needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
           }
           needle = new RegExp(needle);
-          const cssnode = ev => {
-                                         if (ev) { window.removeEventListener(ev.type, cssnode, true); }
-                                   	 try {
+          const cssnode = () => {
+                                         try {
                                           	const css = document.querySelectorAll('style');
                                           	for (const cs of css) {
-                                              		if (cs.outerHTML.matchAll(needle)) {
+                                              		if (cs.outerHTML.match(needle)) {
 								cs.remove();
                                               		}			
                                           	}
                                    	 } catch { }
           };
-          if (document.readyState === 'loading') {
-                   window.addEventListener('DOMContentLoaded', cssnode, true);
-          } else {
-                   cssnode();
-          }
+          const observer = new MutationObserver(cssnode);
+	  observer.observe(document.documentElement, { childList: true, subtree: true });
 })();
 
 # style-tag-remover-alternative
@@ -335,22 +327,18 @@ remove-inline-noscript.js application/javascript
               needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
           }
           needle = new RegExp(needle);
-          const nosnode = ev => {
-                                         if (ev) { window.removeEventListener(ev.type, nosnode, true); }
-                                   	 try {
+          const nosnode = () => {
+                                         try {
                                           	const noss = document.querySelectorAll('noscript');
                                           	for (const nos of noss) {
-                                              		if (nos.outerHTML.matchAll(needle)) {
+                                              		if (nos.outerHTML.match(needle)) {
                                                                 	nos.remove();
                                               		}			
                                           	}
                                    	 } catch { }
           };
-          if (document.readyState === 'loading') {
-                   window.addEventListener('DOMContentLoaded', nosnode, true);
-          } else {
-                   nosnode();
-          }
+          const observer = new MutationObserver(nosnode);
+	  observer.observe(document.documentElement, { childList: true, subtree: true });
 })();
 
 # noscript-logger
@@ -391,22 +379,18 @@ remove-inline-frame.js application/javascript
               needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
           }
           needle = new RegExp(needle);
-          const framenode = ev => {
-                                           if (ev) { window.removeEventListener(ev.type, framenode, true); }
-                                   	   try {
+          const framenode = () => {
+                                           try {
                                           	const frames = document.querySelectorAll('iframe');
                                           	for (const frame of frames) {
-                                              		if (frame.outerHTML.matchAll(needle)) {
+                                              		if (frame.outerHTML.match(needle)) {
                                                                 	frame.remove();
                                               		}			
                                           	}
                                    	   } catch { }
           };
-          if (document.readyState === 'loading') {
-                   window.addEventListener('DOMContentLoaded', framenode, true);
-          } else {
-                   framenode();
-          }
+          const observer = new MutationObserver(framenode);
+	  observer.observe(document.documentElement, { childList: true, subtree: true });
 })();
 
 # link-tag-remover
@@ -423,22 +407,18 @@ remove-link.js application/javascript
               needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
           }
           needle = new RegExp(needle);
-          const linknode = ev => {
-                                          if (ev) { window.removeEventListener(ev.type, linknode, true); }
-                                   	  try {
+          const linknode = () => {
+                                          try {
                                           	const links = document.querySelectorAll('link');
                                           	for (const link of links) {
-                                              		if (link.outerHTML.matchAll(needle)) {
+                                              		if (link.outerHTML.match(needle)) {
 								link.remove();
                                               		}			
                                           	}
                                    	  } catch { }
           };
-          if (document.readyState === 'loading') {
-                   window.addEventListener('DOMContentLoaded', linknode, true);
-          } else {
-                   linknode();
-          }
+          const observer = new MutationObserver(linknode);
+	  observer.observe(document.documentElement, { childList: true, subtree: true });
 })();
 
 # meta-tag-remover
@@ -455,22 +435,18 @@ remove-meta.js application/javascript
               needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
           }
           needle = new RegExp(needle);
-          const metanode = ev => {
-                                          if (ev) { window.removeEventListener(ev.type, metanode, true); }
-                                   	  try {
+          const metanode = () => {
+                                          try {
                                           	const metas = document.querySelectorAll('meta');
                                           	for (const meta of metas) {
-                                              		if (meta.outerHTML.matchAll(needle)) {
+                                              		if (meta.outerHTML.match(needle)) {
                                                                 	meta.remove();
                                               		}			
                                           	}
                                    	  } catch { }
           };
-          if (document.readyState === 'loading') {
-                   window.addEventListener('DOMContentLoaded', metanode, true);
-          } else {
-                   metanode();
-          }
+          const observer = new MutationObserver(metanode);
+	  observer.observe(document.documentElement, { childList: true, subtree: true });
 })();
 
 # element-setAttribute
