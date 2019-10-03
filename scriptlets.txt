@@ -4,13 +4,13 @@
 # example.com##+js(set-respheader, Cross-Origin-Resource-Policy, same-site)
 set-respheader.js application/javascript
 (() => {
-	'use strict';
-	const docu = document;
-	if (!docu.head) { return; }
-	const meta = docu.createElement('meta');
-	meta.setAttribute('http-equiv', '{{1}}');
-	meta.setAttribute('content', '{{2}}');
-	docu.head.appendChild(meta);
+	   'use strict';
+	   const docu = document;
+	   if (!docu.head) { return; }
+	   const meta = docu.createElement('meta');
+	   meta.setAttribute('http-equiv', '{{1}}');
+	   meta.setAttribute('content', '{{2}}');
+	   docu.head.appendChild(meta);
 })();
 
 # readOnly-property-setter
@@ -163,12 +163,12 @@ remove-inline-script.js application/javascript
 		  needle = new RegExp(needle);
 		  const jsnode = () => {
 					    try {
-							const jss = document.querySelectorAll('script');
-							for (const js of jss) {
-								if (js.outerHTML.match(needle)) {
-										js.remove();
-								}			
-							}
+						    const jss = document.querySelectorAll('script');
+						    for (const js of jss) {
+						    	    if (js.outerHTML.match(needle)) {
+								js.remove();
+							    }			
+						    }
 					    } catch { }
 		  };
 		  const observer = new MutationObserver(jsnode);
