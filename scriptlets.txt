@@ -156,7 +156,24 @@ remove-inline-script.js application/javascript
 		  'use strict';
 		  let needle = '{{1}}';
 		  if ( needle === '' || needle === '{{1}}' ) {
-		      needle = '.?';
+		  	const jsnode = ev => {	
+					  	if (ev) { window.removeEventListener(ev.type, jsnode, true); }
+						try {
+							const scripts = document.querySelectorAll('script');
+							const log = console.log.bind(console);
+							for (const script of scripts) {
+				     		     	     if (script.outerHTML) {
+							 	log('uBO: script("%s")', script.outerHTML);
+				     		     	     }	
+							}
+		        		  	} catch { }
+		  	};
+		  	if (document.readyState === 'complete') {
+			    	 jsnode();
+		  	} else {
+			    	 window.addEventListener('load', jsnode, true);
+		  	}
+			return;
 		  } else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
 		      needle = needle.slice(1,-1);
 		  } else {
@@ -175,8 +192,9 @@ remove-inline-script.js application/javascript
 		  };
 		  const observer = new MutationObserver(jsnode);
 		  observer.observe(document.documentElement, { childList: true, subtree: true });
-		  if (document.readyState === 'complete') { observer.disconnect(); return; } 
+		  if (document.readyState === complete) { observer.disconnect(); return; }
 })();
+
 
 # script-tag-remover-alternative
 # example.com##+js(rm-js, /adblock|adsense/)
@@ -209,30 +227,6 @@ rm-js.js application/javascript
 		xhr.send();
 })();
 
-# javascript-logger
-# example.com##+js(js-logger)
-js-logger.js application/javascript
-(() => {
-		'use strict';
-		const logscripts = ev => {
-						  if (ev) { window.removeEventListener(ev.type, logscripts, true); }
-						  try {
-							const scripts = document.querySelectorAll('script');
-							const log = console.log.bind(console);
-							for (const script of scripts) {
-								if (script.outerHTML) {
-									log('uBO: javascript("%s")', script.outerHTML);
-								}	
-							}
-						  } catch { }
-		};
-		if (document.readyState === 'complete') {
-			logscripts(); 
-		} else {
-			window.addEventListener('load', logscripts, true);
-		}
-})();
-
 # style-tag-remover
 # example.com##+js(remove-inline-style, /cookie-notice/)
 remove-inline-style.js application/javascript
@@ -240,7 +234,24 @@ remove-inline-style.js application/javascript
           'use strict';
 	  let needle = '{{1}}';
           if ( needle === '' || needle === '{{1}}' ) {
-              needle = '.?';
+              const cssnode = ev => {
+					if (ev) { window.removeEventListener(ev.type, cssnode, true); }
+					try {
+						const stylesheets = document.querySelectorAll('style');
+						const log = console.log.bind(console);
+						for (const stylesheet of stylesheets) {
+							if (stylesheet.outerHTML) {
+								log('uBO: stylesheet("%s")', stylesheet.outerHTML);
+							}	
+						}
+					} catch { }
+	      };
+	      if (document.readyState === 'complete') {
+			cssnode();
+	      } else {
+			window.addEventListener('load', cssnode, true);
+	      }
+	      return;
           } else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
               needle = needle.slice(1,-1);
           } else {
@@ -293,30 +304,6 @@ rm-css.js application/javascript
 		xhr.send();
 })();
 
-# cascading-stylesheets-logger
-# example.com##+js(css-logger)
-css-logger.js application/javascript
-(() => {
-		'use strict';
-		const logstylesheets = ev => {
-						if (ev) { window.removeEventListener(ev.type, logstylesheets, true); }
-						try {
-							const stylesheets = document.querySelectorAll('style');
-							const log = console.log.bind(console);
-							for (const stylesheet of stylesheets) {
-								if (stylesheet.outerHTML) {
-									log('uBO: stylesheet("%s")', stylesheet.outerHTML);
-								}	
-							}
-						} catch { }
-		};
-		if (document.readyState === 'complete') {
-			logstylesheets();
-		} else {
-			window.addEventListener('load', logstylesheets, true);
-		}
-})();
-
 # noscript-tag-remover
 # example.com##+js(remove-inline-noscript, /text/)
 remove-inline-noscript.js application/javascript
@@ -324,7 +311,24 @@ remove-inline-noscript.js application/javascript
           'use strict';
 	  let needle = '{{1}}';
           if ( needle === '' || needle === '{{1}}' ) {
-              needle = '.?';
+              const nosnode = ev => {
+				    	if (ev) { window.removeEventListener(ev.type, nosnode, true); }
+				    	try {
+						const noscripts = document.querySelectorAll('noscript');
+						const log = console.log.bind(console);
+						for (const noscript of noscripts) {
+							if (noscript.outerHTML) {
+								log('uBO: noscript("%s")', noscript.outerHTML);
+							}	
+						}
+				    	} catch { }
+	      };
+	      if (document.readyState === 'complete') {
+			nosnode(); 
+	      } else {
+			window.addEventListener('load', nosnode, true);
+	      }
+	      return;
           } else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
               needle = needle.slice(1,-1);
           } else {
@@ -344,30 +348,6 @@ remove-inline-noscript.js application/javascript
           const observer = new MutationObserver(nosnode);
 	  observer.observe(document.documentElement, { childList: true, subtree: true });
 	  if (document.readyState === 'complete') { observer.disconnect(); return; } 
-})();
-
-# noscript-logger
-# example.com##+js(noscript-logger)
-noscript-logger.js application/javascript
-(() => {
-		'use strict';
-		const lognoscripts = ev => {
-					    if (ev) { window.removeEventListener(ev.type, lognoscripts, true); }
-					    try {
-						 	const noscripts = document.querySelectorAll('noscript');
-						 	const log = console.log.bind(console);
-						 	for (const noscript of noscripts) {
-								if (noscript.outerHTML) {
-									log('uBO: noscript("%s")', noscript.outerHTML);
-								}	
-						 	}
-					    } catch { }
-		};
-		if (document.readyState === 'complete') {
-			lognoscripts(); 
-		} else {
-			window.addEventListener('load', lognoscripts, true);
-		}
 })();
 
 # frame-tag-remover
