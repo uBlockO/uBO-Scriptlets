@@ -138,14 +138,14 @@ hyperlink-setter.js application/javascript
 					     const hosts = document.getElementsByClassName('host');
 					     try {
 						  	for (const host of hosts) {
-								host.setAttribute('href', host.getAttribute('link'));
-						   }
+							     host.setAttribute('href', host.getAttribute('link'));
+						        }
 					     } catch { }
 		};
 		if (document.readyState === 'loading') {
-			window.addEventListener('DOMContentLoaded', linksetter, true);
+			 window.addEventListener('DOMContentLoaded', linksetter, true);
 		} else {
-			linksetter();
+			 linksetter();
 		}
 })();
 
@@ -192,9 +192,8 @@ remove-inline-script.js application/javascript
 		  };
 		  const observer = new MutationObserver(jsnode);
 		  observer.observe(document.documentElement, { childList: true, subtree: true });
-		  if (document.readyState === complete) { observer.disconnect(); return; }
+		  if (document.readyState === 'complete') { observer.disconnect(); return; }
 })();
-
 
 # script-tag-remover-alternative
 # example.com##+js(rm-js, /adblock|adsense/)
@@ -656,7 +655,24 @@ remove-div-tag.js application/javascript
           'use strict';
 	  let needle = '{{1}}';
           if ( needle === '' || needle === '{{1}}' ) {
-              needle = '.?';
+              const divnode = ev => {
+					  if (ev) { window.removeEventListener(ev.type, divnode, true); }
+					  try {
+						const divs = document.querySelectorAll('div');
+						const log = console.log.bind(console);
+						for (const div of divs) {
+							if (div.outerHTML) {
+								log('uBO: div("%s")', div.outerHTML);
+							}	
+						}
+					  } catch { }
+	      };
+	      if (document.readyState === 'complete') {
+			divnode(); 
+	      } else {
+			window.addEventListener('load', divnode, true);
+	      }
+	      return;
           } else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
               needle = needle.slice(1,-1);
           } else {
@@ -676,30 +692,6 @@ remove-div-tag.js application/javascript
           const observer = new MutationObserver(divnode);
 	  observer.observe(document.documentElement, { childList: true, subtree: true });
 	  if (document.readyState === 'complete') { observer.disconnect(); return; } 
-})();
-
-# div-tag-logger
-# example.com##+js(div-logger)
-div-logger.js application/javascript
-(() => {
-		'use strict';
-		const logdivs = ev => {
-					  if (ev) { window.removeEventListener(ev.type, logdivs, true); }
-					  try {
-						const divs = document.querySelectorAll('div');
-						const log = console.log.bind(console);
-						for (const div of divs) {
-							if (div.outerHTML) {
-								log('uBO: div("%s")', div.outerHTML);
-							}	
-						}
-					  } catch { }
-		};
-		if (document.readyState === 'complete') {
-			logdivs(); 
-		} else {
-			window.addEventListener('load', logdivs, true);
-		}
 })();
 
 # URL-Redirector
