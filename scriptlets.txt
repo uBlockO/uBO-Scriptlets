@@ -362,9 +362,9 @@ remove-inline-frame.js application/javascript
 						const frames = document.querySelectorAll('iframe');
 						const log = console.log.bind(console);
 						for (const frame of frames) {
-							if (frame.outerHTML) {
-								log('uBO: iframe("%s")', iframe.outerHTML);
-							}	
+						     if (frame.outerHTML) {
+							 log('uBO: iframe("%s")', iframe.outerHTML);
+						     }	
 						}
 				    	} catch { }
 	      };
