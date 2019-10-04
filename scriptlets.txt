@@ -153,46 +153,46 @@ hyperlink-setter.js application/javascript
 # example.com##+js(remove-inline-script, /adblock|adsense/)
 remove-inline-script.js application/javascript
 (() => { 
-		  'use strict';
-		  let needle = '{{1}}';
-		  if ( needle === '' || needle === '{{1}}' ) {
-		  	const jsnode = ev => {	
-					  	if (ev) { window.removeEventListener(ev.type, jsnode, true); }
-						try {
-							const scripts = document.querySelectorAll('script');
-							const log = console.log.bind(console);
-							for (const script of scripts) {
-				     		     	     if (script.outerHTML) {
-							 	log('uBO: script("%s")', script.outerHTML);
-				     		     	     }	
-							}
-		        		  	} catch { }
-		  	};
-		  	if (document.readyState === 'complete') {
-			    	 jsnode();
-		  	} else {
-			    	 window.addEventListener('load', jsnode, true);
-		  	}
-			return;
-		  } else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
-		      needle = needle.slice(1,-1);
-		  } else {
-		      needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-		  }
-		  needle = new RegExp(needle);
-		  const jsnode = () => {
-					    try {
-						    const jss = document.querySelectorAll('script');
-						    for (const js of jss) {
-						    	    if (js.outerHTML.match(needle)) {
-								js.remove();
-							    }			
-						    }
-					    } catch { }
-		  };
-		  const observer = new MutationObserver(jsnode);
-		  observer.observe(document.documentElement, { childList: true, subtree: true });
-		  if (document.readyState === 'complete') { observer.disconnect(); return; }
+	  'use strict';
+	  let needle = '{{1}}';
+	  if ( needle === '' || needle === '{{1}}' ) {
+		const jsnode = ev => {	
+					if (ev) { window.removeEventListener(ev.type, jsnode, true); }
+					try {
+						const scripts = document.querySelectorAll('script');
+						const log = console.log.bind(console);
+						for (const script of scripts) {
+						     if (script.outerHTML) {
+							log('uBO: script("%s")', script.outerHTML);
+						     }	
+						}
+					} catch { }
+		};
+		if (document.readyState === 'complete') {
+			 jsnode();
+		} else {
+			 window.addEventListener('load', jsnode, true);
+		}
+		return;
+	  } else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
+	      needle = needle.slice(1,-1);
+	  } else {
+	      needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+	  }
+	  needle = new RegExp(needle);
+	  const jsnode = () => {
+				    try {
+					    const jss = document.querySelectorAll('script');
+					    for (const js of jss) {
+						    if (js.outerHTML.match(needle)) {
+							js.remove();
+						    }			
+					    }
+				    } catch { }
+	  };
+	  const observer = new MutationObserver(jsnode);
+	  observer.observe(document.documentElement, { childList: true, subtree: true });
+	  if (document.readyState === 'complete') { observer.disconnect(); return; }
 })();
 
 # script-tag-remover-alternative
@@ -356,7 +356,24 @@ remove-inline-frame.js application/javascript
           'use strict';
 	  let needle = '{{1}}';
           if ( needle === '' || needle === '{{1}}' ) {
-              needle = '.?';
+              const framenode = ev => {
+				    	if (ev) { window.removeEventListener(ev.type, framenode, true); }
+				    	try {
+						const frames = document.querySelectorAll('iframe');
+						const log = console.log.bind(console);
+						for (const frame of frames) {
+							if (frame.outerHTML) {
+								log('uBO: iframe("%s")', iframe.outerHTML);
+							}	
+						}
+				    	} catch { }
+	      };
+	      if (document.readyState === 'complete') {
+			framenode(); 
+	      } else {
+			window.addEventListener('load', framenode, true);
+	      }
+	      return;
           } else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
               needle = needle.slice(1,-1);
           } else {
@@ -365,12 +382,12 @@ remove-inline-frame.js application/javascript
           needle = new RegExp(needle);
           const framenode = () => {
                                            try {
-                                          	const frames = document.querySelectorAll('iframe');
-                                          	for (const frame of frames) {
+                                          	 const frames = document.querySelectorAll('iframe');
+                                          	 for (const frame of frames) {
                                               		if (frame.outerHTML.match(needle)) {
                                                                 	frame.remove();
                                               		}			
-                                          	}
+                                          	 }
                                    	   } catch { }
           };
           const observer = new MutationObserver(framenode);
