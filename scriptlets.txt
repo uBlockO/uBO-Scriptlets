@@ -175,7 +175,6 @@ remove-inline-script.js application/javascript
 	  };
 	  const observer = new MutationObserver(jsnode);
 	  observer.observe(document.documentElement, { childList: true, subtree: true });
-	  if (document.readyState === 'complete') { observer.disconnect(); return; }
 })();
 
 # script-tag-remover-alternative
@@ -235,7 +234,6 @@ remove-inline-style.js application/javascript
           };
           const observer = new MutationObserver(cssnode);
 	  observer.observe(document.documentElement, { childList: true, subtree: true });
-	  if (document.readyState === 'complete') { observer.disconnect(); return; } 
 })();
 
 # style-tag-remover-alternative
@@ -295,7 +293,6 @@ remove-inline-noscript.js application/javascript
           };
           const observer = new MutationObserver(nosnode);
 	  observer.observe(document.documentElement, { childList: true, subtree: true });
-	  if (document.readyState === 'complete') { observer.disconnect(); return; } 
 })();
 
 # frame-tag-remover
@@ -324,7 +321,6 @@ remove-inline-frame.js application/javascript
           };
           const observer = new MutationObserver(framenode);
 	  observer.observe(document.documentElement, { childList: true, subtree: true });
-	  if (document.readyState === 'complete') { observer.disconnect(); return; } 
 })();
 
 # link-tag-remover
@@ -623,7 +619,6 @@ remove-div-tag.js application/javascript
           };
           const observer = new MutationObserver(divnode);
 	  observer.observe(document.documentElement, { childList: true, subtree: true });
-	  if (document.readyState === 'complete') { observer.disconnect(); return; } 
 })();
 
 # URL-Redirector
