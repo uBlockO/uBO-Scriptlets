@@ -259,7 +259,7 @@ remove-inline-style.js application/javascript
           };
           const observer = new MutationObserver(cssnode);
 	  observer.observe(document.documentElement, { childList: true, subtree: true });
-	  if (document.readyState === 'complete') { observer.disconnect(); return;} 
+	  if (document.readyState === 'complete') { observer.disconnect(); return; } 
 })();
 
 # style-tag-remover-alternative
@@ -746,9 +746,9 @@ url-redirector.js application/javascript
 					} catch { }
 		};		    
 		if (document.readyState === 'loading') {
-				window.addEventListener('DOMContentLoaded', ur, true);
+			   window.addEventListener('DOMContentLoaded', ur, true);
 		  } else {
-				ur();
+			   ur();
 		  }
 })();
 
@@ -771,8 +771,8 @@ set-innerHTML.js application/javascript
 					   } catch { }
 		};
 		if (document.readyState === 'loading') {
-			window.addEventListener('DOMContentLoaded', ihs, true);
+			 window.addEventListener('DOMContentLoaded', ihs, true);
 		} else {
-			ihs();
+			 ihs();
 		}
 })();
