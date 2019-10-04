@@ -156,24 +156,7 @@ remove-inline-script.js application/javascript
 	  'use strict';
 	  let needle = '{{1}}';
 	  if ( needle === '' || needle === '{{1}}' ) {
-		const jsnode = ev => {	
-					if (ev) { window.removeEventListener(ev.type, jsnode, true); }
-					try {
-						const scripts = document.querySelectorAll('script');
-						const log = console.log.bind(console);
-						for (const script of scripts) {
-						     if (script.outerHTML) {
-							log('uBO: script("%s")', script.outerHTML);
-						     }	
-						}
-					} catch { }
-		};
-		if (document.readyState === 'complete') {
-			 jsnode();
-		} else {
-			 window.addEventListener('load', jsnode, true);
-		}
-		return;
+	      needle = '.?';
 	  } else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
 	      needle = needle.slice(1,-1);
 	  } else {
@@ -233,24 +216,7 @@ remove-inline-style.js application/javascript
           'use strict';
 	  let needle = '{{1}}';
           if ( needle === '' || needle === '{{1}}' ) {
-              const cssnode = ev => {
-					if (ev) { window.removeEventListener(ev.type, cssnode, true); }
-					try {
-						const stylesheets = document.querySelectorAll('style');
-						const log = console.log.bind(console);
-						for (const stylesheet of stylesheets) {
-							if (stylesheet.outerHTML) {
-								log('uBO: stylesheet("%s")', stylesheet.outerHTML);
-							}	
-						}
-					} catch { }
-	      };
-	      if (document.readyState === 'complete') {
-			cssnode();
-	      } else {
-			window.addEventListener('load', cssnode, true);
-	      }
-	      return;
+              needle = '.?';
           } else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
               needle = needle.slice(1,-1);
           } else {
@@ -310,24 +276,7 @@ remove-inline-noscript.js application/javascript
           'use strict';
 	  let needle = '{{1}}';
           if ( needle === '' || needle === '{{1}}' ) {
-              const nosnode = ev => {
-				    	if (ev) { window.removeEventListener(ev.type, nosnode, true); }
-				    	try {
-						const noscripts = document.querySelectorAll('noscript');
-						const log = console.log.bind(console);
-						for (const noscript of noscripts) {
-							if (noscript.outerHTML) {
-								log('uBO: noscript("%s")', noscript.outerHTML);
-							}	
-						}
-				    	} catch { }
-	      };
-	      if (document.readyState === 'complete') {
-			nosnode(); 
-	      } else {
-			window.addEventListener('load', nosnode, true);
-	      }
-	      return;
+              needle = '.?';
           } else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
               needle = needle.slice(1,-1);
           } else {
@@ -356,24 +305,7 @@ remove-inline-frame.js application/javascript
           'use strict';
 	  let needle = '{{1}}';
           if ( needle === '' || needle === '{{1}}' ) {
-              const framenode = ev => {
-				    	if (ev) { window.removeEventListener(ev.type, framenode, true); }
-				    	try {
-						const frames = document.querySelectorAll('iframe');
-						const log = console.log.bind(console);
-						for (const frame of frames) {
-						     if (frame.outerHTML) {
-							 log('uBO: iframe("%s")', frame.outerHTML);
-						     }	
-						}
-				    	} catch { }
-	      };
-	      if (document.readyState === 'complete') {
-			framenode(); 
-	      } else {
-			window.addEventListener('load', framenode, true);
-	      }
-	      return;
+              needle = '.?';
           } else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
               needle = needle.slice(1,-1);
           } else {
@@ -672,24 +604,7 @@ remove-div-tag.js application/javascript
           'use strict';
 	  let needle = '{{1}}';
           if ( needle === '' || needle === '{{1}}' ) {
-              const divnode = ev => {
-					  if (ev) { window.removeEventListener(ev.type, divnode, true); }
-					  try {
-						const divs = document.querySelectorAll('div');
-						const log = console.log.bind(console);
-						for (const div of divs) {
-							if (div.outerHTML) {
-								log('uBO: div("%s")', div.outerHTML);
-							}	
-						}
-					  } catch { }
-	      };
-	      if (document.readyState === 'complete') {
-			divnode(); 
-	      } else {
-			window.addEventListener('load', divnode, true);
-	      }
-	      return;
+              needle = '.?';
           } else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
               needle = needle.slice(1,-1);
           } else {
