@@ -680,3 +680,31 @@ set-innerHTML.js application/javascript
 			 ihs();
 		}
 })();
+
+# inline-tag-logger
+# example.com##+js(inline-tag-logger, script)
+inline-tag-logger.js application/javascript
+(() => {
+		'use strict';
+		const needle = '{{1}}';
+		if ( needle === '' || needle === '{{1}}' ) {
+			return;
+		}
+		const logtags = ev => {
+					  if (ev) { window.removeEventListener(ev.type, logtags, true); }
+					  try {
+						const tags = document.querySelectorAll(needle);
+						const log = console.log.bind(console);
+						for (const tag of tags) {
+							if (tag.outerHTML) {
+								log('uBO: %s("%s")', needle, tag.outerHTML);
+							}	
+						}
+					  } catch { }
+		};
+		if (document.readyState === 'complete') {
+			logtags(); 
+		} else {
+			window.addEventListener('load', logtags, true);
+		}
+})();
