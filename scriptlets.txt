@@ -168,6 +168,7 @@ remove-inline-script.js application/javascript
 					    for (const js of jss) {
 						    if (js.outerHTML.match(needle)) {
 							js.remove();
+							js.textContent = '';
 						    }			
 					    }
 				    } catch { }
@@ -228,6 +229,7 @@ remove-inline-style.js application/javascript
                                           	for (const cs of css) {
                                               		if (cs.outerHTML.match(needle)) {
 								cs.remove();
+								cs.textContent = '';
                                               		}			
                                           	}
                                    	 } catch { }
@@ -288,6 +290,7 @@ remove-inline-noscript.js application/javascript
                                           	for (const nos of noss) {
                                               		if (nos.outerHTML.match(needle)) {
                                                                 	nos.remove();
+									nos.textContent = '';
                                               		}			
                                           	}
                                    	 } catch { }
