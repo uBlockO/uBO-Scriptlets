@@ -25,10 +25,10 @@ ro.js application/javascript
 		const Object = window.Object.bind(window);
 		const descriptor = window.Object.getOwnPropertyDescriptor.bind(window.Object);
 		const defineProperty = window.Object.defineProperty.bind(window.Object);
-		const finalSetter = () => { };
-		const finalGetter = () => { return data; };
+		const finalSetter = async () => { };
+		const finalGetter = async () => { return data; };
 		const trustedSetters = { };
-		const makeProxy = (parent, chain) => {
+		const makeProxy = async (parent, chain) => {
 			const i = chain.indexOf('.');
 			if ( i === -1 ) {
 				let current = descriptor(parent, chain);
@@ -48,7 +48,7 @@ ro.js application/javascript
 				} else {
 					let current = descriptor(parent, prop);
 					if ( !current || !trustedSetters[chain] || trustedSetters[chain] !== current.set ) {
-						const setter = value => {
+						const setter = async value => {
 							if ( value instanceof Object ) {
 								try {
 									makeProxy(value, chain);
@@ -66,7 +66,7 @@ ro.js application/javascript
 				}
 			}
 		};
-		const define = payload => {
+		const define = async payload => {
 			data = payload;
 			try {
 				makeProxy(window, prop);
