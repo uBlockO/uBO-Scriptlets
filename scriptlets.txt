@@ -86,7 +86,7 @@ eremove.js application/javascript
 		if ( selector === '' || selector === '{{1}}' ) {
 			return;
 		}
-		const rm = () => {
+		const rm = async () => {
 		 			   const elements = document.querySelectorAll(selector);
 					   try {
 						  for (const element of elements) {
@@ -112,7 +112,7 @@ rm-attr.js application/javascript
 		    if ( selector === '' || selector === '{{2}}' ) {
 			selector = `[${tokens.join('],[')}]`;
 		    }
-		    const rmattr = () => {
+		    const rmattr = async () => {
 						const nodes = document.querySelectorAll(selector);
 						try {
 			    				for ( const node of nodes ) {
@@ -132,7 +132,7 @@ rm-attr.js application/javascript
 hyperlink-setter.js application/javascript
 (() => {
 		'use strict';
-		const linksetter = ev => { 
+		const linksetter = async ev => { 
 					     if (ev) { window.removeEventListener(ev.type, linksetter, true); }
 					     const hosts = document.getElementsByClassName('host');
 					     try {
@@ -162,7 +162,7 @@ remove-inline-script.js application/javascript
 	      needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 	  }
 	  needle = new RegExp(needle);
-	  const jsnode = () => {
+	  const jsnode = async () => {
 				    try {
 					    const jss = document.querySelectorAll('script');
 					    for (const js of jss) {
@@ -194,7 +194,7 @@ rm-js.js application/javascript
 		needle = new RegExp(needle);
 		const xhr = new XMLHttpRequest();
 		xhr.open('GET', window.location.href, false);
-		xhr.onload = () => {
+		xhr.onload = async () => {
 					const html = xhr.response.replace(/<script\b[\s\S]*?<\/script>/g, script => {
 						if (script.match(needle)) {
 						  	return '';
@@ -223,7 +223,7 @@ remove-inline-style.js application/javascript
               needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
           }
           needle = new RegExp(needle);
-          const cssnode = () => {
+          const cssnode = async () => {
                                          try {
                                           	const css = document.querySelectorAll('style');
                                           	for (const cs of css) {
@@ -255,7 +255,7 @@ rm-css.js application/javascript
 		needle = new RegExp(needle);
 		const xhr = new XMLHttpRequest();
 		xhr.open('GET', window.location.href, false);
-		xhr.onload = () => {
+		xhr.onload = async () => {
 					const html = xhr.response.replace(/<style\b[\s\S]*?<\/style>/g, style => {
 						if (style.match(needle)) {
 							 return '';
@@ -284,7 +284,7 @@ remove-inline-noscript.js application/javascript
               needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
           }
           needle = new RegExp(needle);
-          const nosnode = () => {
+          const nosnode = async () => {
                                          try {
                                           	const noss = document.querySelectorAll('noscript');
                                           	for (const nos of noss) {
@@ -314,7 +314,7 @@ remove-inline-frame.js application/javascript
               needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
           }
           needle = new RegExp(needle);
-          const framenode = () => {
+          const framenode = async () => {
                                            try {
                                           	 const frames = document.querySelectorAll('iframe');
                                           	 for (const frame of frames) {
@@ -343,7 +343,7 @@ remove-link.js application/javascript
               needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
           }
           needle = new RegExp(needle);
-          const linknode = () => {
+          const linknode = async () => {
                                           try {
                                           	const links = document.querySelectorAll('link');
                                           	for (const link of links) {
@@ -372,7 +372,7 @@ remove-meta.js application/javascript
               needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
           }
           needle = new RegExp(needle);
-          const metanode = () => {
+          const metanode = async () => {
                                           try {
                                           	const metas = document.querySelectorAll('meta');
                                           	for (const meta of metas) {
@@ -399,7 +399,7 @@ set-attr.js application/javascript
           if ( selector === '' || selector === '{{3}}' ) {
               selector = `[${tokens.join('],[')}]`;
           }
-          const stattr = ev => {
+          const stattr = async ev => {
               				if (ev) { window.removeEventListener(ev.type, stattr, true); }
               				try {
                     				const nodes = document.querySelectorAll(selector);
@@ -429,7 +429,7 @@ tog-attr.js application/javascript
           if ( selector === '' || selector === '{{2}}' ) {
               selector = `[${tokens.join('],[')}]`;
           }
-          const togattr = ev => {
+          const togattr = async ev => {
               				 if (ev) { window.removeEventListener(ev.type, togattr, true); }
             				 try {
                     				const nodes = document.querySelectorAll(selector);
@@ -457,7 +457,7 @@ set-prop.js application/javascript
 		    if ( chain === '' || chain === '{{1}}' ) {
 			return;
 		    }
-		    const set = ev => {
+		    const set = async ev => {
 						if (ev) { window.removeEventListener(ev.type, set, true); }
 						try {
 							const owner = window;
@@ -480,7 +480,7 @@ set-prop.js application/javascript
 cookie-set.js application/javascript
 (() => {
 		'use strict';
-		const cs = ev => {
+		const cs = async ev => {
 					if (ev) { window.removeEventListener(ev.type, cs, true); }
 					try {
 						document.cookie = '{{1}}={{2}}; max-age={{3}}; secure; path=/;';
@@ -503,7 +503,7 @@ ereplace.js application/javascript
 			return;
 		}
 		const div = document.createElement('div');
-		const replace = ev => {
+		const replace = async ev => {
 						if (ev) { window.removeEventListener(ev.type, replace, true); }
 						try {
 							const elements = document.querySelectorAll(selector);
@@ -524,7 +524,7 @@ ereplace.js application/javascript
 remove-prop.js application/javascript
 (() => {
 	      'use strict';
-  	      const remove = ev => {
+  	      const remove = async ev => {
 	      				    if (ev) { window.removeEventListener(ev.type, remove, true); }
 					    try {
                   				  delete {{1}}
@@ -547,7 +547,7 @@ add-elem.js application/javascript
 	   		return; 
 	        }
 		const identifiers = identifier.split(/\s*\|\s*/);
-		const ea = ev => {
+		const ea = async ev => {
 					if (ev) { window.removeEventListener(ev.type, ea, true); }
 					try {
 						const element = document.createElement('div');
@@ -579,7 +579,7 @@ query-stripper.js application/javascript
 	   		return; 
 	   	}			
 	   	const needles = needle.split(/\s*\|\s*/);
-		const querystripper = ev => {
+		const querystripper = async ev => {
 						if (ev) { window.removeEventListener(ev.type, querystripper, true); }
 						try {
 			  		      		const url = new URL(location.href);
@@ -613,7 +613,7 @@ remove-div-tag.js application/javascript
               needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
           }
           needle = new RegExp(needle);
-          const divnode = () => {
+          const divnode = async () => {
                                         try {
                                           	const divs = document.querySelectorAll('div');
                                           	for (const div of divs) {
@@ -637,7 +637,7 @@ url-redirector.js application/javascript
 				return; 
 	   	}			
 	   	const needles = needle.split(/\s*\|\s*/);
-		const ur = ev => {
+		const ur = async ev => {
 					if (ev) { window.removeEventListener(ev.type, ur, true);}
 					try {
 			  			const url = new URL(location.href);
@@ -666,7 +666,7 @@ set-innerHTML.js application/javascript
 		if ( selector === '' || selector === '{{1}}' ) {
 			return;
 		}
-		const ihs = ev => {
+		const ihs = async ev => {
 		 			   if (ev) { window.removeEventListener(ev.type, ihs, true); }
 					   const elements = document.querySelectorAll(selector);
 					   try {
@@ -691,7 +691,7 @@ inline-tag-logger.js application/javascript
 		if ( needle === '' || needle === '{{1}}' ) {
 			return;
 		}
-		const logtags = ev => {
+		const logtags = async ev => {
 					  if (ev) { window.removeEventListener(ev.type, logtags, true); }
 					  try {
 						const tags = document.querySelectorAll(needle);
