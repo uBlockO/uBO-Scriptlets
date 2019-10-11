@@ -96,6 +96,7 @@ eremove.js application/javascript
 		};
 		const observer = new MutationObserver(rm);
     		observer.observe(document.documentElement, { childList: true, subtree: true });
+		if (document.readyState === 'complete') { observer.disconnect(); return; } 
 })();
 
 # attribute-remover
@@ -625,6 +626,7 @@ remove-div-tag.js application/javascript
           };
           const observer = new MutationObserver(divnode);
 	  observer.observe(document.documentElement, { childList: true, subtree: true });
+	  if (document.readyState === 'complete') { observer.disconnect(); return; } 
 })();
 
 # URL-Redirector
