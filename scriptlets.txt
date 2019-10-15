@@ -679,8 +679,8 @@ set-innerHTML.js application/javascript
 })();
 
 # inline-tag-logger
-# example.com##+js(inline-tag-logger, script)
-inline-tag-logger.js application/javascript
+# example.com##+js(logger, script)
+logger.js application/javascript
 (() => {
 		'use strict';
 		const needle = '{{1}}';
@@ -693,9 +693,7 @@ inline-tag-logger.js application/javascript
 						const tags = document.querySelectorAll(needle);
 						const log = console.log.bind(console);
 						for (const tag of tags) {
-							if (tag.outerHTML) {
-								log('uBO: %s("%s")', needle, tag.outerHTML);
-							}	
+							log('uBO: %s("%s")', needle, tag.outerHTML);
 						}
 					  } catch { }
 		};
@@ -705,3 +703,4 @@ inline-tag-logger.js application/javascript
 			window.addEventListener('load', logtags, true);
 		}
 })();
+
