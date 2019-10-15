@@ -693,7 +693,9 @@ inline-tag-logger.js application/javascript
 						const tags = document.querySelectorAll(needle);
 						const log = console.log.bind(console);
 						for (const tag of tags) {
-							log('uBO: %s("%s")', needle, tag.outerHTML);
+							if (tag.outerHTML) {
+								log('uBO: %s("%s")', needle, tag.outerHTML);
+							}	
 						}
 					  } catch { }
 		};
