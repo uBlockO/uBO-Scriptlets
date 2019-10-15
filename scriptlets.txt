@@ -1,4 +1,4 @@
-# Collection of scriptlets to be used for injection/redirection on specific domains.
+# Collection of scriptlets to be used for injection on specific domains.
 
 # response-header-setter
 # example.com##+js(set-respheader, Cross-Origin-Resource-Policy, same-site)
