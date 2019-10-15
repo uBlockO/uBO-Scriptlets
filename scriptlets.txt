@@ -400,25 +400,22 @@ set-attr.js application/javascript
           if ( selector === '' || selector === '{{3}}' ) {
               selector = `[${tokens.join('],[')}]`;
           }
-          const stattr = async ev => {
-              				if (ev) { window.removeEventListener(ev.type, stattr, true); }
-              				try {
-                    				const nodes = document.querySelectorAll(selector);
-                    				for (const node of nodes) {
-                        				for (const attr of tokens) {
-                            					node.setAttribute(attr, '{{2}}');
-                        				}
-                    				}
-              				} catch { }
+          const stattr = async () => {
+					try {
+						const nodes = document.querySelectorAll(selector);
+						for (const node of nodes) {
+							for (const attr of tokens) {
+								node.setAttribute(attr, '{{2}}');
+							}
+						}
+					} catch { }
           };
-          if (document.readyState === 'loading') {
-                   window.addEventListener('DOMContentLoaded', stattr, true);
-          } else {
-                   stattr();
-          }
+          const observer = new MutationObserver(stattr);
+	  observer.observe(document.documentElement, { childList: true, subtree: true });
+	  if (document.readyState === 'complete') { observer.disconnect(); return; } 
 })();
 
-# element-toggleAttribute-DOMContentLoaded
+# element-toggleAttribute
 # example.com##+js(tog-attr, preload, video)
 tog-attr.js application/javascript
 (() => {
@@ -430,9 +427,8 @@ tog-attr.js application/javascript
           if ( selector === '' || selector === '{{2}}' ) {
               selector = `[${tokens.join('],[')}]`;
           }
-          const togattr = async ev => {
-              				 if (ev) { window.removeEventListener(ev.type, togattr, true); }
-            				 try {
+          const togattr = async () => {
+              				 try {
                     				const nodes = document.querySelectorAll(selector);
 					    	for (const node of nodes) {
 							for (const attr of tokens) {
@@ -441,11 +437,9 @@ tog-attr.js application/javascript
 						}
 					 } catch { }
           };
-          if (document.readyState === 'loading') {
-                   window.addEventListener('DOMContentLoaded', togattr, true);
-          } else {
-                   togattr();
-          }
+          const observer = new MutationObserver(togattr);
+	  observer.observe(document.documentElement, { childList: true, subtree: true });
+	  if (document.readyState === 'complete') { observer.disconnect(); return; } 
 })();
 
 # set-property on DOMContentLoaded
