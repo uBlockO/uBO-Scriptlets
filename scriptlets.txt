@@ -129,7 +129,7 @@ rm-attr.js application/javascript
 })();
 
 # hyperlink-setter
-# example.com##+js(hyperlink-setter)
+# example.com##+js(hyperlink-setter, action, link)
 hyperlink-setter.js application/javascript
 (() => {
 		'use strict';
@@ -138,7 +138,7 @@ hyperlink-setter.js application/javascript
 					     const hosts = document.getElementsByClassName('host');
 					     try {
 						  	for (const host of hosts) {
-							     host.setAttribute('action', host.getAttribute('link'));
+							     host.setAttribute('{{1}}', host.getAttribute('{{2}}'));
 						        }
 					     } catch { }
 		};
