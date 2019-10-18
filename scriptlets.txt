@@ -133,20 +133,17 @@ rm-attr.js application/javascript
 hyperlink-setter.js application/javascript
 (() => {
 		'use strict';
-		const linksetter = async ev => { 
-					     if (ev) { window.removeEventListener(ev.type, linksetter, true); }
-					     const hosts = document.getElementsByClassName('host');
-					     try {
-						  	for (const host of hosts) {
-							     host.setAttribute('{{1}}', host.getAttribute('{{2}}'));
-						        }
-					     } catch { }
+		const linksetter = async () => { 
+						    const hosts = document.getElementsByClassName('host');
+					     	    try {
+							  for (const host of hosts) {
+						     	       host.setAttribute('{{1}}', host.getAttribute('{{2}}'));
+							  }
+						    } catch { }
 		};
-		if (document.readyState === 'loading') {
-			 window.addEventListener('DOMContentLoaded', linksetter, true);
-		} else {
-			 linksetter();
-		}
+		const observer = new MutationObserver(linksetter);
+	    	observer.observe(document.documentElement, { childList: true, subtree: true });
+	    	if (document.readyState === 'complete') { observer.disconnect(); return; }
 })();
 
 # script-tag-remover
