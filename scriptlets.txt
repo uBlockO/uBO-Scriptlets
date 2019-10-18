@@ -138,7 +138,7 @@ hyperlink-setter.js application/javascript
 					     const hosts = document.getElementsByClassName('host');
 					     try {
 						  	for (const host of hosts) {
-							     host.setAttribute('href', host.getAttribute('link'));
+							     host.setAttribute('action', host.getAttribute('link'));
 						        }
 					     } catch { }
 		};
