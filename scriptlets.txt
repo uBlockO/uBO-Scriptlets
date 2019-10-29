@@ -48,7 +48,7 @@ ro.js application/javascript
 				} else {
 					let current = descriptor(parent, prop);
 					if ( !current || !trustedSetters[chain] || trustedSetters[chain] !== current.set ) {
-						const setter = async value => {
+						const setter = value => {
 							if ( value instanceof Object ) {
 								try {
 									makeProxy(value, chain);
