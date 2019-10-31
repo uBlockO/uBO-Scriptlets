@@ -129,8 +129,8 @@ rm-attr.js application/javascript
 })();
 
 # hyperlink-setter
-# example.com##+js(hyperlink-setter, form[action], button[link])
-hyperlink-setter.js application/javascript
+# example.com##+js(multiup, form[action], button[link])
+multiup.js application/javascript
 (() => {
 		'use strict';
 		const selector = '{{1}}';
