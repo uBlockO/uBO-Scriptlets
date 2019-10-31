@@ -129,21 +129,30 @@ rm-attr.js application/javascript
 })();
 
 # hyperlink-setter
-# example.com##+js(hyperlink-setter, action, link)
+# example.com##+js(hyperlink-setter, form[action], button[link])
 hyperlink-setter.js application/javascript
 (() => {
 		'use strict';
-		const linksetter = () => { 
-						    const hosts = document.getElementsByClassName('host');
-					     	    try {
-							  for (const host of hosts) {
-						     	       host.setAttribute('{{1}}', host.getAttribute('{{2}}'));
-							  }
-						    } catch { }
+		const selector = '{{1}}';
+		if ( selector === '' || selector === '{{1}}' ) {
+			return;
+		}
+		const selector2 = '{{2}}';
+		if ( selector === '' || selector === '{{1}}' ) {
+			return;
+		}
+		const multiup = () => {
+					const elem = document.querySelectorAll(selector);
+					const elem2 = document.querySelectorAll(selector2);
+				   	try {
+						for (let i = 0; i < elem.length; i++) {
+							elem[i].setAttribute('action', elem2[i].getAttribute('link'));
+						}
+				   	} catch { }
 		};
-		const observer = new MutationObserver(linksetter);
-	    	observer.observe(document.documentElement, { childList: true, subtree: true });
-	    	if (document.readyState === 'complete') { observer.disconnect(); return; }
+		const observer = new MutationObserver(multiup);
+	  	observer.observe(document.documentElement, { childList: true, subtree: true });
+	  	if (document.readyState === 'complete') { observer.disconnect(); return; } 
 })();
 
 # script-tag-remover
