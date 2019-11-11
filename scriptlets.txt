@@ -128,33 +128,6 @@ rm-attr.js application/javascript
 		    if (document.readyState === 'complete') { observer.disconnect(); return; } 
 })();
 
-# hyperlink-setter
-# example.com##+js(multiup, form[action], button[link])
-multiup.js application/javascript
-(() => {
-		'use strict';
-		const selector = '{{1}}';
-		if ( selector === '' || selector === '{{1}}' ) {
-			return;
-		}
-		const selector2 = '{{2}}';
-		if ( selector === '' || selector === '{{1}}' ) {
-			return;
-		}
-		const multiup = () => {
-					const elem = document.querySelectorAll(selector);
-					const elem2 = document.querySelectorAll(selector2);
-				   	try {
-						for (let i = 0; i < elem.length; i++) {
-							elem[i].setAttribute('action', elem2[i].getAttribute('link'));
-						}
-				   	} catch { }
-		};
-		const observer = new MutationObserver(multiup);
-	  	observer.observe(document.documentElement, { childList: true, subtree: true });
-	  	if (document.readyState === 'complete') { observer.disconnect(); return; } 
-})();
-
 # script-tag-remover
 # example.com##+js(remove-inline-script, /adblock|adsense/)
 remove-inline-script.js application/javascript
@@ -174,9 +147,9 @@ remove-inline-script.js application/javascript
 					    const jss = document.querySelectorAll('script');
 					    for (const js of jss) {
 						    if (js.outerHTML.match(needle)) {
-							js.remove();
 							js.textContent = '';
-						    }			
+							js.remove();
+					   	    }			
 					    }
 				    } catch { }
 	  };
@@ -235,9 +208,9 @@ remove-inline-style.js application/javascript
                                           	const css = document.querySelectorAll('style');
                                           	for (const cs of css) {
                                               		if (cs.outerHTML.match(needle)) {
-								cs.remove();
 								cs.textContent = '';
-                                              		}			
+								cs.remove();
+							}			
                                           	}
                                    	 } catch { }
           };
@@ -296,9 +269,9 @@ remove-inline-noscript.js application/javascript
                                           	const noss = document.querySelectorAll('noscript');
                                           	for (const nos of noss) {
                                               		if (nos.outerHTML.match(needle)) {
-                                                                	nos.remove();
-									nos.textContent = '';
-                                              		}			
+                                                                	nos.textContent = '';
+									nos.remove();
+							}			
                                           	}
                                    	 } catch { }
           };
@@ -326,7 +299,8 @@ remove-inline-frame.js application/javascript
                                           	 const frames = document.querySelectorAll('iframe');
                                           	 for (const frame of frames) {
                                               		if (frame.outerHTML.match(needle)) {
-                                                                	frame.remove();
+                                                                	frame.textContent = '';
+									frame.remove();
                                               		}			
                                           	 }
                                    	   } catch { }
@@ -355,6 +329,7 @@ remove-link.js application/javascript
                                           	const links = document.querySelectorAll('link');
                                           	for (const link of links) {
                                               		if (link.outerHTML.match(needle)) {
+								link.textContent = '';
 								link.remove();
                                               		}			
                                           	}
@@ -384,7 +359,8 @@ remove-meta.js application/javascript
                                           	const metas = document.querySelectorAll('meta');
                                           	for (const meta of metas) {
                                               		if (meta.outerHTML.match(needle)) {
-                                                                	meta.remove();
+                                                                	meta.textContent = '';
+									meta.remove();
                                               		}			
                                           	}
                                    	  } catch { }
@@ -528,7 +504,7 @@ remove-prop.js application/javascript
   	      const remove = ev => {
 	      				    if (ev) { window.removeEventListener(ev.type, remove, true); }
 					    try {
-                  				  delete {{1}}
+                  				  	delete {{1}};
 					    } catch { }
               };
               if (document.readyState === 'interactive') {
@@ -619,6 +595,7 @@ remove-div-tag.js application/javascript
                                           	const divs = document.querySelectorAll('div');
                                           	for (const div of divs) {
                                               		if (div.outerHTML.match(needle)) {
+								div.textContent = '';
 								div.remove();
                                               		}			
                                           	}
@@ -708,5 +685,32 @@ logger.js application/javascript
 		} else {
 			window.addEventListener('load', logtags, true);
 		}
+})();
+
+# hyperlink-setter
+# example.com##+js(multiup, form[action], button[link])
+multiup.js application/javascript
+(() => {
+		'use strict';
+		const selector = '{{1}}';
+		if ( selector === '' || selector === '{{1}}' ) {
+			return;
+		}
+		const selector2 = '{{2}}';
+		if ( selector === '' || selector === '{{1}}' ) {
+			return;
+		}
+		const multiup = () => {
+					const elem = document.querySelectorAll(selector);
+					const elem2 = document.querySelectorAll(selector2);
+				   	try {
+						for (let i = 0; i < elem.length; i++) {
+							elem[i].setAttribute('action', elem2[i].getAttribute('link'));
+						}
+				   	} catch { }
+		};
+		const observer = new MutationObserver(multiup);
+	  	observer.observe(document.documentElement, { childList: true, subtree: true });
+	  	if (document.readyState === 'complete') { observer.disconnect(); return; } 
 })();
 
