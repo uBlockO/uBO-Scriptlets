@@ -507,10 +507,10 @@ remove-prop.js application/javascript
                   				  	delete {{1}};
 					    } catch { }
               };
-              if (document.readyState === 'interactive') {
-                       remove(); 
+              if (document.readyState === 'loading') {
+                       window.addEventListener('DOMContentLoaded', remove, true); 
               } else {
-                       window.addEventListener('DOMContentLoaded', remove, true);
+                       remove();  
               }
 })();
 
