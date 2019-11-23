@@ -445,7 +445,7 @@ set-prop.js application/javascript
 							owner[chain[chain.length - 1]] = prop;
 						} catch { }
 		    };
-		    if (document.readyState === 'loading') {
+		    if (document.readyState === 'interactive') {
 			     window.addEventListener('DOMContentLoaded', set, true);
 		    } else {
 			     set();
