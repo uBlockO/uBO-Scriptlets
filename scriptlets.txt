@@ -697,7 +697,7 @@ multiup.js application/javascript
 			return;
 		}
 		const selector2 = '{{2}}';
-		if ( selector === '' || selector === '{{1}}' ) {
+		if ( selector2 === '' || selector2 === '{{1}}' ) {
 			return;
 		}
 		const multiup = () => {
