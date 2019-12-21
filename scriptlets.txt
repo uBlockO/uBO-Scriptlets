@@ -425,7 +425,7 @@ remove-prop.js application/javascript
 })();
 
 # DOM-element-creator
-# example.com##+js(add-elem, #id|.className, block, important)
+# example.com##+js(add-elem, #id|.class, display: block !important;)
 add-elem.js application/javascript
 (() => {
 		'use strict';
