@@ -425,7 +425,7 @@ remove-prop.js application/javascript
 })();
 
 # DOM-element-creator
-# example.com##+js(add-elem, #id|.class, display: block !important;)
+# example.com##+js(add-elem, #id|.class, display: block !important, div)
 add-elem.js application/javascript
 (() => {
 		'use strict';
@@ -437,7 +437,7 @@ add-elem.js application/javascript
 		const ea = ev => {
 					if (ev) { window.removeEventListener(ev.type, ea, true); }
 					try {
-						const element = document.createElement('div');
+						const element = document.createElement('{{3}}');
 						for (const identifieradder of identifiers) {
 							if (identifieradder.charAt(0) === '#') {
 								 element.id = identifieradder.substring(1);
