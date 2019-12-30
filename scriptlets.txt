@@ -445,7 +445,7 @@ add-elem.js application/javascript
 								 element.className = identifieradder.substring(1);
 							} else { return; }	 
 						}
-						element.setAttribute('style', '{{2}}');
+						element.style.cssText = '{{2}}';
 						document.body.appendChild(element);
 					} catch { }
 	   	};
