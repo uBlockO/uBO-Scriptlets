@@ -94,7 +94,17 @@ eremove.js application/javascript
 					       	  }
 					   } catch { }
 		};
-		const observer = new MutationObserver(rm);
+		const throttle = (callback, delay) => {
+ 							 let wait = false;
+  							 return () => {
+    									if (!wait) {
+											callback.apply(null, arguments);
+      											wait = true;
+      											setTimeout(() => { wait = false; }, delay);
+										   }
+ 								      }
+		}
+		const observer = new MutationObserver(throttle(rm, 30));
     		observer.observe(document.documentElement, { childList: true, subtree: true });
 		if (document.readyState === 'complete') { observer.disconnect(); return; } 
 })();
