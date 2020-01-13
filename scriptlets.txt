@@ -103,7 +103,7 @@ eremove.js application/javascript
       											setTimeout(() => { wait = false; }, delay);
 										   }
  								      }
-		}
+		};
 		const observer = new MutationObserver(throttle(rm, 30));
     		observer.observe(document.documentElement, { childList: true, subtree: true });
 		if (document.readyState === 'complete') { observer.disconnect(); return; } 
