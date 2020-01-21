@@ -516,34 +516,26 @@ remove-div-tag.js application/javascript
 	  if (document.readyState === 'complete') { observer.disconnect(); return; } 
 })();
 
-# URL-Redirector
-# example.com##+js(url-redirector, link|url)
-url-redirector.js application/javascript
+# class-remover
+# example.com##+js(rm-class, .w3-btn, w3-border)
+rm-class.js application/javascript
 (() => {
 		'use strict';
-		const needle = '{{1}}';
-		if ( needle === '' || needle === '{{1}}' ) { 
-				return; 
-	   	}			
-	   	const needles = needle.split(/\s*\|\s*/);
-		const ur = ev => {
-					if (ev) { window.removeEventListener(ev.type, ur, true);}
-					try {
-			  			const url = new URL(location.href);
-						const params = new URLSearchParams(url.search.slice(1));
-						for (const needleremover of needles) {
-							if (params.has(needleremover)) {
-								const value = params.get(needleremover);
-								window.location.href = value;
-							}
-						}		
-					} catch { }
-		};		    
-		if (document.readyState === 'loading') {
-			   window.addEventListener('DOMContentLoaded', ur, true);
-		  } else {
-			   ur();
-		  }
+		const selector = '{{1}}';
+		if ( selector === '' || selector === '{{1}}' ) {
+			return;
+		}
+		const rc = () => {
+					   const elements = document.querySelectorAll(selector);
+					   try {
+						  for (const element of elements) {
+						       element.classList.remove('{{2}}');
+						  }
+					   } catch { }
+		};
+		const observer = new MutationObserver(rc);
+    		observer.observe(document.documentElement, { childList: true, subtree: true });
+		if (document.readyState === 'complete') { observer.disconnect(); return; } 
 })();
 
 # innerHTML-setter
