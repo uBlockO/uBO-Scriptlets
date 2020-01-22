@@ -517,8 +517,8 @@ remove-div-tag.js application/javascript
 })();
 
 # class-remover
-# example.com##+js(rm-class, .w3-btn, w3-border)
-rm-class.js application/javascript
+# example.com##+js(remove-class, .example, example)
+remove-class.js application/javascript
 (() => {
 		'use strict';
 		const selector = '{{1}}';
@@ -534,6 +534,28 @@ rm-class.js application/javascript
 					   } catch { }
 		};
 		const observer = new MutationObserver(rc);
+    		observer.observe(document.documentElement, { childList: true, subtree: true });
+		if (document.readyState === 'complete') { observer.disconnect(); return; } 
+})();
+
+# class-adder
+# example.com##+js(add-class, .example, example)
+add-class.js application/javascript
+(() => {
+		'use strict';
+		const selector = '{{1}}';
+		if ( selector === '' || selector === '{{1}}' ) {
+			return;
+		}
+		const ac = () => {
+		 			   const elements = document.querySelectorAll(selector);
+					   try {
+						  for (const element of elements) {
+						       element.classList.add('{{2}}');
+						  }
+					   } catch { }
+		};
+		const observer = new MutationObserver(ac);
     		observer.observe(document.documentElement, { childList: true, subtree: true });
 		if (document.readyState === 'complete') { observer.disconnect(); return; } 
 })();
