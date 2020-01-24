@@ -593,7 +593,7 @@ toggle-class.js application/javascript
 						try {
 			    				for ( const node of nodes ) {
 								for ( const className of needles ) {
-				    					node.classList.toggle(className, '{{3}}');
+				    					node.classList.toggle(className, {{3}});
 								}
 			    				}
 						} catch { }
