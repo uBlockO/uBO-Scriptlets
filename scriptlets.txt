@@ -546,7 +546,7 @@ remove-class.js application/javascript
 })();
 
 # class-adder
-# example.com##+js(add-class, .example, example)
+# example.com##+js(add-class, example, .example)
 add-class.js application/javascript
 (() => {
 		    'use strict';
@@ -575,7 +575,7 @@ add-class.js application/javascript
 })();
 
 # class-toggler
-# example.com##+js(toggle-class, .example, example)
+# example.com##+js(toggle-class, example, .example)
 toggle-class.js application/javascript
 (() => {
 		    'use strict';
