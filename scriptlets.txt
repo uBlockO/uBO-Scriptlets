@@ -517,47 +517,61 @@ remove-div-tag.js application/javascript
 })();
 
 # class-remover
-# example.com##+js(remove-class, .example, example)
+# example.com##+js(remove-class, example, .example)
 remove-class.js application/javascript
 (() => {
-		'use strict';
-		const selector = '{{1}}';
-		if ( selector === '' || selector === '{{1}}' ) {
-			return;
-		}
-		const rc = () => {
-					   const elements = document.querySelectorAll(selector);
-					   try {
-						  for (const element of elements) {
-						       element.classList.remove('{{2}}');
-						  }
-					   } catch { }
-		};
-		const observer = new MutationObserver(rc);
-    		observer.observe(document.documentElement, { childList: true, subtree: true });
-		if (document.readyState === 'complete') { observer.disconnect(); return; } 
+		    'use strict';
+		    const needle = '{{1}}';
+		    if ( needle === '' || needle === '{{1}}' ) { 
+		    		return; 
+		    }
+		    const needles = needle.split(/\s*\|\s*/);
+		    let selector = '{{2}}';
+		    if ( selector === '' || selector === '{{2}}' ) {
+			selector = `[${tokens.join('],[')}]`;
+		    }
+		    const rmclass = () => {
+						const nodes = document.querySelectorAll(selector);
+						try {
+			    				for ( const node of nodes ) {
+								for ( const className of needles ) {
+				    					node.classList.remove(className);
+								}
+			    				}
+						} catch { }
+		    };
+		    const observer = new MutationObserver(rmclass);
+    		    observer.observe(document.documentElement, { childList: true, subtree: true });
+		    if (document.readyState === 'complete') { observer.disconnect(); return; } 
 })();
 
 # class-adder
 # example.com##+js(add-class, .example, example)
 add-class.js application/javascript
 (() => {
-		'use strict';
-		const selector = '{{1}}';
-		if ( selector === '' || selector === '{{1}}' ) {
-			return;
-		}
-		const ac = () => {
-		 			   const elements = document.querySelectorAll(selector);
-					   try {
-						  for (const element of elements) {
-						       element.classList.add('{{2}}');
-						  }
-					   } catch { }
-		};
-		const observer = new MutationObserver(ac);
-    		observer.observe(document.documentElement, { childList: true, subtree: true });
-		if (document.readyState === 'complete') { observer.disconnect(); return; } 
+		    'use strict';
+		    const needle = '{{1}}';
+		    if ( needle === '' || needle === '{{1}}' ) { 
+		    		return; 
+		    }
+		    const needles = needle.split(/\s*\|\s*/);
+		    let selector = '{{2}}';
+		    if ( selector === '' || selector === '{{2}}' ) {
+			selector = `[${tokens.join('],[')}]`;
+		    }
+		    const addclass = () => {
+						const nodes = document.querySelectorAll(selector);
+						try {
+			    				for ( const node of nodes ) {
+								for ( const className of needles ) {
+				    					node.classList.add(className);
+								}
+			    				}
+						} catch { }
+		    };
+		    const observer = new MutationObserver(addclass);
+    		    observer.observe(document.documentElement, { childList: true, subtree: true });
+		    if (document.readyState === 'complete') { observer.disconnect(); return; } 
 })();
 
 # innerHTML-setter
