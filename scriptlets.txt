@@ -13,7 +13,7 @@ set-respheader.js application/javascript
 	   docu.head.appendChild(meta);
 })();
 
-# readOnly-property-setter
+# set-readOnly-property
 # example.com##+js(ro, canAds, true)
 ro.js application/javascript
 (() => {
@@ -570,6 +570,35 @@ add-class.js application/javascript
 						} catch { }
 		    };
 		    const observer = new MutationObserver(addclass);
+    		    observer.observe(document.documentElement, { childList: true, subtree: true });
+		    if (document.readyState === 'complete') { observer.disconnect(); return; } 
+})();
+
+# class-toggler
+# example.com##+js(toggle-class, .example, example)
+toggle-class.js application/javascript
+(() => {
+		    'use strict';
+		    const needle = '{{1}}';
+		    if ( needle === '' || needle === '{{1}}' ) { 
+		    		return; 
+		    }
+		    const needles = needle.split(/\s*\|\s*/);
+		    let selector = '{{2}}';
+		    if ( selector === '' || selector === '{{2}}' ) {
+			selector = `[${tokens.join('],[')}]`;
+		    }
+		    const rmclass = () => {
+						const nodes = document.querySelectorAll(selector);
+						try {
+			    				for ( const node of nodes ) {
+								for ( const className of needles ) {
+				    					node.classList.toggle(className);
+								}
+			    				}
+						} catch { }
+		    };
+		    const observer = new MutationObserver(rmclass);
     		    observer.observe(document.documentElement, { childList: true, subtree: true });
 		    if (document.readyState === 'complete') { observer.disconnect(); return; } 
 })();
