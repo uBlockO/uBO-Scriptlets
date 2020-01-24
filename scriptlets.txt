@@ -575,7 +575,7 @@ add-class.js application/javascript
 })();
 
 # class-toggler
-# example.com##+js(toggle-class, example, .example)
+# example.com##+js(toggle-class, example, .example, true|false)
 toggle-class.js application/javascript
 (() => {
 		    'use strict';
@@ -599,6 +599,35 @@ toggle-class.js application/javascript
 						} catch { }
 		    };
 		    const observer = new MutationObserver(toggleclass);
+    		    observer.observe(document.documentElement, { childList: true, subtree: true });
+		    if (document.readyState === 'complete') { observer.disconnect(); return; } 
+})();
+
+# class-replacer
+# example.com##+js(replace-class, example, .example, example2)
+replace-class.js application/javascript
+(() => {
+		    'use strict';
+		    const needle = '{{1}}';
+		    if ( needle === '' || needle === '{{1}}' ) { 
+		    		return; 
+		    }
+		    const needles = needle.split(/\s*\|\s*/);
+		    let selector = '{{2}}';
+		    if ( selector === '' || selector === '{{2}}' ) {
+			selector = `[${tokens.join('],[')}]`;
+		    }
+		    const replaceclass = () => {
+						const nodes = document.querySelectorAll(selector);
+						try {
+							for ( const node of nodes ) {
+								for ( const className of needles ) {
+									node.classList.replace(className, '{{3}}');
+								}
+							}
+						} catch { }
+		    };
+		    const observer = new MutationObserver(replaceclass);
     		    observer.observe(document.documentElement, { childList: true, subtree: true });
 		    if (document.readyState === 'complete') { observer.disconnect(); return; } 
 })();
