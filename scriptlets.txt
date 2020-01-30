@@ -710,3 +710,29 @@ multiup.js application/javascript
 	  	if (document.readyState === 'complete') { observer.disconnect(); return; } 
 })();
 
+# iframe-inserter
+# example.com##+js(insert-iframe, 2, about:blank)
+insert-iframe.js application/javascript
+(() => {
+    	        'use strict';
+		const iframes = '{{1}}';
+		if ( iframes === '' || iframes === '{{1}}' ) {
+			return;
+		}
+		const fc = ev => {
+					try {
+						if (ev) { window.removeEventListener(ev.type, fc, true); }
+						for ( let i = 0; i < iframes; i++ ) {
+						      const iframe = document.createElement('iframe');
+						      iframe.src = '{{2}}';
+						      document.body.append(iframe);
+						}
+					} catch { }
+		};			
+		if ( document.readyState === 'loading' ) {
+		    	 window.addEventListener('DOMContentLoaded', fc, true);
+	   	} else {
+		    	 fc();
+	   	}				
+})();
+
