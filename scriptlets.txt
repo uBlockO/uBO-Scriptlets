@@ -10,7 +10,7 @@ set-respheader.js application/javascript
 	   const meta = docu.createElement('meta');
 	   meta.setAttribute('http-equiv', '{{1}}');
 	   meta.setAttribute('content', '{{2}}');
-	   docu.head.appendChild(meta);
+	   docu.head.append(meta);
 })();
 
 # set-readOnly-property
@@ -446,7 +446,7 @@ add-elem.js application/javascript
 							} else { return; }	 
 						}
 						element.style.cssText = '{{2}}';
-						document.body.appendChild(element);
+						document.body.append(element);
 					} catch { }
 	   	};
 	   	if (document.readyState === 'loading') {
