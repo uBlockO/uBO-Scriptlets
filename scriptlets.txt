@@ -711,8 +711,8 @@ multiup.js application/javascript
 })();
 
 # iframe-inserter
-# example.com##+js(insert-iframe, 2, id, about:blank)
-insert-iframe.js application/javascript
+# example.com##+js(add-iframe, 2, id, about:blank)
+add-iframe.js application/javascript
 (() => {
     	        'use strict';
 		const iframes = '{{1}}';
