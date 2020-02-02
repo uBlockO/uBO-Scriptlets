@@ -724,8 +724,8 @@ insert-iframe.js application/javascript
 						if (ev) { window.removeEventListener(ev.type, fc, true); }
 						for ( let i = 0; i < iframes; i++ ) {
 						      const iframe = document.createElement('iframe');
-						      iframe.id = '{{2}}';
-						      iframe.src = '{{3}}';
+						      iframe.setAttribute('id', '{{2}}');
+						      iframe.setAttribute('src', '{{3}}');
 						      document.body.append(iframe);
 						}
 					} catch { }
