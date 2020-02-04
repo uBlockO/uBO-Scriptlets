@@ -381,7 +381,7 @@ cookie-set.js application/javascript
 })();	
 
 # element-replacer
-# example.com##+js(ereplace, .element)
+# example.com##+js(ereplace, .element, div)
 ereplace.js application/javascript
 (() => {
 		'use strict';
@@ -389,13 +389,13 @@ ereplace.js application/javascript
 		if ( selector === '' || selector === '{{1}}' ) {
 			return;
 		}
-		const div = document.createElement('div');
+		const tag = document.createElement('{{2}}');
 		const replace = ev => {
 						if (ev) { window.removeEventListener(ev.type, replace, true); }
 						try {
 							const elements = document.querySelectorAll(selector);
 							for ( const element of elements ) {
-			      					element.replaceWith(div);
+			      					element.replaceWith(tag);
 							}
 						} catch { }
 		};
