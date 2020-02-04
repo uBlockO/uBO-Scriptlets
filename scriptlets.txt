@@ -381,28 +381,29 @@ cookie-set.js application/javascript
 })();	
 
 # element-replacer
-# example.com##+js(ereplace, .element, div)
-ereplace.js application/javascript
+# example.com##+js(replace-elem, .element, div)
+replace-elem.js application/javascript
 (() => {
 		'use strict';
 		const selector = '{{1}}';
-		if ( selector === '' || selector === '{{1}}' ) {
-			return;
-		}
-		const tag = document.createElement('{{2}}');
+		if ( selector === '' || selector === '{{1}}' ) { return; }
+		const elem = document.createElement('{{2}}');
+		if ( elem === '' || elem === '{{2}}' ) { return; }
 		const replace = ev => {
-						if (ev) { window.removeEventListener(ev.type, replace, true); }
-						try {
+					    if (ev) { window.removeEventListener(ev.type, replace, true); }
+					    try {
 							const elements = document.querySelectorAll(selector);
-							for ( const element of elements ) {
-			      					element.replaceWith(tag);
-							}
-						} catch { }
+                                            		for ( const element of elements ) {
+                                                    		const text = element.textContent;
+								element.replaceWith(elem);
+								elem.textContent = text;
+							}   
+					    } catch { }
 		};
-		if (document.readyState === 'loading) {
-			 window.addEventListener('DOMContentLoaded', replace, true);
+		if (document.readyState === 'loading') {
+		          window.addEventListener('DOMContentLoaded', replace, true);
 		} else {
-			 replace();
+			  replace();
 		}
 })();
 
