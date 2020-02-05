@@ -393,10 +393,16 @@ replace-elem.js application/javascript
 					    if (ev) { window.removeEventListener(ev.type, replace, true); }
 					    try {
 							const elements = document.querySelectorAll(selector);
-                                            		for ( const element of elements ) {
-                                                    		const text = element.textContent;
+							for ( const element of elements ) {
+								const text = element.textContent;
+								const attrs = element.attributes;
 								element.replaceWith(elem);
 								elem.textContent = text;
+								for ( const attr of attrs ) {
+								      const prop = attr.nodeName;
+								      const value = attr.nodeValue;
+								      elem.setAttribute(prop, value);
+								}	
 							}   
 					    } catch { }
 		};
