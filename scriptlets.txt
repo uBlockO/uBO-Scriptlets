@@ -18,9 +18,7 @@ set-respheader.js application/javascript
 ro.js application/javascript
 (() => {
 		let prop = '{{1}}';
-		if ( prop === '' || prop === '{{1}}' ) {
-			return;
-		}
+		if ( prop === '' || prop === '{{1}}' ) { return; }
 		let data = '{{2}}';
 		const Object = window.Object.bind(window);
 		const descriptor = window.Object.getOwnPropertyDescriptor.bind(window.Object);
@@ -83,9 +81,7 @@ eremove.js application/javascript
 (() => {
 		'use strict';
 		const selector = '{{1}}';
-		if ( selector === '' || selector === '{{1}}' ) {
-			return;
-		}
+		if ( selector === '' || selector === '{{1}}' ) { return; }
 		const rm = () => {
 		 			   const elements = document.querySelectorAll(selector);
 					   try {
@@ -105,14 +101,10 @@ rm-attr.js application/javascript
 (() => {
 		    'use strict';
 		    const needle = '{{1}}';
-		    if ( needle === '' || needle === '{{1}}' ) { 
-		    		return; 
-		    }
+		    if ( needle === '' || needle === '{{1}}' ) { return; }
 		    const needles = needle.split(/\s*\|\s*/);
 		    let selector = '{{2}}';
-		    if ( selector === '' || selector === '{{2}}' ) {
-			selector = `[${tokens.join('],[')}]`;
-		    }
+		    if ( selector === '' || selector === '{{2}}' ) { selector = `[${tokens.join('],[')}]`; }
 		    const rmattr = () => {
 						const nodes = document.querySelectorAll(selector);
 						try {
@@ -317,9 +309,7 @@ set-attr.js application/javascript
           if ( token === '' || token === '{{1}}' ) { return; }
           const tokens = token.split(/\s*\|\s*/);
           let selector = '{{3}}';
-          if ( selector === '' || selector === '{{3}}' ) {
-              selector = `[${tokens.join('],[')}]`;
-          }
+          if ( selector === '' || selector === '{{3}}' ) { selector = `[${tokens.join('],[')}]`; }
           const stattr = () => {
 					try {
 						const nodes = document.querySelectorAll(selector);
@@ -344,9 +334,7 @@ tog-attr.js application/javascript
           if ( token === '' || token === '{{1}}' ) { return; }
           const tokens = token.split(/\s*\|\s*/);
           let selector = '{{2}}';
-          if ( selector === '' || selector === '{{2}}' ) {
-              selector = `[${tokens.join('],[')}]`;
-          }
+          if ( selector === '' || selector === '{{2}}' ) { selector = `[${tokens.join('],[')}]`; }
           const togattr = () => {
               				 try {
                     				const nodes = document.querySelectorAll(selector);
@@ -437,9 +425,7 @@ add-elem.js application/javascript
 (() => {
 		'use strict';
 		const identifier = '{{1}}';
-		if (identifier === '' || identifier === '{{1}}') { 
-	   		return; 
-	        }
+		if ( identifier === '' || identifier === '{{1}}' ) { return; }
 		const identifiers = identifier.split(/\s*\|\s*/);
 		const ea = ev => {
 					if (ev) { window.removeEventListener(ev.type, ea, true); }
@@ -469,9 +455,7 @@ query-stripper.js application/javascript
 (() => {
 		'use strict';
 		const needle = '{{1}}';
-		if ( needle === '' || needle === '{{1}}' ) { 
-	   		return; 
-	   	}			
+		if ( needle === '' || needle === '{{1}}' ) { return; }			
 	   	const needles = needle.split(/\s*\|\s*/);
 		const querystripper = ev => {
 						if (ev) { window.removeEventListener(ev.type, querystripper, true); }
@@ -529,14 +513,10 @@ remove-class.js application/javascript
 (() => {
 		    'use strict';
 		    const needle = '{{1}}';
-		    if ( needle === '' || needle === '{{1}}' ) { 
-		    		return; 
-		    }
+		    if ( needle === '' || needle === '{{1}}' ) { return; }
 		    const needles = needle.split(/\s*\|\s*/);
 		    let selector = '{{2}}';
-		    if ( selector === '' || selector === '{{2}}' ) {
-			selector = `[${tokens.join('],[')}]`;
-		    }
+		    if ( selector === '' || selector === '{{2}}' ) { selector = `[${tokens.join('],[')}]`; }
 		    const rmclass = () => {
 						const nodes = document.querySelectorAll(selector);
 						try {
@@ -558,14 +538,10 @@ add-class.js application/javascript
 (() => {
 		    'use strict';
 		    const needle = '{{1}}';
-		    if ( needle === '' || needle === '{{1}}' ) { 
-		    		return; 
-		    }
+		    if ( needle === '' || needle === '{{1}}' ) { return; }
 		    const needles = needle.split(/\s*\|\s*/);
 		    let selector = '{{2}}';
-		    if ( selector === '' || selector === '{{2}}' ) {
-			selector = `[${tokens.join('],[')}]`;
-		    }
+		    if ( selector === '' || selector === '{{2}}' ) { selector = `[${tokens.join('],[')}]`; }
 		    const addclass = () => {
 						const nodes = document.querySelectorAll(selector);
 						try {
@@ -587,14 +563,10 @@ toggle-class.js application/javascript
 (() => {
 		    'use strict';
 		    const needle = '{{1}}';
-		    if ( needle === '' || needle === '{{1}}' ) { 
-		    		return; 
-		    }
+		    if ( needle === '' || needle === '{{1}}' ) { return; }
 		    const needles = needle.split(/\s*\|\s*/);
 		    let selector = '{{2}}';
-		    if ( selector === '' || selector === '{{2}}' ) {
-			selector = `[${tokens.join('],[')}]`;
-		    }
+		    if ( selector === '' || selector === '{{2}}' ) { selector = `[${tokens.join('],[')}]`; }
 		    const toggleclass = () => {
 						const nodes = document.querySelectorAll(selector);
 						try {
@@ -616,9 +588,7 @@ replace-class.js application/javascript
 (() => {
 		    'use strict';
 		    const needle = '{{1}}';
-		    if ( needle === '' || needle === '{{1}}' ) { 
-		    		return; 
-		    }
+		    if ( needle === '' || needle === '{{1}}' ) { return; }
 		    const needles = needle.split(/\s*\|\s*/);
 		    let selector = '{{2}}';
 		    if ( selector === '' || selector === '{{2}}' ) {
@@ -645,9 +615,7 @@ set-innerHTML.js application/javascript
 (() => {
 		'use strict';
 		const selector = '{{1}}';
-		if ( selector === '' || selector === '{{1}}' ) {
-			return;
-		}
+		if ( selector === '' || selector === '{{1}}' ) { return; }
 		const ihs = ev => {
 		 			   if (ev) { window.removeEventListener(ev.type, ihs, true); }
 					   const elements = document.querySelectorAll(selector);
@@ -670,9 +638,7 @@ logger.js application/javascript
 (() => {
 		'use strict';
 		const needle = '{{1}}';
-		if ( needle === '' || needle === '{{1}}' ) {
-			return;
-		}
+		if ( needle === '' || needle === '{{1}}' ) { return; }
 		const logtags = ev => {
 					  if (ev) { window.removeEventListener(ev.type, logtags, true); }
 					  try {
@@ -696,13 +662,9 @@ multiup.js application/javascript
 (() => {
 		'use strict';
 		const selector = '{{1}}';
-		if ( selector === '' || selector === '{{1}}' ) {
-			return;
-		}
+		if ( selector === '' || selector === '{{1}}' ) { return; }
 		const selector2 = '{{2}}';
-		if ( selector2 === '' || selector2 === '{{2}}' ) {
-			return;
-		}
+		if ( selector2 === '' || selector2 === '{{2}}' ) { return; }
 		const multiup = () => {
 					const elem = document.querySelectorAll(selector);
 					const elem2 = document.querySelectorAll(selector2);
@@ -723,9 +685,7 @@ add-iframe.js application/javascript
 (() => {
     	        'use strict';
 		const iframes = '{{1}}';
-		if ( iframes === '' || iframes === '{{1}}' ) {
-			return;
-		}
+		if ( iframes === '' || iframes === '{{1}}' ) { return; }
 		const fc = ev => {
 					try {
 						if (ev) { window.removeEventListener(ev.type, fc, true); }
