@@ -180,12 +180,12 @@ remove-inline-style.js application/javascript
 	  if (document.readyState === 'complete') { observer.disconnect(); return; }
 })();
 
-# noscript-tag-remover
-# example.com##+js(remove-inline-noscript, /text/)
-remove-inline-noscript.js application/javascript
+# DOM-Node-Remover
+# example.com##+js(remove-node, /adblock|adsense/, script)
+remove-node.js application/javascript
 (() => { 
           'use strict';
-	  let needle = '{{1}}';
+          let needle = '{{1}}';
           if ( needle === '' || needle === '{{1}}' ) {
               needle = '.?';
           } else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
@@ -194,110 +194,20 @@ remove-inline-noscript.js application/javascript
               needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
           }
           needle = new RegExp(needle);
-          const nosnode = () => {
-                                         try {
-                                          	const noss = document.querySelectorAll('noscript');
-                                          	for (const nos of noss) {
-                                              		if (nos.outerHTML.match(needle)) {
-                                                                	nos.textContent = '';
-									nos.remove();
-							}			
-                                          	}
-                                   	 } catch { }
+          const remnode = () => {
+                                        try {
+                                                  const nodes = document.querySelectorAll('{{2}}');
+                                                  for (const node of nodes) {
+                                                       if (node.outerHTML.match(needle)) {
+                                                                node.textContent = ''; 
+                                                                node.remove();
+                                                       }           
+                                                  }
+                                    } catch { }
           };
-          const observer = new MutationObserver(nosnode);
-	  observer.observe(document.documentElement, { childList: true, subtree: true });
-	  if (document.readyState === 'complete') { observer.disconnect(); return; }
-})();
-
-# frame-tag-remover
-# example.com##+js(remove-inline-frame, /frame/)
-remove-inline-frame.js application/javascript
-(() => { 
-          'use strict';
-	  let needle = '{{1}}';
-          if ( needle === '' || needle === '{{1}}' ) {
-              needle = '.?';
-          } else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
-              needle = needle.slice(1,-1);
-          } else {
-              needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-          }
-          needle = new RegExp(needle);
-          const framenode = () => {
-                                           try {
-                                          	 const frames = document.querySelectorAll('iframe');
-                                          	 for (const frame of frames) {
-                                              		if (frame.outerHTML.match(needle)) {
-                                                                	frame.textContent = '';
-									frame.remove();
-                                              		}			
-                                          	 }
-                                   	   } catch { }
-          };
-          const observer = new MutationObserver(framenode);
-	  observer.observe(document.documentElement, { childList: true, subtree: true });
-	  if (document.readyState === 'complete') { observer.disconnect(); return; }
-})();
-
-# link-tag-remover
-# example.com##+js(remove-link, /prefetch|preload|prerender/)
-remove-link.js application/javascript
-(() => { 
-          'use strict';
-	  let needle = '{{1}}';
-          if ( needle === '' || needle === '{{1}}' ) {
-              needle = '.?';
-          } else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
-              needle = needle.slice(1,-1);
-          } else {
-              needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-          }
-          needle = new RegExp(needle);
-          const linknode = () => {
-                                          try {
-                                          	const links = document.querySelectorAll('link');
-                                          	for (const link of links) {
-                                              		if (link.outerHTML.match(needle)) {
-								link.textContent = '';
-								link.remove();
-                                              		}			
-                                          	}
-                                   	  } catch { }
-          };
-          const observer = new MutationObserver(linknode);
-	  observer.observe(document.documentElement, { childList: true, subtree: true });
-	  if (document.readyState === 'complete') { observer.disconnect(); return; } 
-})();
-
-# meta-tag-remover
-# example.com##+js(remove-meta, /refresh|referrer/)
-remove-meta.js application/javascript
-(() => { 
-          'use strict';
-	  let needle = '{{1}}';
-          if ( needle === '' || needle === '{{1}}' ) {
-              needle = '.?';
-          } else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
-              needle = needle.slice(1,-1);
-          } else {
-              needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-          }
-          needle = new RegExp(needle);
-          const metanode = () => {
-                                          try {
-                                          	const metas = document.querySelectorAll('meta');
-                                          	for (const meta of metas) {
-                                              		if (meta.outerHTML.match(needle)) {
-                                                                	meta.textContent = '';
-									meta.remove();
-                                              		}			
-                                          	}
-                                   	  } catch { }
-          };
-          const observer = new MutationObserver(metanode);
-	  observer.observe(document.documentElement, { childList: true, subtree: true });
-	  if (document.readyState === 'complete') { observer.disconnect(); return; } 
+          const observer = new MutationObserver(remnode);
+          observer.observe(document.documentElement, { childList: true, subtree: true });
+          if (document.readyState === 'complete') { observer.disconnect(); return; }
 })();
 
 # element-setAttribute
@@ -477,36 +387,6 @@ query-stripper.js application/javascript
 		}
 })();
 
-# div-tag-remover
-# example.com##+js(remove-div-tag, /adblock|googad/)
-remove-div-tag.js application/javascript
-(() => { 
-          'use strict';
-	  let needle = '{{1}}';
-          if ( needle === '' || needle === '{{1}}' ) {
-              needle = '.?';
-          } else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
-              needle = needle.slice(1,-1);
-          } else {
-              needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-          }
-          needle = new RegExp(needle);
-          const divnode = () => {
-                                        try {
-                                          	const divs = document.querySelectorAll('div');
-                                          	for (const div of divs) {
-                                              		if (div.outerHTML.match(needle)) {
-								div.textContent = '';
-								div.remove();
-                                              		}			
-                                          	}
-                                   	} catch { }
-          };
-          const observer = new MutationObserver(divnode);
-	  observer.observe(document.documentElement, { childList: true, subtree: true });
-	  if (document.readyState === 'complete') { observer.disconnect(); return; } 
-})();
-
 # class-remover
 # example.com##+js(remove-class, example, .example)
 remove-class.js application/javascript
@@ -632,7 +512,7 @@ set-innerHTML.js application/javascript
 		}
 })();
 
-# inline-tag-logger
+# DOM-Node-logger
 # example.com##+js(logger, script)
 logger.js application/javascript
 (() => {
