@@ -120,36 +120,6 @@ rm-attr.js application/javascript
 		    if (document.readyState === 'complete') { observer.disconnect(); return; } 
 })();
 
-# script-tag-remover
-# example.com##+js(remove-inline-script, /adblock|adsense/)
-remove-inline-script.js application/javascript
-(() => { 
-	  'use strict';
-	  let needle = '{{1}}';
-	  if ( needle === '' || needle === '{{1}}' ) {
-	      needle = '.?';
-	  } else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
-	      needle = needle.slice(1,-1);
-	  } else {
-	      needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-	  }
-	  needle = new RegExp(needle);
-	  const jsnode = () => {
-				    try {
-					    const jss = document.querySelectorAll('script');
-					    for (const js of jss) {
-						    if (js.outerHTML.match(needle)) {
-							js.textContent = '';
-							js.remove();
-					   	    }			
-					    }
-				    } catch { }
-	  };
-	  const observer = new MutationObserver(jsnode);
-	  observer.observe(document.documentElement, { childList: true, subtree: true });
-	  if (document.readyState === 'complete') { observer.disconnect(); return; }
-})();
-
 # DOM-Node-Remover
 # example.com##+js(remove-node, /adblock|adsense/, script)
 remove-node.js application/javascript
@@ -553,4 +523,3 @@ add-iframe.js application/javascript
 		    	 fc();
 	   	}				
 })();
-
