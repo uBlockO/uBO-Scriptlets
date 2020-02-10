@@ -150,36 +150,6 @@ remove-inline-script.js application/javascript
 	  if (document.readyState === 'complete') { observer.disconnect(); return; }
 })();
 
-# style-tag-remover
-# example.com##+js(remove-inline-style, /cookie-notice/)
-remove-inline-style.js application/javascript
-(() => { 
-          'use strict';
-	  let needle = '{{1}}';
-          if ( needle === '' || needle === '{{1}}' ) {
-              needle = '.?';
-          } else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
-              needle = needle.slice(1,-1);
-          } else {
-              needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-          }
-          needle = new RegExp(needle);
-          const cssnode = () => {
-                                         try {
-                                          	const css = document.querySelectorAll('style');
-                                          	for (const cs of css) {
-                                              		if (cs.outerHTML.match(needle)) {
-								cs.textContent = '';
-								cs.remove();
-							}			
-                                          	}
-                                   	 } catch { }
-          };
-          const observer = new MutationObserver(cssnode);
-	  observer.observe(document.documentElement, { childList: true, subtree: true });
-	  if (document.readyState === 'complete') { observer.disconnect(); return; }
-})();
-
 # DOM-Node-Remover
 # example.com##+js(remove-node, /adblock|adsense/, script)
 remove-node.js application/javascript
