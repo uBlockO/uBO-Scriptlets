@@ -173,7 +173,7 @@ remove-node.js application/javascript
                                                                 node.remove();
                                                        }           
                                                   }
-                                    } catch { }
+                                        } catch { }
           };
           const observer = new MutationObserver(remnode);
           observer.observe(document.documentElement, { childList: true, subtree: true });
