@@ -477,7 +477,7 @@ logger.js application/javascript
 })();
 
 # hyperlink-setter
-# example.com##+js(multiup, form[action], button[link])
+# example.com##+js(multiup, form[action], button[link], action, link)
 multiup.js application/javascript
 (() => {
 		'use strict';
@@ -490,7 +490,7 @@ multiup.js application/javascript
 					const elem2 = document.querySelectorAll(selector2);
 				   	try {
 						for (let i = 0; i < elem.length; i++) {
-							elem[i].setAttribute('action', elem2[i].getAttribute('link'));
+							elem[i].setAttribute('{{3}}', elem2[i].getAttribute('{{4}}'));
 						}
 				   	} catch { }
 		};
