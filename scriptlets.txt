@@ -534,24 +534,24 @@ insert-elem.js application/javascript
 		if ( identifier === '' || identifier === '{{1}}' ) { return; }
 		const identifiers = identifier.split(/\s*\|\s*/);
 		let executeOnce = true;
-		const ea = () => {
-					try {
-						if (executeOnce !== true) { return; }
-						const element = document.createElement('{{4}}');
-						const node = document.querySelector('{{3}}');
-						for (const identifieradder of identifiers) {
-							if (identifieradder.charAt(0) === '#') {
-								 element.id = identifieradder.substring(1);
-							} else if (identifieradder.charAt(0) === '.') {
-								 element.className = identifieradder.substring(1);
-							} else { return; }	 
-						}
-						element.style.cssText = '{{2}}';
-						document.body.insertBefore(element, node);
-						executeOnce = false;
-					} catch { }
+		const insertelem = () => {
+						try {
+							if (executeOnce !== true) { return; }
+							const element = document.createElement('{{4}}');
+							const node = document.querySelector('{{3}}');
+							for (const identifieradder of identifiers) {
+								if (identifieradder.charAt(0) === '#') {
+									 element.id = identifieradder.substring(1);
+								} else if (identifieradder.charAt(0) === '.') {
+									 element.className = identifieradder.substring(1);
+								} else { return; }	 
+							}
+							element.style.cssText = '{{2}}';
+							document.body.insertBefore(element, node);
+							executeOnce = false;
+						} catch { }
 	   	};
-	   	const observer = new MutationObserver(ea);
+	   	const observer = new MutationObserver(insertelem);
     		observer.observe(document.documentElement, { childList: true, subtree: true });
 		if (document.readyState === 'complete') { observer.disconnect(); return; } 
 })();
