@@ -281,7 +281,7 @@ add-elem.js application/javascript
 					if (ev) { window.removeEventListener(ev.type, ea, true); }
 					try {
 						const element = document.createElement('{{3}}');
-						const doc = '{{4}}';
+						const doc = {{4}};
 						for (const identifieradder of identifiers) {
 							if (identifieradder.charAt(0) === '#') {
 								 element.id = identifieradder.substring(1);
