@@ -1,19 +1,6 @@
 # Collection of javascripts to be used for scriptlet injection on specific domains.
 
-# response-header-setter
-# example.com##+js(set-respheader, Cross-Origin-Resource-Policy, same-site)
-set-respheader.js application/javascript
-(() => {
-	   'use strict';
-	   const docu = document;
-	   if (!docu.head) { return; }
-	   const meta = docu.createElement('meta');
-	   meta.setAttribute('http-equiv', '{{1}}');
-	   meta.setAttribute('content', '{{2}}');
-	   docu.head.append(meta);
-})();
-
-# set-readOnly-property
+# readOnly-property
 # example.com##+js(ro, canAds, true)
 ro.js application/javascript
 (() => {
@@ -277,10 +264,10 @@ add-elem.js application/javascript
 		const identifier = '{{1}}';
 		if ( identifier === '' || identifier === '{{1}}' ) { return; }
 		const identifiers = identifier.split(/\s*\|\s*/);
-		let executeOnce = true;
+		let executeOnce = false;
 		const addelem = () => {
 						try {
-							if (executeOnce !== true) { return; }
+							if (executeOnce !== false) { return; }
 							const element = document.createElement('{{3}}');
 							for (const identifieradder of identifiers) {
 								if (identifieradder.charAt(0) === '#') {
@@ -291,7 +278,7 @@ add-elem.js application/javascript
 							}
 							element.style.cssText = '{{2}}';
 							document.body.append(element);
-							executeOnce = false;
+							executeOnce = true;
 						} catch { }
 	   	};
 	   	const observer = new MutationObserver(addelem);
@@ -506,22 +493,22 @@ add-iframe.js application/javascript
     	        'use strict';
 		const iframes = '{{1}}';
 		if ( iframes === '' || iframes === '{{1}}' ) { return; }
-		const fc = ev => {
+		let executeOnce = false;
+		const addframe = () => {
 					try {
-						if (ev) { window.removeEventListener(ev.type, fc, true); }
+						if (executeOnce !== false) { return; }
 						for ( let i = 0; i < iframes; i++ ) {
 						      const iframe = document.createElement('iframe');
 						      iframe.setAttribute('id', '{{2}}');
 						      iframe.setAttribute('src', '{{3}}');
 						      document.body.append(iframe);
 						}
+						executeOnce = true;
 					} catch { }
 		};			
-		if ( document.readyState === 'loading' ) {
-		    	 window.addEventListener('DOMContentLoaded', fc, true);
-	   	} else {
-		    	 fc();
-	   	}				
+		const observer = new MutationObserver(addframe);
+    		observer.observe(document.documentElement, { childList: true, subtree: true });
+		if (document.readyState === 'complete') { observer.disconnect(); return; }		
 })();
 
 # DOM-element-inserter
@@ -532,10 +519,10 @@ insert-elem.js application/javascript
 		const identifier = '{{1}}';
 		if ( identifier === '' || identifier === '{{1}}' ) { return; }
 		const identifiers = identifier.split(/\s*\|\s*/);
-		let executeOnce = true;
+		let executeOnce = false;
 		const insertelem = () => {
 						try {
-							if (executeOnce !== true) { return; }
+							if (executeOnce !== false) { return; }
 							const element = document.createElement('{{4}}');
 							const node = document.querySelector('{{3}}');
 							for (const identifieradder of identifiers) {
@@ -547,7 +534,7 @@ insert-elem.js application/javascript
 							}
 							element.style.cssText = '{{2}}';
 							document.body.insertBefore(element, node);
-							executeOnce = false;
+							executeOnce = true;
 						} catch { }
 	   	};
 	   	const observer = new MutationObserver(insertelem);
