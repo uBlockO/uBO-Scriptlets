@@ -402,14 +402,14 @@ replace-class.js application/javascript
 			selector = `[${tokens.join('],[')}]`;
 		    }
 		    const replaceclass = () => {
-						const nodes = document.querySelectorAll(selector);
-						try {
-							for ( const node of nodes ) {
-								for ( const className of needles ) {
-									node.classList.replace(className, '{{3}}');
+							const nodes = document.querySelectorAll(selector);
+							try {
+								for ( const node of nodes ) {
+									for ( const className of needles ) {
+										node.classList.replace(className, '{{3}}');
+									}
 								}
-							}
-						} catch { }
+							} catch { }
 		    };
 		    const observer = new MutationObserver(replaceclass);
     		    observer.observe(document.documentElement, { childList: true, subtree: true });
@@ -423,20 +423,20 @@ set-innerHTML.js application/javascript
 		'use strict';
 		const selector = '{{1}}';
 		if ( selector === '' || selector === '{{1}}' ) { return; }
-		const ihs = ev => {
-		 			   if (ev) { window.removeEventListener(ev.type, ihs, true); }
+		let executeOnce = false;
+		const sih = () => {
+					   if (executeOnce !== false) { return; }
 					   const elements = document.querySelectorAll(selector);
 					   try {
 						  for (const element of elements) {
 							element.innerHTML = '{{2}}';
-					       	  }
+						  }
+						  executeOnce = true;
 					   } catch { }
 		};
-		if (document.readyState === 'loading') {
-			 window.addEventListener('DOMContentLoaded', ihs, true);
-		} else {
-			 ihs();
-		}
+		const observer = new MutationObserver(sih);
+	  	observer.observe(document.documentElement, { childList: true, subtree: true });
+	  	if (document.readyState === 'complete') { observer.disconnect(); return; } 
 })();
 
 # DOM-Node-logger
@@ -473,13 +473,13 @@ multiup.js application/javascript
 		const selector2 = '{{2}}';
 		if ( selector2 === '' || selector2 === '{{2}}' ) { return; }
 		const multiup = () => {
-					const elem = document.querySelectorAll(selector);
-					const elem2 = document.querySelectorAll(selector2);
-				   	try {
-						for (let i = 0; i < elem.length; i++) {
-							elem[i].setAttribute('{{3}}', elem2[i].getAttribute('{{4}}'));
-						}
-				   	} catch { }
+						const elem = document.querySelectorAll(selector);
+						const elem2 = document.querySelectorAll(selector2);
+						try {
+							for (let i = 0; i < elem.length; i++) {
+								elem[i].setAttribute('{{3}}', elem2[i].getAttribute('{{4}}'));
+							}
+						} catch { }
 		};
 		const observer = new MutationObserver(multiup);
 	  	observer.observe(document.documentElement, { childList: true, subtree: true });
@@ -495,16 +495,16 @@ add-iframe.js application/javascript
 		if ( iframes === '' || iframes === '{{1}}' ) { return; }
 		let executeOnce = false;
 		const addframe = () => {
-					try {
-						if (executeOnce !== false) { return; }
-						for ( let i = 0; i < iframes; i++ ) {
-						      const iframe = document.createElement('iframe');
-						      iframe.setAttribute('id', '{{2}}');
-						      iframe.setAttribute('src', '{{3}}');
-						      document.body.append(iframe);
-						}
-						executeOnce = true;
-					} catch { }
+						  try {
+							if (executeOnce !== false) { return; }
+							for ( let i = 0; i < iframes; i++ ) {
+							      const iframe = document.createElement('iframe');
+							      iframe.setAttribute('id', '{{2}}');
+							      iframe.setAttribute('src', '{{3}}');
+							      document.body.append(iframe);
+							}
+							executeOnce = true;
+						  } catch { }
 		};			
 		const observer = new MutationObserver(addframe);
     		observer.observe(document.documentElement, { childList: true, subtree: true });
