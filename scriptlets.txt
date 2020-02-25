@@ -357,7 +357,9 @@ add-class.js application/javascript
 						try {
 			    				for ( const node of nodes ) {
 								for ( const className of needles ) {
-				    					node.classList.add(className);
+									if ( !node.classList.contains(className) ) {
+										node.classList.add(className);
+									}	
 								}
 			    				}
 						} catch { }
