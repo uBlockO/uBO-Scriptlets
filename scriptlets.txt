@@ -63,8 +63,8 @@ ro.js application/javascript
 })();		
 
 # element-remover
-# example.com##+js(eremove, #example)
-eremove.js application/javascript
+# example.com##+js(remove-elem, #example)
+remove-elem.js application/javascript
 (() => {
 		'use strict';
 		const selector = '{{1}}';
@@ -73,6 +73,7 @@ eremove.js application/javascript
 		 			   const elements = document.querySelectorAll(selector);
 					   try {
 						  for (const element of elements) {
+							if (!document.querySelector(selector)) { break; }
 							element.remove();
 					       	  }
 					   } catch { }
