@@ -330,7 +330,9 @@ remove-class.js application/javascript
 						try {
 			    				for ( const node of nodes ) {
 								for ( const className of needles ) {
-				    					node.classList.remove(className);
+									if ( node.classList.contains(className) ) {
+										node.classList.remove(className);
+									}	
 								}
 			    				}
 						} catch { }
