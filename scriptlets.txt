@@ -173,21 +173,24 @@ tog-attr.js application/javascript
 		  const token = '{{1}}';
 		  if ( token === '' || token === '{{1}}' ) { return; }
 		  const tokens = token.split(/\s*\|\s*/);
-		  let selector = '{{3}}';
-		  if ( selector === '' || selector === '{{3}}' ) { selector = `[${tokens.join('],[')}]`; }
-		  const togattr = () => {
+		  let selector = '{{2}}';
+		  if ( selector === '' || selector === '{{2}}' ) { selector = `[${tokens.join('],[')}]`; }
+		  const togattr = ev => {
+						 if (ev) { window.removeEventListener(ev.type, togattr, true); }
 						 try {
 							const nodes = document.querySelectorAll(selector);
 							for (const node of nodes) {
 								for (const attr of tokens) {
-								     node.toggleAttribute(attr, {{2}});
+								     node.toggleAttribute(attr);
 								}
 							}
 						} catch { }
 		  };
-		  const observer = new MutationObserver(togattr);
-		  observer.observe(document.documentElement, { childList: true, subtree: true });
-		  if (document.readyState === 'complete') { observer.disconnect(); return; } 
+		  if (document.readyState === 'loading') {
+		    	    window.addEventListener('DOMContentLoaded', togattr, true);
+	   	  } else {
+		    	    togattr();
+	   	  }
 })();
 
 # cookie-setter
