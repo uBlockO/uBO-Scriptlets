@@ -169,25 +169,25 @@ set-attr.js application/javascript
 # example.com##+js(tog-attr, preload, video)
 tog-attr.js application/javascript
 (() => {
-          'use strict';
-          const token = '{{1}}';
-          if ( token === '' || token === '{{1}}' ) { return; }
-          const tokens = token.split(/\s*\|\s*/);
-          let selector = '{{2}}';
-          if ( selector === '' || selector === '{{2}}' ) { selector = `[${tokens.join('],[')}]`; }
-          const togattr = () => {
-              				 try {
-                    				const nodes = document.querySelectorAll(selector);
-					    	for (const node of nodes) {
-							for (const attr of tokens) {
-							    	node.toggleAttribute(attr);
+		  'use strict';
+		  const token = '{{1}}';
+		  if ( token === '' || token === '{{1}}' ) { return; }
+		  const tokens = token.split(/\s*\|\s*/);
+		  let selector = '{{3}}';
+		  if ( selector === '' || selector === '{{3}}' ) { selector = `[${tokens.join('],[')}]`; }
+		  const togattr = () => {
+						 try {
+							const nodes = document.querySelectorAll(selector);
+							for (const node of nodes) {
+								for (const attr of tokens) {
+								     node.toggleAttribute(attr, {{2}});
+								}
 							}
-						}
-					 } catch { }
-          };
-          const observer = new MutationObserver(togattr);
-	  observer.observe(document.documentElement, { childList: true, subtree: true });
-	  if (document.readyState === 'complete') { observer.disconnect(); return; } 
+						} catch { }
+		  };
+		  const observer = new MutationObserver(togattr);
+		  observer.observe(document.documentElement, { childList: true, subtree: true });
+		  if (document.readyState === 'complete') { observer.disconnect(); return; } 
 })();
 
 # cookie-setter
