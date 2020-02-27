@@ -487,18 +487,21 @@ multiup.js application/javascript
 		if ( selector === '' || selector === '{{1}}' ) { return; }
 		const selector2 = '{{2}}';
 		if ( selector2 === '' || selector2 === '{{2}}' ) { return; }
-		const multiup = () => {
-						const elem = document.querySelectorAll(selector);
-						const elem2 = document.querySelectorAll(selector2);
+		const multiup = ev => {
+						if (ev) { window.removeEventListener(ev.type, multiup, true); }
 						try {
+							const elem = document.querySelectorAll(selector);
+							const elem2 = document.querySelectorAll(selector2);
 							for (let i = 0; i < elem.length; i++) {
 								elem[i].setAttribute('{{3}}', elem2[i].getAttribute('{{4}}'));
 							}
 						} catch { }
 		};
-		const observer = new MutationObserver(multiup);
-	  	observer.observe(document.documentElement, { childList: true, subtree: true });
-	  	if (document.readyState === 'complete') { observer.disconnect(); return; } 
+		if (document.readyState === 'loading') {
+		    	    window.addEventListener('DOMContentLoaded', multiup, true);
+	   	} else {
+		    	    multiup();
+	   	}
 })();
 
 # iframe-inserter
