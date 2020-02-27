@@ -438,20 +438,20 @@ set-innerHTML.js application/javascript
 		'use strict';
 		const selector = '{{1}}';
 		if ( selector === '' || selector === '{{1}}' ) { return; }
-		let executeOnce = false;
-		const sih = () => {
-					   if (executeOnce !== false) { return; }
-					   const elements = document.querySelectorAll(selector);
+		const sih = ev => {
+					   if (ev) { window.removeEventListener(ev.type, sih, true); }
 					   try {
+						  const elements = document.querySelectorAll(selector);
 						  for (const element of elements) {
 							element.innerHTML = '{{2}}';
 						  }
-						  executeOnce = true;
 					   } catch { }
 		};
-		const observer = new MutationObserver(sih);
-	  	observer.observe(document.documentElement, { childList: true, subtree: true });
-	  	if (document.readyState === 'complete') { observer.disconnect(); return; } 
+		if (document.readyState === 'loading') {
+		    	    window.addEventListener('DOMContentLoaded', sih, true);
+	   	} else {
+		    	    sih();
+	   	} 
 })();
 
 # DOM-Node-logger
