@@ -559,3 +559,28 @@ insert-elem.js application/javascript
     		observer.observe(document.documentElement, { childList: true, subtree: true });
 		if (document.readyState === 'complete') { observer.disconnect(); return; } 
 })();
+
+# DOM-element-appender
+# example.com##+js(append-elem, #id|.class, element, attribute, value)
+append-elem.js application/javascript
+(() => {
+		'use strict';
+		const selector = '{{1}}';
+		if ( selector === '' || selector === '{{1}}' ) { return; }
+		const appendNode = ev => {
+						if (ev) { window.removeEventListener(ev.type, appendNode, true); }
+						try {
+							const elements = document.querySelectorAll(selector);
+							for ( const element of elements ) {
+							      const node = document.createElement('{{2}}');
+							      node.setAttribute('{{3}}', '{{4}}');
+							      element.appendChild(node);
+							}
+						} catch { }
+		};
+		if (document.readyState === 'complete') {
+		    	    appendNode();
+	   	} else {
+		    	    window.addEventListener('load', appendNode, true);
+	   	}
+})();
