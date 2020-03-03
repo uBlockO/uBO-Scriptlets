@@ -574,7 +574,7 @@ append-elem.js application/javascript
 							for ( const element of elements ) {
 							      const node = document.createElement('{{2}}');
 							      node.setAttribute('{{3}}', '{{4}}');
-							      element.appendChild(node);
+							      element.append(node);
 							}
 						} catch { }
 		};
