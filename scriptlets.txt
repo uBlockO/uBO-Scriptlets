@@ -98,9 +98,7 @@ rm-attr.js application/javascript
 						try {
 			    				for ( const node of nodes ) {
 								for ( const attr of needles ) {
-									if ( node.hasAttribute(attr) ) {
-				    					     node.removeAttribute(attr);
-									}     
+									node.removeAttribute(attr);
 								}
 			    				}
 						} catch { }
