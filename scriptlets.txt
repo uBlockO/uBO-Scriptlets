@@ -84,8 +84,8 @@ remove-elem.js application/javascript
 })();
 
 # attribute-remover
-# example.com##+js(rm-attr, allow, iframe)
-rm-attr.js application/javascript
+# example.com##+js(rem-attr, allow, iframe)
+rem-attr.js application/javascript
 (() => {
 		    'use strict';
 		    const needle = '{{1}}';
@@ -98,7 +98,9 @@ rm-attr.js application/javascript
 						try {
 			    				for ( const node of nodes ) {
 								for ( const attr of needles ) {
-									node.removeAttribute(attr);
+								      if ( node.hasAttribute(attr) ) {
+									   node.removeAttribute(attr);
+								      }	   
 								}
 			    				}
 						} catch { }
