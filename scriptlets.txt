@@ -336,7 +336,7 @@ remove-class.js application/javascript
 							for ( const node of nodes ) {
 								for ( const className of needles ) {
 									if ( node.classList.contains(className) ) {
-										node.classList.remove(className);
+									     node.classList.remove(className);
 									}	
 								}
 			    				}
