@@ -319,7 +319,7 @@ query-stripper.js application/javascript
 		}
 })();
 
-# class-remover
+# element-class-remover
 # example.com##+js(remove-class, example, .example)
 remove-class.js application/javascript
 (() => {
@@ -329,10 +329,11 @@ remove-class.js application/javascript
 		    const needles = needle.split(/\s*\|\s*/);
 		    let selector = '{{2}}';
 		    if ( selector === '' || selector === '{{2}}' ) { selector = `[${tokens.join('],[')}]`; }
-		    const rmclass = () => {
-						const nodes = document.querySelectorAll(selector);
+		    const rmclass = ev => {
+						if (ev) { window.removeEventListener(ev.type, rmclass, true);  }
 						try {
-			    				for ( const node of nodes ) {
+			    				const nodes = document.querySelectorAll(selector);
+							for ( const node of nodes ) {
 								for ( const className of needles ) {
 									if ( node.classList.contains(className) ) {
 										node.classList.remove(className);
@@ -341,9 +342,12 @@ remove-class.js application/javascript
 			    				}
 						} catch { }
 		    };
-		    const observer = new MutationObserver(rmclass);
-    		    observer.observe(document.documentElement, { childList: true, subtree: true });
-		    if (document.readyState === 'complete') { observer.disconnect(); return; } 
+		    if (document.readyState === 'loading') {
+		    	      window.addEventListener('DOMContentLoaded', rmclass, true);
+	   	    } else {
+		    	      rmclass();
+	   	    }
+ 
 })();
 
 # class-adder
