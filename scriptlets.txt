@@ -349,7 +349,7 @@ remove-class.js application/javascript
 	   	    }
 })();
 
-# class-adder
+# element-class-adder
 # example.com##+js(add-class, example, .example)
 add-class.js application/javascript
 (() => {
@@ -359,23 +359,25 @@ add-class.js application/javascript
 		    const needles = needle.split(/\s*\|\s*/);
 		    let selector = '{{2}}';
 		    if ( selector === '' || selector === '{{2}}' ) { selector = `[${tokens.join('],[')}]`; }
-		    const addclass = () => {
+		    const addclass = ev => {
+						if (ev) { window.removeEventListener(ev.type, addclass, true);  }
 						const nodes = document.querySelectorAll(selector);
 						try {
-			    				for ( const node of nodes ) {
+							for ( const node of nodes ) {
 								for ( const className of needles ) {
 									if ( !node.classList.contains(className) ) {
-										node.classList.add(className);
+									     node.classList.add(className);
 									}	
 								}
 			    				}
 						} catch { }
 		    };
-		    const observer = new MutationObserver(addclass);
-    		    observer.observe(document.documentElement, { childList: true, subtree: true });
-		    if (document.readyState === 'complete') { observer.disconnect(); return; } 
+		    if (document.readyState === 'loading') {
+		    	      window.addEventListener('DOMContentLoaded', addclass, true);
+	   	    } else {
+		    	      addclass();
+	   	    }
 })();
-
 # class-toggler
 # example.com##+js(toggle-class, example, .example)
 toggle-class.js application/javascript
