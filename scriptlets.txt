@@ -378,7 +378,8 @@ add-class.js application/javascript
 		    	      addclass();
 	   	    }
 })();
-# class-toggler
+
+# element-class-toggler
 # example.com##+js(toggle-class, example, .example)
 toggle-class.js application/javascript
 (() => {
@@ -406,7 +407,7 @@ toggle-class.js application/javascript
 	    } 
 })();
 
-# class-replacer
+# element-class-replacer
 # example.com##+js(replace-class, example, example2, .example)
 replace-class.js application/javascript
 (() => {
