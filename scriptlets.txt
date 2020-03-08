@@ -331,8 +331,8 @@ remove-class.js application/javascript
 		    if ( selector === '' || selector === '{{2}}' ) { selector = `[${tokens.join('],[')}]`; }
 		    const rmclass = ev => {
 						if (ev) { window.removeEventListener(ev.type, rmclass, true);  }
+						const nodes = document.querySelectorAll(selector);
 						try {
-			    				const nodes = document.querySelectorAll(selector);
 							for ( const node of nodes ) {
 								for ( const className of needles ) {
 									if ( node.classList.contains(className) ) {
@@ -347,7 +347,6 @@ remove-class.js application/javascript
 	   	    } else {
 		    	      rmclass();
 	   	    }
- 
 })();
 
 # class-adder
