@@ -416,24 +416,25 @@ replace-class.js application/javascript
 		    if ( needle === '' || needle === '{{1}}' ) { return; }
 		    const needles = needle.split(/\s*\|\s*/);
 		    let selector = '{{3}}';
-		    if ( selector === '' || selector === '{{3}}' ) {
-			selector = `[${tokens.join('],[')}]`;
-		    }
-		    const replaceclass = () => {
+		    if ( selector === '' || selector === '{{3}}' ) { selector = `[${tokens.join('],[')}]`; }
+		    const replaceclass = ev => {
+							if (ev) { window.removeEventListener(ev.type, replaceclass, true);  }
 							const nodes = document.querySelectorAll(selector);
 							try {
 								for ( const node of nodes ) {
 									for ( const className of needles ) {
 										if ( node.classList.contains(className) ) {
 										     node.classList.replace(className, '{{2}}');
-										}
+										}	
 									}
 								}
 							} catch { }
 		    };
-		    const observer = new MutationObserver(replaceclass);
-    		    observer.observe(document.documentElement, { childList: true, subtree: true });
-		    if (document.readyState === 'complete') { observer.disconnect(); return; } 
+		    if (document.readyState === 'loading') {
+		    	      window.addEventListener('DOMContentLoaded', replaceclass, true);
+	   	    } else {
+		    	      replaceclass();
+	   	    }
 })();
 
 # innerHTML-setter
