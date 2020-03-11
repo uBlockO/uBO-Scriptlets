@@ -74,6 +74,7 @@ remove-elem.js application/javascript
 					   try {
 						  for (const element of elements) {
 							if (!document.querySelector(selector)) { break; }
+							element.textContent = '';
 							element.remove();
 					       	  }
 					   } catch { }
