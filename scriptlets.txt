@@ -519,7 +519,7 @@ insert-iframe.js application/javascript
 		const iframes = '{{1}}';
 		if ( iframes === '' || iframes === '{{1}}' ) { return; }
 		let executeOnce = false;
-		const addframe = () => {
+		const insertframe = () => {
 						  try {
 							if (executeOnce !== false) { return; }
 							for ( let i = 0; i < iframes; i++ ) {
@@ -531,7 +531,7 @@ insert-iframe.js application/javascript
 							executeOnce = true;
 						  } catch { }
 		};			
-		const observer = new MutationObserver(addframe);
+		const observer = new MutationObserver(insertframe);
     		observer.observe(document.documentElement, { childList: true, subtree: true });
 		if (document.readyState === 'complete') { observer.disconnect(); return; }		
 })();
