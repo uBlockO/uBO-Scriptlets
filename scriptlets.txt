@@ -546,8 +546,8 @@ insert-elem.js application/javascript
 		const identifiers = identifier.split(/\s*\|\s*/);
 		let executeOnce = false;
 		const insertelem = () => {
+						if (executeOnce !== false) { return; }
 						try {
-							if (executeOnce !== false) { return; }
 							const element = document.createElement('{{4}}');
 							const node = document.querySelector('{{3}}');
 							for (const identifieradder of identifiers) {
