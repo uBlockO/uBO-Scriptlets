@@ -320,36 +320,6 @@ query-stripper.js application/javascript
 		}
 })();
 
-# element-class-remover
-# example.com##+js(remove-class, example, .example)
-remove-class.js application/javascript
-(() => {
-		    'use strict';
-		    const needle = '{{1}}';
-		    if ( needle === '' || needle === '{{1}}' ) { return; }
-		    const needles = needle.split(/\s*\|\s*/);
-		    let selector = '{{2}}';
-		    if ( selector === '' || selector === '{{2}}' ) { selector = `[${tokens.join('],[')}]`; }
-		    const rmclass = ev => {
-						if (ev) { window.removeEventListener(ev.type, rmclass, true);  }
-						const nodes = document.querySelectorAll(selector);
-						try {
-							for ( const node of nodes ) {
-								for ( const className of needles ) {
-									if ( node.classList.contains(className) ) {
-									     node.classList.remove(className);
-									}	
-								}
-			    				}
-						} catch { }
-		    };
-		    if (document.readyState === 'loading') {
-		    	      window.addEventListener('DOMContentLoaded', rmclass, true);
-	   	    } else {
-		    	      rmclass();
-	   	    }
-})();
-
 # element-class-adder
 # example.com##+js(add-class, example, .example)
 add-class.js application/javascript
