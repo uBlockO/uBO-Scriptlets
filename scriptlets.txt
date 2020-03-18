@@ -149,7 +149,7 @@ set-attr.js application/javascript
           if ( token === '' || token === '{{1}}' ) { return; }
           const tokens = token.split(/\s*\|\s*/);
           let selector = '{{3}}';
-          if ( selector === '' || selector === '{{3}}' ) { selector = `[${tokens.join('],[')}]`; }
+          if ( selector === '' || selector === '{{3}}' ) { selector = '.' + tokens.map(a => CSS.escape(a)).join(',.'); }
           const stattr = () => {
 					try {
 						const nodes = document.querySelectorAll(selector);
@@ -174,7 +174,7 @@ tog-attr.js application/javascript
 		  if ( token === '' || token === '{{1}}' ) { return; }
 		  const tokens = token.split(/\s*\|\s*/);
 		  let selector = '{{2}}';
-		  if ( selector === '' || selector === '{{2}}' ) { selector = `[${tokens.join('],[')}]`; }
+		  if ( selector === '' || selector === '{{2}}' ) { selector = '.' + tokens.map(a => CSS.escape(a)).join(',.'); }
 		  const togattr = ev => {
 						 if (ev) { window.removeEventListener(ev.type, togattr, true); }
 						 try {
@@ -292,34 +292,6 @@ add-elem.js application/javascript
 		if (document.readyState === 'complete') { observer.disconnect(); return; }
 })();
 
-# url-query-remover
-# example.com##+js(query-stripper, fbclid|gclid)
-query-stripper.js application/javascript
-(() => {
-		'use strict';
-		const needle = '{{1}}';
-		if ( needle === '' || needle === '{{1}}' ) { return; }			
-	   	const needles = needle.split(/\s*\|\s*/);
-		const querystripper = ev => {
-						if (ev) { window.removeEventListener(ev.type, querystripper, true); }
-						try {
-			  		      		const url = new URL(location.href);
-					      		const params = new URLSearchParams(url.search.slice(1));
-					      		for (const needleremover of needles) {
-					      			if (params.has(needleremover)) {
-									url.searchParams.delete(needleremover);
-			       						window.location.href = url;
-								}
-			  		      		}		
-						} catch { }
-		};		    
-		if (document.readyState === 'loading') {
-		    	 window.addEventListener('DOMContentLoaded', querystripper, true);
-		} else {
-		     	 querystripper();
-		}
-})();
-
 # element-class-adder
 # example.com##+js(add-class, example, .example)
 add-class.js application/javascript
@@ -329,7 +301,7 @@ add-class.js application/javascript
 		    if ( needle === '' || needle === '{{1}}' ) { return; }
 		    const needles = needle.split(/\s*\|\s*/);
 		    let selector = '{{2}}';
-		    if ( selector === '' || selector === '{{2}}' ) { selector = `[${tokens.join('],[')}]`; }
+		    if ( selector === '' || selector === '{{2}}' ) { selector = '.' + needles.map(a => CSS.escape(a)).join(',.'); }
 		    const addclass = ev => {
 						if (ev) { window.removeEventListener(ev.type, addclass, true);  }
 						const nodes = document.querySelectorAll(selector);
@@ -359,7 +331,7 @@ toggle-class.js application/javascript
 	    if ( needle === '' || needle === '{{1}}' ) { return; }
 	    const needles = needle.split(/\s*\|\s*/);
 	    let selector = '{{2}}';
-	    if ( selector === '' || selector === '{{2}}' ) { selector = `[${tokens.join('],[')}]`; }
+	    if ( selector === '' || selector === '{{2}}' ) { selector = '.' + needles.map(a => CSS.escape(a)).join(',.'); }
 	    const toggleclass = ev => {
 						if (ev) { window.removeEventListener(ev.type, toggleclass, true); }
 						const nodes = document.querySelectorAll(selector);
@@ -387,7 +359,7 @@ replace-class.js application/javascript
 		    if ( needle === '' || needle === '{{1}}' ) { return; }
 		    const needles = needle.split(/\s*\|\s*/);
 		    let selector = '{{3}}';
-		    if ( selector === '' || selector === '{{3}}' ) { selector = `[${tokens.join('],[')}]`; }
+		    if ( selector === '' || selector === '{{3}}' ) { selector = '.' + needles.map(a => CSS.escape(a)).join(',.'); }
 		    const replaceclass = ev => {
 							if (ev) { window.removeEventListener(ev.type, replaceclass, true);  }
 							const nodes = document.querySelectorAll(selector);
