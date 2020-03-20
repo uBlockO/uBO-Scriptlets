@@ -152,7 +152,9 @@ set-attr.js application/javascript
 					try {
 						const nodes = document.querySelectorAll(selector);
 						for (const node of nodes) {
-						     node.setAttribute(...tokens, '{{2}}');
+						     for ( const attr of tokens ) {
+						           node.setAttribute(attr, '{{2}}');
+						     }	   
 						}
 					} catch { }
           };
