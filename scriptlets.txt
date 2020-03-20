@@ -147,7 +147,7 @@ set-attr.js application/javascript
           if ( token === '' || token === '{{1}}' ) { return; }
           const tokens = token.split(/\s*\|\s*/);
           let selector = '{{3}}';
-          if ( selector === '' || selector === '{{3}}' ) { selector = '.' + tokens.map(a => CSS.escape(a)).join(',.'); }
+          if ( selector === '' || selector === '{{3}}' ) { selector = `[${tokens.join('],[')}]`; }
           const stattr = () => {
 					try {
 						const nodes = document.querySelectorAll(selector);
@@ -170,7 +170,7 @@ tog-attr.js application/javascript
 		  if ( token === '' || token === '{{1}}' ) { return; }
 		  const tokens = token.split(/\s*\|\s*/);
 		  let selector = '{{2}}';
-		  if ( selector === '' || selector === '{{2}}' ) { selector = '.' + tokens.map(a => CSS.escape(a)).join(',.'); }
+		  if ( selector === '' || selector === '{{2}}' ) { selector = `[${tokens.join('],[')}]`; }
 		  const togattr = ev => {
 						 if (ev) { window.removeEventListener(ev.type, togattr, true); }
 						 try {
