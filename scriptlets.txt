@@ -93,7 +93,7 @@ rem-attr.js application/javascript
 		    if ( needle === '' || needle === '{{1}}' ) { return; }
 		    const needles = needle.split(/\s*\|\s*/);
 		    let selector = '{{2}}';
-		    if ( selector === '' || selector === '{{2}}' ) { selector = '.' + needles.map(a => CSS.escape(a)).join(',.'); }
+		    if ( selector === '' || selector === '{{2}}' ) { selector = `[${needles.join('],[')}]`; }
 		    const rmattr = () => {
 						const nodes = document.querySelectorAll(selector);
 						try {
