@@ -307,12 +307,8 @@ add-class.js application/javascript
 						const nodes = document.querySelectorAll(selector);
 						try {
 							for ( const node of nodes ) {
-								for ( const className of needles ) {
-									if ( !node.classList.contains(className) ) {
-									     node.classList.add(className);
-									}	
-								}
-			    				}
+							      node.classList.add(...needles);
+							}
 						} catch { }
 		    };
 		    if (document.readyState === 'loading') {
