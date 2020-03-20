@@ -355,9 +355,11 @@ replace-class.js application/javascript
 							const nodes = document.querySelectorAll(selector);
 							try {
 								for ( const node of nodes ) {
-									if ( node.classList.contains(...needles) ) {
-									     node.classList.replace(...needles, '{{2}}');
-									}
+								      for (const tokens of needles ) {
+									    if ( node.classList.contains(tokens) ) {
+									         node.classList.replace(tokens, '{{2}}');
+									    }
+								      }		    
 								}
 							} catch { }
 		    };
