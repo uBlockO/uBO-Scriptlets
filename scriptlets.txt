@@ -92,9 +92,9 @@ remove-shadowroot-elem.js application/javascript
 		const selector = '{{1}}';
 		if ( selector === '' || selector === '{{1}}' ) { return; }
 		const rootElement = document.documentElement;
-		function queryShadowRootElement(shadowRootElement, rootElement) {
-    			const el = rootElement.querySelector(shadowRootElement);
-    			if (el) { return el; }
+		function queryShadowRootElement(shadowRootElement) {
+    			const els = rootElement.querySelectorAll(shadowRootElement);
+			for ( const el of els) { if (el) { return el; } }
     			const probes = rootElement.querySelectorAll('*');
     			for (const probe of probes) {
         		     if (probe.shadowRoot) {
