@@ -84,6 +84,39 @@ remove-elem.js application/javascript
 		if (document.readyState === 'complete') { observer.disconnect(); return; } 
 })();
 
+# shadowRoot-element-remover
+# example.com##+js(remove-shadowroot-elem, [selector])
+remove-shadowroot-elem.js application/javascript
+(() => {
+		'use strict';
+		const selector = '{{1}}';
+		if ( selector === '' || selector === '{{1}}' ) { return; }
+		function queryShadowRootElement(shadowRootElement, rootElement) {
+    			if (!rootElement) {
+        		     return queryShadowRootElement(shadowRootElement, document.documentElement);
+           		}
+   			const el = rootElement.querySelector(shadowRootElement);
+    			if (el) { return el; }
+    			const probes = rootElement.querySelectorAll('*');
+    			for (const probe of probes) {
+        		     if (probe.shadowRoot) {
+            			       const shadowElement = queryShadowRootElement(shadowRootElement, probe.shadowRoot);
+            			       if (shadowElement) { return shadowElement; }
+        		     }
+    			}
+    			return null;
+		};
+		const rmshadowelem = () => {
+					   	try {
+						  	const elem = queryShadowRootElement(selector);
+						  	if (elem) { elem.remove(); }
+					   	} catch { }
+		};
+		const observer = new MutationObserver(rmshadowelem);
+    		observer.observe(document.documentElement, { childList: true, subtree: true });
+		if (document.readyState === 'complete') { observer.disconnect(); return; }
+})();
+
 # attribute-remover
 # example.com##+js(rem-attr, allow, iframe)
 rem-attr.js application/javascript
