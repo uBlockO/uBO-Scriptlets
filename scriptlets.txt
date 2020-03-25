@@ -95,7 +95,7 @@ remove-shadowroot-elem.js application/javascript
     			if (!rootElement) {
         		     return queryShadowRootElement(shadowRootElement, document.documentElement);
            		}
-   			const el = rootElement.querySelector(shadowRootElement);
+   			const el = rootElement.querySelectorAll(shadowRootElement);
     			if (el) { return el; }
     			const probes = rootElement.querySelectorAll('*');
     			for (const probe of probes) {
