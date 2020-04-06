@@ -562,13 +562,15 @@ append-elem.js application/javascript
 setItem.js application/javascript
 (() => {
 		'use strict';
-		const item = '{{1}}';
-		if ( item === '' || item === '{{1}}' ) { return; }
+		const key = '{{1}}';
+		if ( key === '' || key === '{{1}}' ) { return; }
+		const value = '{{2}}';
+		if ( value === '' || value === '{{2}}' ) { return; }
 		const setItem = ev => {
 		 			   if (ev) { window.removeEventListener(ev.type, setItem, true); }
 					   try {
-							if (localStorage.getItem(item) !== null) { return; }
-							localStorage.setItem(item, '{{2}}');
+							if (localStorage.getItem(key) !== null) { return; }
+							localStorage.setItem(key, value);
 					   } catch { }
 		};
 		if (document.readyState === 'loading') {
