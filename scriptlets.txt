@@ -556,3 +556,24 @@ append-elem.js application/javascript
 		    	    window.addEventListener('load', appendNode, true);
 	   	}
 })();
+
+# localStorage item-setter
+# example.com##+js(setItem, item, value)
+setItem.js application/javascript
+(() => {
+		'use strict';
+		const item = '{{1}}';
+		if ( item === '' || item === '{{1}}' ) { return; }
+		const setItem = ev => {
+		 			   if (ev) { window.removeEventListener(ev.type, setItem, true); }
+					   try {
+							if (localStorage.getItem(item) !== null) { return; }
+							localStorage.setItem(item, '{{2}}');
+					   } catch { }
+		};
+		if (document.readyState === 'loading') {
+		    	    window.addEventListener('DOMContentLoaded', setItem, true); 
+	   	} else {
+		    	    setItem();
+	   	}
+})();
