@@ -557,8 +557,29 @@ append-elem.js application/javascript
 	   	}
 })();
 
+# localStorage item-remover
+# example.com##+js(removeItem, key)
+removeItem.js application/javascript
+(() => {
+		'use strict';
+		const key = '{{1}}';
+		if ( key === '' || key === '{{1}}' ) { return; }
+		const removeItem = ev => {
+		 			   if (ev) { window.removeEventListener(ev.type, removeItem, true); }
+					   try {
+						   if (localStorage.getItem(key) == null) { return; }
+						   localStorage.removeItem(key);
+					   } catch { }
+		};
+		if (document.readyState === 'loading') {
+		    	    window.addEventListener('DOMContentLoaded', removeItem, true); 
+	   	} else {
+		    	    removeItem();
+	   	}
+})();
+
 # localStorage item-setter
-# example.com##+js(setItem, item, value)
+# example.com##+js(setItem, key, value)
 setItem.js application/javascript
 (() => {
 		'use strict';
@@ -569,8 +590,8 @@ setItem.js application/javascript
 		const setItem = ev => {
 		 			   if (ev) { window.removeEventListener(ev.type, setItem, true); }
 					   try {
-							if (localStorage.getItem(key) !== null) { return; }
-							localStorage.setItem(key, value);
+						   if (localStorage.getItem(key) !== null) { return; }
+						   localStorage.setItem(key, value);
 					   } catch { }
 		};
 		if (document.readyState === 'loading') {
