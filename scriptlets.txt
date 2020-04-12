@@ -81,7 +81,7 @@ remove-elem.js application/javascript
 		};
 		const observer = new MutationObserver(rm);
     		observer.observe(document.documentElement, { childList: true, subtree: true });
-		if (document.readyState === 'complete') { observer.disconnect(); return; } 
+		if (document.readyState === 'complete') { observer.disconnect(); } 
 })();
 
 # shadowRoot-element-remover
@@ -114,7 +114,7 @@ remove-shadowroot-elem.js application/javascript
 		};
 		const observer = new MutationObserver(rmshadowelem);
     		observer.observe(document.documentElement, { childList: true, subtree: true });
-		if (document.readyState === 'complete') { observer.disconnect(); return; }
+		if (document.readyState === 'complete') { observer.disconnect(); }
 })();
 
 # attribute-remover
@@ -139,7 +139,7 @@ rem-attr.js application/javascript
 		    };
 		    const observer = new MutationObserver(rmattr);
     		    observer.observe(document.documentElement, { childList: true, subtree: true });
-		    if (document.readyState === 'complete') { observer.disconnect(); return; } 
+		    if (document.readyState === 'complete') { observer.disconnect(); } 
 })();
 
 # DOM-Node-Remover
@@ -168,7 +168,7 @@ remove-node.js application/javascript
           };
           const observer = new MutationObserver(remnode);
           observer.observe(document.documentElement, { childList: true, subtree: true });
-          if (document.readyState === 'complete') { observer.disconnect(); return; }
+          if (document.readyState === 'complete') { observer.disconnect(); }
 })();
 
 # element-setAttribute
@@ -193,7 +193,7 @@ set-attr.js application/javascript
           };
           const observer = new MutationObserver(stattr);
 	  observer.observe(document.documentElement, { childList: true, subtree: true });
-	  if (document.readyState === 'complete') { observer.disconnect(); return; } 
+	  if (document.readyState === 'complete') { observer.disconnect(); } 
 })();
 
 # element-toggleAttribute
@@ -318,7 +318,7 @@ add-elem.js application/javascript
 	   	};
 	   	const observer = new MutationObserver(addelem);
     		observer.observe(document.documentElement, { childList: true, subtree: true });
-		if (document.readyState === 'complete') { observer.disconnect(); return; }
+		if (document.readyState === 'complete') { observer.disconnect(); }
 })();
 
 # element-class-adder
@@ -498,7 +498,7 @@ insert-iframe.js application/javascript
 		};			
 		const observer = new MutationObserver(insertframe);
     		observer.observe(document.documentElement, { childList: true, subtree: true });
-		if (document.readyState === 'complete') { observer.disconnect(); return; }		
+		if (document.readyState === 'complete') { observer.disconnect(); }		
 })();
 
 # DOM-element-inserter
@@ -529,7 +529,7 @@ insert-elem.js application/javascript
 	   	};
 	   	const observer = new MutationObserver(insertelem);
     		observer.observe(document.documentElement, { childList: true, subtree: true });
-		if (document.readyState === 'complete') { observer.disconnect(); return; } 
+		if (document.readyState === 'complete') { observer.disconnect(); } 
 })();
 
 # DOM-element-appender
@@ -575,7 +575,7 @@ removeItem.js application/javascript
 		};
 		const observer = new MutationObserver(removeItem);
     		observer.observe(document.documentElement, { childList: true, subtree: true });
-		if (document.readyState === 'complete') { observer.disconnect(); return; } 
+		if (document.readyState === 'complete') { observer.disconnect(); } 
 })();
 
 # localStorage item-setter
