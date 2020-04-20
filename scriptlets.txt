@@ -1,7 +1,6 @@
 # Collection of javascripts to be used for scriptlet injection on specific domains.
 
 # readOnly-property
-# example.com##+js(ro, canAds, true)
 ro.js application/javascript
 (() => {
 		let prop = '{{1}}';
@@ -63,7 +62,6 @@ ro.js application/javascript
 })();		
 
 # element-remover
-# example.com##+js(remove-elem, #example)
 remove-elem.js application/javascript
 (() => {
 		'use strict';
