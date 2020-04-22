@@ -1,7 +1,8 @@
-# Collection of javascripts to be used for scriptlet injection on specific domains.
+// Collection of javascripts to be used for scriptlet injection on specific domains.
 
-# readOnly-property
-ro.js application/javascript
+/// readOnly.js
+/// alias ro.js
+// example.com##+js(ro, canAds, true)
 (() => {
 		let prop = '{{1}}';
 		if ( prop === '' || prop === '{{1}}' ) { return; }
@@ -61,8 +62,9 @@ ro.js application/javascript
 		}
 })();		
 
-# element-remover
-remove-elem.js application/javascript
+/// remove-elem.js
+/// alias re.js
+// example.com##+js(re, [selector])
 (() => {
 		'use strict';
 		const selector = '{{1}}';
@@ -82,9 +84,9 @@ remove-elem.js application/javascript
 		if (document.readyState === 'complete') { observer.disconnect(); } 
 })();
 
-# shadowRoot-element-remover
-# example.com##+js(remove-shadowroot-elem, [selector])
-remove-shadowroot-elem.js application/javascript
+/// remove-shadowroot-elem.js
+/// alias rsre.js
+// example.com##+js(rsre, [selector])
 (() => {
 		'use strict';
 		const selector = '{{1}}';
@@ -115,9 +117,9 @@ remove-shadowroot-elem.js application/javascript
 		if (document.readyState === 'complete') { observer.disconnect(); }
 })();
 
-# attribute-remover
-# example.com##+js(rem-attr, allow, iframe)
-rem-attr.js application/javascript
+/// rem-attr.js
+/// alias rea.js
+// example.com##+js(rea, allow, iframe)
 (() => {
 		    'use strict';
 		    const needle = '{{1}}';
@@ -140,9 +142,9 @@ rem-attr.js application/javascript
 		    if (document.readyState === 'complete') { observer.disconnect(); } 
 })();
 
-# DOM-Node-Remover
-# example.com##+js(remove-node, /adblock|adsense/, script)
-remove-node.js application/javascript
+/// remove-node.js
+/// alias rn.js
+// example.com##+js(rn, /adblock|adsense/, script)
 (() => { 
           'use strict';
           let needle = '{{1}}';
@@ -169,9 +171,9 @@ remove-node.js application/javascript
           if (document.readyState === 'complete') { observer.disconnect(); }
 })();
 
-# element-setAttribute
-# example.com##+js(set-attr, preload, none, video)
-set-attr.js application/javascript
+/// set-attr.js
+/// alias sa.js
+// example.com##+js(sa, preload, none, video)
 (() => {
           'use strict';
           const token = '{{1}}';
@@ -194,9 +196,9 @@ set-attr.js application/javascript
 	  if (document.readyState === 'complete') { observer.disconnect(); } 
 })();
 
-# element-toggleAttribute
-# example.com##+js(tog-attr, preload, video)
-tog-attr.js application/javascript
+/// tog-attr.js
+/// alias ta.js
+// example.com##+js(ta, preload, video)
 (() => {
 		  'use strict';
 		  const token = '{{1}}';
@@ -220,9 +222,9 @@ tog-attr.js application/javascript
 	   	  }
 })();
 
-# cookie-setter
-# example.com##+js(cookie-set, name, value, age)
-cookie-set.js application/javascript
+/// cookie-set.js
+/// alias cs.js
+// example.com##+js(cs, name, value, age)
 (() => {
 		'use strict';
 		const cs = ev => {
@@ -238,9 +240,9 @@ cookie-set.js application/javascript
 	   	}
 })();	
 
-# element-replacer
-# example.com##+js(replace-elem, .element, div)
-replace-elem.js application/javascript
+/// replace-elem.js
+/// alias ree.js
+// example.com##+js(ree, .element, div)
 (() => {
 		'use strict';
 		const selector = '{{1}}';
@@ -271,9 +273,9 @@ replace-elem.js application/javascript
 		}
 })();
 
-# prune-property
-# example.com##+js(remove-prop, foo.bar)
-remove-prop.js application/javascript
+/// remove-prop.js
+/// alias rp.js
+// example.com##+js(rp, foo.bar)
 (() => {
 	      'use strict';
   	      const remove = ev => {
@@ -289,9 +291,9 @@ remove-prop.js application/javascript
               }
 })();
 
-# DOM-element-creator
-# example.com##+js(add-elem, #id|.class, display: block !important, div)
-add-elem.js application/javascript
+/// add-elem.js
+/// alias ae.js
+// example.com##+js(ae, [selector], display:block !important, div)
 (() => {
 		'use strict';
 		const identifier = '{{1}}';
@@ -319,9 +321,9 @@ add-elem.js application/javascript
 		if (document.readyState === 'complete') { observer.disconnect(); }
 })();
 
-# element-class-adder
-# example.com##+js(add-class, example, .example)
-add-class.js application/javascript
+/// add-class.js
+/// alias ac.js
+// example.com##+js(ac, example, [selector])
 (() => {
 		    'use strict';
 		    const needle = '{{1}}';
@@ -345,9 +347,9 @@ add-class.js application/javascript
 	   	    }
 })();
 
-# element-class-toggler
-# example.com##+js(toggle-class, example, .example)
-toggle-class.js application/javascript
+/// toggle-class.js
+/// alias tc.js
+// example.com##+js(tc, example, [selector])
 (() => {
 	    'use strict';
 	    const needle = '{{1}}';
@@ -371,9 +373,9 @@ toggle-class.js application/javascript
 	    } 
 })();
 
-# element-class-replacer
-# example.com##+js(replace-class, example, example2, .example)
-replace-class.js application/javascript
+/// replace-class.js
+/// alias rec.js
+// example.com##+js(rec, example, example2, [selector])
 (() => {
 		    'use strict';
 		    const needle = '{{1}}';
@@ -401,9 +403,9 @@ replace-class.js application/javascript
 	   	    }
 })();
 
-# innerHTML-setter
-# example.com##+js(set-innerHTML, #id, <span class="btext">Download</span>)
-set-innerHTML.js application/javascript
+/// set-innerHTML.js
+/// alias sih.js
+// example.com##+js(sih, [selector], <span class="btext">Download</span>)
 (() => {
 		'use strict';
 		const selector = '{{1}}';
@@ -424,9 +426,9 @@ set-innerHTML.js application/javascript
 	   	} 
 })();
 
-# DOM-Node-logger
-# example.com##+js(logger, script)
-logger.js application/javascript
+/// node-logger.js
+/// alias nl.js
+// example.com##+js(nl, script)
 (() => {
 		'use strict';
 		const needle = '{{1}}';
@@ -448,9 +450,9 @@ logger.js application/javascript
 		}
 })();
 
-# hyperlink-setter
-# example.com##+js(multiup, form[action], button[link], action, link)
-multiup.js application/javascript
+/// multiup.js
+/// alias mult.js
+// example.com##+js(mult, form[action], button[link], action, link)
 (() => {
 		'use strict';
 		const selector = '{{1}}';
@@ -474,9 +476,9 @@ multiup.js application/javascript
 	   	}
 })();
 
-# iframe-inserter
-# example.com##+js(insert-iframe, 2, selector, src)
-insert-iframe.js application/javascript
+/// insert-iframe.js
+/// alias ii.js
+// example.com##+js(ii, 2, [selector], src)
 (() => {
     	        'use strict';
 		const iframes = '{{1}}';
@@ -499,9 +501,9 @@ insert-iframe.js application/javascript
 		if (document.readyState === 'complete') { observer.disconnect(); }		
 })();
 
-# DOM-element-inserter
-# example.com##+js(insert-elem, #id|.class, display: block !important, node, div)
-insert-elem.js application/javascript
+/// insert-elem.js
+/// alias ie.js
+// example.com##+js(ie, [selector], display:block !important, node, div)
 (() => {
 		'use strict';
 		const identifier = '{{1}}';
@@ -530,9 +532,9 @@ insert-elem.js application/javascript
 		if (document.readyState === 'complete') { observer.disconnect(); } 
 })();
 
-# DOM-element-appender
-# example.com##+js(append-elem, #id|.class, element, attribute, value)
-append-elem.js application/javascript
+/// append-elem.js
+/// alias ape.js
+// example.com##+js(ape, [selector], element, attribute, value)
 (() => {
 		'use strict';
 		const selector = '{{1}}';
@@ -555,9 +557,9 @@ append-elem.js application/javascript
 	   	}
 })();
 
-# localStorage item-remover
-# example.com##+js(removeItem, key)
-removeItem.js application/javascript
+/// removeItem.js
+/// alias ri.js
+// example.com##+js(ri, key)
 (() => {
 		'use strict';
 		const key = '{{1}}';
@@ -576,9 +578,9 @@ removeItem.js application/javascript
 		if (document.readyState === 'complete') { observer.disconnect(); } 
 })();
 
-# localStorage item-setter
-# example.com##+js(setItem, key, value)
-setItem.js application/javascript
+/// setItem.js
+/// alias si.js
+// example.com##+js(si, key, value)
 (() => {
 		'use strict';
 		const key = '{{1}}';
