@@ -118,8 +118,8 @@
 })();
 
 /// rem-attr.js
-/// alias rea.js
-// example.com##+js(rea, allow, iframe)
+/// alias rma.js
+// example.com##+js(rma, allow, iframe)
 (() => {
 		    'use strict';
 		    const needle = '{{1}}';
@@ -319,6 +319,31 @@
 	   	const observer = new MutationObserver(addelem);
     		observer.observe(document.documentElement, { childList: true, subtree: true });
 		if (document.readyState === 'complete') { observer.disconnect(); }
+})();
+
+/// rem-class.js
+/// alias rmc.js
+// example.com##+js(rmc, example, [selector])
+(() => {
+		    'use strict';
+		    const needle = '{{1}}';
+		    if ( needle === '' || needle === '{{1}}' ) { return; }
+		    const needles = needle.split(/\s*\|\s*/);
+		    let selector = '{{2}}';
+		    if ( selector === '' || selector === '{{2}}' ) { selector = '.' + needles.map(a => CSS.escape(a)).join(',.'); }
+		    const removeclass = () => {
+							const nodes = document.querySelectorAll(selector);
+							try {
+								for ( const node of nodes ) {
+								      if ( node.classList.contains(...needles) ) {
+		 							   node.classList.remove(...needles);
+								      }
+	    							}
+							} catch { }
+		    };
+		    const observer = new MutationObserver(removeclass);
+    		    observer.observe(document.documentElement, { childList: true, subtree: true });
+		    if (document.readyState === 'complete') { observer.disconnect(); } 
 })();
 
 /// add-class.js
