@@ -625,3 +625,15 @@
 		    	    setItem();
 	   	}
 })();
+
+/// window.open-bypasser.js
+/// alias wob.js
+// example.com##+js(wob)
+(() => {
+		    'use strict';
+		    const popup = window.open, value = /^\/[\S]*?$/;
+          	    window.open = (needle, pop) => {
+	       		if ("string" === typeof needle && value.test(needle)) return window;
+			popup(needle, pop);	
+    		    };
+})();
