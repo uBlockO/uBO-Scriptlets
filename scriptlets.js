@@ -454,9 +454,9 @@
 	   	} 
 })();
 
-/// node-logger.js
-/// alias nl.js
-// example.com##+js(nl, script)
+/// log-node.js
+/// alias ln.js
+// example.com##+js(ln, script)
 (() => {
 		'use strict';
 		const needle = '{{1}}';
@@ -479,8 +479,8 @@
 })();
 
 /// multiup.js
-/// alias mult.js
-// example.com##+js(mult, form[action], button[link], action, link)
+/// alias mtu.js
+// example.com##+js(mtu, form[action], button[link], action, link)
 (() => {
 		'use strict';
 		const selector = '{{1}}';
