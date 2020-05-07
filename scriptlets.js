@@ -184,25 +184,27 @@
           const token = '{{1}}';
           if ( token === '' || token === '{{1}}' ) { return; }
           const tokens = token.split(/\s*\|\s*/);
-	  const value = '{{2}}';
-          let selector = '{{3}}';
+	  let selector = '{{3}}';
           if ( selector === '' || selector === '{{3}}' ) { selector = `[${tokens.join('],[')}]`; }
-          const stattr = () => {
-					try {
+	  let asyncTimer;
+          const setattr = () => {
+					asyncTimer = undefined;
+		  			try {
 						const nodes = document.querySelectorAll(selector);
 						for (const node of nodes) {
 						     for ( const attr of tokens ) {
-							   if (attr == value) { break; }  
-						           node.setAttribute(attr, value);
+							   node.setAttribute(attr, '{{2}}');
 						     }	   
 						}
 					} catch { }
           };
-          const observer = new MutationObserver(stattr);
+	  const setattrAsync = () => {
+		  			if ( asyncTimer !== undefined ) { return; }
+		  			asyncTimer = window.requestAnimationFrame(setattr);
+	  };	  
+          const observer = new MutationObserver(setattrAsync);
 	  observer.observe(document.documentElement, { childList: true, subtree: true });
-	  if (document.readyState === 'complete') { observer.disconnect(); } 
 })();
-
 
 /// tog-attr.js
 /// alias ta.js
