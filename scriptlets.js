@@ -132,19 +132,23 @@
 		    const needles = needle.split(/\s*\|\s*/);
 		    let selector = '{{2}}';
 		    if ( selector === '' || selector === '{{2}}' ) { selector = `[${needles.join('],[')}]`; }
-		    const rmattr = () => {
-						const nodes = document.querySelectorAll(selector);
-						try {
-			    				for ( const node of nodes ) {
-								if ( node.hasAttribute(...needles) ) {
-								     node.removeAttribute(...needles);
-								}	   
-			    				}
-						} catch { }
+		    let asyncTimer;
+		    const removeattr = () => {
+							asyncTimer = undefined;
+							const nodes = document.querySelectorAll(selector);
+							try {
+								for ( const node of nodes ) {
+									if ( node.hasAttribute(...needles) ) {
+									     node.removeAttribute(...needles);
+									}	   
+								}
+							} catch { }
 		    };
-		    const observer = new MutationObserver(rmattr);
+		    const removeattrAsync = () => {	if ( asyncTimer !== undefined ) { return; }
+						   	asyncTimer = window.requestAnimationFrame(removeattr);
+		    };				   
+		    const observer = new MutationObserver(removeattrAsync);
     		    observer.observe(document.documentElement, { childList: true, subtree: true });
-		    if (document.readyState === 'complete') { observer.disconnect(); } 
 })();
 
 /// remove-node.js
