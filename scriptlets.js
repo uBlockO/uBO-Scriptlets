@@ -69,8 +69,10 @@
 		'use strict';
 		const selector = '{{1}}';
 		if ( selector === '' || selector === '{{1}}' ) { return; }
+		let asyncTimer;
 		const rm = () => {
-		 			   const elements = document.querySelectorAll(selector);
+		 			   asyncTimer = undefined;
+					   const elements = document.querySelectorAll(selector);
 					   try {
 						  for (const element of elements) {
 							if (!document.querySelector(selector)) { break; }
@@ -79,10 +81,13 @@
 					       	  }
 					   } catch { }
 		};
-		const observer = new MutationObserver(rm);
+		const rmAsync = () => {
+        				  if ( asyncTimer !== undefined ) { return; }
+        				  asyncTimer = window.requestAnimationFrame(rm);
+    		};
+		const observer = new MutationObserver(rmAsync);
     		observer.observe(document.documentElement, { childList: true, subtree: true });
-		if (document.readyState === 'complete') { observer.disconnect(); } 
-})();
+})();	
 
 /// remove-shadowroot-elem.js
 /// alias rsre.js
