@@ -339,8 +339,10 @@
 		    const needles = needle.split(/\s*\|\s*/);
 		    let selector = '{{2}}';
 		    if ( selector === '' || selector === '{{2}}' ) { selector = '.' + needles.map(a => CSS.escape(a)).join(',.'); }
+	            let asyncTimer;
 		    const removeclass = () => {
-							const nodes = document.querySelectorAll(selector);
+							asyncTimer = undefined;
+			    				const nodes = document.querySelectorAll(selector);
 							try {
 								for ( const node of nodes ) {
 								      if ( node.classList.contains(...needles) ) {
@@ -349,9 +351,12 @@
 	    							}
 							} catch { }
 		    };
-		    const observer = new MutationObserver(removeclass);
+		    const removeclassAsync = () => {
+			    				if ( asyncTimer !== undefined ) { return; }
+			    				asyncTimer = window.requestAnimationFrame(removeclass);
+		    };    
+		    const observer = new MutationObserver(removeclassAsync);
     		    observer.observe(document.documentElement, { childList: true, subtree: true });
-		    if (document.readyState === 'complete') { observer.disconnect(); } 
 })();
 
 /// add-class.js
