@@ -598,17 +598,22 @@
 		const key = '{{1}}';
 		if ( key === '' || key === '{{1}}' ) { return; }
 		const keys = key.split(/\s*\|\s*/);
+		let asyncTimer;
 		const removeItem = () => {
-		 			   try {
-					   	   for (const keyName of keys) {
-						   	if (!localStorage.getItem(keyName)) { break; }
-							localStorage.removeItem(keyName);
-						   }
-					   } catch { }
+		 			   	   asyncTimer = undefined;
+						   try {
+							   for (const keyName of keys) {
+								if (!localStorage.getItem(keyName)) { break; }
+								localStorage.removeItem(keyName);
+							   }
+						   } catch { }
 		};
-		const observer = new MutationObserver(removeItem);
+		const removeItemAsync = () => {
+						   if ( asyncTimer !== undefined ) { return; }
+						   asyncTimer = window.requestAnimationFrame(removeItem);
+		};	
+		const observer = new MutationObserver(removeItemAsync);
     		observer.observe(document.documentElement, { childList: true, subtree: true });
-		if (document.readyState === 'complete') { observer.disconnect(); } 
 })();
 
 /// setItem.js
