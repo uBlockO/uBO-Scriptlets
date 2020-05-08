@@ -535,6 +535,7 @@
 							      const iframe = document.createElement('iframe');
 							      iframe.setAttribute('id', '{{2}}');
 							      iframe.setAttribute('src', '{{3}}');
+							      iframe.setAttribute('style', '{{4}}');
 							      document.body.append(iframe);
 							}
 							executeOnce = true;
