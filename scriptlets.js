@@ -96,6 +96,7 @@
 		'use strict';
 		const selector = '{{1}}';
 		if ( selector === '' || selector === '{{1}}' ) { return; }
+		let asyncTimer;
 		const queryShadowRootElement = (shadowRootElement, rootElement) => {
 	      		if (!rootElement) {
         		     return queryShadowRootElement(shadowRootElement, document.documentElement);
@@ -112,14 +113,18 @@
     			return null;
 		};
 		const rmshadowelem = () => {
-					   	try {
+					   	asyncTimer = undefined;
+						try {
 						  	const elem = queryShadowRootElement(selector);
 						  	if (elem) { elem.remove(); }
 					   	} catch { }
 		};
-		const observer = new MutationObserver(rmshadowelem);
+		const rmshadowelemAsync = () => {
+						   if ( asyncTimer !== undefined ) { return; }
+						   asyncTimer = window.requestAnimationFrame(rmshadowelem);
+		};	
+		const observer = new MutationObserver(rmshadowelemAsync);
     		observer.observe(document.documentElement, { childList: true, subtree: true });
-		if (document.readyState === 'complete') { observer.disconnect(); }
 })();
 
 /// rem-attr.js
