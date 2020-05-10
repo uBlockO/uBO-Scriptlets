@@ -76,7 +76,6 @@
 					   try {
 						  for (const element of elements) {
 							if (!document.querySelector(selector)) { break; }
-							element.textContent = '';
 							element.remove();
 					       	  }
 					   } catch { }
@@ -175,7 +174,8 @@
                                                   const nodes = document.querySelectorAll('{{2}}');
                                                   for (const node of nodes) {
                                                        if (node.outerHTML.match(needle)) {
-                                                           node.textContent = ''; node.remove(); 
+                                                           node.textContent = ''; 
+							   node.remove(); 
                                                        }           
                                                   }
                                         } catch { }
