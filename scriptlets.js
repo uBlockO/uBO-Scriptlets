@@ -75,8 +75,7 @@
 					   const elements = document.querySelectorAll(selector);
 					   try {
 						  for (const element of elements) {
-							if (!document.querySelector(selector)) { break; }
-							element.remove();
+						       if (element) { element.remove() }
 					       	  }
 					   } catch { }
 		};
@@ -337,7 +336,6 @@
 	   	};
 	   	const observer = new MutationObserver(addelem);
     		observer.observe(document.documentElement, { childList: true, subtree: true });
-		if (document.readyState === 'complete') { observer.disconnect(); }
 })();
 
 /// rem-class.js
@@ -527,7 +525,7 @@
 
 /// insert-iframe.js
 /// alias ii.js
-// example.com##+js(ii, 2, [selector], src)
+// example.com##+js(ii, 2, [selector], src, style)
 (() => {
     	        'use strict';
 		const iframes = '{{1}}';
@@ -548,7 +546,6 @@
 		};			
 		const observer = new MutationObserver(insertframe);
     		observer.observe(document.documentElement, { childList: true, subtree: true });
-		if (document.readyState === 'complete') { observer.disconnect(); }		
 })();
 
 /// insert-elem.js
@@ -579,7 +576,6 @@
 	   	};
 	   	const observer = new MutationObserver(insertelem);
     		observer.observe(document.documentElement, { childList: true, subtree: true });
-		if (document.readyState === 'complete') { observer.disconnect(); } 
 })();
 
 /// append-elem.js
