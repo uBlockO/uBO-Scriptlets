@@ -172,7 +172,7 @@
                                         try {
                                                   const nodes = document.querySelectorAll('{{2}}');
                                                   for (const node of nodes) {
-                                                       if (node.outerHTML.match(needle)) {
+                                                       if (needle.test(node.outerHTML)) {
                                                            node.textContent = ''; 
 							   node.remove(); 
                                                        }           
