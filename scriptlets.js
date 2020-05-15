@@ -181,7 +181,7 @@
           };
           const observer = new MutationObserver(remnode);
           observer.observe(document.documentElement, { childList: true, subtree: true });
-          if (document.readyState === 'complete') { observer.disconnect(); }
+          if (document.readyState === 'complete') { return observer.disconnect(); }
 })();
 
 /// set-attr.js
