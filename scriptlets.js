@@ -168,9 +168,11 @@
               needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
           }
           needle = new RegExp(needle);
+	  let asyncTimer, observer;
 	  const remnode = () => {
+		  			asyncTimer = undefined;
+		  			const nodes = document.querySelectorAll('{{2}}');
 		  			try {
-                                                  const nodes = document.querySelectorAll('{{2}}');
                                                   for (const node of nodes) {
 							if (needle.test(node.outerHTML)) {
                                                             node.textContent = ''; 
@@ -179,9 +181,18 @@
                                                   }
                                         } catch { }
           };
-	  const observer = new MutationObserver(remnode);  
-	  observer.observe(document.documentElement, { childList: true, subtree: true });
-	  if ( document.readyState === 'complete' ) { return observer.disconnect(); }
+	  const remnodeAsync = () => {
+		  			if ( asyncTimer !== undefined ) { return; }
+		                        asyncTimer =  window.requestAnimationFrame(remnode);
+	  };	  
+	  if ( document.readyState !== 'complete' ) {
+		  	observer = new MutationObserver(remnode);  
+	  	        observer.observe(document.documentElement, { childList: true, subtree: true });
+	  } else {		  
+			observer.disconnect();
+		  	observer = new MutationObserver(remnodeAsync);  
+	  	        observer.observe(document.documentElement, { childList: true, subtree: true });
+	  }	  
 })();
 
 /// set-attr.js
