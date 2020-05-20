@@ -1,5 +1,5 @@
 # uBO-Scriptlets
-A custom arsenal of scriptlets to be used for injecting javascripts via uBlock Origin.
+A custom arsenal of scriptlets to be used for injecting userscripts via uBlock Origin.
 
 RAW - https://raw.githubusercontent.com/uBlock-user/uBO-Scriptlets/master/scriptlets.js
 
