@@ -690,9 +690,9 @@
 							setTimeout(window[funcCall], funcDelay);
 						} catch { }
 	      };	      
-	      if (document.readyState === 'complete') {
+	      if (document.readyState === 'interactive' || document.readyState === 'complete') {
 		    	    funcInvoke();
 	      } else {
-		    	    window.addEventListener('load', funcInvoke, true);
+		    	    window.addEventListener('DOMContentLoaded', funcInvoke, true);
 	      }
 })();
