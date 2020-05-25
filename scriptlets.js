@@ -676,7 +676,7 @@
 })();
 
 /// executesitefunction.js
-///alias esf.js
+/// alias esf.js
 // example.com##+js(esf, adBlockNotDetected, 16)
 (() => {
 	      'use strict';
