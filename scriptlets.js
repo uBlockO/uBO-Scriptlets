@@ -674,3 +674,25 @@
 			popup(needle, pop);	
     		    };
 })();
+
+/// executesitefunction.js
+///alias esf.js
+// example.com##+js(esf, adBlockNotDetected, 16)
+(() => {
+	      'use strict';
+	      const funcCall = '{{1}}';
+	      if ( funcCall === '' || funcCall === '{{1}}' ) { return; }
+	      const funcDelay = '{{2}}';
+	      if ( funcDelay === '' || funcDelay === '{{2}}' ) { return; }
+	      const funcInvoke = ev => { 
+		      				if (ev) { window.removeEventListener(ev.type, funcInvoke, true); }
+		      				try { 
+							setTimeout(window[funcCall], funcDelay);
+						} catch { }
+	      };	      
+	      if (document.readyState === 'complete') {
+		    	    funcInvoke();
+	      } else {
+		    	    window.addEventListener('load', funcInvoke, true);
+	      }
+})();
