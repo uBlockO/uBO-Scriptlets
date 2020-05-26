@@ -75,7 +75,7 @@
 					   const elements = document.querySelectorAll(selector);
 					   try {
 						  for (const element of elements) {
-						       if (element) { element.remove() }
+						       if (element) { element.remove(); }
 					       	  }
 					   } catch { }
 		};
