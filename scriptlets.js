@@ -1,4 +1,4 @@
-// Collection of javascripts to be used for scriptlet injection on specific domains.
+// Collection of userscripts to be used for scriptlet injection on domains.
 
 /// readOnly.js
 /// alias ro.js
@@ -677,7 +677,7 @@
 
 /// executesitefunction.js
 /// alias esf.js
-// example.com##+js(esf, adBlockNotDetected, 16)
+// example.com##+js(esf, funcName, funcDelay)
 (() => {
 	      'use strict';
 	      const funcCall = '{{1}}';
