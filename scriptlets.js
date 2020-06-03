@@ -620,7 +620,7 @@
 (() => {
 		'use strict';
 		const key = '{{1}}';
-		if ( key === '' || key === '{{1}}' ) { localStorage.clear(); }
+		if ( key === '' || key === '{{1}}' ) { return; }
 		const keys = key.split(/\s*\|\s*/);
 		let asyncTimer;
 		const removeItem = () => {
