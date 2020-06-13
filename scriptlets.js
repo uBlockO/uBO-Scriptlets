@@ -696,3 +696,26 @@
 		    	    window.addEventListener('DOMContentLoaded', funcInvoke, true);
 	      }
 })();
+
+/// no-alert-if.js
+/// alias naif.js
+// example.com##+js(naif, /loading ad/)
+(() => {
+                let needle = '{{1}}';
+                if ( needle === '' || needle === '{{1}}' ) {
+                     needle = '.?';
+                } else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
+                     needle = needle.slice(1,-1);
+                } else {
+                     needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                }
+                needle = new RegExp(needle);
+                window.alert = new Proxy(window.alert, {
+                       apply: (target, thisArg, args) => {
+                        	const a = args[0];
+                        	if ( needle.test(a.toString()) === false ) {
+                            	     return target.apply(thisArg, args);
+                        	}
+                       }
+                });
+})();
