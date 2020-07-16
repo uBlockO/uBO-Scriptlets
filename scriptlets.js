@@ -1,67 +1,5 @@
 // Collection of userscripts to be used for scriptlet injection on domains.
 
-/// readOnly.js
-/// alias ro.js
-// example.com##+js(ro, canAds, true)
-(() => {
-		let prop = '{{1}}';
-		if ( prop === '' || prop === '{{1}}' ) { return; }
-		let data = '{{2}}';
-		const Object = window.Object.bind(window);
-		const descriptor = window.Object.getOwnPropertyDescriptor.bind(window.Object);
-		const defineProperty = window.Object.defineProperty.bind(window.Object);
-		const finalSetter = () => { };
-		const finalGetter = () => { return data; };
-		const trustedSetters = { };
-		const makeProxy = (parent, chain) => {
-			const i = chain.indexOf('.');
-			if ( i === -1 ) {
-				let current = descriptor(parent, chain);
-				if ( !current || current.set !== finalSetter || current.get !== finalGetter ) {
-					defineProperty(parent, chain, {
-						configurable: false,
-						set: finalSetter,
-						get: finalGetter
-					});
-				}
-			} else {
-				let prop = chain.slice(0, i);
-				let val = parent[prop];
-				chain = chain.substring(i + 1);
-				if ( val instanceof Object ) {
-					makeProxy(val, chain);
-				} else {
-					let current = descriptor(parent, prop);
-					if ( !current || !trustedSetters[chain] || trustedSetters[chain] !== current.set ) {
-						const setter = value => {
-							if ( value instanceof Object ) {
-								try {
-									makeProxy(value, chain);
-									val = value;
-								} catch { }
-							}
-						};
-						trustedSetters[chain] = setter;
-						defineProperty(parent, prop, {
-							configurable: false,
-							set: setter,
-							get: () => { return val; }
-						});
-					}
-				}
-			}
-		};
-		const define = payload => {
-			data = payload;
-			try {
-				makeProxy(window, prop);
-			} catch { }
-		};
-		switch (data) {
-			default: 		return define(data);
-		}
-})();		
-
 /// remove-elem.js
 /// alias re.js
 // example.com##+js(re, [selector])
@@ -225,50 +163,6 @@
 	  observer.observe(document.documentElement, { childList: true, subtree: true });
 })();
 
-/// tog-attr.js
-/// alias ta.js
-// example.com##+js(ta, preload, video)
-(() => {
-		  'use strict';
-		  const token = '{{1}}';
-		  if ( token === '' || token === '{{1}}' ) { return; }
-		  const tokens = token.split(/\s*\|\s*/);
-		  let selector = '{{2}}';
-		  if ( selector === '' || selector === '{{2}}' ) { selector = `[${tokens.join('],[')}]`; }
-		  const togattr = ev => {
-						 if (ev) { window.removeEventListener(ev.type, togattr, true); }
-						 try {
-							const nodes = document.querySelectorAll(selector);
-							for (const node of nodes) {
-							     node.toggleAttribute(...tokens);
-							}
-						} catch { }
-		  };
-		  if (document.readyState === 'loading') {
-		    	    window.addEventListener('DOMContentLoaded', togattr, true);
-	   	  } else {
-		    	    togattr();
-	   	  }
-})();
-
-/// cookie-set.js
-/// alias cs.js
-// example.com##+js(cs, name, value, age)
-(() => {
-		'use strict';
-		const cs = ev => {
-					if (ev) { window.removeEventListener(ev.type, cs, true); }
-					try {
-						document.cookie = '{{1}}={{2}}; max-age={{3}}; secure; path=/;';
-					} catch { }
-	   	};
-	   	if (document.readyState === 'loading') {
-		    	 window.addEventListener('DOMContentLoaded', cs, true);
-	   	} else {
-		    	 cs();
-	   	}
-})();	
-
 /// replace-elem.js
 /// alias ree.js
 // example.com##+js(ree, .element, div)
@@ -403,32 +297,6 @@
 	   	    } else {
 		    	      addclass();
 	   	    }
-})();
-
-/// toggle-class.js
-/// alias tc.js
-// example.com##+js(tc, example, [selector])
-(() => {
-	    'use strict';
-	    const needle = '{{1}}';
-	    if ( needle === '' || needle === '{{1}}' ) { return; }
-	    const needles = needle.split(/\s*\|\s*/);
-	    let selector = '{{2}}';
-	    if ( selector === '' || selector === '{{2}}' ) { selector = '.' + needles.map(a => CSS.escape(a)).join(',.'); }
-	    const toggleclass = ev => {
-						if (ev) { window.removeEventListener(ev.type, toggleclass, true); }
-						const nodes = document.querySelectorAll(selector);
-						try {
-							for ( const node of nodes ) {
-							      node.classList.toggle(...needles);
-							}
-						} catch { }
-	    };
-	    if (document.readyState === 'loading') {
-		      window.addEventListener('DOMContentLoaded', toggleclass, true);
-	    } else {
-		      toggleclass();
-	    } 
 })();
 
 /// replace-class.js
@@ -663,18 +531,6 @@
 	   	}
 })();
 
-/// window.open-bypasser.js
-/// alias wob.js
-// example.com##+js(wob)
-(() => {
-		    'use strict';
-		    const popup = window.open, value = /^\/[\S]*?$/;
-          	    window.open = (needle, pop) => {
-	       		if ("string" === typeof needle && value.test(needle)) return window;
-			popup(needle, pop);	
-    		    };
-})();
-
 /// executesitefunction.js
 /// alias esf.js
 // example.com##+js(esf, funcName, funcDelay)
@@ -713,7 +569,7 @@
                 window.alert = new Proxy(window.alert, {
                        apply: (target, thisArg, args) => {
                         	const a = args[0];
-                        	if ( needle.test(a.toString()) === false ) {
+                        	if ( needle.test(String(a)) === false ) {
                             	     return target.apply(thisArg, args);
                         	}
                        }
