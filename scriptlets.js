@@ -352,27 +352,27 @@
 	   	} 
 })();
 
-/// log-node.js
-/// alias ln.js
-// example.com##+js(ln, script)
+/// node-logger.js
+/// alias nl.js
+// example.com##+js(nl, script)
 (() => {
 		'use strict';
 		const needle = '{{1}}';
 		if ( needle === '' || needle === '{{1}}' ) { return; }
-		const logtags = ev => {
-					  if (ev) { window.removeEventListener(ev.type, logtags, true); }
+		const lognodes = ev => {
+					  if (ev) { window.removeEventListener(ev.type, lognodes, true); }
 					  try {
-						const tags = document.querySelectorAll(needle);
+						const nodes = document.querySelectorAll(needle);
 						const log = console.log.bind(console);
-						for (const tag of tags) {
-							log('uBO: %s("%s")', needle, tag.outerHTML);
+						for (const node of nodes) {
+						     log('uBO: %s("%s")', needle, node.outerHTML);
 						}
 					  } catch { }
 		};
 		if (document.readyState === 'complete') {
-			logtags(); 
+			 lognodes(); 
 		} else {
-			window.addEventListener('load', logtags, true);
+			 window.addEventListener('load', lognodes, true);
 		}
 })();
 
