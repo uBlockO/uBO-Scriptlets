@@ -1,30 +1,5 @@
 // Collection of userscripts to be used for scriptlet injection on domains.
 
-/// remove-elem.js
-/// alias re.js
-// example.com##+js(re, [selector])
-(() => {
-		'use strict';
-		const selector = '{{1}}';
-		if ( selector === '' || selector === '{{1}}' ) { return; }
-		let asyncTimer;
-		const rm = () => {
-		 			   asyncTimer = undefined;
-					   const elements = document.querySelectorAll(selector);
-					   try {
-						  for (const element of elements) {
-						       if (element) { element.remove(); }
-					       	  }
-					   } catch { }
-		};
-		const rmAsync = () => {
-        				  if ( asyncTimer !== undefined ) { return; }
-        				  asyncTimer = window.requestAnimationFrame(rm);
-    		};
-		const observer = new MutationObserver(rmAsync);
-    		observer.observe(document.documentElement, { childList: true, subtree: true });
-})();	
-
 /// remove-shadowroot-elem.js
 /// alias rsre.js
 // example.com##+js(rsre, [selector])
@@ -161,39 +136,6 @@
 	  };	  
           const observer = new MutationObserver(setattrAsync);
 	  observer.observe(document.documentElement, { childList: true, subtree: true });
-})();
-
-/// replace-elem.js
-/// alias ree.js
-// example.com##+js(ree, .element, div)
-(() => {
-		'use strict';
-		const selector = '{{1}}';
-		if ( selector === '' || selector === '{{1}}' ) { return; }
-		const elem = document.createElement('{{2}}');
-		if ( elem === '' || elem === '{{2}}' ) { return; }
-		const replace = ev => {
-					    if (ev) { window.removeEventListener(ev.type, replace, true); }
-					    try {
-							const elements = document.querySelectorAll(selector);
-							for ( const element of elements ) {
-								const text = element.textContent;
-								const attrs = element.attributes;
-								element.replaceWith(elem);
-								elem.textContent = text;
-								for ( const attr of attrs ) {
-								      const prop = attr.nodeName;
-								      const value = attr.nodeValue;
-								      elem.setAttribute(prop, value);
-								}	
-							}   
-					    } catch { }
-		};
-		if (document.readyState === 'loading') {
-		          window.addEventListener('DOMContentLoaded', replace, true);
-		} else {
-			  replace();
-		}
 })();
 
 /// remove-prop.js
@@ -427,9 +369,9 @@
     		observer.observe(document.documentElement, { childList: true, subtree: true });
 })();
 
-/// insert-elem.js
-/// alias ie.js
-// example.com##+js(ie, [selector], display:block !important, node, div)
+/// insert-elem-before.js
+/// alias ieb.js
+// example.com##+js(ieb, [selector], display:block !important, node, div)
 (() => {
 		'use strict';
 		const identifier = '{{1}}';
