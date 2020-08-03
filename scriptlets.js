@@ -112,30 +112,28 @@
 /// alias sa.js
 // example.com##+js(sa, preload, none, video)
 (() => {
-          'use strict';
-          const token = '{{1}}';
-          if ( token === '' || token === '{{1}}' ) { return; }
-          const tokens = token.split(/\s*\|\s*/);
-	  let selector = '{{3}}';
-          if ( selector === '' || selector === '{{3}}' ) { selector = `[${tokens.join('],[')}]`; }
-	  let asyncTimer;
-          const setattr = () => {
-					asyncTimer = undefined;
-		  			try {
-						const nodes = document.querySelectorAll(selector);
-						for (const node of nodes) {
-						     for ( const attr of tokens ) {
-							   node.setAttribute(attr, '{{2}}');
-						     }	   
-						}
-					} catch { }
-          };
-	  const setattrAsync = () => {
-		  			if ( asyncTimer !== undefined ) { return; }
-		  			asyncTimer = window.requestAnimationFrame(setattr);
-	  };	  
-          const observer = new MutationObserver(setattrAsync);
-	  observer.observe(document.documentElement, { childList: true, subtree: true });
+		  'use strict';
+		  const token = '{{1}}';
+		  if ( token === '' || token === '{{1}}' ) { return; }
+		  const tokens = token.split(/\s*\|\s*/);
+		  let selector = '{{3}}';
+		  if ( selector === '' || selector === '{{3}}' ) { selector = `[${tokens.join('],[')}]`; }
+		  const setattr = ev => {
+			  			if (ev) { window.removeEventListener(ev.type, setattr, true); }
+						try {
+							const nodes = document.querySelectorAll(selector);
+							for (const node of nodes) {
+							     for ( const attr of tokens ) {
+								   node.setAttribute(attr, '{{2}}');
+							     }	   
+							}
+						} catch { }
+		  };
+		  if ( document.readyState === 'interactive' || document.readyState === 'complete' ) {
+		      	   setattr();
+		  } else {
+			   window.addEventListener('load', setattr, true);
+		  }	  
 })();
 
 /// remove-prop.js
