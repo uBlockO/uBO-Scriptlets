@@ -499,7 +499,8 @@
 /// alias naif.js
 // example.com##+js(naif, /loading ad/)
 (() => {
-                let needle = '{{1}}';
+                'use strict';
+		let needle = '{{1}}';
                 if ( needle === '' || needle === '{{1}}' ) {
                      needle = '.?';
                 } else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
