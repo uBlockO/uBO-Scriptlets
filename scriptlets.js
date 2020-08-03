@@ -166,8 +166,8 @@
 		const identifiers = identifier.split(/\s*\|\s*/);
 		let executeOnce = false;
 		const addelem = () => {
+						if (executeOnce !== false) { return; }
 						try {
-							if (executeOnce !== false) { return; }
 							const element = document.createElement('{{3}}');
 							for (const identifieradder of identifiers) {
 								if (identifieradder.charAt(0) === '#') {
@@ -353,8 +353,8 @@
 		if ( iframes === '' || iframes === '{{1}}' ) { return; }
 		let executeOnce = false;
 		const insertframe = () => {
+						  if (executeOnce !== false) { return; }
 						  try {
-							if (executeOnce !== false) { return; }
 							for ( let i = 0; i < iframes; i++ ) {
 							      const iframe = document.createElement('iframe');
 							      iframe.setAttribute('id', '{{2}}');
