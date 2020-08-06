@@ -65,6 +65,7 @@
 		    };				   
 		    const observer = new MutationObserver(removeattrAsync);
     		    observer.observe(document.documentElement, { childList: true, subtree: true });
+		    if (document.readyState === "complete") { observer.disconnect(); }
 })();
 
 /// remove-node.js
