@@ -36,6 +36,7 @@
 		};	
 		const observer = new MutationObserver(rmshadowelemAsync);
     		observer.observe(document.documentElement, { childList: true, subtree: true });
+		if ( document.readyState === "complete" ) { observer.disconnect(); }
 })();
 
 /// rem-attr.js
@@ -65,7 +66,7 @@
 		    };				   
 		    const observer = new MutationObserver(removeattrAsync);
     		    observer.observe(document.documentElement, { childList: true, subtree: true });
-		    if (document.readyState === "complete") { observer.disconnect(); }
+		    if ( document.readyState === "complete" ) { observer.disconnect(); }
 })();
 
 /// remove-node.js
@@ -212,6 +213,7 @@
 		    };    
 		    const observer = new MutationObserver(removeclassAsync);
     		    observer.observe(document.documentElement, { childList: true, subtree: true });
+		    if (document.readyState === "complete") { observer.disconnect(); }
 })();
 
 /// add-class.js
@@ -447,6 +449,7 @@
 		};	
 		const observer = new MutationObserver(removeItemAsync);
     		observer.observe(document.documentElement, { childList: true, subtree: true });
+		if ( document.readyState === "complete" ) { observer.disconnect(); }
 })();
 
 /// setItem.js
