@@ -213,7 +213,7 @@
 		    };    
 		    const observer = new MutationObserver(removeclassAsync);
     		    observer.observe(document.documentElement, { childList: true, subtree: true });
-		    if (document.readyState === "complete") { observer.disconnect(); }
+		    if ( document.readyState === "complete" ) { observer.disconnect(); }
 })();
 
 /// add-class.js
