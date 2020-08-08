@@ -464,7 +464,6 @@
 		const setItem = ev => {
 		 			   if (ev) { window.removeEventListener(ev.type, setItem, true); }
 					   try {
-						   if (localStorage.getItem(key) !== null) { return; }
 						   localStorage.setItem(key, value);
 					   } catch { }
 		};
