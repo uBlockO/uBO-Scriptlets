@@ -128,11 +128,13 @@
 						asyncTimer = undefined;
 						try {
 							const nodes = document.querySelectorAll(selector);
-							for (const node of nodes) {
-							     for ( const attr of tokens ) {
-								   if ( attr == attrValue) { break; }
-								   node.setAttribute(attr, attrValue);
-							     }	   
+							loop: 
+								for (const node of nodes) {
+							loop2:
+								for ( const attr of tokens ) {
+								      if ( attr == attrValue) { break loop; }
+								      node.setAttribute(attr, attrValue);
+								}	   
 							}
 						} catch { }
 		  };
