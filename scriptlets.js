@@ -118,24 +118,31 @@
 		  const token = '{{1}}';
 		  if ( token === '' || token === '{{1}}' ) { return; }
 		  const tokens = token.split(/\s*\|\s*/);
+		  const attrValue = '{{2}}';
+		  if ( attrValue === '' || attrValue === '{{2}}' ) { return; }
 		  let selector = '{{3}}';
 		  if ( selector === '' || selector === '{{3}}' ) { selector = `[${tokens.join('],[')}]`; }
-		  const setattr = ev => {
-			  			if (ev) { window.removeEventListener(ev.type, setattr, true); }
+		  let asyncTimer;
+		  const setattr = () => {
+			  			
+						asyncTimer = undefined;
 						try {
 							const nodes = document.querySelectorAll(selector);
 							for (const node of nodes) {
 							     for ( const attr of tokens ) {
-								   node.setAttribute(attr, '{{2}}');
+								   if ( attr == attrValue) { break; }
+								   node.setAttribute(attr, attrValue);
 							     }	   
 							}
 						} catch { }
 		  };
-		  if ( document.readyState === 'interactive' || document.readyState === 'complete' ) {
-		      	   setattr();
-		  } else {
-			   window.addEventListener('load', setattr, true);
-		  }	  
+		  const setattrAsync = () => {	
+			  			if ( asyncTimer !== undefined ) { return; }
+						asyncTimer = window.requestAnimationFrame(setattr);
+		  };				   
+		  const observer = new MutationObserver(setattrAsync);
+    		  observer.observe(document.documentElement, { childList: true, subtree: true });
+		  if ( document.readyState === "complete" ) { observer.disconnect(); }  
 })();
 
 /// remove-prop.js
