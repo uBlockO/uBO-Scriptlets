@@ -124,15 +124,15 @@
 		  if ( selector === '' || selector === '{{3}}' ) { selector = `[${tokens.join('],[')}]`; }
 		  let asyncTimer;
 		  const setattr = () => {
-			  			
-						asyncTimer = undefined;
+			  			asyncTimer = undefined;
+			  			const nodes = document.querySelectorAll(selector);
 						try {
-							const nodes = document.querySelectorAll(selector);
 							for (const node of nodes) {
 								for ( const attr of tokens ) {
-								      if ( attr == attrValue) { break; }
+								      if ( attr == attrValue ) { break; }
 								      node.setAttribute(attr, attrValue);
-								}	   
+								}
+								break;
 							}
 						} catch { }
 		  };
