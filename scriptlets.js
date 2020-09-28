@@ -132,7 +132,6 @@
 								      if ( attr == attrValue ) { break; }
 								      node.setAttribute(attr, attrValue);
 								}
-								break;
 							}
 						} catch { }
 		  };
