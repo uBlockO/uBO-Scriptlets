@@ -162,16 +162,16 @@
               }
 })();
 
-/// add-elem.js
-/// alias ae.js
-// example.com##+js(ae, [selector], display:block !important, div)
+/// create-elem.js
+/// alias ce.js
+// example.com##+js(ce, [selector], display:block !important, div)
 (() => {
 		'use strict';
 		const identifier = '{{1}}';
 		if ( identifier === '' || identifier === '{{1}}' ) { return; }
 		const identifiers = identifier.split(/\s*\|\s*/);
 		let executeOnce = false;
-		const addelem = () => {
+		const createelem = () => {
 						if (executeOnce !== false) { return; }
 						try {
 							const element = document.createElement('{{3}}');
@@ -187,7 +187,7 @@
 							executeOnce = true;
 						} catch { }
 	   	};
-	   	const observer = new MutationObserver(addelem);
+	   	const observer = new MutationObserver(createelem);
     		observer.observe(document.documentElement, { childList: true, subtree: true });
 })();
 
