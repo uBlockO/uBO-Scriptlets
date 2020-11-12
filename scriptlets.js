@@ -507,21 +507,29 @@
 // example.com##+js(naif, /loading ad/)
 (() => {
                 'use strict';
-		let needle = '{{1}}';
-                if ( needle === '' || needle === '{{1}}' ) {
-                     needle = '.?';
-                } else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
-                     needle = needle.slice(1,-1);
-                } else {
-                     needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                let needle = '{{1}}';
+                if ( needle === '{{1}}' ) { needle = ''; }
+                const needleNot = needle.charAt(0) === '!';
+                if ( needleNot ) { needle = needle.slice(1); }
+                if ( needle.startsWith('/') && needle.endsWith('/') ) {
+                    needle = needle.slice(1, -1);
+                } else if ( needle !== '' ) {
+                    needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
                 }
-                needle = new RegExp(needle);
+                const log = needleNot === false && needle === '' ? console.log : undefined;
+                const reNeedle = new RegExp(needle);
                 window.alert = new Proxy(window.alert, {
-                       apply: (target, thisArg, args) => {
-                        	const a = args[0];
-                        	if ( needle.test(String(a)) === false ) {
-                            	     return target.apply(thisArg, args);
-                        	}
-                       }
+                        apply: (target, thisArg, args) => {
+                            const a = String(args[0]);
+                            let defuse = false;
+                            if ( log !== undefined ) {
+                                log('uBO: alert("%s")', a);
+                            } else {
+                                defuse = reNeedle.test(a) !== needleNot;
+                            }
+                            if ( !defuse ) {
+                                return target.apply(thisArg, args);
+                            }  
+                        }
                 });
 })();
