@@ -503,8 +503,8 @@
 })();
 
 /// no-alert-if.js
-/// alias naif.js
-// example.com##+js(naif, /loading ad/)
+/// alias noaif.js
+// example.com##+js(noaif, loading ad)
 (() => {
                 'use strict';
                 let needle = '{{1}}';
@@ -531,5 +531,38 @@
                                 return target.apply(thisArg, args);
                             }  
                         }
+                });
+})();
+
+/// no-request-if.js
+/// alias norif.js
+// example.com##+js(norif, juicyads)
+(() => {
+                'use strict';
+                let needle = '{{1}}';
+                if ( needle === '{{1}}' ) { needle = ''; }
+                const needleNot = needle.charAt(0) === '!';
+                if ( needleNot ) { needle = needle.slice(1); }
+                if ( needle.startsWith('/') && needle.endsWith('/') ) {
+                    needle = needle.slice(1, -1);
+                } else if ( needle !== '' ) {
+                    needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                }
+                const log = needleNot === false && needle === '' ? console.log : undefined;
+                const reNeedle = new RegExp(needle);
+                window.Request = new Proxy(window.Request, {
+                       construct: (target, args) => {
+                                   const url = String(args[0]);
+                                   let defuse = false;
+                                   if ( log !== undefined ) {
+                                        log('uBO: Request("%s")', url);
+                                   } else if ( reNeedle.test(url) !== needleNot ) {
+                                               args[0] = function(){};
+                                   }
+                                   if ( !defuse ) {
+                                         const r = new target(...args);
+                                         return r;
+                                   } 
+                       }
                 });
 })();
