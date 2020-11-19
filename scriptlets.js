@@ -557,7 +557,7 @@
                                    if ( log !== undefined ) {
                                         log('uBO: Request("%s")', url);
                                    } else if ( reNeedle.test(url) !== needleNot ) {
-                                               args[0] = function(){};
+                                               args[0] = location.href;
                                    }
                                    if ( !defuse ) {
                                          const r = new target(...args);
