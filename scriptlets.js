@@ -144,24 +144,6 @@
 		  if ( document.readyState === "complete" ) { observer.disconnect(); }  
 })();
 
-/// remove-prop.js
-/// alias rp.js
-// example.com##+js(rp, foo.bar)
-(() => {
-	      'use strict';
-  	      const remove = ev => {
-	      				    if (ev) { window.removeEventListener(ev.type, remove, true); }
-					    try {
-						    delete {{1}};
-					    } catch { }
-              };
-              if (document.readyState === 'loading') {
-                       window.addEventListener('DOMContentLoaded', remove, true); 
-              } else {
-                       remove();  
-              }
-})();
-
 /// create-elem.js
 /// alias ce.js
 // example.com##+js(ce, [selector], display:block !important, div)
