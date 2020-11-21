@@ -119,7 +119,6 @@
 		  if ( token === '' || token === '{{1}}' ) { return; }
 		  const tokens = token.split(/\s*\|\s*/);
 		  const attrValue = '{{2}}';
-		  if ( attrValue === '' || attrValue === '{{2}}' ) { return; }
 		  let selector = '{{3}}';
 		  if ( selector === '' || selector === '{{3}}' ) { selector = `[${tokens.join('],[')}]`; }
 		  let asyncTimer;
