@@ -447,7 +447,6 @@
 		const key = '{{1}}';
 		if ( key === '' || key === '{{1}}' ) { return; }
 		const value = '{{2}}';
-		if ( value === '' || value === '{{2}}' ) { return; }
 		const setItem = ev => {
 		 			   if (ev) { window.removeEventListener(ev.type, setItem, true); }
 					   try {
