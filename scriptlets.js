@@ -540,8 +540,8 @@
                                                args[0] = location.href;
                                    }
                                    if ( !defuse ) {
-                                         const r = new target(...args);
-                                         return r;
+                                         const request = new target(...args);
+                                         return request;
                                    } 
                        }
                 });
