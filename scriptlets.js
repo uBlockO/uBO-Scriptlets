@@ -569,7 +569,7 @@
                                    let defuse = false;
                                    if ( log !== undefined ) {
                                         log('uBO: fetch("%s")', url);
-                                   } else {
+                                   } else if ( reNeedle.test(url) !== needleNot ) {
                                         defuse = reNeedle.test(url) !== needleNot;
                                         return new Promise(() => {});
                                    }
