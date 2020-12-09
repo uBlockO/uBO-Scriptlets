@@ -514,39 +514,6 @@
                 });
 })();
 
-/// no-request-if.js
-/// alias norif.js
-// example.com##+js(norif, juicyads)
-(() => {
-                'use strict';
-                let needle = '{{1}}';
-                if ( needle === '{{1}}' ) { needle = ''; }
-                const needleNot = needle.charAt(0) === '!';
-                if ( needleNot ) { needle = needle.slice(1); }
-                if ( needle.startsWith('/') && needle.endsWith('/') ) {
-                    needle = needle.slice(1, -1);
-                } else if ( needle !== '' ) {
-                    needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-                }
-                const log = needleNot === false && needle === '' ? console.log : undefined;
-                const reNeedle = new RegExp(needle);
-                window.Request = new Proxy(window.Request, {
-                       construct: (target, args) => {
-                                   const url = String(args[0]);
-                                   let defuse = false;
-                                   if ( log !== undefined ) {
-                                        log('uBO: Request("%s")', url);
-                                   } else if ( reNeedle.test(url) !== needleNot ) {
-                                               args[0] = location.href;
-                                   }
-                                   if ( !defuse ) {
-                                         const request = new target(...args);
-                                         return request;
-                                   } 
-                       }
-                });
-})();
-
 /// no-fetch-if.js
 /// alias nofif.js
 // example.com##+js(nofif, adsbygoogle)
@@ -565,7 +532,13 @@
                 const reNeedle = new RegExp(needle);
                 window.fetch = new Proxy(window.fetch, {
                        apply: (target, thisArg, args) => {
-                                   const url = String(args[0]);
+                                   const req = args[0];
+                                   let url = req;
+                                   if (req instanceof Request) {
+                                       url = String(req.url);
+                                   } else {
+                                       url = String(req);
+                                   }
                                    let defuse = false;
                                    if ( log !== undefined ) {
                                         log('uBO: fetch("%s")', url);
