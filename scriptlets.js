@@ -503,12 +503,12 @@
                             const a = String(args[0]);
                             let defuse = false;
                             if ( log !== undefined ) {
-                                log('uBO: alert("%s")', a);
-                            } else {
-                                defuse = reNeedle.test(a) !== needleNot;
+                                 log('uBO: alert("%s")', a);
+                            } else if ( reNeedle.test(a) !== needleNot ) {
+                                 defuse = reNeedle.test(a) !== needleNot;
                             }
                             if ( !defuse ) {
-                                return target.apply(thisArg, args);
+                                 return target.apply(thisArg, args);
                             }  
                         }
                 });
@@ -533,10 +533,10 @@
                 window.fetch = new Proxy(window.fetch, {
                        apply: (target, thisArg, args) => {
                                    let url = args[0];
-                                   if (url instanceof Request) {
-                                       url = String(url.url);
+                                   if ( url instanceof Request ) {
+                                        url = String(url.url);
                                    } else {
-                                       url = String(url);
+                                        url = String(url);
                                    }
                                    let defuse = false;
                                    if ( log !== undefined ) {
@@ -546,7 +546,7 @@
                                         return new Promise(() => {});
                                    }
                                    if ( !defuse ) {
-                                         return target.apply(thisArg, args);
+                                        return target.apply(thisArg, args);
                                    } 
                        }
                 });
