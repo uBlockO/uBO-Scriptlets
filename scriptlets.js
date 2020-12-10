@@ -532,12 +532,11 @@
                 const reNeedle = new RegExp(needle);
                 window.fetch = new Proxy(window.fetch, {
                        apply: (target, thisArg, args) => {
-                                   const request = args[0];
-                                   let url = request;
-                                   if (request instanceof Request) {
-                                       url = String(request.url);
+                                   let url = args[0];
+                                   if (url instanceof Request) {
+                                       url = String(url.url);
                                    } else {
-                                       url = String(request);
+                                       url = String(url);
                                    }
                                    let defuse = false;
                                    if ( log !== undefined ) {
