@@ -165,7 +165,7 @@
 					node.classList.remove(...tokens);
 				    }
 			    }
-			} catch ( ) { }
+			} catch { }
 		    };
 		    const mutationHandler = mutations => {
 			if ( timer !== undefined ) { return; }
