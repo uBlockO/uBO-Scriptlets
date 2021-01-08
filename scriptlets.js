@@ -195,9 +195,9 @@
 			});
 		    };
 		    if ( document.readyState !== 'complete' && /\bcomplete\b/.test(behavior) ) {
-			document.addEventListener('load', start, { once: true });
+			window.addEventListener('load', start, { once: true });
 		    } else if ( document.readyState === 'loading' ) {
-			document.addEventListener('DOMContentLoaded', start, { once: true });
+			window.addEventListener('DOMContentLoaded', start, { once: true });
 		    } else {
 			start();
 		    }
