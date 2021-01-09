@@ -124,7 +124,7 @@
 		  };
 		  const start = ( ) => {
 			setattr();
-			if ( /\bstay\b/.test(behavior) === false ) { return; }
+			if ( /\bmutation\b/.test(behavior) === false ) { return; }
 			const observer = new MutationObserver(mutationHandler);
 			observer.observe(document.documentElement, {
 			    attributes: true,
@@ -214,7 +214,7 @@
 		    };
 		    const start = ( ) => {
 			rmclass();
-			if ( /\bstay\b/.test(behavior) === false ) { return; }
+			if ( /\bmutation\b/.test(behavior) === false ) { return; }
 			const observer = new MutationObserver(mutationHandler);
 			observer.observe(document.documentElement, {
 			    attributes: true,
