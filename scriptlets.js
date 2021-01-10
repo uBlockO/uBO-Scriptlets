@@ -455,8 +455,8 @@
 			  timer = undefined;
 			  try {
 				   for (const keyName of keys) {
-					if (localStorage.getItem(keyName)) { 
-					    localStorage.removeItem(keyName);
+					if ( localStorage.getItem(keyName) !== null ) { 
+					     localStorage.removeItem(keyName);
 					}	
 				   }
 			  } catch { }
