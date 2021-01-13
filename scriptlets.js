@@ -45,7 +45,7 @@
 			    }
 			}
 			if ( skip ) { return; }
-			timer = self.requestIdleCallback(rmshadowelem, { timeout: 67 });
+			timer = self.requestIdleCallback(rmshadowelem, { timeout: 20 });
 		};
 		const start = ( ) => {
 			rmshadowelem();
