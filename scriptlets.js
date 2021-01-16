@@ -8,7 +8,7 @@
 			const selector = '{{1}}';
 			if ( selector === '' || selector === '{{1}}' ) { return; }
 			const behavior = '{{2}}';
-	        let timer;
+	        	let timer;
 			const queryShadowRootElement = (shadowRootElement, rootElement) => {
 					if (!rootElement) {
 						 return queryShadowRootElement(shadowRootElement, document.documentElement);
