@@ -102,8 +102,6 @@
 	  	        observer.observe(document.documentElement, { childList: true, subtree: true });
 	  } else {		  
 			observer.disconnect();
-		  	observer = new MutationObserver(remnodeAsync);  
-	  	        observer.observe(document.documentElement, { childList: true, subtree: true });
 	  }	  
 })();
 
