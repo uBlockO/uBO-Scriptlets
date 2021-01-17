@@ -80,9 +80,8 @@
               needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
           }
           needle = new RegExp(needle);
-	  let asyncTimer, observer;
+	  let observer;
 	  const remnode = () => {
-		  			asyncTimer = undefined;
 		  			const nodes = document.querySelectorAll('{{2}}');
 		  			try {
                                                   for (const node of nodes) {
@@ -93,10 +92,6 @@
                                                   }
                                         } catch { }
           };
-	  const remnodeAsync = () => {
-		  			if ( asyncTimer !== undefined ) { return; }
-		                        asyncTimer =  window.requestAnimationFrame(remnode);
-	  };	  
 	  if ( document.readyState !== 'complete' ) {
 		  	observer = new MutationObserver(remnode);  
 	  	        observer.observe(document.documentElement, { childList: true, subtree: true });
