@@ -607,24 +607,18 @@
                 }
                 const log = needleNot === false && needle === '' ? console.log : undefined;
                 const reNeedle = new RegExp(needle);
-                self.XMLHttpRequest.prototype.send = new Proxy(self.XMLHttpRequest.prototype.send, {
-                        apply: (target, thisArg, args) => {
-                                    const req = args[0];
-                                    let url = req;
-                                    if ( url instanceof XMLHttpRequest.prototype.open ) {
-                                         url = String(req.url);
-                                    } else {
-                                         url = String(req);
-                                    }
-                                    let defuse = false;
-                                    if ( log !== undefined ) {
-                                         log('uBO: xhr("%s")', url);
-                                    } else if ( reNeedle.test(url) !== needleNot ) {
-                                         defuse = reNeedle.test(url) !== needleNot;
-                                    }
-                                    if ( !defuse ) {
-                                         return target.apply(thisArg, args);
-                                    }  
-                        }
+                self.XMLHttpRequest.prototype.open = new Proxy(self.XMLHttpRequest.prototype.open, {
+                     apply: (target, thisArg, args) => {
+                                 const url = String(args[1]);
+                                 let defuse = false;
+                                 if ( log !== undefined ) {
+                                      log('uBO: xhr("%s")', url);
+                                 } else if ( reNeedle.test(url) !== needleNot ) {
+                                      defuse = reNeedle.test(url) !== needleNot;
+                                 }
+                                 if ( !defuse ) {
+                                      return target.apply(thisArg, args);
+                                 }  
+                     }
                 });
 })();
