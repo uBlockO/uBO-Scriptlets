@@ -590,3 +590,41 @@
                         }
                 });
 })();
+
+/// no-xhr-if.js
+/// alias noxif.js
+// example.com##+js(noxif, /someSoup/)
+(() => {
+                'use strict';
+                let needle = '{{1}}';
+                if ( needle === '{{1}}' ) { needle = ''; }
+                const needleNot = needle.charAt(0) === '!';
+                if ( needleNot ) { needle = needle.slice(1); }
+                if ( needle.startsWith('/') && needle.endsWith('/') ) {
+                    needle = needle.slice(1, -1);
+                } else if ( needle !== '' ) {
+                    needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                }
+                const log = needleNot === false && needle === '' ? console.log : undefined;
+                const reNeedle = new RegExp(needle);
+                self.XMLHttpRequest.prototype.send = new Proxy(self.XMLHttpRequest.prototype.send, {
+                        apply: (target, thisArg, args) => {
+                                    const req = args[0];
+                                    let url = req;
+                                    if ( url instanceof XMLHttpRequest.prototype.open ) {
+                                         url = String(req.url);
+                                    } else {
+                                         url = String(req);
+                                    }
+                                    let defuse = false;
+                                    if ( log !== undefined ) {
+                                         log('uBO: xhr("%s")', url);
+                                    } else if ( reNeedle.test(url) !== needleNot ) {
+                                         defuse = reNeedle.test(url) !== needleNot;
+                                    }
+                                    if ( !defuse ) {
+                                         return target.apply(thisArg, args);
+                                    }  
+                        }
+                });
+})();
