@@ -612,7 +612,7 @@
                                  const url = String(args[1]);
                                  let defuse = false;
                                  if ( log !== undefined ) {
-                                      log('uBO: xhr("%s")', url);
+                                      log('uBO: xhr("url:%s")', url);
                                  } else if ( reNeedle.test(url) !== needleNot ) {
                                       defuse = reNeedle.test(url) !== needleNot;
                                  }
