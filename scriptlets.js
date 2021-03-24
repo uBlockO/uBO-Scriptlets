@@ -278,83 +278,6 @@
 	   	    }
 })();
 
-/// replace-class.js
-/// alias rec.js
-// example.com##+js(rec, example, example2, [selector])
-(() => {
-		    'use strict';
-		    const needle = '{{1}}';
-		    if ( needle === '' || needle === '{{1}}' ) { return; }
-		    const needles = needle.split(/\s*\|\s*/);
-		    let selector = '{{3}}';
-		    if ( selector === '' || selector === '{{3}}' ) { selector = '.' + needles.map(a => CSS.escape(a)).join(',.'); }
-		    const replaceclass = ev => {
-							if (ev) { window.removeEventListener(ev.type, replaceclass, true);  }
-							const nodes = document.querySelectorAll(selector);
-							try {
-								for ( const node of nodes ) {
-								      for (const tokens of needles ) {
-									    if ( node.classList.contains(tokens) ) {
-									         node.classList.replace(tokens, '{{2}}');
-									    }
-								      }		    
-								}
-							} catch { }
-		    };
-		    if (document.readyState === 'loading') {
-		    	      window.addEventListener('DOMContentLoaded', replaceclass, true);
-	   	    } else {
-		    	      replaceclass();
-	   	    }
-})();
-
-/// set-innerHTML.js
-/// alias sih.js
-// example.com##+js(sih, [selector], <span class="btext">Download</span>)
-(() => {
-		'use strict';
-		const selector = '{{1}}';
-		if ( selector === '' || selector === '{{1}}' ) { return; }
-		const sih = ev => {
-					   if (ev) { window.removeEventListener(ev.type, sih, true); }
-					   try {
-						  const elements = document.querySelectorAll(selector);
-						  for (const element of elements) {
-							element.innerHTML = '{{2}}';
-						  }
-					   } catch { }
-		};
-		if (document.readyState === 'loading') {
-		    	    window.addEventListener('DOMContentLoaded', sih, true);
-	   	} else {
-		    	    sih();
-	   	} 
-})();
-
-/// node-logger.js
-/// alias nl.js
-// example.com##+js(nl, script)
-(() => {
-		'use strict';
-		const needle = '{{1}}';
-		if ( needle === '' || needle === '{{1}}' ) { return; }
-		const lognodes = ev => {
-					  if (ev) { window.removeEventListener(ev.type, lognodes, true); }
-					  try {
-						const nodes = document.querySelectorAll(needle);
-						const log = console.log.bind(console);
-						for (const node of nodes) {
-						     log('uBO: %s("%s")', needle, node.outerHTML);
-						}
-					  } catch { }
-		};
-		if (document.readyState === 'complete') {
-			 lognodes(); 
-		} else {
-			 window.addEventListener('load', lognodes, true);
-		}
-})();
-
 /// multiup.js
 /// alias mtu.js
 // example.com##+js(mtu, form[action], button[link], action, link)
@@ -514,27 +437,6 @@
 		    } else {
 			start();
 		    }
-})();
-
-/// setItem.js
-/// alias si.js
-// example.com##+js(si, key, value)
-(() => {
-		'use strict';
-		const key = '{{1}}';
-		if ( key === '' || key === '{{1}}' ) { return; }
-		const value = '{{2}}';
-		const setItem = ev => {
-		 			   if (ev) { window.removeEventListener(ev.type, setItem, true); }
-					   try {
-						   localStorage.setItem(key, value);
-					   } catch { }
-		};
-		if (document.readyState === 'loading') {
-		    	    window.addEventListener('DOMContentLoaded', setItem, true); 
-	   	} else {
-		    	    setItem();
-	   	}
 })();
 
 /// executesitefunction.js
