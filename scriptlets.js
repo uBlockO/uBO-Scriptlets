@@ -73,14 +73,13 @@
           'use strict';
           let needle = '{{1}}';
           if ( needle === '' || needle === '{{1}}' ) {
-              needle = '.?';
+              needle = '^';
           } else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
               needle = needle.slice(1,-1);
           } else {
               needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
           }
           needle = new RegExp(needle);
-	  let observer;
 	  const remnode = () => {
 		  			const nodes = document.querySelectorAll('{{2}}');
 		  			try {
@@ -92,12 +91,9 @@
                                                   }
                                         } catch { }
           };
-	  if ( document.readyState !== 'complete' ) {
-		  	observer = new MutationObserver(remnode);  
-	  	        observer.observe(document.documentElement, { childList: true, subtree: true });
-	  } else {		  
-			observer.disconnect();
-	  }	  
+	  const observer = new MutationObserver(remnode);
+    	  observer.observe(document.documentElement, { childList: true, subtree: true });
+	  if ( document.readyState === "complete" ) { observer.disconnect(); }
 })();
 
 /// set-attr.js
