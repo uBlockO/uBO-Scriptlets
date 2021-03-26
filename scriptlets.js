@@ -507,12 +507,12 @@
                 const reNeedle = new RegExp(needle);
                 self.XMLHttpRequest.prototype.open = new Proxy(self.XMLHttpRequest.prototype.open, {
                      apply: (target, thisArg, args) => {
-                                 const url = String(args[1]);
+                                 const params = String(args);
                                  let defuse = false;
                                  if ( log !== undefined ) {
-                                      log('uBO: xhr("url:%s")', url);
-                                 } else if ( reNeedle.test(url) !== needleNot ) {
-                                      defuse = reNeedle.test(url) !== needleNot;
+                                      log('uBO: xhr("%s")', params);
+                                 } else if ( reNeedle.test(params) !== needleNot ) {
+                                      defuse = reNeedle.test(params) !== needleNot;
                                  }
                                  if ( !defuse ) {
                                       return target.apply(thisArg, args);
