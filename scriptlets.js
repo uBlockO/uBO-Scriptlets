@@ -473,14 +473,14 @@
                 }
                 const log = needleNot === false && needle === '' ? console.log : undefined;
                 const reNeedle = new RegExp(needle);
-                window.alert = new Proxy(window.alert, {
+                self.alert = new Proxy(self.alert, {
                         apply: (target, thisArg, args) => {
-                            const a = String(args[0]);
+                            const params = String(args);
                             let defuse = false;
                             if ( log !== undefined ) {
-                                 log('uBO: alert("%s")', a);
-                            } else if ( reNeedle.test(a) !== needleNot ) {
-                                 defuse = reNeedle.test(a) !== needleNot;
+                                 log('uBO: alert("%s")', params);
+                            } else if ( reNeedle.test(params) !== needleNot ) {
+                                 defuse = reNeedle.test(params) !== needleNot;
                             }
                             if ( !defuse ) {
                                  return target.apply(thisArg, args);
