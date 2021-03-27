@@ -513,6 +513,7 @@
                                       log('uBO: xhr("%s")', params);
                                  } else if ( reNeedle.test(params) !== needleNot ) {
                                       defuse = reNeedle.test(params) !== needleNot;
+				      return self.XMLHttpRequest.prototype.send = () => {};
                                  }
                                  if ( !defuse ) {
                                       return target.apply(thisArg, args);
