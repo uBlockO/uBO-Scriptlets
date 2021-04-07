@@ -165,18 +165,21 @@
 		'use strict';
 		const identifier = '{{1}}';
 		if ( identifier === '' || identifier === '{{1}}' ) { return; }
+		const identifiers = identifier.split(/\s*\|\s*/);
 		let executeOnce = false;
 		const createelem = () => {
 						if (executeOnce !== false) { return; }
 						try {
-							const element = document.createElement('{{3}}');
-							if (identifier.charAt(0) === '#') {
-							    element.id = identifier.substring(1);
-							} else if (identifier.charAt(0) === '.') {
-							    element.className = identifier.substring(1);
-							} else { return; }
-							element.style.cssText = '{{2}}';
-							document.body.append(element);
+							for (const token of identifiers) {
+							     const element = document.createElement('{{3}}');
+							     if (token.charAt(0) === '#') {
+								 element.id = token.substring(1);
+							     } else if (token.charAt(0) === '.') {
+								 element.className = token.substring(1);
+							     } else { return; }
+							     element.style.cssText = '{{2}}';
+							     document.body.append(element);	
+							}	
 							executeOnce = true;
 						} catch { }
 	   	};
@@ -329,19 +332,22 @@
 		'use strict';
 		const identifier = '{{1}}';
 		if ( identifier === '' || identifier === '{{1}}' ) { return; }
+		const identifiers = identifier.split(/\s*\|\s*/);
 		let executeOnce = false;
 		const insertelem = () => {
 						if (executeOnce !== false) { return; }
 						try {
-							const element = document.createElement('{{4}}');
-							const node = document.querySelector('{{3}}');
-							if (identifier.charAt(0) === '#') {
-							    element.id = identifier.substring(1);
-							} else if (identifier.charAt(0) === '.') {
-							    element.className = identifier.substring(1);
-							} else { return; }	 
-							element.style.cssText = '{{2}}';
-							document.body.insertBefore(element, node);
+							for (const token of identifiers) {
+							     const element = document.createElement('{{4}}');
+							     const node = document.querySelector('{{3}}');
+							     if (token.charAt(0) === '#') {
+							    	 element.id = token.substring(1);
+							     } else if (token.charAt(0) === '.') {
+							    	 element.className = token.substring(1);
+							     } else { return; }	 
+							     element.style.cssText = '{{2}}';
+							     document.body.insertBefore(element, node);
+							}	
 							executeOnce = true;
 						} catch { }
 	   	};
