@@ -171,9 +171,9 @@
 						try {
 							const element = document.createElement('{{3}}');
 							if (identifier.charAt(0) === '#') {
-								 element.id = identifier.substring(1);
+							    element.id = identifier.substring(1);
 							} else if (identifier.charAt(0) === '.') {
-								 element.className = identifier.substring(1);
+							    element.className = identifier.substring(1);
 							} else { return; }
 							element.style.cssText = '{{2}}';
 							document.body.append(element);
@@ -329,20 +329,17 @@
 		'use strict';
 		const identifier = '{{1}}';
 		if ( identifier === '' || identifier === '{{1}}' ) { return; }
-		const identifiers = identifier.split(/\s*\|\s*/);
 		let executeOnce = false;
 		const insertelem = () => {
 						if (executeOnce !== false) { return; }
 						try {
 							const element = document.createElement('{{4}}');
 							const node = document.querySelector('{{3}}');
-							for (const identifieradder of identifiers) {
-								if (identifieradder.charAt(0) === '#') {
-									 element.id = identifieradder.substring(1);
-								} else if (identifieradder.charAt(0) === '.') {
-									 element.className = identifieradder.substring(1);
-								} else { return; }	 
-							}
+							if (identifier.charAt(0) === '#') {
+							    element.id = identifier.substring(1);
+							} else if (identifier.charAt(0) === '.') {
+							    element.className = identifier.substring(1);
+							} else { return; }	 
 							element.style.cssText = '{{2}}';
 							document.body.insertBefore(element, node);
 							executeOnce = true;
