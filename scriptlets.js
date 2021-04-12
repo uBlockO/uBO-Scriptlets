@@ -49,7 +49,7 @@
 		  };
 		  const start = ( ) => {
 			rmshadowelem();
-			if ( /\bmutation\b/.test(behavior) === false ) { return; }
+			if ( /\bloop\b/.test(behavior) === false ) { return; }
 			const observer = new MutationObserver(mutationHandler);
 			observer.observe(document.documentElement, {
 			      attributes: true,
@@ -140,7 +140,7 @@
 		  };
 		  const start = ( ) => {
 			setattr();
-			if ( /\bmutation\b/.test(behavior) === false ) { return; }
+			if ( /\bloop\b/.test(behavior) === false ) { return; }
 			const observer = new MutationObserver(mutationHandler);
 			observer.observe(document.documentElement, {
 			    attributes: true,
@@ -230,7 +230,7 @@
 		    };
 		    const start = ( ) => {
 			rmclass();
-			if ( /\bmutation\b/.test(behavior) === false ) { return; }
+			if ( /\bloop\b/.test(behavior) === false ) { return; }
 			const observer = new MutationObserver(mutationHandler);
 			observer.observe(document.documentElement, {
 			    attributes: true,
@@ -418,7 +418,7 @@
 		    };
 		    const start = ( ) => {
 			removeItem();
-			if ( /\bmutation\b/.test(behavior) === false ) { return; }
+			if ( /\bloop\b/.test(behavior) === false ) { return; }
 			const observer = new MutationObserver(mutationHandler);
 			observer.observe(document.documentElement, {
 			    attributes: true,
