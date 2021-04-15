@@ -519,3 +519,58 @@
                      }
                 });
 })();
+
+/// setItem.js
+/// alias si.js
+// example.com##+js(si, key, value)
+(() => {
+		    'use strict';
+		    const key = '{{1}}';
+		    if ( key === '' || key === '{{1}}' ) { return; }
+		    const keys = key.split(/\s*\|\s*/);
+		    const value = '{{2}}';
+		    let timer;
+	            const behavior = '{{3}}';
+		    const setItem = () => {
+			  timer = undefined;
+			  try {
+				   for (const keyName of keys) {
+					if (localStorage.getItem(keyName) === value) { break; }
+					   localStorage.setItem(keyName, value);
+				   }
+			  } catch { }
+		    };
+		    const mutationHandler = mutations => {
+			if ( timer !== undefined ) { return; }
+			let skip = true;
+			for ( let i = 0; i < mutations.length && skip; i++ ) {
+			    const { type, addedNodes, removedNodes } = mutations[i];
+			    if ( type === 'attributes' ) { skip = false; }
+			    for ( let j = 0; j < addedNodes.length && skip; j++ ) {
+				if ( addedNodes[j].nodeType === 1 ) { skip = false; break; }
+			    }
+			    for ( let j = 0; j < removedNodes.length && skip; j++ ) {
+				if ( removedNodes[j].nodeType === 1 ) { skip = false; break; }
+			    }
+			}
+			if ( skip ) { return; }
+			timer = self.requestIdleCallback(setItem, { timeout: 67 });
+		    };
+		    const start = ( ) => {
+			setItem();
+			if ( /\bloop\b/.test(behavior) === false ) { return; }
+			const observer = new MutationObserver(mutationHandler);
+			observer.observe(document.documentElement, {
+			    attributes: true,
+			    childList: true,
+			    subtree: true,
+			});
+		    };
+		    if ( document.readyState !== 'complete' && /\bcomplete\b/.test(behavior) ) {
+			window.addEventListener('load', start, { once: true });
+		    } else if ( document.readyState === 'loading' ) {
+			window.addEventListener('DOMContentLoaded', start, { once: true });
+		    } else {
+			start();
+		    }
+})();
