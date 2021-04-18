@@ -598,6 +598,7 @@
                               if ( log !== undefined ) {
                                    log('uBO: websocket("%s")', params);
                               } else if ( reNeedle.test(params) !== needleNot ) {
+				   defuse = reNeedle.test(params) !== needleNot;
 				   return new Object(new Response());
                               }
                               if ( !defuse ) {
