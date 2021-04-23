@@ -585,7 +585,7 @@
                                  } else if ( reNeedle.test(params) !== needleNot ) {
 				      defuse = reNeedle.test(params) !== needleNot;
 				      const url = String(args[1]);	 
-				      thisArg.send = () => { 
+				      return thisArg.send = () => { 
 					      thisArg.readyState = 4;
 					      thisArg.responseURL = url;
         				      thisArg.status = 200;
