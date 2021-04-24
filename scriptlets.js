@@ -560,30 +560,30 @@
                 const reNeedle = new RegExp(needle);
                 self.XMLHttpRequest.prototype.open = new Proxy(self.XMLHttpRequest.prototype.open, {
                      apply: (target, thisArg, args) => {
-			         Object.defineProperties(thisArg, {
-            				'readyState': {	
-					 	writable: true,
-            					configurable: true
-					},
-					'responseURL': {
-						writable: true,
-            					configurable: true
-					},
-					'status': {
-						writable: true,
-            					configurable: true
-					},
-					'statusText': {
-						writable: true,
-            					configurable: true
-					}	
-        			 });
 			         const params = String(args);
                                  let defuse = false;
                                  if ( log !== undefined ) {
                                       log('uBO: xhr("%s")', params);
                                  } else if ( reNeedle.test(params) !== needleNot ) {
 				      defuse = reNeedle.test(params) !== needleNot;
+				      Object.defineProperties(thisArg, {
+						'readyState': {	
+							writable: true,
+							configurable: true
+						},
+						'responseURL': {
+							writable: true,
+							configurable: true
+						},
+						'status': {
+							writable: true,
+							configurable: true
+						},
+						'statusText': {
+							writable: true,
+							configurable: true
+						}	
+        			      });	 
 				      const url = String(args[1]);	 
 				      return thisArg.send = () => { 
 					      thisArg.readyState = 4;
