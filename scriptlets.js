@@ -178,7 +178,6 @@
 								 element.className = token.substring(1);
 							     } else { return; }
 							     element.style.cssText = '{{2}}';
-							     element.setAttribute('{{4}}', '{{5}}');	
 							     document.body.append(element);	
 							}	
 							executeOnce = true;
