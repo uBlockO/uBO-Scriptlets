@@ -565,7 +565,6 @@
                                  if ( log !== undefined ) {
                                       log('uBO: xhr("%s")', params);
                                  } else if ( reNeedle.test(params) !== needleNot ) {
-				      defuse = reNeedle.test(params) !== needleNot;
 				      Object.defineProperties(thisArg, {
 						'readyState': {	
 							writable: true,
@@ -585,12 +584,12 @@
 						}	
         			      });	 
 				      const url = String(args[1]);	 
-				      return thisArg.send = () => { 
+				      thisArg.send = () => { 
 					      thisArg.readyState = 4;
 					      thisArg.responseURL = url;
         				      thisArg.status = 200;
         				      thisArg.statusText = "OK";
-				      }	      
+				      };	      
                                  }
                                  if ( !defuse ) {
                                       return target.apply(thisArg, args);
