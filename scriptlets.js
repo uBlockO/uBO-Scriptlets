@@ -528,7 +528,10 @@
                 const reNeedle = new RegExp(needle);
                 self.alert = new Proxy(self.alert, {
                         apply: (target, thisArg, args) => {
-                            const params = String(args);
+		            let params;
+			    try {
+                            	  params = String(args);
+			    } catch { }	    
                             let defuse = false;
                             if ( log !== undefined ) {
                                  log('uBO: alert("%s")', params);
@@ -560,7 +563,10 @@
                 const reNeedle = new RegExp(needle);
                 self.XMLHttpRequest.prototype.open = new Proxy(self.XMLHttpRequest.prototype.open, {
                      apply: (target, thisArg, args) => {
-			         const params = String(args);
+			         let params;
+			         try {
+			               params = String(args);
+				 } catch { } 
                                  let defuse = false;
                                  if ( log !== undefined ) {
                                       log('uBO: xhr("%s")', params);
@@ -582,8 +588,11 @@
 							writable: true,
 							configurable: true
 						}	
-        			      });	 
-				      const url = String(args[1]);	 
+        			      });
+				      let url;
+				      try {	 
+				      	    url = String(args[1]);
+				      } catch { }	      
 				      thisArg.send = () => { 
 					      thisArg.readyState = 4;
 					      thisArg.responseURL = url;
@@ -616,7 +625,10 @@
                 const reNeedle = new RegExp(needle);
                 self.WebSocket = new Proxy(self.WebSocket, {
                      construct: (target, args) => {
-                              const params = String(args);      
+			      let params;
+			      try {
+                              	    params = String(args);
+			      } catch { }	      
                               let defuse = false;
                               if ( log !== undefined ) {
                                    log('uBO: websocket("%s")', params);
