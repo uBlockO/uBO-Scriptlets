@@ -576,6 +576,14 @@
 							writable: true,
 							configurable: true
 						},
+					        'response': {
+							writable: true,
+							configurable: true
+						},
+					        'responseType': {
+							 writable: true,
+							 configurable: true
+						},	
 						'responseURL': {
 							writable: true,
 							configurable: true
@@ -595,6 +603,8 @@
 				      } catch { }	      
 				      thisArg.send = () => { 
 					      thisArg.readyState = 4;
+					      thisArg.response = Text;
+					      thisArg.responseType = Text;
 					      thisArg.responseURL = url;
         				      thisArg.status = 200;
         				      thisArg.statusText = "OK";
