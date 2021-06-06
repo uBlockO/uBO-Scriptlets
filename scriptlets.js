@@ -187,67 +187,6 @@
     		observer.observe(document.documentElement, { childList: true, subtree: true });
 })();
 
-/// rem-class.js
-/// alias rmc.js
-// example.com##+js(rmc, example, [selector])
-(() => {
-		    'use strict';
-		    const token = '{{1}}';
-		    if ( token === '' || token === '{{1}}' ) { return; }
-		    const tokens = token.split(/\s*\|\s*/);
-		    let selector = '{{2}}';
-		    if ( selector === '' || selector === '{{2}}' ) {
-			selector = `[${tokens.join('],[')}]`;
-		    }
-		    const behavior = '{{3}}';
-		    let timer;
-		    const rmclass = ( ) => {
-			timer = undefined;
-			try {
-			    const nodes = document.querySelectorAll(selector);
-			    for ( const node of nodes ) {
-				   if ( node.classList.contains(...tokens) ) {
-					node.classList.remove(...tokens);
-				    }
-			    }
-			} catch { }
-		    };
-		    const mutationHandler = mutations => {
-			if ( timer !== undefined ) { return; }
-			let skip = true;
-			for ( let i = 0; i < mutations.length && skip; i++ ) {
-			    const { type, addedNodes, removedNodes } = mutations[i];
-			    if ( type === 'attributes' ) { skip = false; }
-			    for ( let j = 0; j < addedNodes.length && skip; j++ ) {
-				if ( addedNodes[j].nodeType === 1 ) { skip = false; break; }
-			    }
-			    for ( let j = 0; j < removedNodes.length && skip; j++ ) {
-				if ( removedNodes[j].nodeType === 1 ) { skip = false; break; }
-			    }
-			}
-			if ( skip ) { return; }
-			timer = self.requestIdleCallback(rmclass, { timeout: 67 });
-		    };
-		    const start = ( ) => {
-			rmclass();
-			if ( /\bloop\b/.test(behavior) === false ) { return; }
-			const observer = new MutationObserver(mutationHandler);
-			observer.observe(document.documentElement, {
-			    attributes: true,
-			    attributeFilter: tokens,
-			    childList: true,
-			    subtree: true,
-			});
-		    };
-		    if ( document.readyState !== 'complete' && /\bcomplete\b/.test(behavior) ) {
-			window.addEventListener('load', start, { once: true });
-		    } else if ( document.readyState === 'loading' ) {
-			window.addEventListener('DOMContentLoaded', start, { once: true });
-		    } else {
-			start();
-		    }
-})();
-
 /// add-class.js
 /// alias ac.js
 // example.com##+js(ac, example, [selector])
