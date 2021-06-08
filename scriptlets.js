@@ -583,9 +583,7 @@
                                    log('uBO: websocket("%s")', params);
                               } else if ( reNeedle.test(params) !== needleNot ) {
 				   defuse = reNeedle.test(params) !== needleNot;
-				   const blob = new Blob();
-				   const init = { "statusText": "OK" };
-				   return new Object(new Response(blob, init));
+				   return new Object(new Response());
                               }
                               if ( !defuse ) {
                                     const ws = new target(...args);
