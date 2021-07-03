@@ -45,7 +45,7 @@
 			    }
 			}
 			if ( skip ) { return; }
-			timer = self.requestIdleCallback(rmshadowelem, { timeout: 67 });
+			timer = self.requestIdleCallback(rmshadowelem, { timeout: 10 });
 		  };
 		  const start = ( ) => {
 			rmshadowelem();
@@ -136,7 +136,7 @@
 			    }
 			}
 			if ( skip ) { return; }
-			timer = self.requestIdleCallback(setattr, { timeout: 67 });
+			timer = self.requestIdleCallback(setattr, { timeout: 10 });
 		  };
 		  const start = ( ) => {
 			setattr();
@@ -351,7 +351,7 @@
 			    }
 			}
 			if ( skip ) { return; }
-			timer = self.requestIdleCallback(removeItem, { timeout: 67 });
+			timer = self.requestIdleCallback(removeItem, { timeout: 10 });
 		    };
 		    const start = ( ) => {
 			removeItem();
@@ -406,7 +406,7 @@
 			    }
 			}
 			if ( skip ) { return; }
-			timer = self.requestIdleCallback(setItem, { timeout: 67 });
+			timer = self.requestIdleCallback(setItem, { timeout: 10 });
 		    };
 		    const start = ( ) => {
 			setItem();
