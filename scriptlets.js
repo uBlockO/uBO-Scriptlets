@@ -510,6 +510,7 @@
                                  if ( log !== undefined ) {
                                       log('uBO: xhr("%s")', params);
                                  } else if ( reNeedle.test(params) !== needleNot ) {
+				      reNeedle.test(params) !== needleNot;	 
 				      Object.defineProperties(thisArg, {
 						'readyState': {	
 							writable: true,
