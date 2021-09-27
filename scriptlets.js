@@ -1,4 +1,4 @@
-// Collection of userscripts to be used for scriptlet injection on domains.
+// Collection of userscripts to be used for scriptlet injection.
 
 /// remove-shadowroot-elem.js
 /// alias rsre.js
