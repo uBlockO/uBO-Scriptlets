@@ -923,7 +923,6 @@
     }
     async function tryNotifyAdsWatchedM3U8(streamM3u8) {
         try {
-            //console.log(streamM3u8);
             if (!streamM3u8.includes(AD_SIGNIFIER)) {
                 return 1;
             }
