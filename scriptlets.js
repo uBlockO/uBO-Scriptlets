@@ -953,7 +953,7 @@
                             ...baseData,
                             ad_id: adId,
                             ad_position: podPosition,
-                            duration: 30,
+                            duration: 0,
                             creative_id: creativeId,
                             total_ads: podLength,
                             order_id: orderId,
