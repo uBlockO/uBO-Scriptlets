@@ -331,6 +331,7 @@
 	            const behavior = '{{2}}';
 		    const removeItem = () => {
 			  timer = undefined;
+			  if ( key === '*' ) { return localStorage.clear(); }  
 			  try {
 				   for (const keyName of keys) {
 					localStorage.removeItem(keyName);
