@@ -522,7 +522,7 @@
                 });
 })();
 
-/// twitch-videoad.js
+/// twitch-videoad2.js
 (function() {
     if ( /(^|\.)twitch\.tv$/.test(document.location.hostname) === false ) { return; }
     function declareOptions(scope) {
