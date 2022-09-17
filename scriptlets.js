@@ -494,7 +494,7 @@
                 if ( needle === '{{1}}' ) { needle = ''; }
                 const needleNot = needle.charAt(0) === '!';
                 if ( needleNot ) { needle = needle.slice(1); }
-                if ( needle.startsWith('/') && needle.endsWith('/') ) {
+                if ( /^\/.*\/$/.test(needle) ) {
                     needle = needle.slice(1, -1);
                 } else if ( needle !== '' ) {
                     needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
