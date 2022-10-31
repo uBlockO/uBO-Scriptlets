@@ -2,7 +2,7 @@
 
 /// remove-shadowroot-elem.js
 /// alias rsre.js
-// example.com##+js(rsre, [selector])
+// example.com##+js(rsre, [selector], behavior)
 (() => {
 		  'use strict';
 		  const selector = '{{1}}';
