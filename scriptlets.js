@@ -395,9 +395,9 @@
 		    }
 })();
 
-/// executesitefunction.js
-/// alias esf.js
-// example.com##+js(esf, funcName, funcDelay)
+/// callfunction.js
+/// alias cf.js
+// example.com##+js(cf, funcName, funcDelay)
 (() => {
 	      'use strict';
 	      const funcCall = '{{1}}';
@@ -452,39 +452,111 @@
                 });
 })();
 
-/// no-websocket-if.js
-/// alias nowsif.js
-// example.com##+js(nowsif, /^/)
+/// removeSessionItem.js
+/// alias rsi.js
+// example.com##+js(rsi, key)
 (() => {
-                'use strict';
-                let needle = '{{1}}';
-                if ( needle === '{{1}}' ) { needle = ''; }
-                const needleNot = needle.charAt(0) === '!';
-                if ( needleNot ) { needle = needle.slice(1); }
-                if ( /^\/.*\/$/.test(needle) ) {
-                    needle = needle.slice(1, -1);
-                } else if ( needle !== '' ) {
-                    needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-                }
-                const log = needleNot === false && needle === '' ? console.log : undefined;
-                const reNeedle = new RegExp(needle);
-                self.WebSocket = new Proxy(self.WebSocket, {
-                     construct: (target, args) => {
-			      let params;
-			      try {
-                              	    params = String(args);
-			      } catch { }	      
-                              let defuse = false;
-                              if ( log !== undefined ) {
-                                   log('uBO: websocket("%s")', params);
-                              } else if ( reNeedle.test(params) !== needleNot ) {
-				   defuse = reNeedle.test(params) !== needleNot;
-				   return new Object(new Response());
-                              }
-                              if ( !defuse ) {
-                                    const ws = new target(...args);
-                                    return ws;
-                              }                                         
-                     }
-                });
+		    'use strict';
+		    const key = '{{1}}';
+		    if ( key === '' || key === '{{1}}' ) { return; }
+		    const keys = key.split(/\s*\|\s*/);
+		    let timer;
+	            const behavior = '{{2}}';
+		    const removeItem = () => {
+			  timer = undefined;
+			  if ( key === '*' ) { return sessionStorage.clear(); }  
+			  try {
+				   for (const keyName of keys) {
+					sessionStorage.removeItem(keyName);
+				   }
+			  } catch { }
+		    };
+		    const mutationHandler = mutations => {
+			if ( timer !== undefined ) { return; }
+			let skip = true;
+			for ( let i = 0; i < mutations.length && skip; i++ ) {
+			    const { type, addedNodes, removedNodes } = mutations[i];
+			    if ( type === 'attributes' ) { skip = false; }
+			    for ( let j = 0; j < addedNodes.length && skip; j++ ) {
+				if ( addedNodes[j].nodeType === 1 ) { skip = false; break; }
+			    }
+			    for ( let j = 0; j < removedNodes.length && skip; j++ ) {
+				if ( removedNodes[j].nodeType === 1 ) { skip = false; break; }
+			    }
+			}
+			if ( skip ) { return; }
+			timer = self.requestIdleCallback(removeItem, { timeout: 10 });
+		    };
+		    const start = ( ) => {
+			removeItem();
+			if ( /\bloop\b/.test(behavior) === false ) { return; }
+			const observer = new MutationObserver(mutationHandler);
+			observer.observe(document.documentElement, {
+			    attributes: true,
+			    childList: true,
+			    subtree: true,
+			});
+		    };
+		    if ( document.readyState !== 'complete' && /\bcomplete\b/.test(behavior) ) {
+			window.addEventListener('load', start, { once: true });
+		    } else if ( document.readyState === 'loading' ) {
+			window.addEventListener('DOMContentLoaded', start, { once: true });
+		    } else {
+			start();
+		    }
+})();
+
+/// setSessionItem.js
+/// alias ssi.js
+// example.com##+js(ssi, key, value)
+(() => {
+		    'use strict';
+		    const key = '{{1}}';
+		    if ( key === '' || key === '{{1}}' ) { return; }
+		    const keys = key.split(/\s*\|\s*/);
+		    const value = '{{2}}';
+		    let timer;
+	            const behavior = '{{3}}';
+		    const setItem = () => {
+			  timer = undefined;
+			  try {
+				   for (const keyName of keys) {
+					if (sessionStorage.getItem(keyName) === value) { break; }
+					   sessionStorage.setItem(keyName, value);
+				   }
+			  } catch { }
+		    };
+		    const mutationHandler = mutations => {
+			if ( timer !== undefined ) { return; }
+			let skip = true;
+			for ( let i = 0; i < mutations.length && skip; i++ ) {
+			    const { type, addedNodes, removedNodes } = mutations[i];
+			    if ( type === 'attributes' ) { skip = false; }
+			    for ( let j = 0; j < addedNodes.length && skip; j++ ) {
+				if ( addedNodes[j].nodeType === 1 ) { skip = false; break; }
+			    }
+			    for ( let j = 0; j < removedNodes.length && skip; j++ ) {
+				if ( removedNodes[j].nodeType === 1 ) { skip = false; break; }
+			    }
+			}
+			if ( skip ) { return; }
+			timer = self.requestIdleCallback(setItem, { timeout: 10 });
+		    };
+		    const start = ( ) => {
+			setItem();
+			if ( /\bloop\b/.test(behavior) === false ) { return; }
+			const observer = new MutationObserver(mutationHandler);
+			observer.observe(document.documentElement, {
+			    attributes: true,
+			    childList: true,
+			    subtree: true,
+			});
+		    };
+		    if ( document.readyState !== 'complete' && /\bcomplete\b/.test(behavior) ) {
+			window.addEventListener('load', start, { once: true });
+		    } else if ( document.readyState === 'loading' ) {
+			window.addEventListener('DOMContentLoaded', start, { once: true });
+		    } else {
+			start();
+		    }
 })();
