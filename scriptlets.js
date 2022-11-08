@@ -286,9 +286,9 @@
 	   	}
 })();
 
-/// removeItem.js
-/// alias ri.js
-// example.com##+js(ri, key)
+/// removeLocalItem.js
+/// alias rli.js
+// example.com##+js(rli, key)
 (() => {
 		    'use strict';
 		    const key = '{{1}}';
@@ -340,9 +340,9 @@
 		    }
 })();
 
-/// setItem.js
-/// alias si.js
-// example.com##+js(si, key, value)
+/// setLocalItem.js
+/// alias sli.js
+// example.com##+js(sli, key, value)
 (() => {
 		    'use strict';
 		    const key = '{{1}}';
