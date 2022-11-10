@@ -7,6 +7,7 @@
 		  'use strict';
 		  const selector = '{{1}}';
 		  if ( selector === '' || selector === '{{1}}' ) { return; }
+		  const delay = '{{2}}';
 		  const queryShadowRootElement = (shadowRootElement, rootElement) => {
 			if (!rootElement) {
 			    return queryShadowRootElement(shadowRootElement, document.documentElement);
@@ -30,7 +31,7 @@
 		  };
 		  const observer = new MutationObserver(rmshadowelem);
     	  	  observer.observe(document.documentElement, { attributes: true, childList: true, subtree: true, });
-		  if ( document.readyState === "complete" ) { self.setTimeout(observer.disconnect(), '{{2}}');  }
+		  if ( document.readyState === "complete" ) { self.setTimeout(observer.disconnect(), delay);  }
 })();
 
 /// remove-node.js
