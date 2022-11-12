@@ -181,17 +181,17 @@
 	   	    }
 })();
 
-/// multiup.js
-/// alias mtu.js
-// example.com##+js(mtu, form[action], button[link], action, link)
+/// move-attr-prop.js
+/// alias map.js
+// example.com##+js(map, form[action], button[link], action, link)
 (() => {
 		'use strict';
 		const selector = '{{1}}';
 		if ( selector === '' || selector === '{{1}}' ) { return; }
 		const selector2 = '{{2}}';
 		if ( selector2 === '' || selector2 === '{{2}}' ) { return; }
-		const multiup = ev => {
-						if (ev) { window.removeEventListener(ev.type, multiup, true); }
+		const map = ev => {
+						if (ev) { window.removeEventListener(ev.type, map, true); }
 						try {
 							const elem = document.querySelectorAll(selector);
 							const elem2 = document.querySelectorAll(selector2);
@@ -201,9 +201,9 @@
 						} catch { }
 		};
 		if (document.readyState === 'loading') {
-		    	    window.addEventListener('DOMContentLoaded', multiup, true);
+		    	    window.addEventListener('DOMContentLoaded', map, true);
 	   	} else {
-		    	    multiup();
+		    	    map();
 	   	}
 })();
 
