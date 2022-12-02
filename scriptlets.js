@@ -1,4 +1,4 @@
-// Collection of userscripts to be used for scriptlet injection.
+// Collection of userscripts to be used for scriptlet injection via uBO.
 
 /// remove-shadowroot-elem.js
 /// alias rsre.js
