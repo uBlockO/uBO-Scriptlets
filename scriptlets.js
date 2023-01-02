@@ -36,7 +36,7 @@
 
 /// remove-node.js
 /// alias rn.js
-// example.com##+js(rn, /adblock|adsense/, script)
+// example.com##+js(rn, text, inline-tag)
 (() => { 
           'use strict';
           let needle = '{{1}}';
@@ -66,7 +66,7 @@
 
 /// set-attr.js
 /// alias sa.js
-// example.com##+js(sa, preload, none, video)
+// example.com##+js(sa, attr, value, [selector])
 (() => {
 		  'use strict';
 		  const token = '{{1}}';
@@ -157,7 +157,7 @@
 
 /// add-class.js
 /// alias ac.js
-// example.com##+js(ac, example, [selector])
+// example.com##+js(ac, class, [selector])
 (() => {
 		    'use strict';
 		    const needle = '{{1}}';
@@ -183,7 +183,7 @@
 
 /// move-attr-prop.js
 /// alias map.js
-// example.com##+js(map, form[action], button[link], action, link)
+// example.com##+js(map, [selector], [selector2], attr, attr2)
 (() => {
 		'use strict';
 		const selector = '{{1}}';
@@ -209,7 +209,7 @@
 
 /// insert-iframe.js
 /// alias ii.js
-// example.com##+js(ii, 2, [selector], src, style)
+// example.com##+js(ii, integer, [selector], src, style)
 (() => {
     	        'use strict';
 		const iframes = '{{1}}';
@@ -234,7 +234,7 @@
 
 /// insert-elem-before.js
 /// alias ieb.js
-// example.com##+js(ieb, [selector], display:block !important, node, div)
+// example.com##+js(ieb, [selector], style.prop, node, tag)
 (() => {
 		'use strict';
 		const identifier = '{{1}}';
@@ -420,7 +420,7 @@
 
 /// no-alert-if.js
 /// alias noaif.js
-// example.com##+js(noaif, loading ad)
+// example.com##+js(noaif, text)
 (() => {
                 'use strict';
                 let needle = '{{1}}';
