@@ -126,6 +126,31 @@
 		  }
 })();
 
+/// rename-attr.js
+/// alias rna.js
+// example.com##+js(rna, [selector], attr, attr2)
+(() => {
+                'use strict';
+                const selector = '{{1}}';
+		if ( selector === '' || selector === '{{1}}' ) { return; }
+		const oldattr = '{{2}}';
+	        const newattr = '{{3}}';
+		const renameattr = ( ) => {
+	        				const elems = document.querySelectorAll( selector );
+						try {
+							for ( const elem of elems ) {
+								if ( elem.hasAttribute( oldattr ) ) {
+							             const value = elem.getAttribute( oldattr );		
+		     				   	   	     elem.setAttribute( newattr, value );
+								}
+							}	
+						} catch { }
+		};
+		const observer = new MutationObserver(renameattr);
+    	  	observer.observe(document.documentElement, { attributes: true, childList: true, subtree: true, });
+		if ( document.readyState === "complete" ) { observer.disconnect();  }
+})();
+
 /// create-elem.js
 /// alias ce.js
 // example.com##+js(ce, [selector], display:block !important, div)
