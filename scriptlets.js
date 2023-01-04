@@ -135,7 +135,10 @@
 		if ( selector === '' || selector === '{{1}}' ) { return; }
 		const oldattr = '{{2}}';
 	        const newattr = '{{3}}';
+		let timer;
+		const behavior = '{{4}}';
 		const renameattr = ( ) => {
+						timer = undefined;
 	        				const elems = document.querySelectorAll( selector );
 						try {
 							for ( const elem of elems ) {
@@ -146,9 +149,39 @@
 							}	
 						} catch { }
 		};
-		const observer = new MutationObserver(renameattr);
-    	  	observer.observe(document.documentElement, { attributes: true, childList: true, subtree: true, });
-		if ( document.readyState === "complete" ) { observer.disconnect();  }
+		const mutationHandler = mutations => {
+			if ( timer !== undefined ) { return; }
+			let skip = true;
+			for ( let i = 0; i < mutations.length && skip; i++ ) {
+			    const { type, addedNodes, removedNodes } = mutations[i];
+			    if ( type === 'attributes' ) { skip = false; }
+			    for ( let j = 0; j < addedNodes.length && skip; j++ ) {
+				if ( addedNodes[j].nodeType === 1 ) { skip = false; break; }
+			    }
+			    for ( let j = 0; j < removedNodes.length && skip; j++ ) {
+				if ( removedNodes[j].nodeType === 1 ) { skip = false; break; }
+			    }
+			}
+			if ( skip ) { return; }
+			timer = self.requestIdleCallback(renameattr, { timeout: 10 });
+		  };
+		  const start = ( ) => {
+			renameattr();
+			if ( /\bloop\b/.test(behavior) === false ) { return; }
+			const observer = new MutationObserver(mutationHandler);
+			observer.observe(document.documentElement, {
+			    attributes: true,
+			    childList: true,
+			    subtree: true,
+			});
+		  };
+		  if ( document.readyState !== 'complete' && /\bcomplete\b/.test(behavior) ) {
+			self.addEventListener('load', start, { once: true });
+		     } else if ( document.readyState === 'loading' ) {
+			self.addEventListener('DOMContentLoaded', start, { once: true });
+		     } else {
+			start();
+		  }
 })();
 
 /// create-elem.js
