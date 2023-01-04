@@ -118,9 +118,9 @@
 			});
 		  };
 		  if ( document.readyState !== 'complete' && /\bcomplete\b/.test(behavior) ) {
-			window.addEventListener('load', start, { once: true });
+			self.addEventListener('load', start, { once: true });
 		     } else if ( document.readyState === 'loading' ) {
-			window.addEventListener('DOMContentLoaded', start, { once: true });
+			self.addEventListener('DOMContentLoaded', start, { once: true });
 		     } else {
 			start();
 		  }
@@ -225,7 +225,7 @@
 		    let selector = '{{2}}';
 		    if ( selector === '' || selector === '{{2}}' ) { selector = '.' + needles.map(a => CSS.escape(a)).join(',.'); }
 		    const addclass = ev => {
-						if (ev) { window.removeEventListener(ev.type, addclass, true);  }
+						if (ev) { self.removeEventListener(ev.type, addclass, true);  }
 						const nodes = document.querySelectorAll(selector);
 						try {
 							for ( const node of nodes ) {
@@ -234,7 +234,7 @@
 						} catch { }
 		    };
 		    if (document.readyState === 'loading') {
-		    	      window.addEventListener('DOMContentLoaded', addclass, true);
+		    	      self.addEventListener('DOMContentLoaded', addclass, true);
 	   	    } else {
 		    	      addclass();
 	   	    }
@@ -250,7 +250,7 @@
 		const selector2 = '{{2}}';
 		if ( selector2 === '' || selector2 === '{{2}}' ) { return; }
 		const map = ev => {
-						if (ev) { window.removeEventListener(ev.type, map, true); }
+						if (ev) { self.removeEventListener(ev.type, map, true); }
 						try {
 							const elem = document.querySelectorAll(selector);
 							const elem2 = document.querySelectorAll(selector2);
@@ -260,7 +260,7 @@
 						} catch { }
 		};
 		if (document.readyState === 'loading') {
-		    	    window.addEventListener('DOMContentLoaded', map, true);
+		    	    self.addEventListener('DOMContentLoaded', map, true);
 	   	} else {
 		    	    map();
 	   	}
@@ -329,7 +329,7 @@
 		const selector = '{{1}}';
 		if ( selector === '' || selector === '{{1}}' ) { return; }
 		const appendNode = ev => {
-						if (ev) { window.removeEventListener(ev.type, appendNode, true); }
+						if (ev) { self.removeEventListener(ev.type, appendNode, true); }
 						try {
 							const elements = document.querySelectorAll(selector);
 							for ( const element of elements ) {
@@ -342,7 +342,7 @@
 		if (document.readyState === 'complete') {
 		    	    appendNode();
 	   	} else {
-		    	    window.addEventListener('load', appendNode, true);
+		    	    self.addEventListener('load', appendNode, true);
 	   	}
 })();
 
@@ -392,9 +392,9 @@
 			});
 		    };
 		    if ( document.readyState !== 'complete' && /\bcomplete\b/.test(behavior) ) {
-			window.addEventListener('load', start, { once: true });
+			self.addEventListener('load', start, { once: true });
 		    } else if ( document.readyState === 'loading' ) {
-			window.addEventListener('DOMContentLoaded', start, { once: true });
+			self.addEventListener('DOMContentLoaded', start, { once: true });
 		    } else {
 			start();
 		    }
@@ -447,9 +447,9 @@
 			});
 		    };
 		    if ( document.readyState !== 'complete' && /\bcomplete\b/.test(behavior) ) {
-			window.addEventListener('load', start, { once: true });
+			self.addEventListener('load', start, { once: true });
 		    } else if ( document.readyState === 'loading' ) {
-			window.addEventListener('DOMContentLoaded', start, { once: true });
+			self.addEventListener('DOMContentLoaded', start, { once: true });
 		    } else {
 			start();
 		    }
@@ -465,7 +465,7 @@
 	      const funcDelay = '{{2}}';
 	      if ( funcDelay === '' || funcDelay === '{{2}}' ) { return; }
 	      const funcInvoke = ev => { 
-		      				if (ev) { window.removeEventListener(ev.type, funcInvoke, true); }
+		      				if (ev) { self.removeEventListener(ev.type, funcInvoke, true); }
 		      				try { 
 							setTimeout(window[funcCall], funcDelay);
 						} catch { }
@@ -473,7 +473,7 @@
 	      if (document.readyState === 'interactive' || document.readyState === 'complete') {
 		    	    funcInvoke();
 	      } else {
-		    	    window.addEventListener('DOMContentLoaded', funcInvoke, true);
+		    	    self.addEventListener('DOMContentLoaded', funcInvoke, true);
 	      }
 })();
 
@@ -558,9 +558,9 @@
 			});
 		    };
 		    if ( document.readyState !== 'complete' && /\bcomplete\b/.test(behavior) ) {
-			window.addEventListener('load', start, { once: true });
+			self.addEventListener('load', start, { once: true });
 		    } else if ( document.readyState === 'loading' ) {
-			window.addEventListener('DOMContentLoaded', start, { once: true });
+			self.addEventListener('DOMContentLoaded', start, { once: true });
 		    } else {
 			start();
 		    }
@@ -613,9 +613,9 @@
 			});
 		    };
 		    if ( document.readyState !== 'complete' && /\bcomplete\b/.test(behavior) ) {
-			window.addEventListener('load', start, { once: true });
+			self.addEventListener('load', start, { once: true });
 		    } else if ( document.readyState === 'loading' ) {
-			window.addEventListener('DOMContentLoaded', start, { once: true });
+			self.addEventListener('DOMContentLoaded', start, { once: true });
 		    } else {
 			start();
 		    }
