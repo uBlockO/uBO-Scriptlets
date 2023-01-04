@@ -144,7 +144,8 @@
 							for ( const elem of elems ) {
 								if ( elem.hasAttribute( oldattr ) ) {
 							             const value = elem.getAttribute( oldattr );		
-		     				   	   	     elem.setAttribute( newattr, value );
+		     				   	   	     elem.removeAttribute( oldattr );
+								     elem.setAttribute( newattr, value );
 								}
 							}	
 						} catch { }
