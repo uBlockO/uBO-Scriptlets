@@ -134,7 +134,9 @@
                 const selector = '{{1}}';
 		if ( selector === '' || selector === '{{1}}' ) { return; }
 		const oldattr = '{{2}}';
+		if ( oldattr === '' || oldattr === '{{2}}' ) { return; }
 	        const newattr = '{{3}}';
+		if ( newattr === '' || newattr === '{{3}}' ) { return; }
 		let timer;
 		const behavior = '{{4}}';
 		const renameattr = ( ) => {
@@ -178,9 +180,9 @@
 		  };
 		  if ( document.readyState !== 'complete' && /\bcomplete\b/.test(behavior) ) {
 			self.addEventListener('load', start, { once: true });
-		     } else if ( document.readyState === 'loading' ) {
+		  } else if ( document.readyState === 'loading' ) {
 			self.addEventListener('DOMContentLoaded', start, { once: true });
-		     } else {
+		  } else {
 			start();
 		  }
 })();
