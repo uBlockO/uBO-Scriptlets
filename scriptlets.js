@@ -242,6 +242,64 @@
 	   	    }
 })();
 
+/// replace-class.js
+/// alias rpc.js
+// example.com##+js(rpc, [selector], oldclass, newclass)
+(() => {
+			  'use strict';
+			  const selector = '{{1}}';
+			  if ( selector === '' || selector === '{{1}}' ) { return; }
+			  const oldclass = '{{2}}';
+			  if ( oldclass === '' || oldclass === '{{2}}' ) { return; }
+			  const newclass = '{{3}}';
+			  if ( newclass === '' || newclass === '{{3}}' ) { return; }
+			  const behavior = '{{4}}';
+			  const replaceclass = ( ) => {
+				  let timer = undefined;
+				  const nodes = document.querySelectorAll(selector);
+				  try {
+					for ( const node of nodes ) {
+					      if ( node.classList.contains(oldclass) ) {	
+					      	   node.classList.replace(oldclass, newclass);
+					      }	      
+					}
+				  } catch { }
+			  };
+			  const mutationHandler = mutations => {
+				if ( timer !== undefined ) { return; }
+				let skip = true;
+				for ( let i = 0; i < mutations.length && skip; i++ ) {
+				    const { type, addedNodes, removedNodes } = mutations[i];
+				    if ( type === 'attributes' ) { skip = false; }
+				    for ( let j = 0; j < addedNodes.length && skip; j++ ) {
+					if ( addedNodes[j].nodeType === 1 ) { skip = false; break; }
+				    }
+				    for ( let j = 0; j < removedNodes.length && skip; j++ ) {
+					if ( removedNodes[j].nodeType === 1 ) { skip = false; break; }
+				    }
+				}
+				if ( skip ) { return; }
+				timer = self.requestIdleCallback(replaceclass, { timeout: 10 });
+		  	  };
+			  const start = ( ) => {
+				replaceclass();
+				if ( /\bloop\b/.test(behavior) === false ) { return; }
+				const observer = new MutationObserver(mutationHandler);
+				observer.observe(document.documentElement, {
+				    attributes: true,
+				    childList: true,
+				    subtree: true,
+				});
+			  };
+			  if ( document.readyState !== 'complete' && /\bcomplete\b/.test(behavior) ) {
+				self.addEventListener('load', start, { once: true });
+			     } else if ( document.readyState === 'loading' ) {
+				self.addEventListener('DOMContentLoaded', start, { once: true });
+			     } else {
+				start();
+			  }
+})();
+
 /// move-attr-prop.js
 /// alias map.js
 // example.com##+js(map, [selector], [selector2], attr, attr2)
