@@ -75,10 +75,9 @@
 		  const attrValue = '{{2}}';
 		  let selector = '{{3}}';
 		  if ( selector === '' || selector === '{{3}}' ) { selector = `[${tokens.join('],[')}]`; }
-	          let timer;
 		  const behavior = '{{4}}';
 		  const setattr = () => {
-			timer = undefined;  
+			let timer = undefined;  
 			const nodes = document.querySelectorAll(selector);
 			try {
 				for (const node of nodes) {
@@ -137,10 +136,9 @@
 		if ( oldattr === '' || oldattr === '{{2}}' ) { return; }
 	        const newattr = '{{3}}';
 		if ( newattr === '' || newattr === '{{3}}' ) { return; }
-		let timer;
 		const behavior = '{{4}}';
 		const renameattr = ( ) => {
-						timer = undefined;
+						let timer = undefined;
 	        				const elems = document.querySelectorAll( selector );
 						try {
 							for ( const elem of elems ) {
@@ -414,10 +412,9 @@
 		    const key = '{{1}}';
 		    if ( key === '' || key === '{{1}}' ) { return; }
 		    const keys = key.split(/\s*\|\s*/);
-		    let timer;
 	            const behavior = '{{2}}';
 		    const removeItem = () => {
-			  timer = undefined;
+			  let timer = undefined;
 			  if ( key === '*' ) { return localStorage.clear(); }  
 			  try {
 				   for (const keyName of keys) {
@@ -469,14 +466,13 @@
 		    if ( key === '' || key === '{{1}}' ) { return; }
 		    const keys = key.split(/\s*\|\s*/);
 		    const value = '{{2}}';
-		    let timer;
 	            const behavior = '{{3}}';
 		    const setItem = () => {
-			  timer = undefined;
+			  let timer = undefined;
 			  try {
 				   for (const keyName of keys) {
 					if (localStorage.getItem(keyName) === value) { break; }
-					   localStorage.setItem(keyName, value);
+					    localStorage.setItem(keyName, value);
 				   }
 			  } catch { }
 		    };
@@ -580,10 +576,9 @@
 		    const key = '{{1}}';
 		    if ( key === '' || key === '{{1}}' ) { return; }
 		    const keys = key.split(/\s*\|\s*/);
-		    let timer;
 	            const behavior = '{{2}}';
 		    const removeItem = () => {
-			  timer = undefined;
+			  let timer = undefined;
 			  if ( key === '*' ) { return sessionStorage.clear(); }  
 			  try {
 				   for (const keyName of keys) {
@@ -635,14 +630,13 @@
 		    if ( key === '' || key === '{{1}}' ) { return; }
 		    const keys = key.split(/\s*\|\s*/);
 		    const value = '{{2}}';
-		    let timer;
 	            const behavior = '{{3}}';
 		    const setItem = () => {
-			  timer = undefined;
+			  let timer = undefined;
 			  try {
 				   for (const keyName of keys) {
 					if (sessionStorage.getItem(keyName) === value) { break; }
-					   sessionStorage.setItem(keyName, value);
+					    sessionStorage.setItem(keyName, value);
 				   }
 			  } catch { }
 		    };
