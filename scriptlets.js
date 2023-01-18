@@ -1,10 +1,11 @@
 // Collection of userscripts to be used for scriptlet injection via uBO.
 
+'use strict';
+
 /// remove-shadowroot-elem.js
 /// alias rsre.js
 // example.com##+js(rsre, [selector], delay)
 (() => {
-		  'use strict';
 		  const selector = '{{1}}';
 		  if ( selector === '' || selector === '{{1}}' ) { return; }
 		  const delay = '{{2}}';
@@ -38,7 +39,6 @@
 /// alias rn.js
 // example.com##+js(rn, text, inline-tag)
 (() => { 
-          'use strict';
           let needle = '{{1}}';
           if ( needle === '' || needle === '{{1}}' ) {
               needle = '^';
@@ -68,7 +68,6 @@
 /// alias sa.js
 // example.com##+js(sa, attr, value, [selector])
 (() => {
-		  'use strict';
 		  const token = '{{1}}';
 		  if ( token === '' || token === '{{1}}' ) { return; }
 		  const tokens = token.split(/\s*\|\s*/);
@@ -129,7 +128,6 @@
 /// alias rna.js
 // example.com##+js(rna, [selector], attr, attr2)
 (() => {
-                'use strict';
                 const selector = '{{1}}';
 		if ( selector === '' || selector === '{{1}}' ) { return; }
 		const oldattr = '{{2}}';
@@ -189,7 +187,6 @@
 /// alias ce.js
 // example.com##+js(ce, [selector], display:block !important, div)
 (() => {
-		'use strict';
 		const identifier = '{{1}}';
 		if ( identifier === '' || identifier === '{{1}}' ) { return; }
 		const identifiers = identifier.split(/\s*\|\s*/);
@@ -218,7 +215,6 @@
 /// alias ac.js
 // example.com##+js(ac, class, [selector])
 (() => {
-		    'use strict';
 		    const needle = '{{1}}';
 		    if ( needle === '' || needle === '{{1}}' ) { return; }
 		    const needles = needle.split(/\s*\|\s*/);
@@ -244,7 +240,6 @@
 /// alias rpc.js
 // example.com##+js(rpc, [selector], oldclass, newclass)
 (() => {
-			  'use strict';
 			  const selector = '{{1}}';
 			  if ( selector === '' || selector === '{{1}}' ) { return; }
 			  const oldclass = '{{2}}';
@@ -302,7 +297,6 @@
 /// alias map.js
 // example.com##+js(map, [selector], [selector2], attr, attr2)
 (() => {
-		'use strict';
 		const selector = '{{1}}';
 		if ( selector === '' || selector === '{{1}}' ) { return; }
 		const selector2 = '{{2}}';
@@ -327,8 +321,7 @@
 /// insert-iframe.js
 /// alias ii.js
 // example.com##+js(ii, integer, [selector], src, style)
-(() => {
-    	        'use strict';
+(() => { 
 		const iframes = '{{1}}';
 		if ( iframes === '' || iframes === '{{1}}' ) { return; }
 		let executeOnce = false;
@@ -353,7 +346,6 @@
 /// alias ieb.js
 // example.com##+js(ieb, [selector], style.prop, node, tag)
 (() => {
-		'use strict';
 		const identifier = '{{1}}';
 		if ( identifier === '' || identifier === '{{1}}' ) { return; }
 		const identifiers = identifier.split(/\s*\|\s*/);
@@ -383,7 +375,6 @@
 /// alias ape.js
 // example.com##+js(ape, [selector], element, attribute, value)
 (() => {
-		'use strict';
 		const selector = '{{1}}';
 		if ( selector === '' || selector === '{{1}}' ) { return; }
 		const appendNode = ev => {
@@ -407,8 +398,7 @@
 /// removeLocalItem.js
 /// alias rli.js
 // example.com##+js(rli, key)
-(() => {
-		    'use strict';
+(() => { 
 		    const key = '{{1}}';
 		    if ( key === '' || key === '{{1}}' ) { return; }
 		    const keys = key.split(/\s*\|\s*/);
@@ -460,8 +450,7 @@
 /// setLocalItem.js
 /// alias sli.js
 // example.com##+js(sli, key, value)
-(() => {
-		    'use strict';
+(() => { 
 		    const key = '{{1}}';
 		    if ( key === '' || key === '{{1}}' ) { return; }
 		    const keys = key.split(/\s*\|\s*/);
@@ -515,7 +504,6 @@
 /// alias cf.js
 // example.com##+js(cf, funcName, funcDelay)
 (() => {
-	      'use strict';
 	      const funcCall = '{{1}}';
 	      if ( funcCall === '' || funcCall === '{{1}}' ) { return; }
 	      const funcDelay = '{{2}}';
@@ -537,7 +525,6 @@
 /// alias noaif.js
 // example.com##+js(noaif, text)
 (() => {
-                'use strict';
                 let needle = '{{1}}';
                 if ( needle === '{{1}}' ) { needle = ''; }
                 const needleNot = needle.charAt(0) === '!';
@@ -571,8 +558,7 @@
 /// removeSessionItem.js
 /// alias rsi.js
 // example.com##+js(rsi, key)
-(() => {
-		    'use strict';
+(() => { 
 		    const key = '{{1}}';
 		    if ( key === '' || key === '{{1}}' ) { return; }
 		    const keys = key.split(/\s*\|\s*/);
@@ -624,8 +610,7 @@
 /// setSessionItem.js
 /// alias ssi.js
 // example.com##+js(ssi, key, value)
-(() => {
-		    'use strict';
+(() => { 
 		    const key = '{{1}}';
 		    if ( key === '' || key === '{{1}}' ) { return; }
 		    const keys = key.split(/\s*\|\s*/);
