@@ -163,8 +163,8 @@
 			}
 			if ( skip ) { return; }
 			timer = self.requestIdleCallback(renameattr, { timeout: 10 });
-		  };
-		  const start = ( ) => {
+		};
+		const start = ( ) => {
 			renameattr();
 			if ( /\bloop\b/.test(behavior) === false ) { return; }
 			const observer = new MutationObserver(mutationHandler);
@@ -173,14 +173,14 @@
 			    childList: true,
 			    subtree: true,
 			});
-		  };
-		  if ( document.readyState !== 'complete' && /\bcomplete\b/.test(behavior) ) {
+		};
+		if ( document.readyState !== 'complete' && /\bcomplete\b/.test(behavior) ) {
 			self.addEventListener('load', start, { once: true });
-		  } else if ( document.readyState === 'loading' ) {
+		} else if ( document.readyState === 'loading' ) {
 			self.addEventListener('DOMContentLoaded', start, { once: true });
-		  } else {
+		} else {
 			start();
-		  }
+		}
 })();
 
 /// create-elem.js
