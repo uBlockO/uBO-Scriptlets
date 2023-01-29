@@ -126,7 +126,7 @@
 
 /// rename-attr.js
 /// alias rna.js
-// example.com##+js(rna, [selector], attr, attr2)
+// example.com##+js(rna, [selector], oldattr, newattr)
 (() => {
                 const selector = '{{1}}';
 		if ( selector === '' || selector === '{{1}}' ) { return; }
