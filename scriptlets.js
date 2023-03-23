@@ -689,3 +689,57 @@
 			start();
 		    }
 })();
+
+/// insert-first-child.js
+/// alias ifc.js
+// example.com##+js(ifc, element, node)
+(() => {
+		const selector = '{{1}}';
+		if ( selector === '' || selector === '{{1}}' ) { return; }
+	        const element = '{{2}}';
+		if ( element === '' || element === '{{2}}' ) { return; }
+		const behavior = '{{3}}';
+		let timer = undefined;
+		const insertelem = () => {
+			try {
+				const elem = document.querySelector(selector);
+				const node = document.querySelector(element);
+				if (elem) {
+				    elem.prepend(node);
+				}	
+			} catch { }
+	   	};
+		const mutationHandler = mutations => {
+			if ( timer !== undefined ) { return; }
+			let skip = true;
+			for ( let i = 0; i < mutations.length && skip; i++ ) {
+			    const { type, addedNodes, removedNodes } = mutations[i];
+			    if ( type === 'attributes' ) { skip = false; }
+			    for ( let j = 0; j < addedNodes.length && skip; j++ ) {
+				if ( addedNodes[j].nodeType === 1 ) { skip = false; break; }
+			    }
+			    for ( let j = 0; j < removedNodes.length && skip; j++ ) {
+				if ( removedNodes[j].nodeType === 1 ) { skip = false; break; }
+			    }
+			}
+			if ( skip ) { return; }
+			timer = self.requestIdleCallback(insertelem, { timeout: 10 });
+		};
+		const start = ( ) => {
+			insertelem();
+			if ( /\bloop\b/.test(behavior) === false ) { return; }
+			const observer = new MutationObserver(mutationHandler);
+			observer.observe(document.documentElement, {
+			    attributes: true,
+			    childList: true,
+			    subtree: true,
+			});
+		};
+		if ( document.readyState !== 'complete' && /\bcomplete\b/.test(behavior) ) {
+		     self.addEventListener('load', start, { once: true });
+		    } else if ( document.readyState === 'loading' ) {
+		     self.addEventListener('DOMContentLoaded', start, { once: true });
+		    } else {
+		     start();
+		}
+})();
