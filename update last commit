@@ -702,10 +702,10 @@
 		let timer = undefined;
 		const insertelem = () => {
 			try {
-				const elem = document.querySelector(selector);
-				const node = document.querySelector(element);
-				if (elem) {
-				    elem.prepend(node);
+				const elems = document.querySelectorAll(selector);
+				const nodes = document.querySelectorAll(element);
+				for (let i = 0; i < elems.length; i++) {
+				    elems[i].prepend(nodes[i]);
 				}	
 			} catch { }
 	   	};
