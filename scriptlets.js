@@ -690,9 +690,9 @@
 		    }
 })();
 
-/// insert-first-child.js
-/// alias ifc.js
-// example.com##+js(ifc, element, node)
+/// insert-child-before.js
+/// alias icb.js
+// example.com##+js(icb, element, node)
 (() => {
 		const selector = '{{1}}';
 		if ( selector === '' || selector === '{{1}}' ) { return; }
@@ -705,7 +705,7 @@
 				const elems = document.querySelectorAll(selector);
 				const nodes = document.querySelectorAll(element);
 				for (let i = 0; i < elems.length; i++) {
-				    elems[i].prepend(nodes[i]);
+				    elems[i].before(nodes[i]);
 				}	
 			} catch { }
 	   	};
