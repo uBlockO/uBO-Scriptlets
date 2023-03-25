@@ -479,107 +479,109 @@ function(
 /// removeSessionItem.js
 /// alias rsi.js
 // example.com##+js(rsi, key)
-(() => { 
-		    const key = '{{1}}';
-		    if ( key === '' || key === '{{1}}' ) { return; }
-		    const keys = key.split(/\s*\|\s*/);
-	            const behavior = '{{2}}';
-		    let timer = undefined;
-		    const removeItem = () => {
-			  if ( key === '*' ) { return sessionStorage.clear(); }  
-			  try {
-				   for (const keyName of keys) {
-					sessionStorage.removeItem(keyName);
-				   }
-			  } catch { }
-		    };
-		    const mutationHandler = mutations => {
-			if ( timer !== undefined ) { return; }
-			let skip = true;
-			for ( let i = 0; i < mutations.length && skip; i++ ) {
-			    const { type, addedNodes, removedNodes } = mutations[i];
-			    if ( type === 'attributes' ) { skip = false; }
-			    for ( let j = 0; j < addedNodes.length && skip; j++ ) {
-				if ( addedNodes[j].nodeType === 1 ) { skip = false; break; }
-			    }
-			    for ( let j = 0; j < removedNodes.length && skip; j++ ) {
-				if ( removedNodes[j].nodeType === 1 ) { skip = false; break; }
-			    }
-			}
-			if ( skip ) { return; }
-			timer = self.requestIdleCallback(removeItem, { timeout: 10 });
-		    };
-		    const start = ( ) => {
-			removeItem();
-			if ( /\bloop\b/.test(behavior) === false ) { return; }
-			const observer = new MutationObserver(mutationHandler);
-			observer.observe(document.documentElement, {
-			    attributes: true,
-			    childList: true,
-			    subtree: true,
-			});
-		    };
-		    if ( document.readyState !== 'complete' && /\bcomplete\b/.test(behavior) ) {
-			self.addEventListener('load', start, { once: true });
-		    } else if ( document.readyState === 'loading' ) {
-			self.addEventListener('DOMContentLoaded', start, { once: true });
-		    } else {
-			start();
+function( 
+        key = '',
+	behavior = '' 
+) { 
+	    if ( key === '' ) { return; }
+	    const keys = key.split(/\s*\|\s*/);
+	    let timer = undefined;
+	    const removeItem = () => {
+		  if ( key === '*' ) { return sessionStorage.clear(); }  
+		  try {
+			   for (const keyName of keys) {
+				sessionStorage.removeItem(keyName);
+			   }
+		  } catch { }
+	    };
+	    const mutationHandler = mutations => {
+		if ( timer !== undefined ) { return; }
+		let skip = true;
+		for ( let i = 0; i < mutations.length && skip; i++ ) {
+		    const { type, addedNodes, removedNodes } = mutations[i];
+		    if ( type === 'attributes' ) { skip = false; }
+		    for ( let j = 0; j < addedNodes.length && skip; j++ ) {
+			if ( addedNodes[j].nodeType === 1 ) { skip = false; break; }
 		    }
-})();
+		    for ( let j = 0; j < removedNodes.length && skip; j++ ) {
+			if ( removedNodes[j].nodeType === 1 ) { skip = false; break; }
+		    }
+		}
+		if ( skip ) { return; }
+		timer = self.requestIdleCallback(removeItem, { timeout: 10 });
+	    };
+	    const start = ( ) => {
+		removeItem();
+		if ( /\bloop\b/.test(behavior) === false ) { return; }
+		const observer = new MutationObserver(mutationHandler);
+		observer.observe(document.documentElement, {
+		    attributes: true,
+		    childList: true,
+		    subtree: true,
+		});
+	    };
+	    if ( document.readyState !== 'complete' && /\bcomplete\b/.test(behavior) ) {
+		self.addEventListener('load', start, { once: true });
+	    } else if ( document.readyState === 'loading' ) {
+		self.addEventListener('DOMContentLoaded', start, { once: true });
+	    } else {
+		start();
+	    }
+}
 
 /// setSessionItem.js
 /// alias ssi.js
 // example.com##+js(ssi, key, value)
-(() => { 
-		    const key = '{{1}}';
-		    if ( key === '' || key === '{{1}}' ) { return; }
-		    const keys = key.split(/\s*\|\s*/);
-		    const value = '{{2}}';
-	            const behavior = '{{3}}';
-		    let timer = undefined;
-		    const setItem = () => {
-			  try {
-				   for (const keyName of keys) {
-					if (sessionStorage.getItem(keyName) === value) { break; }
-					    sessionStorage.setItem(keyName, value);
-				   }
-			  } catch { }
-		    };
-		    const mutationHandler = mutations => {
-			if ( timer !== undefined ) { return; }
-			let skip = true;
-			for ( let i = 0; i < mutations.length && skip; i++ ) {
-			    const { type, addedNodes, removedNodes } = mutations[i];
-			    if ( type === 'attributes' ) { skip = false; }
-			    for ( let j = 0; j < addedNodes.length && skip; j++ ) {
-				if ( addedNodes[j].nodeType === 1 ) { skip = false; break; }
-			    }
-			    for ( let j = 0; j < removedNodes.length && skip; j++ ) {
-				if ( removedNodes[j].nodeType === 1 ) { skip = false; break; }
-			    }
-			}
-			if ( skip ) { return; }
-			timer = self.requestIdleCallback(setItem, { timeout: 10 });
-		    };
-		    const start = ( ) => {
-			setItem();
-			if ( /\bloop\b/.test(behavior) === false ) { return; }
-			const observer = new MutationObserver(mutationHandler);
-			observer.observe(document.documentElement, {
-			    attributes: true,
-			    childList: true,
-			    subtree: true,
-			});
-		    };
-		    if ( document.readyState !== 'complete' && /\bcomplete\b/.test(behavior) ) {
-			self.addEventListener('load', start, { once: true });
-		    } else if ( document.readyState === 'loading' ) {
-			self.addEventListener('DOMContentLoaded', start, { once: true });
-		    } else {
-			start();
+function(
+	key = '',
+	value = '',
+	behavior = ''
+) { 
+	    if ( key === '' ) { return; }
+	    const keys = key.split(/\s*\|\s*/);
+	    let timer = undefined;
+	    const setItem = () => {
+		  try {
+			   for (const keyName of keys) {
+				if (sessionStorage.getItem(keyName) === value) { break; }
+				    sessionStorage.setItem(keyName, value);
+			   }
+		  } catch { }
+	    };
+	    const mutationHandler = mutations => {
+		if ( timer !== undefined ) { return; }
+		let skip = true;
+		for ( let i = 0; i < mutations.length && skip; i++ ) {
+		    const { type, addedNodes, removedNodes } = mutations[i];
+		    if ( type === 'attributes' ) { skip = false; }
+		    for ( let j = 0; j < addedNodes.length && skip; j++ ) {
+			if ( addedNodes[j].nodeType === 1 ) { skip = false; break; }
 		    }
-})();
+		    for ( let j = 0; j < removedNodes.length && skip; j++ ) {
+			if ( removedNodes[j].nodeType === 1 ) { skip = false; break; }
+		    }
+		}
+		if ( skip ) { return; }
+		timer = self.requestIdleCallback(setItem, { timeout: 10 });
+	    };
+	    const start = ( ) => {
+		setItem();
+		if ( /\bloop\b/.test(behavior) === false ) { return; }
+		const observer = new MutationObserver(mutationHandler);
+		observer.observe(document.documentElement, {
+		    attributes: true,
+		    childList: true,
+		    subtree: true,
+		});
+	    };
+	    if ( document.readyState !== 'complete' && /\bcomplete\b/.test(behavior) ) {
+		self.addEventListener('load', start, { once: true });
+	    } else if ( document.readyState === 'loading' ) {
+		self.addEventListener('DOMContentLoaded', start, { once: true });
+	    } else {
+		start();
+	    }
+}
 
 /// insert-child-before.js
 /// alias icb.js
