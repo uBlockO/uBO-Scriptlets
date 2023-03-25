@@ -5,35 +5,36 @@
 /// remove-shadowroot-elem.js
 /// alias rsre.js
 // example.com##+js(rsre, [selector], delay)
-(() => {
-		  const selector = '{{1}}';
-		  if ( selector === '' || selector === '{{1}}' ) { return; }
-		  const delay = '{{2}}';
-		  const queryShadowRootElement = (shadowRootElement, rootElement) => {
-			if (!rootElement) {
-			    return queryShadowRootElement(shadowRootElement, document.documentElement);
-			}
-			const els = rootElement.querySelectorAll(shadowRootElement);
-			for (const el of els) { if (el) { return el; } }
-			const probes = rootElement.querySelectorAll('*');
-			for (const probe of probes) {
-			     if (probe.shadowRoot) {
-			         const shadowElement = queryShadowRootElement(shadowRootElement, probe.shadowRoot);
-				 if (shadowElement) { return shadowElement; }
-			     }
-			}
-			return null;
-		  };
-		  const rmshadowelem = () => {
-			try {
-				const elem = queryShadowRootElement(selector);
-				if (elem) { elem.remove(); }
-			} catch { }
-		  };
-		  const observer = new MutationObserver(rmshadowelem);
-    	  	  observer.observe(document.documentElement, { attributes: true, childList: true, subtree: true, });
-		  if ( document.readyState === "complete" ) { self.setTimeout(observer.disconnect(), delay);  }
-})();
+function(  
+	selector = '',
+	delay = '' 
+) {
+	  if ( selector === '' ) { return; }
+	  const queryShadowRootElement = (shadowRootElement, rootElement) => {
+		if (!rootElement) {
+		    return queryShadowRootElement(shadowRootElement, document.documentElement);
+		}
+		const els = rootElement.querySelectorAll(shadowRootElement);
+		for (const el of els) { if (el) { return el; } }
+		const probes = rootElement.querySelectorAll('*');
+		for (const probe of probes) {
+		     if (probe.shadowRoot) {
+			 const shadowElement = queryShadowRootElement(shadowRootElement, probe.shadowRoot);
+			 if (shadowElement) { return shadowElement; }
+		     }
+		}
+		return null;
+	  };
+	  const rmshadowelem = () => {
+		try {
+			const elem = queryShadowRootElement(selector);
+			if (elem) { elem.remove(); }
+		} catch { }
+	  };
+	  const observer = new MutationObserver(rmshadowelem);
+	  observer.observe(document.documentElement, { attributes: true, childList: true, subtree: true, });
+	  if ( document.readyState === "complete" ) { self.setTimeout(observer.disconnect(), delay);  }
+}
 
 /// remove-node.js
 /// alias rn.js
