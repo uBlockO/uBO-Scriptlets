@@ -424,30 +424,30 @@ function(
 /// callfunction.js
 /// alias cf.js
 // example.com##+js(cf, funcName, funcDelay)
-(() => {
-	      const funcCall = '{{1}}';
-	      if ( funcCall === '' || funcCall === '{{1}}' ) { return; }
-	      const funcDelay = '{{2}}';
-	      if ( funcDelay === '' || funcDelay === '{{2}}' ) { return; }
+function(
+	funcCall = '',
+	funcDelay = '' 
+) {
+	      if ( funcCall === '' || funcDelay === '' ) { return; }
 	      const funcInvoke = ev => { 
-		      				if (ev) { self.removeEventListener(ev.type, funcInvoke, true); }
-		      				try { 
-							setTimeout(window[funcCall], funcDelay);
-						} catch { }
+			if (ev) { self.removeEventListener(ev.type, funcInvoke, true); }
+			try { 
+				setTimeout(window[funcCall], funcDelay);
+			} catch { }
 	      };	      
 	      if (document.readyState === 'interactive' || document.readyState === 'complete') {
-		    	    funcInvoke();
+		    funcInvoke();
 	      } else {
-		    	    self.addEventListener('DOMContentLoaded', funcInvoke, true);
+		    self.addEventListener('DOMContentLoaded', funcInvoke, true);
 	      }
-})();
+}
 
 /// no-alert-if.js
 /// alias noaif.js
 // example.com##+js(noaif, text)
-(() => {
-                let needle = '{{1}}';
-                if ( needle === '{{1}}' ) { needle = ''; }
+function(
+        needle = ''
+) {
                 const needleNot = needle.charAt(0) === '!';
                 if ( needleNot ) { needle = needle.slice(1); }
                 if ( /^\/.*\/$/.test(needle) ) {
@@ -474,7 +474,7 @@ function(
                             }  
                         }
                 });
-})();
+}
 
 /// removeSessionItem.js
 /// alias rsi.js
