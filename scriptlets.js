@@ -38,31 +38,32 @@
 /// remove-node.js
 /// alias rn.js
 // example.com##+js(rn, text, inline-tag)
-(() => { 
-          let needle = '{{1}}';
-          if ( needle === '' || needle === '{{1}}' ) {
-              needle = '^';
-          } else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
-              needle = needle.slice(1,-1);
-          } else {
-              needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-          }
-          needle = new RegExp(needle);
-	  const remnode = () => {
-		  			const nodes = document.querySelectorAll('{{2}}');
-		  			try {
-                                                  for (const node of nodes) {
-							if (needle.test(node.outerHTML)) {
-                                                            node.textContent = ''; 
-						       	    node.remove(); 
-                                                       }     
-                                                  }
-                                        } catch { }
-          };
-	  const observer = new MutationObserver(remnode);
-    	  observer.observe(document.documentElement, { childList: true, subtree: true });
-	  if ( document.readyState === "complete" ) { observer.disconnect(); }
-})();
+function( 
+	needle = '', 
+	selector = '' 
+) {
+	if ( needle === '' ) { needle = '^'; }
+	else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
+		  needle = needle.slice(1,-1);
+	} else {
+		  needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+	}
+	needle = new RegExp(needle);
+	const removenode = () => {
+		try {
+			const nodes = document.querySelectorAll(selector);  
+			for (const node of nodes) {
+				if (needle.test(node.outerHTML)) {
+				    node.textContent = ''; 
+				    node.remove(); 
+			       }     
+			  }
+		} catch { }
+	};
+	const observer = new MutationObserver(removenode);
+	observer.observe(document.documentElement, { childList: true, subtree: true });
+	if ( document.readyState === "complete" ) { observer.disconnect(); }	
+}
 
 /// set-attr.js
 /// alias sa.js
