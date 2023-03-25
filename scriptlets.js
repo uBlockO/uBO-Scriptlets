@@ -638,12 +638,12 @@ function(
 /// insert-child-after.js
 /// alias ica.js
 // example.com##+js(ica, element, node)
-(() => {
-		const selector = '{{1}}';
-		if ( selector === '' || selector === '{{1}}' ) { return; }
-	        const element = '{{2}}';
-		if ( element === '' || element === '{{2}}' ) { return; }
-		const behavior = '{{3}}';
+function( 
+	selector = '',
+	element = '',
+	behavior = '' 
+) {
+		if ( selector === '' || element === '' ) { return; }
 		let timer = undefined;
 		const insertelem = () => {
 			try {
@@ -687,4 +687,4 @@ function(
 		    } else {
 		     start();
 		}
-})();
+}
