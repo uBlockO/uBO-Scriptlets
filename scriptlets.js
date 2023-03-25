@@ -183,34 +183,6 @@
 		}
 })();
 
-/// create-elem.js
-/// alias ce.js
-// example.com##+js(ce, [selector], display:block !important, div)
-(() => {
-		const identifier = '{{1}}';
-		if ( identifier === '' || identifier === '{{1}}' ) { return; }
-		const identifiers = identifier.split(/\s*\|\s*/);
-		let executeOnce = false;
-		const createelem = () => {
-						if (executeOnce !== false) { return; }
-						try {
-							for (const token of identifiers) {
-							     const element = document.createElement('{{3}}');
-							     if (token.charAt(0) === '#') {
-								 element.id = token.substring(1);
-							     } else if (token.charAt(0) === '.') {
-								 element.className = token.substring(1);
-							     } else { return; }
-							     element.style.cssText = '{{2}}';
-							     document.body.append(element);	
-							}	
-							executeOnce = true;
-						} catch { }
-	   	};
-	   	const observer = new MutationObserver(createelem);
-    		observer.observe(document.documentElement, { childList: true, subtree: true });
-})();
-
 /// add-class.js
 /// alias ac.js
 // example.com##+js(ac, class, [selector])
@@ -316,89 +288,6 @@
 	   	} else {
 		    	    map();
 	   	}
-})();
-
-/// insert-iframe.js
-/// alias ii.js
-// example.com##+js(ii, integer, [selector], src, style)
-(() => { 
-		const iframes = '{{1}}';
-		if ( iframes === '' || iframes === '{{1}}' ) { return; }
-		let executeOnce = false;
-		const insertframe = () => {
-						  if (executeOnce !== false) { return; }
-						  try {
-							for ( let i = 0; i < iframes; i++ ) {
-							      const iframe = document.createElement('iframe');
-							      iframe.setAttribute('id', '{{2}}');
-							      iframe.setAttribute('src', '{{3}}');
-							      iframe.setAttribute('style', '{{4}}');
-							      document.body.append(iframe);
-							}
-							executeOnce = true;
-						  } catch { }
-		};			
-		const observer = new MutationObserver(insertframe);
-    		observer.observe(document.documentElement, { childList: true, subtree: true });
-})();
-
-/// insert-elem-before.js
-/// alias ieb.js
-// example.com##+js(ieb, [selector], style.prop, node, tag)
-(() => {
-		const identifier = '{{1}}';
-		if ( identifier === '' || identifier === '{{1}}' ) { return; }
-		const identifiers = identifier.split(/\s*\|\s*/);
-		const behavior = '{{5}}';
-		let timer = undefined;
-		const insertElem = () => {
-						try {
-							for (const token of identifiers) {
-							     const element = document.createElement('{{4}}');
-							     const node = document.querySelector('{{3}}');
-							     if (token.charAt(0) === '#') {
-							    	 element.id = token.substring(1);
-							     } else if (token.charAt(0) === '.') {
-							    	 element.className = token.substring(1);
-							     } else { return; }	 
-							     element.style.cssText = '{{2}}';
-							     document.body.insertBefore(element, node);
-							}	
-						} catch { }
-	   	};
-		const mutationHandler = mutations => {
-			if ( timer !== undefined ) { return; }
-			let skip = true;
-			for ( let i = 0; i < mutations.length && skip; i++ ) {
-			    const { type, addedNodes, removedNodes } = mutations[i];
-			    if ( type === 'attributes' ) { skip = false; }
-			    for ( let j = 0; j < addedNodes.length && skip; j++ ) {
-				if ( addedNodes[j].nodeType === 1 ) { skip = false; break; }
-			    }
-			    for ( let j = 0; j < removedNodes.length && skip; j++ ) {
-				if ( removedNodes[j].nodeType === 1 ) { skip = false; break; }
-			    }
-			}
-			if ( skip ) { return; }
-			timer = self.requestIdleCallback(insertElem, { timeout: 10 });
-		    };
-		    const start = ( ) => {
-			insertElem();
-			if ( /\bloop\b/.test(behavior) === false ) { return; }
-			const observer = new MutationObserver(mutationHandler);
-			observer.observe(document.documentElement, {
-			    attributes: true,
-			    childList: true,
-			    subtree: true,
-			});
-		    };
-		    if ( document.readyState !== 'complete' && /\bcomplete\b/.test(behavior) ) {
-			self.addEventListener('load', start, { once: true });
-		    } else if ( document.readyState === 'loading' ) {
-			self.addEventListener('DOMContentLoaded', start, { once: true });
-		    } else {
-			start();
-		    }
 })();
 
 /// append-elem.js
