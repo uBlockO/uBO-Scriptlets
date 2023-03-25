@@ -270,51 +270,57 @@ function(
 /// move-attr-prop.js
 /// alias map.js
 // example.com##+js(map, [selector], [selector2], attr, attr2)
-(() => {
-		const selector = '{{1}}';
-		if ( selector === '' || selector === '{{1}}' ) { return; }
-		const selector2 = '{{2}}';
-		if ( selector2 === '' || selector2 === '{{2}}' ) { return; }
-		const map = ev => {
-						if (ev) { self.removeEventListener(ev.type, map, true); }
-						try {
-							const elem = document.querySelectorAll(selector);
-							const elem2 = document.querySelectorAll(selector2);
-							for (let i = 0; i < elem.length; i++) {
-								elem[i].setAttribute('{{3}}', elem2[i].getAttribute('{{4}}'));
-							}
-						} catch { }
-		};
-		if (document.readyState === 'loading') {
-		    	    self.addEventListener('DOMContentLoaded', map, true);
-	   	} else {
-		    	    map();
-	   	}
+function(
+	selector = '',
+	element = '',
+	newattr = '',
+	oldattr = '' 
+) {
+	if ( selector === '' || element === '') { return; }
+	const map = ev => {
+		if (ev) { self.removeEventListener(ev.type, map, true); }
+		try {
+			const elem = document.querySelectorAll(selector);
+			const elem2 = document.querySelectorAll(element);
+			for (let i = 0; i < elem.length; i++) {
+			     elem[i].setAttribute(newattr, elem2[i].getAttribute(oldattr));
+			}
+		} catch { }
+	};
+	if (document.readyState === 'loading') {
+		    self.addEventListener('DOMContentLoaded', map, true);
+	} else {
+		    map();
+	}
 })();
 
 /// append-elem.js
 /// alias ape.js
 // example.com##+js(ape, [selector], element, attribute, value)
-(() => {
-		const selector = '{{1}}';
-		if ( selector === '' || selector === '{{1}}' ) { return; }
-		const appendNode = ev => {
-						if (ev) { self.removeEventListener(ev.type, appendNode, true); }
-						try {
-							const elements = document.querySelectorAll(selector);
-							for ( const element of elements ) {
-							      const node = document.createElement('{{2}}');
-							      node.setAttribute('{{3}}', '{{4}}');
-							      element.append(node);
-							}
-						} catch { }
-		};
-		if (document.readyState === 'complete') {
-		    	    appendNode();
-	   	} else {
-		    	    self.addEventListener('load', appendNode, true);
-	   	}
-})();
+function(
+	selector = '',
+	elem = '',
+	attr = '',
+	value = '' 
+) {
+	if ( selector === '' ) { return; }
+	const appendNode = ev => {
+		if (ev) { self.removeEventListener(ev.type, appendNode, true); }
+		try {
+			const elements = document.querySelectorAll(selector);
+			for ( const element of elements ) {
+			      const node = document.createElement(elem);
+			      node.setAttribute(attr, value);
+			      element.append(node);
+			}
+		} catch { }
+	};
+	if (document.readyState === 'complete') {
+		    appendNode();
+	} else {
+		    self.addEventListener('load', appendNode, true);
+	}
+}
 
 /// removeLocalItem.js
 /// alias rli.js
