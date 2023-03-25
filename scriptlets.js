@@ -292,7 +292,7 @@ function(
 	} else {
 		    map();
 	}
-})();
+}
 
 /// append-elem.js
 /// alias ape.js
