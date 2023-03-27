@@ -43,7 +43,13 @@ function(
 	needle = '', 
 	selector = '' 
 ) {
-	needle = patternToRegex(needle);
+	if ( needle === '' ) { needle = '^'; }
+	else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
+		  needle = needle.slice(1,-1);
+	} else {
+		  needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+	}
+	needle = new RegExp(needle);
 	const removenode = () => {
 		try {
 			const nodes = document.querySelectorAll(selector);  
