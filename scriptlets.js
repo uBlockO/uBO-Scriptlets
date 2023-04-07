@@ -700,7 +700,7 @@ function(
 }
 
 /// setCookie.js
-// alias sck.js
+/// alias sck.js
 // example.com##+js(sck, cookie, value)
 function( 
 	cName = '', 
@@ -714,7 +714,7 @@ function(
 		try {
 			if ( expTime === '' ) { expTime = '1' };
 			const cookies = document.cookie;
-			if ( !cookies.includes(cName) || !cookies.includes(cValue) ) {
+			if ( !cookies.includes(cName=cValue) ) {
 		      		const date = new Date();
 				date.setTime(date.getTime() + (expTime * 24 * 60 * 60 * 1000));
 				const expires = "expires=" + date.toUTCString();
