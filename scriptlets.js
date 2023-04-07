@@ -698,3 +698,62 @@ function(
 	     start();
 	}
 }
+
+/// setCookie.js
+// alias sck.js
+// example.com##+js(sck, cookie, value, time)
+function( 
+	cName = '', 
+	cValue = '',
+	expTime = '',
+	behavior = '' 
+) {
+	let timer = undefined;
+	if ( cName === '' || cValue === '' || expTime === '' ) { return; }
+	const setCookie = () => {
+		try {
+			const cookies = document.cookie;
+			if ( !cookies.includes(cName) || !cookies.includes(cValue) ) {
+		      		const date = new Date();
+				date.setTime(date.getTime() + (expTime * 24 * 60 * 60 * 1000));
+				const expires = "expires=" + date.toUTCString();
+				document.cookie = cName + "=" + cValue + "; " + expires + "; path=/";
+			} else { 
+				return; 
+			}	
+		} catch { }
+	};
+	const mutationHandler = mutations => {
+	if ( timer !== undefined ) { return; }
+	let skip = true;
+	for ( let i = 0; i < mutations.length && skip; i++ ) {
+	    const { type, addedNodes, removedNodes } = mutations[i];
+	    if ( type === 'attributes' ) { skip = false; }
+	    for ( let j = 0; j < addedNodes.length && skip; j++ ) {
+		if ( addedNodes[j].nodeType === 1 ) { skip = false; break; }
+	    }
+	    for ( let j = 0; j < removedNodes.length && skip; j++ ) {
+		if ( removedNodes[j].nodeType === 1 ) { skip = false; break; }
+	    }
+	}
+	if ( skip ) { return; }
+	timer = self.requestIdleCallback(setCookie, { timeout: 10 });
+	};
+	const start = ( ) => {
+	setCookie();
+	if ( /\bloop\b/.test(behavior) === false ) { return; }
+	const observer = new MutationObserver(mutationHandler);
+	observer.observe(document.documentElement, {
+	    attributes: true,
+	    childList: true,
+	    subtree: true,
+	});
+	};
+	if ( document.readyState !== 'complete' && /\bcomplete\b/.test(behavior) ) {
+	self.addEventListener('load', start, { once: true });
+	} else if ( document.readyState === 'loading' ) {
+	self.addEventListener('DOMContentLoaded', start, { once: true });
+	} else {
+	start();
+	}	
+}
