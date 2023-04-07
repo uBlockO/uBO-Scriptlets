@@ -709,12 +709,13 @@ function(
 	behavior = '' 
 ) {
 	let timer = undefined;
-	if ( cName === '' || cValue === '' ) { return; }
+	if ( cName === '' ) { return; }
+	if ( expTime === '' ) { expTime = '1'; }
+	if ( cValue === '' ) { cValue = '""'; }	
 	const setCookie = () => {
 		try {
-			if ( expTime === '' ) { expTime = '1' };
 			const cookies = document.cookie;
-			if ( !cookies.includes(cName=cValue) ) {
+			if ( !cookies.includes(cName) || !cookies.includes(cValue) ) {
 		      		const date = new Date();
 				date.setTime(date.getTime() + (expTime * 24 * 60 * 60 * 1000));
 				const expires = "expires=" + date.toUTCString();
