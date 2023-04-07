@@ -753,9 +753,9 @@ function(
 	};
 	if ( document.readyState !== 'complete' && /\bcomplete\b/.test(behavior) ) {
 	self.addEventListener('load', start, { once: true });
-	} else if ( document.readyState === 'loading' ) {
-	self.addEventListener('DOMContentLoaded', start, { once: true });
+	} else if ( document.readyState === 'loading' || /\basap\b/.test(behavior) ) {
+	start(); 
 	} else {
-	start();
+	self.addEventListener('DOMContentLoaded', start, { once: true });
 	}	
 }
