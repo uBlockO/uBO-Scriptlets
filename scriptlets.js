@@ -701,7 +701,7 @@ function(
 
 /// setCookie.js
 // alias sck.js
-// example.com##+js(sck, cookie, value, time)
+// example.com##+js(sck, cookie, value)
 function( 
 	cName = '', 
 	cValue = '',
@@ -709,9 +709,10 @@ function(
 	behavior = '' 
 ) {
 	let timer = undefined;
-	if ( cName === '' || cValue === '' || expTime === '' ) { return; }
+	if ( cName === '' || cValue === '' ) { return; }
 	const setCookie = () => {
 		try {
+			if ( expTime === '' ) { expTime = '1' };
 			const cookies = document.cookie;
 			if ( !cookies.includes(cName) || !cookies.includes(cValue) ) {
 		      		const date = new Date();
