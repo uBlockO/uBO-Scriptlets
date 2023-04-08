@@ -753,7 +753,7 @@ function(
 	};
 	if ( document.readyState !== 'complete' && /\bcomplete\b/.test(behavior) ) {
 	self.addEventListener('load', start, { once: true });
-	} else if ( document.readyState === 'loading' || /\basap\b/.test(behavior) ) {
+	} else if ( document.readyState !== 'loading' || /\basap\b/.test(behavior) ) {
 	start(); 
 	} else {
 	self.addEventListener('DOMContentLoaded', start, { once: true });
