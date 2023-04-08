@@ -119,12 +119,12 @@ function(
 	});
 	};
 	if ( document.readyState !== 'complete' && /\bcomplete\b/.test(behavior) ) {
-	self.addEventListener('load', start, { once: true });
-	} else if ( document.readyState === 'loading' ) {
-	self.addEventListener('DOMContentLoaded', start, { once: true });
-	} else {
-	start();
-	}
+        self.addEventListener('load', start, { once: true });
+    	} else if ( document.readyState !== 'loading' || /\basap\b/.test(behavior) ) {
+        start();
+    	} else {
+        self.addEventListener('DOMContentLoaded', start, { once: true });
+    	}
 }
 
 /// rename-attr.js
@@ -177,12 +177,12 @@ function(
 		});
 	};
 	if ( document.readyState !== 'complete' && /\bcomplete\b/.test(behavior) ) {
-		self.addEventListener('load', start, { once: true });
-	} else if ( document.readyState === 'loading' ) {
-		self.addEventListener('DOMContentLoaded', start, { once: true });
-	} else {
-		start();
-	}
+        self.addEventListener('load', start, { once: true });
+    	} else if ( document.readyState !== 'loading' || /\basap\b/.test(behavior) ) {
+        start();
+    	} else {
+        self.addEventListener('DOMContentLoaded', start, { once: true });
+    	}
 }
 
 /// add-class.js
@@ -259,12 +259,12 @@ function(
 	});
 	};
 	if ( document.readyState !== 'complete' && /\bcomplete\b/.test(behavior) ) {
-	self.addEventListener('load', start, { once: true });
-	} else if ( document.readyState === 'loading' ) {
-	self.addEventListener('DOMContentLoaded', start, { once: true });
-	} else {
-	start();
-	}
+        self.addEventListener('load', start, { once: true });
+    	} else if ( document.readyState !== 'loading' || /\basap\b/.test(behavior) ) {
+        start();
+    	} else {
+        self.addEventListener('DOMContentLoaded', start, { once: true });
+    	}
 }
 
 /// move-attr-prop.js
@@ -367,12 +367,12 @@ function(
 		});
 	    };
 	    if ( document.readyState !== 'complete' && /\bcomplete\b/.test(behavior) ) {
-		self.addEventListener('load', start, { once: true });
-	    } else if ( document.readyState === 'loading' ) {
-		self.addEventListener('DOMContentLoaded', start, { once: true });
-	    } else {
-		start();
-	    }
+            self.addEventListener('load', start, { once: true });
+    	    } else if ( document.readyState !== 'loading' || /\basap\b/.test(behavior) ) {
+            start();
+    	    } else {
+            self.addEventListener('DOMContentLoaded', start, { once: true });
+    	    }
 }
 
 /// setLocalItem.js
@@ -421,12 +421,12 @@ function(
 		});
 	    };
 	    if ( document.readyState !== 'complete' && /\bcomplete\b/.test(behavior) ) {
-		self.addEventListener('load', start, { once: true });
-	    } else if ( document.readyState === 'loading' ) {
-		self.addEventListener('DOMContentLoaded', start, { once: true });
-	    } else {
-		start();
-	    }
+            self.addEventListener('load', start, { once: true });
+    	    } else if ( document.readyState !== 'loading' || /\basap\b/.test(behavior) ) {
+            start();
+    	    } else {
+            self.addEventListener('DOMContentLoaded', start, { once: true });
+    	    }
 }
 
 /// callfunction.js
@@ -529,12 +529,12 @@ function(
 		});
 	    };
 	    if ( document.readyState !== 'complete' && /\bcomplete\b/.test(behavior) ) {
-		self.addEventListener('load', start, { once: true });
-	    } else if ( document.readyState === 'loading' ) {
-		self.addEventListener('DOMContentLoaded', start, { once: true });
-	    } else {
-		start();
-	    }
+            self.addEventListener('load', start, { once: true });
+    	    } else if ( document.readyState !== 'loading' || /\basap\b/.test(behavior) ) {
+            start();
+    	    } else {
+            self.addEventListener('DOMContentLoaded', start, { once: true });
+    	    }
 }
 
 /// setSessionItem.js
@@ -583,12 +583,12 @@ function(
 		});
 	    };
 	    if ( document.readyState !== 'complete' && /\bcomplete\b/.test(behavior) ) {
-		self.addEventListener('load', start, { once: true });
-	    } else if ( document.readyState === 'loading' ) {
-		self.addEventListener('DOMContentLoaded', start, { once: true });
-	    } else {
-		start();
-	    }
+        self.addEventListener('load', start, { once: true });
+    	} else if ( document.readyState !== 'loading' || /\basap\b/.test(behavior) ) {
+        start();
+    	} else {
+        self.addEventListener('DOMContentLoaded', start, { once: true });
+    	}
 }
 
 /// insert-child-before.js
@@ -637,12 +637,12 @@ function(
 		});
 	};
 	if ( document.readyState !== 'complete' && /\bcomplete\b/.test(behavior) ) {
-	     self.addEventListener('load', start, { once: true });
-	    } else if ( document.readyState === 'loading' ) {
-	     self.addEventListener('DOMContentLoaded', start, { once: true });
-	    } else {
-	     start();
-	}
+        self.addEventListener('load', start, { once: true });
+    	} else if ( document.readyState !== 'loading' || /\basap\b/.test(behavior) ) {
+        start();
+    	} else {
+        self.addEventListener('DOMContentLoaded', start, { once: true });
+    }
 }
 
 /// insert-child-after.js
@@ -691,12 +691,12 @@ function(
 		});
 	};
 	if ( document.readyState !== 'complete' && /\bcomplete\b/.test(behavior) ) {
-	     self.addEventListener('load', start, { once: true });
-	    } else if ( document.readyState === 'loading' ) {
-	     self.addEventListener('DOMContentLoaded', start, { once: true });
-	    } else {
-	     start();
-	}
+        self.addEventListener('load', start, { once: true });
+    	} else if ( document.readyState !== 'loading' || /\basap\b/.test(behavior) ) {
+        start();
+    	} else {
+        self.addEventListener('DOMContentLoaded', start, { once: true });
+    }
 }
 
 /// setCookie.js
