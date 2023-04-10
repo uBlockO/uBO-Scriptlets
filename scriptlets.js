@@ -4,10 +4,9 @@
 
 /// remove-shadowroot-elem.js
 /// alias rsre.js
-// example.com##+js(rsre, [selector], delay)
+// example.com##+js(rsre, [selector])
 function(  
-	selector = '',
-	delay = '' 
+	selector = '' 
 ) {
 	  if ( selector === '' ) { return; }
 	  const queryShadowRootElement = (shadowRootElement, rootElement) => {
@@ -33,7 +32,7 @@ function(
 	  };
 	  const observer = new MutationObserver(rmshadowelem);
 	  observer.observe(document.documentElement, { attributes: true, childList: true, subtree: true, });
-	  if ( document.readyState === "complete" ) { self.setTimeout(observer.disconnect(), delay);  }
+	  if ( document.readyState === "complete" ) { self.setTimeout(observer.disconnect(), 67);  }
 }
 
 /// remove-node.js
@@ -64,6 +63,38 @@ function(
 	const observer = new MutationObserver(removenode);
 	observer.observe(document.documentElement, { childList: true, subtree: true });
 	if ( document.readyState === "complete" ) { observer.disconnect(); }	
+}
+
+/// replace-node.js
+/// alias rpn.js
+// example.com##+js(rpn, needle, text, inlineTag)
+function( 
+	needle = '',
+	text = '', 
+	inlineTag = ''
+) {
+	if ( needle === '' ) { return; }
+	else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
+		  needle = needle.slice(1,-1);
+	} else {
+		  needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+	}
+	needle = new RegExp(needle, "gms");
+	const replacenode = () => {
+		try {
+			const nodes = document.getElementsByTagName(inlineTag); 
+			for (const node of nodes) {
+				if (needle.test(node.outerHTML)) {
+				    let textContent = node.textContent; 
+				    textContent  = textContent.replace(needle, text);
+				    node.textContent = textContent; 
+			        }     
+			  }	
+		} catch { }
+	};
+	const observer = new MutationObserver(replacenode);
+	observer.observe( document.documentElement, { attributes: true, childList: true, subtree: true } );
+	if ( document.readyState === "complete" ) { self.setTimeout(observer.disconnect(), 67); }
 }
 
 /// set-attr.js
