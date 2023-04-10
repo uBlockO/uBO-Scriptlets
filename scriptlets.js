@@ -94,7 +94,7 @@ function(
 	};
 	const observer = new MutationObserver(replacenode);
 	observer.observe( document.documentElement, { attributes: true, childList: true, subtree: true } );
-	if ( document.readyState === "complete" ) { self.setTimeout(observer.disconnect(), 67); }
+	if ( document.readyState === "complete" ) { observer.disconnect(); }
 }
 
 /// set-attr.js
