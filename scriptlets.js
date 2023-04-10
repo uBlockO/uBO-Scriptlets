@@ -37,10 +37,10 @@ function(
 
 /// remove-node.js
 /// alias rn.js
-// example.com##+js(rn, text, inline-tag)
+// example.com##+js(rn, text, inlineTag)
 function( 
 	needle = '', 
-	selector = '' 
+	inlineTag = '' 
 ) {
 	if ( needle === '' ) { needle = '^'; }
 	else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
@@ -51,7 +51,7 @@ function(
 	needle = new RegExp(needle);
 	const removenode = () => {
 		try {
-			const nodes = document.querySelectorAll(selector);  
+			const nodes = document.getElementsByTagName(inlineTag);  
 			for (const node of nodes) {
 				if (needle.test(node.outerHTML)) {
 				    node.textContent = ''; 
