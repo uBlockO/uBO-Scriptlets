@@ -5,7 +5,7 @@
 /// remove-shadowroot-elem.js
 /// alias rsre.js
 // example.com##+js(rsre, [selector])
-function(  
+function removeShadowRootElem(  
 	selector = '' 
 ) {
 	  if ( selector === '' ) { return; }
@@ -38,7 +38,7 @@ function(
 /// remove-node.js
 /// alias rn.js
 // example.com##+js(rn, text, inlineTag)
-function( 
+function removeNode( 
 	needle = '', 
 	inlineTag = '' 
 ) {
@@ -68,7 +68,7 @@ function(
 /// replace-node.js
 /// alias rpn.js
 // example.com##+js(rpn, needle, text, inlineTag)
-function( 
+function replaceNode( 
 	needle = '',
 	text = '', 
 	inlineTag = ''
@@ -100,7 +100,7 @@ function(
 /// set-attr.js
 /// alias sa.js
 // example.com##+js(sa, attr, value, [selector])
-function(
+function setAttr(
 	token = '',
 	attrValue = '',
 	selector = '',
@@ -161,7 +161,7 @@ function(
 /// rename-attr.js
 /// alias rna.js
 // example.com##+js(rna, [selector], oldattr, newattr)
-function(
+function renameAttr(
 	selector = '',
 	oldattr = '',
 	newattr = '',
@@ -219,7 +219,7 @@ function(
 /// add-class.js
 /// alias ac.js
 // example.com##+js(ac, class, [selector])
-function(
+function addClass(
 	needle = '',
 	selector = '' 
 ) {
@@ -245,7 +245,7 @@ function(
 /// replace-class.js
 /// alias rpc.js
 // example.com##+js(rpc, [selector], oldclass, newclass)
-function(
+function replaceClass(
 	selector = '',
 	oldclass = '',
 	newclass = '', 
@@ -301,7 +301,7 @@ function(
 /// move-attr-prop.js
 /// alias map.js
 // example.com##+js(map, [selector], [selector2], attr, attr2)
-function(
+function moveAttrProp(
 	selector = '',
 	element = '',
 	newattr = '',
@@ -328,7 +328,7 @@ function(
 /// append-elem.js
 /// alias ape.js
 // example.com##+js(ape, [selector], element, attribute, value)
-function(
+function appendElem(
 	selector = '',
 	elem = '',
 	attr = '',
@@ -356,7 +356,7 @@ function(
 /// removeLocalItem.js
 /// alias rli.js
 // example.com##+js(rli, key)
-function( 
+function removeLocalItem( 
 	key = '',
 	behavior = '' 
 ) { 
@@ -409,7 +409,7 @@ function(
 /// setLocalItem.js
 /// alias sli.js
 // example.com##+js(sli, key, value)
-function(
+function setLocalItem(
 	key = '',
 	value = '',
 	behavior = '' 
@@ -463,7 +463,7 @@ function(
 /// callfunction.js
 /// alias cf.js
 // example.com##+js(cf, funcName, funcDelay)
-function(
+function callFunction(
 	funcCall = '',
 	funcDelay = '' 
 ) {
@@ -484,7 +484,7 @@ function(
 /// no-alert-if.js
 /// alias noaif.js
 // example.com##+js(noaif, text)
-function(
+function noAlertIf(
         needle = ''
 ) {
                 const needleNot = needle.charAt(0) === '!';
@@ -518,7 +518,7 @@ function(
 /// removeSessionItem.js
 /// alias rsi.js
 // example.com##+js(rsi, key)
-function( 
+function removeSessionItem( 
         key = '',
 	behavior = '' 
 ) { 
@@ -571,7 +571,7 @@ function(
 /// setSessionItem.js
 /// alias ssi.js
 // example.com##+js(ssi, key, value)
-function(
+function setSessionItem(
 	key = '',
 	value = '',
 	behavior = ''
@@ -625,7 +625,7 @@ function(
 /// insert-child-before.js
 /// alias icb.js
 // example.com##+js(icb, element, node)
-function( 
+function insertChildBefore( 
 	selector = '',
 	element = '',
 	behavior = '' 
@@ -679,7 +679,7 @@ function(
 /// insert-child-after.js
 /// alias ica.js
 // example.com##+js(ica, element, node)
-function( 
+function insertChildAfter( 
 	selector = '',
 	element = '',
 	behavior = '' 
@@ -733,7 +733,7 @@ function(
 /// setCookie.js
 /// alias sck.js
 // example.com##+js(sck, cookie, value)
-function( 
+function setCookie( 
 	cName = '', 
 	cValue = '',
 	expTime = '',
