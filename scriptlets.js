@@ -72,7 +72,7 @@ function replaceNode(
 	needle = '',
 	text = '', 
 	inlineTag = '',
-	behavior = '' 
+	runAt = '' 
 ) {
 	if ( needle === '' ) { return; }
 	else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
@@ -112,7 +112,7 @@ function replaceNode(
 	};
 	const start = ( ) => {
 	replacenode();
-	if ( /\bloop\b/.test(behavior) === false ) { return; }
+	if ( /\bloop\b/.test(runAt) === false ) { return; }
 	const observer = new MutationObserver(mutationHandler);
 	observer.observe(document.documentElement, {
 	    attributes: true,
@@ -120,9 +120,9 @@ function replaceNode(
 	    subtree: true,
 	});
 	};
-	if ( document.readyState !== 'complete' && /\bcomplete\b/.test(behavior) ) {
+	if ( document.readyState !== 'complete' && /\bcomplete\b/.test(runAt) ) {
         self.addEventListener('load', start, { once: true });
-    	} else if ( document.readyState !== 'loading' || /\basap\b/.test(behavior) ) {
+    	} else if ( document.readyState !== 'loading' || /\basap\b/.test(runAt) ) {
         start();
     	} else {
         self.addEventListener('DOMContentLoaded', start, { once: true });
@@ -136,7 +136,7 @@ function setAttr(
 	token = '',
 	attrValue = '',
 	selector = '',
-	behavior = '' 
+	runAt = '' 
 ) {
 	if ( token === '' ) { return; }
 	const tokens = token.split(/\s*\|\s*/);
@@ -172,7 +172,7 @@ function setAttr(
 	};
 	const start = ( ) => {
 	setattr();
-	if ( /\bloop\b/.test(behavior) === false ) { return; }
+	if ( /\bloop\b/.test(runAt) === false ) { return; }
 	const observer = new MutationObserver(mutationHandler);
 	observer.observe(document.documentElement, {
 	    attributes: true,
@@ -181,9 +181,9 @@ function setAttr(
 	    subtree: true,
 	});
 	};
-	if ( document.readyState !== 'complete' && /\bcomplete\b/.test(behavior) ) {
+	if ( document.readyState !== 'complete' && /\bcomplete\b/.test(runAt) ) {
         self.addEventListener('load', start, { once: true });
-    	} else if ( document.readyState !== 'loading' || /\basap\b/.test(behavior) ) {
+    	} else if ( document.readyState !== 'loading' || /\basap\b/.test(runAt) ) {
         start();
     	} else {
         self.addEventListener('DOMContentLoaded', start, { once: true });
@@ -197,7 +197,7 @@ function renameAttr(
 	selector = '',
 	oldattr = '',
 	newattr = '',
-	behavior = '' 
+	runAt = '' 
 ) {
 	if ( selector === '' || oldattr === '' || newattr === '' ) { return; }
 	let timer = undefined;
@@ -231,7 +231,7 @@ function renameAttr(
 	};
 	const start = ( ) => {
 		renameattr();
-		if ( /\bloop\b/.test(behavior) === false ) { return; }
+		if ( /\bloop\b/.test(runAt) === false ) { return; }
 		const observer = new MutationObserver(mutationHandler);
 		observer.observe(document.documentElement, {
 		    attributes: true,
@@ -239,9 +239,9 @@ function renameAttr(
 		    subtree: true,
 		});
 	};
-	if ( document.readyState !== 'complete' && /\bcomplete\b/.test(behavior) ) {
+	if ( document.readyState !== 'complete' && /\bcomplete\b/.test(runAt) ) {
         self.addEventListener('load', start, { once: true });
-    	} else if ( document.readyState !== 'loading' || /\basap\b/.test(behavior) ) {
+    	} else if ( document.readyState !== 'loading' || /\basap\b/.test(runAt) ) {
         start();
     	} else {
         self.addEventListener('DOMContentLoaded', start, { once: true });
@@ -281,7 +281,7 @@ function replaceClass(
 	selector = '',
 	oldclass = '',
 	newclass = '', 
-	behavior = ''
+	runAt = ''
 ) {
 	if ( selector === '' || oldclass === '' || newclass === '' ) { return; }
 	let timer = undefined;
@@ -313,7 +313,7 @@ function replaceClass(
 	};
 	const start = ( ) => {
 	replaceclass();
-	if ( /\bloop\b/.test(behavior) === false ) { return; }
+	if ( /\bloop\b/.test(runAt) === false ) { return; }
 	const observer = new MutationObserver(mutationHandler);
 	observer.observe(document.documentElement, {
 	    attributes: true,
@@ -321,9 +321,9 @@ function replaceClass(
 	    subtree: true,
 	});
 	};
-	if ( document.readyState !== 'complete' && /\bcomplete\b/.test(behavior) ) {
+	if ( document.readyState !== 'complete' && /\bcomplete\b/.test(runAt) ) {
         self.addEventListener('load', start, { once: true });
-    	} else if ( document.readyState !== 'loading' || /\basap\b/.test(behavior) ) {
+    	} else if ( document.readyState !== 'loading' || /\basap\b/.test(runAt) ) {
         start();
     	} else {
         self.addEventListener('DOMContentLoaded', start, { once: true });
@@ -390,7 +390,7 @@ function appendElem(
 // example.com##+js(rli, key)
 function removeLocalItem( 
 	key = '',
-	behavior = '' 
+	runAt = '' 
 ) { 
 	    if ( key === '' ) { return; }
 	    const keys = key.split(/\s*\|\s*/);
@@ -421,7 +421,7 @@ function removeLocalItem(
 	    };
 	    const start = ( ) => {
 		removeItem();
-		if ( /\bloop\b/.test(behavior) === false ) { return; }
+		if ( /\bloop\b/.test(runAt) === false ) { return; }
 		const observer = new MutationObserver(mutationHandler);
 		observer.observe(document.documentElement, {
 		    attributes: true,
@@ -429,9 +429,9 @@ function removeLocalItem(
 		    subtree: true,
 		});
 	    };
-	    if ( document.readyState !== 'complete' && /\bcomplete\b/.test(behavior) ) {
+	    if ( document.readyState !== 'complete' && /\bcomplete\b/.test(runAt) ) {
             self.addEventListener('load', start, { once: true });
-    	    } else if ( document.readyState !== 'loading' || /\basap\b/.test(behavior) ) {
+    	    } else if ( document.readyState !== 'loading' || /\basap\b/.test(runAt) ) {
             start();
     	    } else {
             self.addEventListener('DOMContentLoaded', start, { once: true });
@@ -444,7 +444,7 @@ function removeLocalItem(
 function setLocalItem(
 	key = '',
 	value = '',
-	behavior = '' 
+	runAt = '' 
 ) { 
 	    if ( key === '' ) { return; }
 	    const keys = key.split(/\s*\|\s*/);
@@ -475,7 +475,7 @@ function setLocalItem(
 	    };
 	    const start = ( ) => {
 		setItem();
-		if ( /\bloop\b/.test(behavior) === false ) { return; }
+		if ( /\bloop\b/.test(runAt) === false ) { return; }
 		const observer = new MutationObserver(mutationHandler);
 		observer.observe(document.documentElement, {
 		    attributes: true,
@@ -483,9 +483,9 @@ function setLocalItem(
 		    subtree: true,
 		});
 	    };
-	    if ( document.readyState !== 'complete' && /\bcomplete\b/.test(behavior) ) {
+	    if ( document.readyState !== 'complete' && /\bcomplete\b/.test(runAt) ) {
             self.addEventListener('load', start, { once: true });
-    	    } else if ( document.readyState !== 'loading' || /\basap\b/.test(behavior) ) {
+    	    } else if ( document.readyState !== 'loading' || /\basap\b/.test(runAt) ) {
             start();
     	    } else {
             self.addEventListener('DOMContentLoaded', start, { once: true });
@@ -552,7 +552,7 @@ function noAlertIf(
 // example.com##+js(rsi, key)
 function removeSessionItem( 
         key = '',
-	behavior = '' 
+	runAt = '' 
 ) { 
 	    if ( key === '' ) { return; }
 	    const keys = key.split(/\s*\|\s*/);
@@ -583,7 +583,7 @@ function removeSessionItem(
 	    };
 	    const start = ( ) => {
 		removeItem();
-		if ( /\bloop\b/.test(behavior) === false ) { return; }
+		if ( /\bloop\b/.test(runAt) === false ) { return; }
 		const observer = new MutationObserver(mutationHandler);
 		observer.observe(document.documentElement, {
 		    attributes: true,
@@ -591,9 +591,9 @@ function removeSessionItem(
 		    subtree: true,
 		});
 	    };
-	    if ( document.readyState !== 'complete' && /\bcomplete\b/.test(behavior) ) {
+	    if ( document.readyState !== 'complete' && /\bcomplete\b/.test(runAt) ) {
             self.addEventListener('load', start, { once: true });
-    	    } else if ( document.readyState !== 'loading' || /\basap\b/.test(behavior) ) {
+    	    } else if ( document.readyState !== 'loading' || /\basap\b/.test(runAt) ) {
             start();
     	    } else {
             self.addEventListener('DOMContentLoaded', start, { once: true });
@@ -606,7 +606,7 @@ function removeSessionItem(
 function setSessionItem(
 	key = '',
 	value = '',
-	behavior = ''
+	runAt = ''
 ) { 
 	    if ( key === '' ) { return; }
 	    const keys = key.split(/\s*\|\s*/);
@@ -637,7 +637,7 @@ function setSessionItem(
 	    };
 	    const start = ( ) => {
 		setItem();
-		if ( /\bloop\b/.test(behavior) === false ) { return; }
+		if ( /\bloop\b/.test(runAt) === false ) { return; }
 		const observer = new MutationObserver(mutationHandler);
 		observer.observe(document.documentElement, {
 		    attributes: true,
@@ -645,9 +645,9 @@ function setSessionItem(
 		    subtree: true,
 		});
 	    };
-	    if ( document.readyState !== 'complete' && /\bcomplete\b/.test(behavior) ) {
+	    if ( document.readyState !== 'complete' && /\bcomplete\b/.test(runAt) ) {
         self.addEventListener('load', start, { once: true });
-    	} else if ( document.readyState !== 'loading' || /\basap\b/.test(behavior) ) {
+    	} else if ( document.readyState !== 'loading' || /\basap\b/.test(runAt) ) {
         start();
     	} else {
         self.addEventListener('DOMContentLoaded', start, { once: true });
@@ -660,7 +660,7 @@ function setSessionItem(
 function insertChildBefore( 
 	selector = '',
 	element = '',
-	behavior = '' 
+	runAt = '' 
 ) {
 	if ( selector === '' || element === '' ) { return; }
 	let timer = undefined;
@@ -691,7 +691,7 @@ function insertChildBefore(
 	};
 	const start = ( ) => {
 		insertelem();
-		if ( /\bloop\b/.test(behavior) === false ) { return; }
+		if ( /\bloop\b/.test(runAt) === false ) { return; }
 		const observer = new MutationObserver(mutationHandler);
 		observer.observe(document.documentElement, {
 		    attributes: true,
@@ -699,9 +699,9 @@ function insertChildBefore(
 		    subtree: true,
 		});
 	};
-	if ( document.readyState !== 'complete' && /\bcomplete\b/.test(behavior) ) {
+	if ( document.readyState !== 'complete' && /\bcomplete\b/.test(runAt) ) {
         self.addEventListener('load', start, { once: true });
-    	} else if ( document.readyState !== 'loading' || /\basap\b/.test(behavior) ) {
+    	} else if ( document.readyState !== 'loading' || /\basap\b/.test(runAt) ) {
         start();
     	} else {
         self.addEventListener('DOMContentLoaded', start, { once: true });
@@ -714,7 +714,7 @@ function insertChildBefore(
 function insertChildAfter( 
 	selector = '',
 	element = '',
-	behavior = '' 
+	runAt = '' 
 ) {
 	if ( selector === '' || element === '' ) { return; }
 	let timer = undefined;
@@ -745,7 +745,7 @@ function insertChildAfter(
 	};
 	const start = ( ) => {
 		insertelem();
-		if ( /\bloop\b/.test(behavior) === false ) { return; }
+		if ( /\bloop\b/.test(runAt) === false ) { return; }
 		const observer = new MutationObserver(mutationHandler);
 		observer.observe(document.documentElement, {
 		    attributes: true,
@@ -753,9 +753,9 @@ function insertChildAfter(
 		    subtree: true,
 		});
 	};
-	if ( document.readyState !== 'complete' && /\bcomplete\b/.test(behavior) ) {
+	if ( document.readyState !== 'complete' && /\bcomplete\b/.test(runAt) ) {
         self.addEventListener('load', start, { once: true });
-    	} else if ( document.readyState !== 'loading' || /\basap\b/.test(behavior) ) {
+    	} else if ( document.readyState !== 'loading' || /\basap\b/.test(runAt) ) {
         start();
     	} else {
         self.addEventListener('DOMContentLoaded', start, { once: true });
@@ -769,7 +769,7 @@ function setCookie(
 	cName = '', 
 	cValue = '',
 	expTime = '',
-	behavior = '' 
+	runAt = '' 
 ) {
 	let timer = undefined;
 	if ( cName === '' ) { return; }
@@ -806,7 +806,7 @@ function setCookie(
 	};
 	const start = ( ) => {
 	setCookie();
-	if ( /\bloop\b/.test(behavior) === false ) { return; }
+	if ( /\bloop\b/.test(runAt) === false ) { return; }
 	const observer = new MutationObserver(mutationHandler);
 	observer.observe(document.documentElement, {
 	    attributes: true,
@@ -814,9 +814,9 @@ function setCookie(
 	    subtree: true,
 	});
 	};
-	if ( document.readyState !== 'complete' && /\bcomplete\b/.test(behavior) ) {
+	if ( document.readyState !== 'complete' && /\bcomplete\b/.test(runAt) ) {
 	self.addEventListener('load', start, { once: true });
-	} else if ( document.readyState !== 'loading' || /\basap\b/.test(behavior) ) {
+	} else if ( document.readyState !== 'loading' || /\basap\b/.test(runAt) ) {
 	start(); 
 	} else {
 	self.addEventListener('DOMContentLoaded', start, { once: true });
