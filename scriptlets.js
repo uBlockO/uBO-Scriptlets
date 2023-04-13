@@ -877,7 +877,7 @@ function xhrPrune(
               }
           });
           self.XMLHttpRequest.prototype.open = new Proxy(self.XMLHttpRequest.prototype.open, {
-              apply: (target, thisArg, args) => {
+              apply: async (target, thisArg, args) => {
                   if ( xhrURL.test(urlFromArg(args[1])) === false ) {
                       return Reflect.apply(target, thisArg, args);
                   }
