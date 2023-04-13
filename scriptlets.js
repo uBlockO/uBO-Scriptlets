@@ -822,3 +822,73 @@ function setCookie(
 	self.addEventListener('DOMContentLoaded', start, { once: true });
 	}	
 }
+
+/// xhr-prune.js
+/// alias xhrp.js
+// example.com##+js(xhrp, url, needle, text)
+function xhrPrune(
+         xhrURL = '',
+         needle = '',
+         textContent = '' 
+) {
+          if ( xhrURL === '' ) {
+              xhrURL = '';
+          } else if ( xhrURL.startsWith('/') && xhrURL.endsWith('/') ) {
+              xhrURL = xhrURL.slice(1,-1);
+          } else {
+              xhrURL = xhrURL.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+          }
+          xhrURL= new RegExp(xhrURL);
+          if ( needle === '' ) {
+              needle = '.*';
+          } else if ( needle.startsWith('/') && needle.endsWith('/') ) {
+              needle = needle.slice(1,-1);
+          } else {
+              needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+          }
+          needle = new RegExp(needle, "gms");
+          if ( textContent === '' ) {
+              textContent = '';
+          }
+          const pruner = stringText => {
+               stringText  = stringText.replace(needle, textContent);
+               return stringText;
+          };
+          const urlFromArg = arg => {
+              if ( typeof arg === 'string' ) { return arg; }
+              if ( arg instanceof Request ) { return arg.url; }
+              return String(arg);
+          };
+          const realFetch = self.fetch;
+          self.fetch = new Proxy(self.fetch, {
+              apply: (target, thisArg, args) => {
+                  if ( xhrURL.test(urlFromArg(args[0])) === false ) {
+                      return Reflect.apply(target, thisArg, args);
+                  }
+                  return realFetch(...args).then(realResponse =>
+                      realResponse.text().then(text =>
+                          new Response(pruner(text), {
+                              status: realResponse.status,
+                              statusText: realResponse.statusText,
+                              headers: realResponse.headers,
+                          })
+                      )
+                  );
+              }
+          });
+          self.XMLHttpRequest.prototype.open = new Proxy(self.XMLHttpRequest.prototype.open, {
+              apply: (target, thisArg, args) => {
+                  if ( xhrURL.test(urlFromArg(args[1])) === false ) {
+                      return Reflect.apply(target, thisArg, args);
+                  }
+                  thisArg.addEventListener('readystatechange', () => {
+                      if ( thisArg.readyState !== 4 ) { return; }
+                      const textin = thisArg.responseText;
+                      const textout = pruner(textin);
+                      Object.defineProperty(thisArg, 'response', { value: textout });
+                      Object.defineProperty(thisArg, 'responseText', { value: textout });
+                  });
+                  return Reflect.apply(target, thisArg, args);
+              }
+          });
+}
