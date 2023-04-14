@@ -823,22 +823,22 @@ function setCookie(
 	}	
 }
 
-/// xhr-prune.js
-/// alias xhrp.js
-// example.com##+js(xhrp, url, needle, text)
-function xhrPrune(
-         xhrURL = '',
+/// response-prune.js
+/// alias resp.js
+// example.com##+js(resp, url, needle, text)
+function responsePrune(
+         resURL = '',
          needle = '',
          textContent = '' 
 ) {
-          if ( xhrURL === '' ) {
-              xhrURL = '';
-          } else if ( xhrURL.startsWith('/') && xhrURL.endsWith('/') ) {
-              xhrURL = xhrURL.slice(1,-1);
+          if ( resURL === '' ) {
+              resURL = '';
+          } else if ( resURL.startsWith('/') && resURL.endsWith('/') ) {
+              resURL = resURL.slice(1,-1);
           } else {
-              xhrURL = xhrURL.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+              resURL = resURL.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
           }
-          xhrURL= new RegExp(xhrURL);
+          resURL= new RegExp(resURL);
           if ( needle === '' ) {
               needle = '.*';
           } else if ( needle.startsWith('/') && needle.endsWith('/') ) {
@@ -862,7 +862,7 @@ function xhrPrune(
           const realFetch = self.fetch;
           self.fetch = new Proxy(self.fetch, {
               apply: (target, thisArg, args) => {
-                  if ( xhrURL.test(urlFromArg(args[0])) === false ) {
+                  if ( resURL.test(urlFromArg(args[0])) === false ) {
                       return Reflect.apply(target, thisArg, args);
                   }
                   return realFetch(...args).then(realResponse =>
@@ -878,7 +878,7 @@ function xhrPrune(
           });
           self.XMLHttpRequest.prototype.open = new Proxy(self.XMLHttpRequest.prototype.open, {
               apply: async (target, thisArg, args) => {
-                  if ( xhrURL.test(urlFromArg(args[1])) === false ) {
+                  if ( resURL.test(urlFromArg(args[1])) === false ) {
                       return Reflect.apply(target, thisArg, args);
                   }
                   thisArg.addEventListener('readystatechange', () => {
