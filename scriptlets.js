@@ -839,8 +839,8 @@ function responsePrune(
               resURL = resURL.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
           }
           resURL= new RegExp(resURL);
-          if ( needle === '' ) {
-              needle = '.*';
+          if ( needle === '*' ) {
+              needle = '.?';
           } else if ( needle.startsWith('/') && needle.endsWith('/') ) {
               needle = needle.slice(1,-1);
           } else {
