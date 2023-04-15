@@ -81,8 +81,9 @@ function replaceNode(
 		  needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 	}
 	needle = new RegExp(needle, "gms");
-	let timer = undefined;	
+	let timer;	
 	const replacenode = () => {
+		timer = undefined;
 		try {
 			const nodes = document.getElementsByTagName(inlineTag); 
 			for (const node of nodes) {
@@ -141,8 +142,9 @@ function setAttr(
 	if ( token === '' ) { return; }
 	const tokens = token.split(/\s*\|\s*/);
 	if ( selector === '' ) { selector = `[${tokens.join('],[')}]`; }
-	let timer = undefined;
-	const setattr = () => {  
+	let timer;
+	const setattr = () => {
+	timer = undefined;	
 	const nodes = document.querySelectorAll(selector);
 	try {
 		for (const node of nodes) {
@@ -200,8 +202,9 @@ function renameAttr(
 	runAt = '' 
 ) {
 	if ( selector === '' || oldattr === '' || newattr === '' ) { return; }
-	let timer = undefined;
+	let timer;
 	const renameattr = ( ) => {
+		timer = undefined;
 		const elems = document.querySelectorAll( selector );
 		try {
 			for ( const elem of elems ) {
@@ -284,8 +287,9 @@ function replaceClass(
 	runAt = ''
 ) {
 	if ( selector === '' || oldclass === '' || newclass === '' ) { return; }
-	let timer = undefined;
+	let timer;
 	const replaceclass = ( ) => {
+	  timer = undefined;	
 	  const nodes = document.querySelectorAll(selector);
 	  try {
 		for ( const node of nodes ) {
@@ -394,8 +398,9 @@ function removeLocalItem(
 ) { 
 	    if ( key === '' ) { return; }
 	    const keys = key.split(/\s*\|\s*/);
-	    let timer = undefined;
+	    let timer;
 	    const removeItem = () => {
+		  timer = undefined;  
 		  if ( key === '*' ) { return localStorage.clear(); }  
 		  try {
 			   for (const keyName of keys) {
@@ -448,8 +453,9 @@ function setLocalItem(
 ) { 
 	    if ( key === '' ) { return; }
 	    const keys = key.split(/\s*\|\s*/);
-	    let timer = undefined;
+	    let timer;
 	    const setItem = () => {
+		  timer = undefined;  
 		  try {
 			   for (const keyName of keys) {
 				if (localStorage.getItem(keyName) === value) { break; }
@@ -556,8 +562,9 @@ function removeSessionItem(
 ) { 
 	    if ( key === '' ) { return; }
 	    const keys = key.split(/\s*\|\s*/);
-	    let timer = undefined;
+	    let timer;
 	    const removeItem = () => {
+		  timer = undefined;  
 		  if ( key === '*' ) { return sessionStorage.clear(); }  
 		  try {
 			   for (const keyName of keys) {
@@ -610,8 +617,9 @@ function setSessionItem(
 ) { 
 	    if ( key === '' ) { return; }
 	    const keys = key.split(/\s*\|\s*/);
-	    let timer = undefined;
+	    let timer;
 	    const setItem = () => {
+		  timer = undefined;  
 		  try {
 			   for (const keyName of keys) {
 				if (sessionStorage.getItem(keyName) === value) { break; }
@@ -663,8 +671,9 @@ function insertChildBefore(
 	runAt = '' 
 ) {
 	if ( selector === '' || element === '' ) { return; }
-	let timer = undefined;
+	let timer;
 	const insertelem = () => {
+		timer = undefined;
 		try {
 			const elems = document.querySelectorAll(selector);
 			const nodes = document.querySelectorAll(element);
@@ -717,8 +726,9 @@ function insertChildAfter(
 	runAt = '' 
 ) {
 	if ( selector === '' || element === '' ) { return; }
-	let timer = undefined;
+	let timer;
 	const insertelem = () => {
+		timer = undefined;
 		try {
 			const elems = document.querySelectorAll(selector);
 			const nodes = document.querySelectorAll(element);
@@ -771,11 +781,12 @@ function setCookie(
 	expTime = '',
 	runAt = '' 
 ) {
-	let timer = undefined;
+	let timer;
 	if ( cName === '' ) { return; }
 	if ( expTime === '' ) { expTime = '1'; }
 	if ( cValue === '' ) { cValue = '""'; }	
 	const setCookie = () => {
+		timer = undefined;
 		try {
 			const cookies = document.cookie;
 			if ( !cookies.includes(cName) || !cookies.includes(cValue) ) {
