@@ -87,7 +87,7 @@ function replaceNode(
 		try {
 			const nodes = document.getElementsByTagName(inlineTag); 
 			for (const node of nodes) {
-				if (needle.test(node.outerHTML)) {
+				if (needle.test(node.textContent)) {
 				    let textContent = node.textContent; 
 				    textContent  = textContent.replace(needle, text);
 				    node.textContent = textContent; 
