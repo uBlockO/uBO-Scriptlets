@@ -80,14 +80,7 @@ function replaceNode(
 	} else {
 		  needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 	}
-	needle = new RegExp(needle, "gms");
-	if ( text === '' ) { text = ''; }
-	else if ( text.slice(0,1) === '/' && text.slice(-1) === '/' ) {
-		  text = text.slice(1,-1);
-	} else {
-		  text = text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-	}
-	text = new RegExp(text);	
+	needle = new RegExp(needle, "gms");	
 	let timer;	
 	const replacenode = () => {
 		timer = undefined;
