@@ -67,12 +67,12 @@ function removeNode(
 
 /// replace-node.js
 /// alias rpn.js
-// example.com##+js(rpn, needle, text, inlineTag)
+// example.com##+js(rpn, needle, oldtext, newtext, tag)
 function replaceNode( 
 	needle = '',
-	text = '', 
-	inlineTag = '',
-	runAt = '' 
+	oldtext = '',
+	newtext = '', 
+	tagname = ''
 ) {
 	if ( needle === '' ) { return; }
 	else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
@@ -80,54 +80,33 @@ function replaceNode(
 	} else {
 		  needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 	}
-	needle = new RegExp(needle, "gms");	
-	let timer;	
+	needle = new RegExp(needle, "gms");
+	if ( oldtext === '' ) {
+              oldtext = '';
+        } else if ( oldtext.startsWith('/') && oldtext.endsWith('/') ) {
+              oldtext = oldtext.slice(1,-1);
+        } else {
+              oldtext = oldtext.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        }
+        oldtext = new RegExp(oldtext, "gms");	
+	if ( newtext === '' ) {
+              newtext = '';
+        }	
 	const replacenode = () => {
-		timer = undefined;
-		try {
-			const nodes = document.getElementsByTagName(inlineTag); 
-			for (const node of nodes) {
-				if (needle.test(node.textContent)) {
-				    let textContent = node.textContent; 
-				    textContent  = textContent.replace(needle, text);
-				    node.textContent = textContent; 
-			        }     
-			  }	
+		const nodes = document.getElementsByTagName(tagname);
+		try { 
+			for (const node of nodes) { 
+				    if (needle.test(node.textContent)) {
+				    	let textContent = node.textContent;    
+				    	textContent  = textContent.replace(oldtext, newtext);
+				    	node.textContent = textContent; 
+			            }     
+			}
 		} catch { }
 	};
-	const mutationHandler = mutations => {
-	if ( timer !== undefined ) { return; }
-	let skip = true;
-	for ( let i = 0; i < mutations.length && skip; i++ ) {
-	    const { type, addedNodes, removedNodes } = mutations[i];
-	    if ( type === 'attributes' ) { skip = false; }
-	    for ( let j = 0; j < addedNodes.length && skip; j++ ) {
-		if ( addedNodes[j].nodeType === 1 ) { skip = false; break; }
-	    }
-	    for ( let j = 0; j < removedNodes.length && skip; j++ ) {
-		if ( removedNodes[j].nodeType === 1 ) { skip = false; break; }
-	    }
-	}
-	if ( skip ) { return; }
-	timer = self.requestIdleCallback(replacenode, { timeout: 10 });
-	};
-	const start = ( ) => {
-	replacenode();
-	if ( /\bloop\b/.test(runAt) === false ) { return; }
-	const observer = new MutationObserver(mutationHandler);
-	observer.observe(document.documentElement, {
-	    attributes: true,
-	    childList: true,
-	    subtree: true,
-	});
-	};
-	if ( document.readyState !== 'complete' && /\bcomplete\b/.test(runAt) ) {
-        self.addEventListener('load', start, { once: true });
-    	} else if ( document.readyState !== 'loading' || /\basap\b/.test(runAt) ) {
-        start();
-    	} else {
-        self.addEventListener('DOMContentLoaded', start, { once: true });
-    	}
+	const observer = new MutationObserver(replacenode);
+	observer.observe(document.documentElement, { childList: true, subtree: true });
+	if ( document.readyState === "complete" ) { observer.disconnect(); }	
 }
 
 /// set-attr.js
