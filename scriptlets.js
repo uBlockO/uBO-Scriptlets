@@ -105,7 +105,7 @@ function replaceNode(
 		} catch { }
 	};
 	const observer = new MutationObserver(replacenode);
-	observer.observe(document.documentElement, { childList: true, subtree: true });
+	observer.observe(document.documentElement, { attributes: true, childList: true, subtree: true });
 	if ( document.readyState === "complete" ) { observer.disconnect(); }	
 }
 
