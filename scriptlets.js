@@ -40,24 +40,24 @@ function removeShadowRootElem(
 // example.com##+js(rn, text, inlineTag)
 function removeNode( 
 	needle = '', 
-	inlineTag = '' 
+	tagname = '' 
 ) {
-	if ( needle === '' ) { needle = '^'; }
+	if ( needle === '*' ) { needle = '.?'; }
 	else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
 		  needle = needle.slice(1,-1);
 	} else {
 		  needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 	}
-	needle = new RegExp(needle);
+	needle = new RegExp(needle, "gms");
 	const removenode = () => {
+	        const nodes = document.getElementsByTagName(tagname);  
 		try {
-			const nodes = document.getElementsByTagName(inlineTag);  
 			for (const node of nodes) {
-				if (needle.test(node.outerHTML)) {
+				if (needle.test(node.textContent)) {
 				    node.textContent = ''; 
 				    node.remove(); 
-			       }     
-			  }
+			        }     
+			}
 		} catch { }
 	};
 	const observer = new MutationObserver(removenode);
