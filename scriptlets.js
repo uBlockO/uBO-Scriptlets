@@ -80,7 +80,7 @@ function replaceNode(
 	} else {
 		  needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 	}
-	needle = new RegExp(needle, "gms");
+	needle = new RegExp(needle);
 	if ( oldtext === '' ) {
               oldtext = '';
         } else if ( oldtext.startsWith('/') && oldtext.endsWith('/') ) {
@@ -88,7 +88,7 @@ function replaceNode(
         } else {
               oldtext = oldtext.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
         }
-        oldtext = new RegExp(oldtext, "gms");	
+        oldtext = new RegExp(oldtext);	
 	if ( newtext === '*' ) {
               newtext = '';
         }	
