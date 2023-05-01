@@ -48,7 +48,7 @@ function removeNode(
 	} else {
 		  needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 	}
-	needle = new RegExp(needle, "g");
+	needle = new RegExp(needle);
 	const removenode = () => {
 	        const nodes = document.getElementsByTagName(tagname);  
 		try {
