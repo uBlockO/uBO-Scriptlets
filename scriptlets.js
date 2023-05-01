@@ -89,7 +89,7 @@ function replaceNode(
               oldtext = oldtext.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
         }
         oldtext = new RegExp(oldtext, "gms");	
-	if ( newtext === '' ) {
+	if ( newtext === '*' ) {
               newtext = '';
         }	
 	const replacenode = () => {
