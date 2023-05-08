@@ -1,5 +1,3 @@
-// Collection of userscripts to be used for scriptlet injection via uBO.
-
 'use strict';
 
 /// remove-shadowroot-elem.js
