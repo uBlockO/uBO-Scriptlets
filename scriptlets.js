@@ -63,50 +63,6 @@ function removeNode(
 	if ( document.readyState === "complete" ) { observer.disconnect(); }	
 }
 
-/// replace-node.js
-/// alias rpn.js
-// example.com##+js(rpn, needle, oldtext, newtext, tag)
-function replaceNode( 
-	needle = '',
-	oldtext = '',
-	newtext = '', 
-	tagname = ''
-) {
-	if ( needle === '' ) { return; }
-	else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
-		  needle = needle.slice(1,-1);
-	} else {
-		  needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-	}
-	needle = new RegExp(needle);
-	if ( oldtext === '' ) {
-              oldtext = '';
-        } else if ( oldtext.startsWith('/') && oldtext.endsWith('/') ) {
-              oldtext = oldtext.slice(1,-1);
-        } else {
-              oldtext = oldtext.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-        }
-        oldtext = new RegExp(oldtext);	
-	if ( newtext === '*' ) {
-              newtext = '';
-        }	
-	const replacenode = () => {
-		const nodes = document.getElementsByTagName(tagname);
-		try { 
-			for (const node of nodes) { 
-				    if (needle.test(node.textContent)) {
-				    	let textContent = node.textContent;    
-				    	textContent  = textContent.replace(oldtext, newtext);
-				    	node.textContent = textContent; 
-			            }     
-			}
-		} catch { }
-	};
-	const observer = new MutationObserver(replacenode);
-	observer.observe(document.documentElement, { childList: true, subtree: true });
-	if ( document.readyState === "complete" ) { observer.disconnect(); }	
-}
-
 /// set-attr.js
 /// alias sa.js
 // example.com##+js(sa, attr, value, [selector])
