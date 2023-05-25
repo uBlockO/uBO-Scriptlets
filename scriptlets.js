@@ -33,36 +33,6 @@ function removeShadowRootElem(
 	  if ( document.readyState === "complete" ) { self.setTimeout(observer.disconnect(), 67);  }
 }
 
-/// remove-node.js
-/// alias rn.js
-// example.com##+js(rn, text, inlineTag)
-function removeNode( 
-	needle = '', 
-	tagname = '' 
-) {
-	if ( needle === '*' ) { needle = '.?'; }
-	else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
-		  needle = needle.slice(1,-1);
-	} else {
-		  needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-	}
-	needle = new RegExp(needle);
-	const removenode = () => {
-	        const nodes = document.getElementsByTagName(tagname);  
-		try {
-			for (const node of nodes) {
-				if (needle.test(node.outerHTML)) {
-				    node.textContent = ''; 
-				    node.remove(); 
-			        }     
-			}
-		} catch { }
-	};
-	const observer = new MutationObserver(removenode);
-	observer.observe(document.documentElement, { childList: true, subtree: true });
-	if ( document.readyState === "complete" ) { observer.disconnect(); }	
-}
-
 /// set-attr.js
 /// alias sa.js
 // example.com##+js(sa, attr, value, [selector])
