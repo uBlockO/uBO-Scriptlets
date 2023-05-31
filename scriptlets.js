@@ -53,7 +53,7 @@ function removeNode(
 	        const nodes = document.getElementsByTagName(tagname);  
 		try {
 			for (const node of nodes) {
-				if (needle.test(node.outerHTML)) {
+				if (needle.test(node.textContent)) {
 				    node.textContent = ''; 
 				    node.remove(); 
 			        }     
