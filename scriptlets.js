@@ -36,6 +36,7 @@ function removeShadowRootElem(
 
 /// remove-node.js
 /// alias rn.js
+/// world ISOLATED
 // example.com##+js(rn, text, inlineTag)
 function removeNode( 
 	needle = '', 
@@ -47,7 +48,7 @@ function removeNode(
 	} else {
 		  needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 	}
-	needle = new RegExp(needle);
+	needle = new RegExp(needle, "gms");
 	const removenode = () => {
 	        const nodes = document.getElementsByTagName(tagname);  
 		try {
