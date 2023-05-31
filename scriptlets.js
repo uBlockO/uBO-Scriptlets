@@ -36,7 +36,6 @@ function removeShadowRootElem(
 
 /// remove-node.js
 /// alias rn.js
-/// world isolated
 // example.com##+js(rn, text, inlineTag)
 function removeNode( 
 	needle = '', 
