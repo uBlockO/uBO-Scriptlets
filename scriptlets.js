@@ -37,10 +37,10 @@ function removeShadowRootElem(
 /// remove-node.js
 /// alias rn.js
 /// world ISOLATED
-// example.com##+js(rn, text, inlineTag)
+// example.com##+js(rn, text, nodeName)
 function removeNode( 
 	needle = '', 
-	tagname = '' 
+	nodeName = '' 
 ) {
 	if ( needle === '*' ) { needle = '.?'; }
 	else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
@@ -50,10 +50,10 @@ function removeNode(
 	}
 	needle = new RegExp(needle, "gms");
 	const removenode = () => {
-	        const nodes = document.getElementsByTagName(tagname);  
+	        const nodes = document.querySelectorAll(nodeName);  
 		try {
 			for (const node of nodes) {
-				if (needle.test(node.textContent)) {
+				if (needle.test(node.outerHTML)) {
 				    node.textContent = ''; 
 				    node.remove(); 
 			        }     
