@@ -2,7 +2,7 @@
 
 /// remove-shadowroot-elem.js
 /// alias rsre.js
-/// world isolated
+/// world ISOLATED
 // example.com##+js(rsre, [selector])
 function removeShadowRootElem(  
 	selector = '' 
@@ -67,7 +67,7 @@ function removeNode(
 
 /// set-attr.js
 /// alias sa.js
-/// world isolated
+/// world ISOLATED
 // example.com##+js(sa, attr, value, [selector])
 function setAttr(
 	token = '',
@@ -130,7 +130,7 @@ function setAttr(
 
 /// rename-attr.js
 /// alias rna.js
-/// world isolated
+/// world ISOLATED
 // example.com##+js(rna, [selector], oldattr, newattr)
 function renameAttr(
 	selector = '',
@@ -190,7 +190,7 @@ function renameAttr(
 
 /// add-class.js
 /// alias ac.js
-/// world isolated
+/// world ISOLATED
 // example.com##+js(ac, class, [selector])
 function addClass(
 	needle = '',
@@ -217,7 +217,7 @@ function addClass(
 
 /// replace-class.js
 /// alias rpc.js
-/// world isolated
+/// world ISOLATED
 // example.com##+js(rpc, [selector], oldclass, newclass)
 function replaceClass(
 	selector = '',
@@ -275,7 +275,7 @@ function replaceClass(
 
 /// move-attr-prop.js
 /// alias map.js
-/// world isolated
+/// world ISOLATED
 // example.com##+js(map, [selector], [selector2], attr, attr2)
 function moveAttrProp(
 	selector = '',
@@ -303,7 +303,7 @@ function moveAttrProp(
 
 /// append-elem.js
 /// alias ape.js
-/// world isolated
+/// world ISOLATED
 // example.com##+js(ape, [selector], element, attribute, value)
 function appendElem(
 	selector = '',
@@ -332,7 +332,7 @@ function appendElem(
 
 /// removeLocalItem.js
 /// alias rli.js
-/// world isolated
+/// world ISOLATED
 // example.com##+js(rli, key)
 function removeLocalItem( 
 	key = '',
@@ -387,7 +387,7 @@ function removeLocalItem(
 
 /// setLocalItem.js
 /// alias sli.js
-/// world isolated
+/// world ISOLATED
 // example.com##+js(sli, key, value)
 function setLocalItem(
 	key = '',
@@ -443,7 +443,7 @@ function setLocalItem(
 
 /// callfunction.js
 /// alias cf.js
-/// world isolated
+/// world ISOLATED
 // example.com##+js(cf, funcName, funcDelay)
 function callFunction(
 	funcCall = '',
@@ -465,7 +465,7 @@ function callFunction(
 
 /// no-alert-if.js
 /// alias noaif.js
-/// world isolated
+/// world ISOLATED
 // example.com##+js(noaif, text)
 function noAlertIf(
         needle = ''
@@ -500,7 +500,7 @@ function noAlertIf(
 
 /// removeSessionItem.js
 /// alias rsi.js
-/// world isolated
+/// world ISOLATED
 // example.com##+js(rsi, key)
 function removeSessionItem( 
         key = '',
@@ -555,7 +555,7 @@ function removeSessionItem(
 
 /// setSessionItem.js
 /// alias ssi.js
-/// world isolated
+/// world ISOLATED
 // example.com##+js(ssi, key, value)
 function setSessionItem(
 	key = '',
@@ -611,7 +611,7 @@ function setSessionItem(
 
 /// insert-child-before.js
 /// alias icb.js
-/// world isolated
+/// world ISOLATED
 // example.com##+js(icb, element, node)
 function insertChildBefore( 
 	selector = '',
@@ -667,7 +667,7 @@ function insertChildBefore(
 
 /// insert-child-after.js
 /// alias ica.js
-/// world isolated
+/// world ISOLATED
 // example.com##+js(ica, element, node)
 function insertChildAfter( 
 	selector = '',
@@ -723,7 +723,7 @@ function insertChildAfter(
 
 /// setCookie.js
 /// alias sck.js
-/// world isolated
+/// world ISOLATED
 // example.com##+js(sck, cookie, value)
 function setCookie( 
 	cName = '', 
@@ -786,7 +786,7 @@ function setCookie(
 
 /// response-prune.js
 /// alias resp.js
-/// world isolated
+/// world ISOLATED
 // example.com##+js(resp, url, needle, text)
 function responsePrune(
          resURL = '',
