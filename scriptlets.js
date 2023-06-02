@@ -847,7 +847,7 @@ function responsePrune(
                 	if ( thisArg.readyState !== 4 ) { return; }
                 	const textin = thisArg.responseText;
                 	const textout = pruner(textin);
-                	if ( textout === textin ) { return; }
+                	// if ( textout === textin ) { return; }
                 	Object.defineProperty(thisArg, 'response', { value: textout });
                 	Object.defineProperty(thisArg, 'responseText', { value: textout });
             	  });
