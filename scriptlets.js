@@ -843,13 +843,16 @@ function responsePrune(
                   if ( resURL.test(urlFromArg(args[1])) === false ) {
                       return Reflect.apply(target, thisArg, args);
                   }
-                  thisArg.addEventListener('readystatechange', () => {
-                      if ( thisArg.readyState !== 4 ) { return; }
-                      const textin = thisArg.responseText;
-                      const textout = pruner(textin);
-                      Object.defineProperty(thisArg, 'response', { value: textout });
-                      Object.defineProperty(thisArg, 'responseText', { value: textout });
-                  });
+                  thisArg.addEventListener('readystatechange', function() {
+                	if ( thisArg.readyState !== 4 ) { return; }
+                	const type = thisArg.responseType;
+                	if ( type !== '' && type !== 'text' ) { return; }
+                	const textin = thisArg.responseText;
+                	const textout = pruner(textin);
+                	if ( textout === textin ) { return; }
+                	Object.defineProperty(thisArg, 'response', { value: textout });
+                	Object.defineProperty(thisArg, 'responseText', { value: textout });
+            	  });
                   return Reflect.apply(target, thisArg, args);
               }
           });
