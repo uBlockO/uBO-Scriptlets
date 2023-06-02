@@ -800,7 +800,7 @@ function responsePrune(
           } else {
               resURL = resURL.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
           }
-          resURL= new RegExp(resURL, "gms");
+          resURL= new RegExp(resURL);
           if ( needle === '*' ) {
               needle = '.?';
           } else if ( needle.startsWith('/') && needle.endsWith('/') ) {
