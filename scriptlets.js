@@ -786,7 +786,6 @@ function setCookie(
 
 /// response-prune.js
 /// alias resp.js
-/// world ISOLATED
 // example.com##+js(resp, url, needle, text)
 function responsePrune(
          resURL = '',
