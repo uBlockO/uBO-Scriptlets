@@ -845,8 +845,6 @@ function responsePrune(
                   }
                   thisArg.addEventListener('readystatechange', function() {
                 	if ( thisArg.readyState !== 4 ) { return; }
-                	const type = thisArg.responseType;
-                	if ( type !== '' && type !== 'text' ) { return; }
                 	const textin = thisArg.responseText;
                 	const textout = pruner(textin);
                 	if ( textout === textin ) { return; }
