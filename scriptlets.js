@@ -800,7 +800,7 @@ function responsePrune(
           } else {
               resURL = resURL.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
           }
-          resURL= new RegExp(resURL);
+          resURL= new RegExp(resURL, "gms");
           if ( needle === '*' ) {
               needle = '.?';
           } else if ( needle.startsWith('/') && needle.endsWith('/') ) {
@@ -845,9 +845,11 @@ function responsePrune(
                   }
                   thisArg.addEventListener('readystatechange', function() {
                 	if ( thisArg.readyState !== 4 ) { return; }
+                	const type = thisArg.responseType;
+                	if ( type !== '' && type !== 'text' ) { return; }
                 	const textin = thisArg.responseText;
                 	const textout = pruner(textin);
-                	// if ( textout === textin ) { return; }
+                	if ( textout === textin ) { return; }
                 	Object.defineProperty(thisArg, 'response', { value: textout });
                 	Object.defineProperty(thisArg, 'responseText', { value: textout });
             	  });
