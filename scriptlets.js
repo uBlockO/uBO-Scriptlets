@@ -755,31 +755,16 @@ function setCookie(
 
 /// response-prune.js
 /// alias resp.js
+/// dependency pattern-to-regex.fn
 // example.com##+js(resp, url, needle, text)
 function responsePrune(
          resURL = '',
          needle = '',
          textContent = '' 
 ) {
-          if ( resURL === '' ) {
-              resURL = '';
-          } else if ( resURL.startsWith('/') && resURL.endsWith('/') ) {
-              resURL = resURL.slice(1,-1);
-          } else {
-              resURL = resURL.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-          }
-          resURL= new RegExp(resURL, "gms");
-          if ( needle === '*' ) {
-              needle = '.?';
-          } else if ( needle.startsWith('/') && needle.endsWith('/') ) {
-              needle = needle.slice(1,-1);
-          } else {
-              needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-          }
-          needle = new RegExp(needle, "gms");
-          if ( textContent === '' ) {
-              textContent = '';
-          }
+	  resURL= patternToRegex(resURL, "gms"); 
+	  needle = patternToRegex(needle, "gms");
+          if ( textContent === '' ) { textContent = ''; }
           const pruner = stringText => {
                stringText  = stringText.replace(needle, textContent);
                return stringText;
