@@ -36,7 +36,6 @@ function removeShadowRootElem(
 
 /// set-attr.js
 /// alias sa.js
-/// world ISOLATED
 // example.com##+js(sa, attr, value, [selector])
 function setAttr(
 	token = '',
