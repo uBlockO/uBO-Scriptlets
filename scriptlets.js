@@ -354,62 +354,6 @@ function removeLocalItem(
     	    }
 }
 
-/// setLocalItem.js
-/// alias sli.js
-/// world ISOLATED
-// example.com##+js(sli, key, value)
-function setLocalItem(
-	key = '',
-	value = '',
-	runAt = '' 
-) { 
-	    if ( key === '' ) { return; }
-	    const keys = key.split(/\s*\|\s*/);
-	    let timer;
-	    const setItem = () => {
-		  timer = undefined;  
-		  try {
-			   for (const keyName of keys) {
-				if (localStorage.getItem(keyName) === value) { break; }
-				    localStorage.setItem(keyName, value);
-			   }
-		  } catch { }
-	    };
-	    const mutationHandler = mutations => {
-		if ( timer !== undefined ) { return; }
-		let skip = true;
-		for ( let i = 0; i < mutations.length && skip; i++ ) {
-		    const { type, addedNodes, removedNodes } = mutations[i];
-		    if ( type === 'attributes' ) { skip = false; }
-		    for ( let j = 0; j < addedNodes.length && skip; j++ ) {
-			if ( addedNodes[j].nodeType === 1 ) { skip = false; break; }
-		    }
-		    for ( let j = 0; j < removedNodes.length && skip; j++ ) {
-			if ( removedNodes[j].nodeType === 1 ) { skip = false; break; }
-		    }
-		}
-		if ( skip ) { return; }
-		timer = self.requestIdleCallback(setItem, { timeout: 10 });
-	    };
-	    const start = ( ) => {
-		setItem();
-		if ( /\bloop\b/.test(runAt) === false ) { return; }
-		const observer = new MutationObserver(mutationHandler);
-		observer.observe(document.documentElement, {
-		    attributes: true,
-		    childList: true,
-		    subtree: true,
-		});
-	    };
-	    if ( document.readyState !== 'complete' && /\bcomplete\b/.test(runAt) ) {
-            self.addEventListener('load', start, { once: true });
-    	    } else if ( document.readyState !== 'loading' || /\basap\b/.test(runAt) ) {
-            start();
-    	    } else {
-            self.addEventListener('DOMContentLoaded', start, { once: true });
-    	    }
-}
-
 /// callfunction.js
 /// alias cf.js
 /// world ISOLATED
