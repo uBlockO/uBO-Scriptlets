@@ -99,7 +99,6 @@ function setAttr(
 
 /// rename-attr.js
 /// alias rna.js
-/// world ISOLATED
 // example.com##+js(rna, [selector], oldattr, newattr)
 function renameAttr(
 	selector = '',
@@ -159,7 +158,6 @@ function renameAttr(
 
 /// replace-attr.js
 /// alias rpla.js
-/// world ISOLATED
 // example.com##+js(rpla, [selector], oldattr, newattr, newvalue)
 function replaceAttr(
 	selector = '',
@@ -176,8 +174,8 @@ function replaceAttr(
 		try {
 			for ( const elem of elems ) {
 				if ( elem.hasAttribute( oldattr ) ) {
+				     elem.removeAttribute( oldattr );		
 				     elem.setAttribute( newattr, value );
-				     elem.removeAttribute( oldattr );	
 				}
 			}	
 		} catch { }
