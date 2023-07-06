@@ -157,6 +157,66 @@ function renameAttr(
     	}
 }
 
+/// replace-attr.js
+/// alias rpla.js
+/// world ISOLATED
+// example.com##+js(rpla, [selector], oldattr, newattr, newvalue)
+function replaceAttr(
+	selector = '',
+	oldattr = '',
+	newattr = '',
+	value = '',
+	runAt = '' 
+) {
+	if ( selector === '' || oldattr === '' || newattr === '' ) { return; }
+	let timer;
+	const replaceattr = ( ) => {
+		timer = undefined;
+		const elems = document.querySelectorAll(selector);
+		try {
+			for ( const elem of elems ) {
+				if ( elem.hasAttribute( oldattr ) ) {
+				     elem.removeAttribute( oldattr );
+				     elem.setAttribute( newattr, value );
+				}
+			}	
+		} catch { }
+	};
+	const mutationHandler = mutations => {
+		if ( timer !== undefined ) { return; }
+		let skip = true;
+		for ( let i = 0; i < mutations.length && skip; i++ ) {
+		    const { type, addedNodes, removedNodes } = mutations[i];
+		    if ( type === 'attributes' ) { skip = false; }
+		    for ( let j = 0; j < addedNodes.length && skip; j++ ) {
+			if ( addedNodes[j].nodeType === 1 ) { skip = false; break; }
+		    }
+		    for ( let j = 0; j < removedNodes.length && skip; j++ ) {
+			if ( removedNodes[j].nodeType === 1 ) { skip = false; break; }
+		    }
+		}
+		if ( skip ) { return; }
+		timer = self.requestIdleCallback(replaceattr, { timeout: 10 });
+	};
+	const start = ( ) => {
+		replaceattr();
+		if ( /\bloop\b/.test(runAt) === false ) { return; }
+		const observer = new MutationObserver(mutationHandler);
+		observer.observe(document.documentElement, {
+		    attributes: true,
+		    childList: true,
+		    subtree: true,
+		});
+	};
+	if ( document.readyState !== 'complete' && /\bcomplete\b/.test(runAt) ) {
+        self.addEventListener('load', start, { once: true });
+    	} else if ( document.readyState !== 'loading' || /\basap\b/.test(runAt) ) {
+        start();
+    	} else {
+        self.addEventListener('DOMContentLoaded', start, { once: true });
+    	}
+}
+
 /// add-class.js
 /// alias ac.js
 /// world ISOLATED
