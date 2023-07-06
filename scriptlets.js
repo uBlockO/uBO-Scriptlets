@@ -176,8 +176,8 @@ function replaceAttr(
 		try {
 			for ( const elem of elems ) {
 				if ( elem.hasAttribute( oldattr ) ) {
-				     elem.removeAttribute( oldattr );
 				     elem.setAttribute( newattr, value );
+				     elem.removeAttribute( oldattr );	
 				}
 			}	
 		} catch { }
