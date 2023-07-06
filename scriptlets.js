@@ -218,7 +218,7 @@ function replaceClass(
 	    }
 	}
 	if ( skip ) { return; }
-	timer = self.requestIdleCallback(replaceclass, { timeout: 10 });
+	timer = self.requestAnimationFrame(replaceclass);
 	};
 	const start = ( ) => {
 	replaceclass();
@@ -388,7 +388,7 @@ function insertChildBefore(
 		    }
 		}
 		if ( skip ) { return; }
-		timer = self.requestIdleCallback(insertelem, { timeout: 10 });
+		timer = self.requestAnimationFrame(insertelem);
 	};
 	const start = ( ) => {
 		insertelem();
@@ -444,7 +444,7 @@ function insertChildAfter(
 		    }
 		}
 		if ( skip ) { return; }
-		timer = self.requestIdleCallback(insertelem, { timeout: 10 });
+		timer = self.requestAnimationFrame(insertelem);
 	};
 	const start = ( ) => {
 		insertelem();
