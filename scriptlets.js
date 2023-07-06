@@ -75,7 +75,7 @@ function setAttr(
 	    }
 	}
 	if ( skip ) { return; }
-	timer = self.requestIdleCallback(setattr, { timeout: 10 });
+	timer = self.requestAnimationFrame(setattr);
 	};
 	const start = ( ) => {
 	setattr();
@@ -136,7 +136,7 @@ function renameAttr(
 		    }
 		}
 		if ( skip ) { return; }
-		timer = self.requestIdleCallback(renameattr, { timeout: 10 });
+		timer = self.requestAnimationFrame(renameattr);
 	};
 	const start = ( ) => {
 		renameattr();
@@ -196,7 +196,7 @@ function replaceAttr(
 		    }
 		}
 		if ( skip ) { return; }
-		timer = self.requestIdleCallback(replaceattr, { timeout: 10 });
+		timer = self.requestAnimationFrame(replaceattr);
 	};
 	const start = ( ) => {
 		replaceattr();
