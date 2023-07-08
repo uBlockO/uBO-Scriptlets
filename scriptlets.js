@@ -79,18 +79,17 @@ function renameAttr(
 		renameattr();
 		if ( /\bloop\b/.test(runAt) === false ) { return; }
 		const observer = new MutationObserver(mutationHandler);
-		observer.observe(document.documentElement, {
-		    attributes: true,
+		observer.observe(document.body, {
 		    childList: true,
 		    subtree: true,
 		});
 	};
 	if ( document.readyState !== 'complete' && /\bcomplete\b/.test(runAt) ) {
-        self.addEventListener('load', start, { once: true });
+        	self.addEventListener('load', start, { once: true });
     	} else if ( document.readyState !== 'loading' || /\basap\b/.test(runAt) ) {
-        start();
+        	start();
     	} else {
-        self.addEventListener('DOMContentLoaded', start, { once: true });
+        	self.requestidleCallback(start, { timeout : 10 });
     	}
 }
 
@@ -139,18 +138,17 @@ function replaceAttr(
 		replaceattr();
 		if ( /\bloop\b/.test(runAt) === false ) { return; }
 		const observer = new MutationObserver(mutationHandler);
-		observer.observe(document.documentElement, {
-		    attributes: true,
+		observer.observe(document.body, {
 		    childList: true,
 		    subtree: true,
 		});
 	};
 	if ( document.readyState !== 'complete' && /\bcomplete\b/.test(runAt) ) {
-        self.addEventListener('load', start, { once: true });
+        	self.addEventListener('load', start, { once: true });
     	} else if ( document.readyState !== 'loading' || /\basap\b/.test(runAt) ) {
-        start();
+       		start();
     	} else {
-        self.addEventListener('DOMContentLoaded', start, { once: true });
+        	self.requestidleCallback(start, { timeout : 10 });
     	}
 }
 
@@ -224,18 +222,17 @@ function replaceClass(
 	replaceclass();
 	if ( /\bloop\b/.test(runAt) === false ) { return; }
 	const observer = new MutationObserver(mutationHandler);
-	observer.observe(document.documentElement, {
-	    attributes: true,
+	observer.observe(document.body, {
 	    childList: true,
 	    subtree: true,
 	});
 	};
 	if ( document.readyState !== 'complete' && /\bcomplete\b/.test(runAt) ) {
-        self.addEventListener('load', start, { once: true });
+        	self.addEventListener('load', start, { once: true });
     	} else if ( document.readyState !== 'loading' || /\basap\b/.test(runAt) ) {
-        start();
+        	start();
     	} else {
-        self.addEventListener('DOMContentLoaded', start, { once: true });
+        	self.requestidleCallback(start, { timeout : 10 });
     	}
 }
 
@@ -394,18 +391,17 @@ function insertChildBefore(
 		insertelem();
 		if ( /\bloop\b/.test(runAt) === false ) { return; }
 		const observer = new MutationObserver(mutationHandler);
-		observer.observe(document.documentElement, {
-		    attributes: true,
+		observer.observe(document.body, {
 		    childList: true,
 		    subtree: true,
 		});
 	};
 	if ( document.readyState !== 'complete' && /\bcomplete\b/.test(runAt) ) {
-        self.addEventListener('load', start, { once: true });
+        	self.addEventListener('load', start, { once: true });
     	} else if ( document.readyState !== 'loading' || /\basap\b/.test(runAt) ) {
-        start();
+        	start();
     	} else {
-        self.addEventListener('DOMContentLoaded', start, { once: true });
+        	self.requestidleCallback(start, { timeout : 10 });
     }
 }
 
@@ -450,18 +446,17 @@ function insertChildAfter(
 		insertelem();
 		if ( /\bloop\b/.test(runAt) === false ) { return; }
 		const observer = new MutationObserver(mutationHandler);
-		observer.observe(document.documentElement, {
-		    attributes: true,
+		observer.observe(document.body, {
 		    childList: true,
 		    subtree: true,
 		});
 	};
 	if ( document.readyState !== 'complete' && /\bcomplete\b/.test(runAt) ) {
-        self.addEventListener('load', start, { once: true });
+        	self.addEventListener('load', start, { once: true });
     	} else if ( document.readyState !== 'loading' || /\basap\b/.test(runAt) ) {
-        start();
+        	start();
     	} else {
-        self.addEventListener('DOMContentLoaded', start, { once: true });
+        	self.requestidleCallback(start, { timeout : 10 });
     }
 }
 
