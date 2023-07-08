@@ -79,17 +79,17 @@ function renameAttr(
 		renameattr();
 		if ( /\bloop\b/.test(runAt) === false ) { return; }
 		const observer = new MutationObserver(mutationHandler);
-		observer.observe(document.body, {
+		observer.observe(document.documentElement, {
 		    childList: true,
 		    subtree: true,
 		});
 	};
 	if ( document.readyState !== 'complete' && /\bcomplete\b/.test(runAt) ) {
-        	self.addEventListener('load', start, { once: true });
+        	self.addEventListener('load', start, true);
     	} else if ( document.readyState !== 'loading' || /\basap\b/.test(runAt) ) {
         	start();
     	} else {
-        	self.requestIdleCallback(start, { timeout : 10 });
+        	self.addEventListener('DOMContentLoaded', start, true);
     	}
 }
 
@@ -138,17 +138,17 @@ function replaceAttr(
 		replaceattr();
 		if ( /\bloop\b/.test(runAt) === false ) { return; }
 		const observer = new MutationObserver(mutationHandler);
-		observer.observe(document.body, {
+		observer.observe(document.documentElement, {
 		    childList: true,
 		    subtree: true,
 		});
 	};
 	if ( document.readyState !== 'complete' && /\bcomplete\b/.test(runAt) ) {
-        	self.addEventListener('load', start, { once: true });
+        	sself.addEventListener('load', start, true);
     	} else if ( document.readyState !== 'loading' || /\basap\b/.test(runAt) ) {
        		start();
     	} else {
-        	self.requestIdleCallback(start, { timeout : 10 });
+        	self.addEventListener('DOMContentLoaded', start, true);
     	}
 }
 
@@ -222,17 +222,17 @@ function replaceClass(
 	replaceclass();
 	if ( /\bloop\b/.test(runAt) === false ) { return; }
 	const observer = new MutationObserver(mutationHandler);
-	observer.observe(document.body, {
+	observer.observe(document.documentElement, {
 	    childList: true,
 	    subtree: true,
 	});
 	};
 	if ( document.readyState !== 'complete' && /\bcomplete\b/.test(runAt) ) {
-        	self.addEventListener('load', start, { once: true });
+        	self.addEventListener('load', start, true);
     	} else if ( document.readyState !== 'loading' || /\basap\b/.test(runAt) ) {
         	start();
     	} else {
-        	self.requestIdleCallback(start, { timeout : 10 });
+        	self.addEventListener('DOMContentLoaded', start, true);
     	}
 }
 
@@ -391,17 +391,17 @@ function insertChildBefore(
 		insertelem();
 		if ( /\bloop\b/.test(runAt) === false ) { return; }
 		const observer = new MutationObserver(mutationHandler);
-		observer.observe(document.body, {
+		observer.observe(document.documentElement, {
 		    childList: true,
 		    subtree: true,
 		});
 	};
 	if ( document.readyState !== 'complete' && /\bcomplete\b/.test(runAt) ) {
-        	self.addEventListener('load', start, { once: true });
+        	self.addEventListener('load', start, true);
     	} else if ( document.readyState !== 'loading' || /\basap\b/.test(runAt) ) {
         	start();
     	} else {
-        	self.requestIdleCallback(start, { timeout : 10 });
+        	self.addEventListener('DOMContentLoaded', start, true);
     }
 }
 
@@ -446,17 +446,17 @@ function insertChildAfter(
 		insertelem();
 		if ( /\bloop\b/.test(runAt) === false ) { return; }
 		const observer = new MutationObserver(mutationHandler);
-		observer.observe(document.body, {
+		observer.observe(document.documentElement, {
 		    childList: true,
 		    subtree: true,
 		});
 	};
 	if ( document.readyState !== 'complete' && /\bcomplete\b/.test(runAt) ) {
-        	self.addEventListener('load', start, { once: true });
+        	self.addEventListener('load', start, true);
     	} else if ( document.readyState !== 'loading' || /\basap\b/.test(runAt) ) {
         	start();
     	} else {
-        	self.requestIdleCallback(start, { timeout : 10 });
+        	self.addEventListener('DOMContentLoaded', start, true);
     }
 }
 
