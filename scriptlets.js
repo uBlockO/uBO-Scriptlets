@@ -89,7 +89,7 @@ function renameAttr(
     	} else if ( document.readyState !== 'loading' || /\basap\b/.test(runAt) ) {
         	start();
     	} else {
-        	self.requestidleCallback(start, { timeout : 10 });
+        	self.requestIdleCallback(start, { timeout : 10 });
     	}
 }
 
@@ -148,7 +148,7 @@ function replaceAttr(
     	} else if ( document.readyState !== 'loading' || /\basap\b/.test(runAt) ) {
        		start();
     	} else {
-        	self.requestidleCallback(start, { timeout : 10 });
+        	self.requestIdleCallback(start, { timeout : 10 });
     	}
 }
 
@@ -232,7 +232,7 @@ function replaceClass(
     	} else if ( document.readyState !== 'loading' || /\basap\b/.test(runAt) ) {
         	start();
     	} else {
-        	self.requestidleCallback(start, { timeout : 10 });
+        	self.requestIdleCallback(start, { timeout : 10 });
     	}
 }
 
@@ -401,7 +401,7 @@ function insertChildBefore(
     	} else if ( document.readyState !== 'loading' || /\basap\b/.test(runAt) ) {
         	start();
     	} else {
-        	self.requestidleCallback(start, { timeout : 10 });
+        	self.requestIdleCallback(start, { timeout : 10 });
     }
 }
 
@@ -456,7 +456,7 @@ function insertChildAfter(
     	} else if ( document.readyState !== 'loading' || /\basap\b/.test(runAt) ) {
         	start();
     	} else {
-        	self.requestidleCallback(start, { timeout : 10 });
+        	self.requestIdleCallback(start, { timeout : 10 });
     }
 }
 
