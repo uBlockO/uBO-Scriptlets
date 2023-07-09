@@ -144,7 +144,7 @@ function replaceAttr(
 		});
 	};
 	if ( document.readyState !== 'complete' && /\bcomplete\b/.test(runAt) ) {
-        	sself.addEventListener('load', start, true);
+        	self.addEventListener('load', start, true);
     	} else if ( document.readyState !== 'loading' || /\basap\b/.test(runAt) ) {
        		start();
     	} else {
