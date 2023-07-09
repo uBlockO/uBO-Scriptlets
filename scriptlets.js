@@ -37,12 +37,13 @@ function removeShadowRootElem(
 /// rename-attr.js
 /// alias rna.js
 /// world ISOLATED
+/// dependency run-at.fn
 // example.com##+js(rna, [selector], oldattr, newattr)
 function renameAttr(
 	selector = '',
 	oldattr = '',
 	newattr = '',
-	runAt = '' 
+	run = '' 
 ) {
 	if ( selector === '' || oldattr === '' || newattr === '' ) { return; }
 	let timer;
@@ -77,32 +78,27 @@ function renameAttr(
 	};
 	const start = ( ) => {
 		renameattr();
-		if ( /\bloop\b/.test(runAt) === false ) { return; }
+		if ( /\bloop\b/.test(run) === false ) { return; }
 		const observer = new MutationObserver(mutationHandler);
 		observer.observe(document.documentElement, {
 		    childList: true,
 		    subtree: true,
 		});
 	};
-	if ( document.readyState !== 'complete' && /\bcomplete\b/.test(runAt) ) {
-        	self.addEventListener('load', start, true);
-    	} else if ( document.readyState !== 'loading' || /\basap\b/.test(runAt) ) {
-        	start();
-    	} else {
-        	self.addEventListener('DOMContentLoaded', start, true);
-    	}
+	runAt(( ) => { start(); }, /\bcomplete\b/.test(run) ? 'idle' : 'interactive');
 }
 
 /// replace-attr.js
 /// alias rpla.js
 /// world ISOLATED
+/// dependency run-at.fn
 // example.com##+js(rpla, [selector], oldattr, newattr, newvalue)
 function replaceAttr(
 	selector = '',
 	oldattr = '',
 	newattr = '',
 	value = '',
-	runAt = '' 
+	run = '' 
 ) {
 	if ( selector === '' || oldattr === '' || newattr === '' ) { return; }
 	let timer;
@@ -136,20 +132,14 @@ function replaceAttr(
 	};
 	const start = ( ) => {
 		replaceattr();
-		if ( /\bloop\b/.test(runAt) === false ) { return; }
+		if ( /\bloop\b/.test(run) === false ) { return; }
 		const observer = new MutationObserver(mutationHandler);
 		observer.observe(document.documentElement, {
 		    childList: true,
 		    subtree: true,
 		});
 	};
-	if ( document.readyState !== 'complete' && /\bcomplete\b/.test(runAt) ) {
-        	self.addEventListener('load', start, true);
-    	} else if ( document.readyState !== 'loading' || /\basap\b/.test(runAt) ) {
-       		start();
-    	} else {
-        	self.addEventListener('DOMContentLoaded', start, true);
-    	}
+	runAt(( ) => { start(); }, /\bcomplete\b/.test(run) ? 'idle' : 'interactive');
 }
 
 /// add-class.js
@@ -182,12 +172,13 @@ function addClass(
 /// replace-class.js
 /// alias rpc.js
 /// world ISOLATED
+/// dependency run-at.fn
 // example.com##+js(rpc, [selector], oldclass, newclass)
 function replaceClass(
 	selector = '',
 	oldclass = '',
 	newclass = '', 
-	runAt = ''
+	run = ''
 ) {
 	if ( selector === '' || oldclass === '' || newclass === '' ) { return; }
 	let timer;
@@ -227,13 +218,7 @@ function replaceClass(
 	    subtree: true,
 	});
 	};
-	if ( document.readyState !== 'complete' && /\bcomplete\b/.test(runAt) ) {
-        	self.addEventListener('load', start, true);
-    	} else if ( document.readyState !== 'loading' || /\basap\b/.test(runAt) ) {
-        	start();
-    	} else {
-        	self.addEventListener('DOMContentLoaded', start, true);
-    	}
+	runAt(( ) => { start(); }, /\bcomplete\b/.test(run) ? 'idle' : 'interactive');
 }
 
 /// move-attr-prop.js
@@ -353,11 +338,12 @@ function noAlertIf(
 /// insert-child-before.js
 /// alias icb.js
 /// world ISOLATED
+/// dependency run-at.fn
 // example.com##+js(icb, element, node)
 function insertChildBefore( 
 	selector = '',
 	element = '',
-	runAt = '' 
+	run = '' 
 ) {
 	if ( selector === '' || element === '' ) { return; }
 	let timer;
@@ -389,30 +375,25 @@ function insertChildBefore(
 	};
 	const start = ( ) => {
 		insertelem();
-		if ( /\bloop\b/.test(runAt) === false ) { return; }
+		if ( /\bloop\b/.test(run) === false ) { return; }
 		const observer = new MutationObserver(mutationHandler);
 		observer.observe(document.documentElement, {
 		    childList: true,
 		    subtree: true,
 		});
 	};
-	if ( document.readyState !== 'complete' && /\bcomplete\b/.test(runAt) ) {
-        	self.addEventListener('load', start, true);
-    	} else if ( document.readyState !== 'loading' || /\basap\b/.test(runAt) ) {
-        	start();
-    	} else {
-        	self.addEventListener('DOMContentLoaded', start, true);
-    }
+	runAt(( ) => { start(); }, /\bcomplete\b/.test(run) ? 'idle' : 'interactive');
 }
 
 /// insert-child-after.js
 /// alias ica.js
 /// world ISOLATED
+/// dependency run-at.fn
 // example.com##+js(ica, element, node)
 function insertChildAfter( 
 	selector = '',
 	element = '',
-	runAt = '' 
+	run = '' 
 ) {
 	if ( selector === '' || element === '' ) { return; }
 	let timer;
@@ -444,20 +425,14 @@ function insertChildAfter(
 	};
 	const start = ( ) => {
 		insertelem();
-		if ( /\bloop\b/.test(runAt) === false ) { return; }
+		if ( /\bloop\b/.test(run) === false ) { return; }
 		const observer = new MutationObserver(mutationHandler);
 		observer.observe(document.documentElement, {
 		    childList: true,
 		    subtree: true,
 		});
 	};
-	if ( document.readyState !== 'complete' && /\bcomplete\b/.test(runAt) ) {
-        	self.addEventListener('load', start, true);
-    	} else if ( document.readyState !== 'loading' || /\basap\b/.test(runAt) ) {
-        	start();
-    	} else {
-        	self.addEventListener('DOMContentLoaded', start, true);
-    }
+	runAt(( ) => { start(); }, /\bcomplete\b/.test(run) ? 'idle' : 'interactive');
 }
 
 /// response-prune.js
