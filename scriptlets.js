@@ -211,7 +211,7 @@ function replaceClass(
 	};
 	const start = ( ) => {
 	replaceclass();
-	if ( /\bloop\b/.test(runAt) === false ) { return; }
+	if ( /\bloop\b/.test(run) === false ) { return; }
 	const observer = new MutationObserver(mutationHandler);
 	observer.observe(document.documentElement, {
 	    childList: true,
