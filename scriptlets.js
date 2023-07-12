@@ -302,7 +302,6 @@ function callFunction(
 
 /// no-alert-if.js
 /// alias noaif.js
-/// world ISOLATED
 // example.com##+js(noaif, text)
 function noAlertIf(
         needle = ''
