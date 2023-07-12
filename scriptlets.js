@@ -336,7 +336,7 @@ function noAlertIf(
                     		 return target.toString.bind(target);
                 	}
                 		return Reflect.get(target, prop, receiver);
-            		}
+            		},
                 });
 }
 
@@ -476,7 +476,14 @@ function responsePrune(
                           })
                       )
                   );
-              }
+              },
+	      get(target, prop, receiver) {
+       		  if(prop == "toString") {
+          		return target.toString.bind(target);
+       		  } else {
+          		return Reflect.get(target, prop, receiver);
+       		  }
+    	      },	  
           });
           self.XMLHttpRequest.prototype.open = new Proxy(self.XMLHttpRequest.prototype.open, {
               apply: async (target, thisArg, args) => {
@@ -494,6 +501,13 @@ function responsePrune(
                 	Object.defineProperty(thisArg, 'responseText', { value: textout });
             	  });
                   return Reflect.apply(target, thisArg, args);
-              }
+              },
+	      get(target, prop, receiver) {
+       		  if(prop == "toString") {
+          		return target.toString.bind(target);
+       		  } else {
+          		return Reflect.get(target, prop, receiver);
+       		  }
+    	      },	     
           });
 }
