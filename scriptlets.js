@@ -329,7 +329,7 @@ function noAlertIf(
                                  defuse = reNeedle.test(params) !== needleNot;
                             }
                             if ( !defuse ) {
-                                 return target.apply(thisArg, args);
+                                 return Reflect.apply(target, thisArg, args);
                             }  
                         }
                 });
