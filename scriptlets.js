@@ -331,7 +331,13 @@ function noAlertIf(
                             if ( !defuse ) {
                                  return Reflect.apply(target, thisArg, args);
                             }  
-                        }
+                        },
+			get(target, prop, receiver) {
+                	    if ( prop === 'toString' ) {
+                    		 return target.toString.bind(target);
+                	}
+                		return Reflect.get(target, prop, receiver);
+            		}
                 });
 }
 
