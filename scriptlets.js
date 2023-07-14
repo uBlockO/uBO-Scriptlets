@@ -442,17 +442,21 @@ function insertChildAfter(
 
 /// response-prune.js
 /// alias resp.js
+/// dependency safe-self.fn
+/// dependency get-extra-args.fn
 /// dependency pattern-to-regex.fn
-// example.com##+js(resp, url, needle, text)
 function responsePrune(
          resURL = '',
          needle = '',
          textContent = '' 
 ) {
+	  const safe = safeSelf();  
+	  const extraArgs = getExtraArgs(Array.from(arguments), 1);
+	  const shouldLog = scriptletGlobals.has('canDebug') && extraArgs.log || 0;
+	  if ( textContent === '' ) { textContent = ''; }
 	  resURL= patternToRegex(resURL, "gms"); 
 	  needle = patternToRegex(needle, "gms");
-          if ( textContent === '' ) { textContent = ''; }
-          const pruner = stringText => {
+	  const pruner = stringText => {
                stringText  = stringText.replace(needle, textContent);
                return stringText;
           };
@@ -467,7 +471,11 @@ function responsePrune(
                   if ( resURL.test(urlFromArg(args[0])) === false ) {
                       return Reflect.apply(target, thisArg, args);
                   }
-                  return realFetch(...args).then(realResponse =>
+		  const haystack = args.join('');    
+		  if ( shouldLog !== 0 ) {
+                    safe.log('fetch:', haystack);
+                  }
+		  return realFetch(...args).then(realResponse =>
                       realResponse.text().then(text =>
                           new Response(pruner(text), {
                               status: realResponse.status,
@@ -490,7 +498,11 @@ function responsePrune(
                   if ( resURL.test(urlFromArg(args[1])) === false ) {
                       return Reflect.apply(target, thisArg, args);
                   }
-                  thisArg.addEventListener('readystatechange', function() {
+		  const haystack = args.join('');    
+		  if ( shouldLog !== 0 ) {
+                    safe.log('xhr:', haystack);
+                  }
+		  thisArg.addEventListener('readystatechange', function() {
                 	if ( thisArg.readyState !== 4 ) { return; }
                 	const type = thisArg.responseType;
                 	if ( type !== '' && type !== 'text' ) { return; }
