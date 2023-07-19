@@ -313,7 +313,7 @@ function noAlertIf(
                 } else if ( needle !== '' ) {
                     needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
                 }
-                const log = needleNot === false && needle === '' ? console.log : undefined;
+                const log = needleNot === false && needle.length == 0 ? console.log.bind(console) : undefined;
                 const reNeedle = new RegExp(needle);
                 self.alert = new Proxy(self.alert, {
                         apply: (target, thisArg, args) => {
@@ -440,8 +440,8 @@ function insertChildAfter(
 	runAt(( ) => { start(); }, /\bcomplete\b/.test(run) ? 'idle' : 'interactive');
 }
 
-/// response-prune.js
-/// alias resp.js
+/// response-text-prune.js
+/// alias rtp.js
 /// dependency pattern-to-regex.fn
 function responsePrune(
          resURL = '',
