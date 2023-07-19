@@ -481,12 +481,13 @@ function responsePrune(
                   for ( const prop in details ) {
                     let v = details[prop];
                     if ( typeof v !== 'string' ) {
-                        try { v = JSON.stringify(v); } 
-			catch { }
+                        try { 
+		              v = JSON.stringify(v); 
+			} catch { }
                     }
                     if ( typeof v !== 'string' ) { continue; }
-                    	 props.set(prop, v);
-                    }
+                    props.set(prop, v);
+                  }
                   if ( shouldLog !== 0 ) {
                     const logout = Array.from(props)
                                      .map(a => `${a[0]}:${a[1]}`)
