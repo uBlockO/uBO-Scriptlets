@@ -471,10 +471,29 @@ function responsePrune(
                   if ( resURL.test(urlFromArg(args[0])) === false ) {
                       return Reflect.apply(target, thisArg, args);
                   }
-		  const haystack = args.join(' ');    
-		  if ( shouldLog !== 0 ) {
-                    safe.log('fetch:', haystack);
+		  let details;
+                  if ( args[0] instanceof self.Request ) {
+                    details = args[0];
+                  } else {
+                    details = Object.assign({ url: args[0] }, args[1]);
                   }
+                  const props = new Map();
+                  for ( const prop in details ) {
+                    let v = details[prop];
+                    if ( typeof v !== 'string' ) {
+                        try { v = JSON.stringify(v); } 
+			catch { }
+                    }
+                    if ( typeof v !== 'string' ) { continue; }
+                    	 props.set(prop, v);
+                    }
+                  if ( shouldLog !== 0 ) {
+                    const logout = Array.from(props)
+                                     .map(a => `${a[0]}:${a[1]}`)
+                                     .join(', ');
+                    safe.log(`[uBO]: fetch(${logout})`);
+		    return Reflect.apply(target, thisArg, args);	  
+                  } 
 		  return realFetch(...args).then(realResponse =>
                       realResponse.text().then(text =>
                           new Response(pruner(text), {
@@ -483,8 +502,8 @@ function responsePrune(
                               headers: realResponse.headers,
                           })
                       )
-                  );
-              },
+                  );    
+	      },
 	      get(target, prop, receiver) {
        		  if(prop == "toString") {
           		return target.toString.bind(target);
@@ -498,10 +517,9 @@ function responsePrune(
                   if ( resURL.test(urlFromArg(args[1])) === false ) {
                       return Reflect.apply(target, thisArg, args);
                   }
-		  const haystack = args.join(' ');    
 		  if ( shouldLog !== 0 ) {
-                    safe.log('xhr:', haystack);
-                  }
+                    safe.log(`[uBO]: xhr(${args.join(', ')})`);
+                  } 
 		  thisArg.addEventListener('readystatechange', function() {
                 	if ( thisArg.readyState !== 4 ) { return; }
                 	const type = thisArg.responseType;
