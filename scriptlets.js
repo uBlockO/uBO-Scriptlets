@@ -467,7 +467,7 @@ function responsePrune(
           };
           const realFetch = self.fetch;
           self.fetch = new Proxy(self.fetch, {
-              apply: (target, thisArg, args) => {
+              apply: async (target, thisArg, args) => {
                   if ( resURL.test(urlFromArg(args[0])) === false ) {
                       return Reflect.apply(target, thisArg, args);
                   }
