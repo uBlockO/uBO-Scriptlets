@@ -442,17 +442,13 @@ function insertChildAfter(
 
 /// response-prune.js
 /// alias resp.js
-/// dependency safe-self.fn
-/// dependency get-extra-args.fn
 /// dependency pattern-to-regex.fn
 function responsePrune(
          resURL = '',
          needle = '',
          textContent = '' 
 ) {
-	  const safe = safeSelf();  
-	  const extraArgs = getExtraArgs(Array.from(arguments), 1);
-	  const shouldLog = scriptletGlobals.has('canDebug') && extraArgs.log || 0;
+	  const log = resURL.length == 0 && needle.length == 0 ? console.log.bind(console) : undefined;
 	  if ( textContent === '' ) { textContent = ''; }
 	  resURL= patternToRegex(resURL, "gms"); 
 	  needle = patternToRegex(needle, "gms");
@@ -488,11 +484,11 @@ function responsePrune(
                     if ( typeof v !== 'string' ) { continue; }
                     props.set(prop, v);
                   }
-                  if ( shouldLog !== 0 ) {
+                  if ( log !== undefined ) {
                     const logout = Array.from(props)
                                      .map(a => `${a[0]}:${a[1]}`)
                                      .join(', ');
-                    safe.log(`[uBO]: fetch(${logout})`);
+                    log(`[uBO]: fetch(${logout})`);
 		    return Reflect.apply(target, thisArg, args);	  
                   } 
 		  return realFetch(...args).then(realResponse =>
@@ -518,8 +514,8 @@ function responsePrune(
                   if ( resURL.test(urlFromArg(args[1])) === false ) {
                       return Reflect.apply(target, thisArg, args);
                   }
-		  if ( shouldLog !== 0 ) {
-                    safe.log(`[uBO]: xhr(${args.join(', ')})`);
+		  if ( log !== undefined ) {
+                    log(`[uBO]: xhr(${args.join(', ')})`);
                   } 
 		  thisArg.addEventListener('readystatechange', function() {
                 	if ( thisArg.readyState !== 4 ) { return; }
