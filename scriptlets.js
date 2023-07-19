@@ -471,7 +471,7 @@ function responsePrune(
                   if ( resURL.test(urlFromArg(args[0])) === false ) {
                       return Reflect.apply(target, thisArg, args);
                   }
-		  const haystack = args.join('');    
+		  const haystack = args.join(' ');    
 		  if ( shouldLog !== 0 ) {
                     safe.log('fetch:', haystack);
                   }
@@ -498,7 +498,7 @@ function responsePrune(
                   if ( resURL.test(urlFromArg(args[1])) === false ) {
                       return Reflect.apply(target, thisArg, args);
                   }
-		  const haystack = args.join('');    
+		  const haystack = args.join(' ');    
 		  if ( shouldLog !== 0 ) {
                     safe.log('xhr:', haystack);
                   }
