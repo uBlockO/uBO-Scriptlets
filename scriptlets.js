@@ -448,7 +448,7 @@ function responsePrune(
          needle = '',
          textContent = '' 
 ) {
-	  const log = resURL.length == 0 && needle.length == 0 ? console.log.bind(console) : undefined;
+	  const log = resURL.length === 0 && needle.length === 0 && textContent.length === 0 ? console.log.bind(console) : undefined;
 	  resURL= patternToRegex(resURL, "gms"); 
 	  needle = patternToRegex(needle, "gms");
 	  const pruner = stringText => {
@@ -518,11 +518,11 @@ function responsePrune(
                   } 
 		  thisArg.addEventListener('readystatechange', function() {
                 	if ( thisArg.readyState !== 4 ) { return; }
-                	const type = thisArg.responseType;
-                	if ( type !== '' && type !== 'text' ) { return; }
+			const type = thisArg.responseType;
+                	if ( type !== '' && type !== 'text' ) { return; }  
                 	const textin = thisArg.responseText;
                 	const textout = pruner(textin);
-                	if ( textout === textin ) { return; }
+	 		if ( textout === textin ) { return; }  
                 	Object.defineProperty(thisArg, 'response', { value: textout });
                 	Object.defineProperty(thisArg, 'responseText', { value: textout });
             	  });
@@ -537,3 +537,4 @@ function responsePrune(
     	      },	     
           });
 }
+
