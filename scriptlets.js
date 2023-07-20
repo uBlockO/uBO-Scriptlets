@@ -449,7 +449,6 @@ function responsePrune(
          textContent = '' 
 ) {
 	  const log = resURL.length == 0 && needle.length == 0 ? console.log.bind(console) : undefined;
-	  if ( textContent === '' ) { textContent = ''; }
 	  resURL= patternToRegex(resURL, "gms"); 
 	  needle = patternToRegex(needle, "gms");
 	  const pruner = stringText => {
