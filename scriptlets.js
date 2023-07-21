@@ -313,7 +313,7 @@ function noAlertIf(
                 } else if ( needle !== '' ) {
                     needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
                 }
-                const log = needleNot === false && needle.length == 0 ? console.log.bind(console) : undefined;
+                const log = needleNot === false && needle.length === 0 ? console.log.bind(console) : undefined;
                 const reNeedle = new RegExp(needle);
                 self.alert = new Proxy(self.alert, {
                         apply: (target, thisArg, args) => {
