@@ -85,7 +85,7 @@ function renameAttr(
 		    subtree: true,
 		});
 	};
-	runAt(( ) => { start(); }, /\bcomplete\b/.test(run) ? 'idle' : 'interactive');
+	runAt(( ) => { start(); }, /\bcomplete\b/.test(run) ? 'idle' : 'loading');
 }
 
 /// replace-attr.js
@@ -139,7 +139,7 @@ function replaceAttr(
 		    subtree: true,
 		});
 	};
-	runAt(( ) => { start(); }, /\bcomplete\b/.test(run) ? 'idle' : 'interactive');
+	runAt(( ) => { start(); }, /\bcomplete\b/.test(run) ? 'idle' : 'loading');
 }
 
 /// add-class.js
@@ -218,7 +218,7 @@ function replaceClass(
 	    subtree: true,
 	});
 	};
-	runAt(( ) => { start(); }, /\bcomplete\b/.test(run) ? 'idle' : 'interactive');
+	runAt(( ) => { start(); }, /\bcomplete\b/.test(run) ? 'idle' : 'loading');
 }
 
 /// move-attr-prop.js
@@ -387,7 +387,7 @@ function insertChildBefore(
 		    subtree: true,
 		});
 	};
-	runAt(( ) => { start(); }, /\bcomplete\b/.test(run) ? 'idle' : 'interactive');
+	runAt(( ) => { start(); }, /\bcomplete\b/.test(run) ? 'idle' : 'loading');
 }
 
 /// insert-child-after.js
@@ -437,7 +437,7 @@ function insertChildAfter(
 		    subtree: true,
 		});
 	};
-	runAt(( ) => { start(); }, /\bcomplete\b/.test(run) ? 'idle' : 'interactive');
+	runAt(( ) => { start(); }, /\bcomplete\b/.test(run) ? 'idle' : 'loading');
 }
 
 /// response-text-prune.js
