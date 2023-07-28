@@ -488,6 +488,9 @@ function responsePrune(
                                      .map(a => `${a[0]}:${a[1]}`)
                                      .join(', ');
                     log(`[uBO]: fetch(${logout})`);
+		    realFetch(...args).then(realResponse =>
+                        realResponse.text().then(data => { log('[uBO]: '+'textin:'+data); }) 
+		    );	  
 		    return Reflect.apply(target, thisArg, args);	  
                   } 
 		  return realFetch(...args).then(realResponse =>
@@ -496,9 +499,9 @@ function responsePrune(
                               status: realResponse.status,
                               statusText: realResponse.statusText,
                               headers: realResponse.headers,
-                          })
+                          })	       
                       )
-                  );    
+		 );    
 	      },
 	      get(target, prop, receiver) {
        		  if(prop == "toString") {
@@ -513,18 +516,19 @@ function responsePrune(
                   if ( resURL.test(urlFromArg(args[1])) === false ) {
                       return Reflect.apply(target, thisArg, args);
                   }
-		  if ( log !== undefined ) {
-                    log(`[uBO]: xhr(${args.join(', ')})`);
-                  } 
 		  thisArg.addEventListener('readystatechange', function() {
                 	if ( thisArg.readyState !== 4 ) { return; }
 			const type = thisArg.responseType;
                 	if ( type !== '' && type !== 'text' ) { return; }  
                 	const textin = thisArg.responseText;
+		        if ( log !== undefined ) { 
+			     log(`[uBO]: xhr(${args.join(', ')})`);
+			     log('[uBO]: '+'textin:'+JSON.stringify(textin)); 
+			}
                 	const textout = pruner(textin);
 	 		if ( textout === textin ) { return; }  
                 	Object.defineProperty(thisArg, 'response', { value: textout });
-                	Object.defineProperty(thisArg, 'responseText', { value: textout });
+                	Object.defineProperty(thisArg, 'responseText', { value: textout });		  
             	  });
                   return Reflect.apply(target, thisArg, args);
               },
@@ -537,4 +541,3 @@ function responsePrune(
     	      },	     
           });
 }
-
