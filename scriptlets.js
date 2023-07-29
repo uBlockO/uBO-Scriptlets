@@ -516,19 +516,19 @@ function responsePrune(
                   if ( resURL.test(urlFromArg(args[1])) === false ) {
                       return Reflect.apply(target, thisArg, args);
                   }
+		  if ( log !== undefined ) {
+		       log(`[uBO]: xhr(${args.join(', ')})`);	
+		  }    
 		  thisArg.addEventListener('readystatechange', function() {
-                	if ( thisArg.readyState !== 4 ) { return; }
-			const type = thisArg.responseType;
-                	if ( type !== '' && type !== 'text' ) { return; }  
+			if ( thisArg.readyState !== 4 ) { return; }  
+			const type = thisArg.responseType;                	
+			if ( type !== '' && type !== 'text' ) { return; }  
                 	const textin = thisArg.responseText;
-		        if ( log !== undefined ) { 
-			     log(`[uBO]: xhr(${args.join(', ')})`);
-			     log('[uBO]: '+'textin:'+JSON.stringify(textin)); 
-			}
-                	const textout = pruner(textin);
+			if ( log !== undefined ) { log('[uBO] '+'textin:'+textin); }  
+                	const textout = pruner(textin);  
 	 		if ( textout === textin ) { return; }  
                 	Object.defineProperty(thisArg, 'response', { value: textout });
-                	Object.defineProperty(thisArg, 'responseText', { value: textout });		  
+                	Object.defineProperty(thisArg, 'responseText', { value: textout });
             	  });
                   return Reflect.apply(target, thisArg, args);
               },
@@ -541,3 +541,4 @@ function responsePrune(
     	      },	     
           });
 }
+
