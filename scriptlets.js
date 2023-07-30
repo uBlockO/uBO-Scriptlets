@@ -219,6 +219,7 @@ function replaceClass(
 
 /// move-attr-prop.js
 /// alias map.js
+/// dependency run-at.fn
 /// world ISOLATED
 // example.com##+js(map, [selector], [selector2], attr, attr2)
 function moveAttrProp(
@@ -228,8 +229,7 @@ function moveAttrProp(
 	oldattr = '' 
 ) {
 	if ( selector === '' || element === '') { return; }
-	const map = ev => {
-		if (ev) { self.removeEventListener(ev.type, map, true); }
+	const map = ( ) => {
 		try {
 			const elem = document.querySelectorAll(selector);
 			const elem2 = document.querySelectorAll(element);
@@ -238,11 +238,7 @@ function moveAttrProp(
 			}
 		} catch { }
 	};
-	if (document.readyState === 'loading') {
-		    self.addEventListener('DOMContentLoaded', map, true);
-	} else {
-		    map();
-	}
+	runAt(( ) => { map(); }, 'interactive');
 }
 
 /// append-elem.js
