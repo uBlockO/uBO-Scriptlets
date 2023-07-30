@@ -218,7 +218,7 @@ function replaceClass(
 	    subtree: true,
 	});
 	};
-	runAt(( ) => { start(); }, /\bcomplete\b/.test(run) ? 'idle' : 'loading');
+	runAt(( ) => { start(); }, /\bcomplete\b/.test(run) ? 'idle' : 'interactive');
 }
 
 /// move-attr-prop.js
