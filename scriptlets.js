@@ -144,6 +144,7 @@ function replaceAttr(
 
 /// add-class.js
 /// alias ac.js
+/// dependency run-at.fn
 /// world ISOLATED
 // example.com##+js(ac, class, [selector])
 function addClass(
@@ -153,8 +154,7 @@ function addClass(
 	if ( needle === '' ) { return; }
 	const needles = needle.split(/\s*\|\s*/);
 	if ( selector === '' ) { selector = '.' + needles.map(a => CSS.escape(a)).join(',.'); }
-	const addclass = ev => {
-		if (ev) { self.removeEventListener(ev.type, addclass, true);  }
+	const addclass = ( ) => {
 		const nodes = document.querySelectorAll(selector);
 		try {
 			for ( const node of nodes ) {
@@ -162,11 +162,7 @@ function addClass(
 			}
 		} catch { }
 	};
-	if (document.readyState === 'loading') {
-	      self.addEventListener('DOMContentLoaded', addclass, true);
-	} else {
-	      addclass();
-	}
+	runAt(( ) => { addclass(); }, 'interactive');
 }
 
 /// replace-class.js
