@@ -387,7 +387,7 @@ function insertChildBefore(
 		    subtree: true,
 		});
 	};
-	runAt(( ) => { start(); }, /\bcomplete\b/.test(run) ? 'idle' : 'loading');
+	runAt(( ) => { start(); }, /\bcomplete\b/.test(run) ? 'idle' : 'interactive');
 }
 
 /// insert-child-after.js
@@ -437,7 +437,7 @@ function insertChildAfter(
 		    subtree: true,
 		});
 	};
-	runAt(( ) => { start(); }, /\bcomplete\b/.test(run) ? 'idle' : 'loading');
+	runAt(( ) => { start(); }, /\bcomplete\b/.test(run) ? 'idle' : 'interactive');
 }
 
 /// response-text-prune.js
