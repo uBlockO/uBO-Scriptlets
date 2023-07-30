@@ -85,7 +85,7 @@ function renameAttr(
 		    subtree: true,
 		});
 	};
-	runAt(( ) => { start(); }, /\bcomplete\b/.test(run) ? 'idle' : 'loading');
+	runAt(( ) => { start(); }, /\bcomplete\b/.test(run) ? 'idle' : 'interactive');
 }
 
 /// replace-attr.js
@@ -139,7 +139,7 @@ function replaceAttr(
 		    subtree: true,
 		});
 	};
-	runAt(( ) => { start(); }, /\bcomplete\b/.test(run) ? 'idle' : 'loading');
+	runAt(( ) => { start(); }, /\bcomplete\b/.test(run) ? 'idle' : 'interactive');
 }
 
 /// add-class.js
