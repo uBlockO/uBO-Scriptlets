@@ -243,6 +243,7 @@ function moveAttrProp(
 
 /// append-elem.js
 /// alias ape.js
+/// dependency run-at.fn
 /// world ISOLATED
 // example.com##+js(ape, [selector], element, attribute, value)
 function appendElem(
@@ -252,8 +253,7 @@ function appendElem(
 	value = '' 
 ) {
 	if ( selector === '' ) { return; }
-	const appendNode = ev => {
-		if (ev) { self.removeEventListener(ev.type, appendNode, true); }
+	const appendNode = ( ) => {
 		try {
 			const elements = document.querySelectorAll(selector);
 			for ( const element of elements ) {
@@ -263,15 +263,12 @@ function appendElem(
 			}
 		} catch { }
 	};
-	if (document.readyState === 'complete') {
-		    appendNode();
-	} else {
-		    self.addEventListener('load', appendNode, true);
-	}
+	runAt(( ) => { appendNode(); }, 'interactive');
 }
 
 /// callfunction.js
 /// alias cf.js
+/// dependency run-at.fn
 /// world ISOLATED
 // example.com##+js(cf, funcName, funcDelay)
 function callFunction(
@@ -279,17 +276,12 @@ function callFunction(
 	funcDelay = '' 
 ) {
 	      if ( funcCall === '' || funcDelay === '' ) { return; }
-	      const funcInvoke = ev => { 
-			if (ev) { self.removeEventListener(ev.type, funcInvoke, true); }
+	      const funcInvoke = ( ) => { 
 			try { 
 				setTimeout(window[funcCall], funcDelay);
 			} catch { }
 	      };	      
-	      if (document.readyState === 'interactive' || document.readyState === 'complete') {
-		    funcInvoke();
-	      } else {
-		    self.addEventListener('DOMContentLoaded', funcInvoke, true);
-	      }
+	      runAt(( ) => { funcInvoke(); }, 'interactive');
 }
 
 /// no-alert-if.js
