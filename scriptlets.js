@@ -426,15 +426,16 @@ function insertChildAfter(
 
 /// response-text-prune.js
 /// alias rtp.js
-/// dependency pattern-to-regex.fn
+/// dependency safe-self.fn
 function responsePrune(
          resURL = '',
          needle = '',
          textContent = '' 
 ) {
+	  const safe = safeSelf(); 
 	  const log = resURL.length === 0 && needle.length === 0 && textContent.length === 0 ? console.log.bind(console) : undefined;
-	  resURL= patternToRegex(resURL, "gms"); 
-	  needle = patternToRegex(needle, "gms");
+	  resURL= safe.patternToRegex(resURL, "gms"); 
+	  needle = safe.patternToRegex(needle, "gms");
 	  const pruner = stringText => {
                stringText  = stringText.replace(needle, textContent);
                return stringText;
