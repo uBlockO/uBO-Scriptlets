@@ -427,7 +427,7 @@ function insertChildAfter(
 /// xhr-prune.js
 /// alias xhp.js
 /// dependency safe-self.fn
-function responsePrune(
+function xhrPrune(
          resURL = '',
          needle = '',
          textContent = '' 
