@@ -424,54 +424,22 @@ function insertChildAfter(
 	runAt(( ) => { start(); }, /\bcomplete\b/.test(run) ? 'idle' : 'interactive');
 }
 
-/// xhr-prune.js
-/// alias xhp.js
-/// dependency safe-self.fn
-function xhrPrune(
-         resURL = '',
-         needle = '',
-         textContent = '' 
+/// set-inner-html.js
+/// alias sih.js
+/// dependency run-at.fn
+/// world ISOLATED
+function setInnerHTML(
+         selector = '',
+         text = ''    
 ) {
-	  const safe = safeSelf(); 
-	  const log = resURL.length === 0 && needle.length === 0 && textContent.length === 0 ? console.log.bind(console) : undefined;
-	  resURL= safe.patternToRegex(resURL, "gms"); 
-	  needle = safe.patternToRegex(needle, "gms");
-	  const pruner = stringText => {
-               stringText  = stringText.replace(needle, textContent);
-               return stringText;
-          };
-          const urlFromArg = arg => {
-              if ( typeof arg === 'string' ) { return arg; }
-              if ( arg instanceof Request ) { return arg.url; }
-              return String(arg);
-          };
-          self.XMLHttpRequest.prototype.open = new Proxy(self.XMLHttpRequest.prototype.open, {
-              apply: async (target, thisArg, args) => {
-                  if ( resURL.test(urlFromArg(args[1])) === false ) {
-                      return Reflect.apply(target, thisArg, args);
-                  }
-		  if ( log !== undefined ) {
-		       log(`[uBO]: xhr(${args.join(', ')})`);	
-		  }    
-		  thisArg.addEventListener('readystatechange', function() {
-			if ( thisArg.readyState !== 4 ) { return; }  
-			const type = thisArg.responseType;                	
-			if ( type !== '' && type !== 'text' ) { return; }  
-                	const textin = thisArg.responseText;
-			if ( log !== undefined ) { log('[uBO] '+'textin:'+textin); }  
-                	const textout = pruner(textin);  
-	 		if ( textout === textin ) { return; }  
-                	Object.defineProperty(thisArg, 'response', { value: textout });
-                	Object.defineProperty(thisArg, 'responseText', { value: textout });
-            	  });
-                  return Reflect.apply(target, thisArg, args);
-              },
-	      get(target, prop, receiver) {
-       		  if(prop == "toString") {
-          		return target.toString.bind(target);
-       		  } else {
-          		return Reflect.get(target, prop, receiver);
-       		  }
-    	      },	     
-          });
+    if ( selector === '' || text === '' ) { return; }
+    const innerHTML = ( ) => {
+          const nodes = document.querySelectorAll(selector);
+          try {
+			for ( const node of nodes ) {
+			      if ( node ) { node.innerHTML = text; }
+			}
+	  } catch { }
+    };
+    runAt(( ) => { innerHTML(); }, 'interactive');
 }
