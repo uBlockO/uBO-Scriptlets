@@ -436,9 +436,9 @@ function setInnerHTML(
     const innerHTML = ( ) => {
           const nodes = document.querySelectorAll(selector);
           try {
-			for ( const node of nodes ) {
-			      if ( node ) { node.innerHTML = text; }
-			}
+		 for ( const node of nodes ) {
+		      if ( node ) { node.innerHTML = text; }
+		 }
 	  } catch { }
     };
     runAt(( ) => { innerHTML(); }, 'interactive');
