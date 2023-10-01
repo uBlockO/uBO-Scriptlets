@@ -419,3 +419,47 @@ function setInnerHTML(
     };
     runAt(( ) => { innerHTML(); }, 'interactive');
 }
+
+/// no-beacon.js
+/// alias nob.js
+/// dependency run-at.fn
+/// dependency safe-self.fn
+/// dependency should-log.fn
+function noSendBeaconIf(
+        url = '',
+        data = ''
+) {
+        const safe = safeSelf();
+        const extraArgs = safe.getExtraArgs(Array.from(arguments), 2);
+        const reUrl = safe.patternToRegex(url);
+        const reData = safe.patternToRegex(data);
+        const log = shouldLog(extraArgs);
+        const trapSendBeacons = ( ) => {
+           const beaconHandler = {
+                apply: (target, thisArg, args) => {
+                    let url, data;
+                    try {
+                          url = String(args[0]);
+                          data = String(args[1]);
+                    } catch { }	    
+                    const matchesNeedle = safe.RegExp_test.call(reUrl, url);
+                    const matchesData = safe.RegExp_test.call(reData, data);
+                    const matchesEither = matchesNeedle || matchesData;
+                    const matchesBoth = matchesNeedle && matchesData;
+                    if ( log === 1 && matchesBoth || log === 2 && matchesEither || log === 3 ) {
+                        safe.uboLog(`sendBeacon('${url}', ${data})`);
+                    }
+                    if ( matchesBoth ) { return; }
+                    return Reflect.apply(target, thisArg, args);
+                },
+                get: (target, prop, receiver) => {
+                    if ( prop === 'toString' ) {
+                        return target.toString.bind(target);
+                    }
+                        return Reflect.get(target, prop, receiver);
+                },
+            };
+           self.navigator.sendBeacon = new Proxy(self.navigator.sendBeacon, beaconHandler);
+        };
+        runAt(( ) => { trapSendBeacons(); }, extraArgs.runAt);
+}
