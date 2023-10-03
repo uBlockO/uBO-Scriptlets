@@ -425,7 +425,7 @@ function setInnerHTML(
 /// dependency run-at.fn
 /// dependency safe-self.fn
 /// dependency should-log.fn
-function noSendBeaconIf(
+function noBeaconIf(
         url = '',
         data = ''
 ) {
@@ -434,7 +434,7 @@ function noSendBeaconIf(
         const reUrl = safe.patternToRegex(url);
         const reData = safe.patternToRegex(data);
         const log = shouldLog(extraArgs);
-        const trapSendBeacons = ( ) => {
+        const trapBeacons = ( ) => {
            const beaconHandler = {
                 apply: (target, thisArg, args) => {
                     let url, data;
@@ -461,5 +461,5 @@ function noSendBeaconIf(
             };
            self.navigator.sendBeacon = new Proxy(self.navigator.sendBeacon, beaconHandler);
         };
-        runAt(( ) => { trapSendBeacons(); }, extraArgs.runAt);
+        runAt(( ) => { trapBeacons(); }, extraArgs.runAt);
 }
