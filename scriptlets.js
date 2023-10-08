@@ -447,7 +447,7 @@ function noBeaconIf(
                     const matchesEither = matchesNeedle || matchesData;
                     const matchesBoth = matchesNeedle && matchesData;
                     if ( log === 1 && matchesBoth || log === 2 && matchesEither || log === 3 ) {
-                        safe.uboLog(`sendBeacon('${url}', ${data})`);
+                        safe.uboLog(`sendBeacon(${url}, ${data})`);
                     }
                     if ( matchesBoth ) { return; }
                     return Reflect.apply(target, thisArg, args);
