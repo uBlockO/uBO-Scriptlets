@@ -420,6 +420,30 @@ function setInnerHTML(
     runAt(( ) => { innerHTML(); }, 'interactive');
 }
 
+/// move-attr-prop.js
+/// alias map.js
+/// dependency run-at.fn
+/// world ISOLATED
+// example.com##+js(map, [selector], [selector2], attr, attr2)
+function moveAttrProp(
+	selector = '',
+	element = '',
+	newattr = '',
+	oldattr = '' 
+) {
+	if ( selector === '' || element === '') { return; }
+	const map = ( ) => {
+		try {
+			const elem = document.querySelectorAll(selector);
+			const elem2 = document.querySelectorAll(element);
+			for (let i = 0; i < elem.length; i++) {
+			     elem[i].setAttribute(newattr, elem2[i].getAttribute(oldattr));
+			}
+		} catch { }
+	};
+	runAt(( ) => { map(); }, 'interactive');
+}
+
 /// no-beacon.js
 /// alias nob.js
 /// dependency run-at.fn
@@ -462,28 +486,4 @@ function noBeaconIf(
            self.navigator.sendBeacon = new Proxy(self.navigator.sendBeacon, beaconHandler);
         };
         runAt(( ) => { trapBeacons(); }, extraArgs.runAt);
-}
-
-/// move-attr-prop.js
-/// alias map.js
-/// dependency run-at.fn
-/// world ISOLATED
-// example.com##+js(map, [selector], [selector2], attr, attr2)
-function moveAttrProp(
-	selector = '',
-	element = '',
-	newattr = '',
-	oldattr = '' 
-) {
-	if ( selector === '' || element === '') { return; }
-	const map = ( ) => {
-		try {
-			const elem = document.querySelectorAll(selector);
-			const elem2 = document.querySelectorAll(element);
-			for (let i = 0; i < elem.length; i++) {
-			     elem[i].setAttribute(newattr, elem2[i].getAttribute(oldattr));
-			}
-		} catch { }
-	};
-	runAt(( ) => { map(); }, 'interactive');
 }
