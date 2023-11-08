@@ -503,7 +503,7 @@ function setAttr(
 	const tokens = token.split(/\s*\|\s*/);
 	if ( selector === '' ) { selector = `[${tokens.join('],[')}]`; }
 	let timer;
-	const setattr = () => {
+	const setAttr = () => {
 	timer = undefined;	
 	const nodes = document.querySelectorAll(selector);
 	try {
@@ -530,10 +530,10 @@ function setAttr(
 	    }
 	}
 	if ( skip ) { return; }
-	timer = self.requestAnimationFrame(setattr);
+	timer = self.requestAnimationFrame(setAttr);
 	};
 	const start = ( ) => {
-	setattr();
+	setAttr();
 	if ( /\bloop\b/.test(run) === false ) { return; }
 	const observer = new MutationObserver(mutationHandler);
 	observer.observe(document.documentElement, {
