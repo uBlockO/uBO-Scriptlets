@@ -492,7 +492,7 @@ function noBeaconIf(
 /// alias tsa.js
 /// dependency run-at.fn
 /// world ISOLATED
-// example.com##+js(tsa, attr, value, [selector])
+// example.com##+js(tsa, attr, value, [selector], runValue)
 function setAttr(
 	token = '',
 	attrValue = '',
