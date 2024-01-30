@@ -406,14 +406,23 @@ function insertChildAfter(
 /// world ISOLATED
 function setInnerHTML(
          selector = '',
-         text = ''    
+         text = '',
+	 append = 0, 
 ) {
     if ( selector === '' || text === '' ) { return; }
     const innerHTML = ( ) => {
           const nodes = document.querySelectorAll(selector);
           try {
 		 for ( const node of nodes ) {
-		      if ( node ) { node.innerHTML = text; }
+		      if ( node ) { 
+			      if (append == 0) {
+				      node.innerHTML = text;
+			      } else if ( append == 1 ) {
+				      node.innerHTML += text;
+			      } else if ( append == 2) {
+				      node.innerHTML = text + node.innerHTML;
+			      }
+			}
 		 }
 	  } catch { }
     };
