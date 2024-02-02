@@ -448,7 +448,6 @@ function moveAttrProp(
 /// alias nob.js
 /// dependency run-at.fn
 /// dependency safe-self.fn
-/// dependency should-log.fn
 function noBeaconIf(
         url = '',
         data = ''
@@ -457,7 +456,7 @@ function noBeaconIf(
         const extraArgs = safe.getExtraArgs(Array.from(arguments), 2);
         const reUrl = safe.patternToRegex(url);
         const reData = safe.patternToRegex(data);
-        const log = shouldLog(extraArgs);
+        const log = safe.makeLogPrefix('no-beacon', type, pattern);
         const trapBeacons = ( ) => {
            const beaconHandler = {
                 apply: (target, thisArg, args) => {
@@ -471,7 +470,7 @@ function noBeaconIf(
                     const matchesEither = matchesNeedle || matchesData;
                     const matchesBoth = matchesNeedle && matchesData;
                     if ( log === 1 && matchesBoth || log === 2 && matchesEither || log === 3 ) {
-                        safe.uboLog(`sendBeacon('${url}', '${data}')`);
+                        safe.uboLog(log, `sendBeacon('${url}', '${data}')`);
                     }
                     if ( matchesBoth ) { return; }
                     return Reflect.apply(target, thisArg, args);
