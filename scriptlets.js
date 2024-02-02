@@ -456,6 +456,7 @@ function noBeaconIf(
         const extraArgs = safe.getExtraArgs(Array.from(arguments), 2);
         const reUrl = safe.patternToRegex(url);
         const reData = safe.patternToRegex(data);
+	const log = url.length === 0 && data.length === 0 ? console.log.bind(console) : undefined;
         const trapBeacons = ( ) => {
            const beaconHandler = {
                 apply: (target, thisArg, args) => {
@@ -468,8 +469,8 @@ function noBeaconIf(
                     const matchesData = safe.RegExp_test.call(reData, data);
                     const matchesEither = matchesNeedle || matchesData;
                     const matchesBoth = matchesNeedle && matchesData;
-                    if ( url.length === 0 && data.length === 0 ) {
-                        safe.uboLog(`sendBeacon('${url}', '${data}')`);
+                    if ( log !== undefined ) {
+                        log(`sendBeacon('${url}', '${data}')`);
                     }
                     if ( matchesBoth ) { return; }
                     return Reflect.apply(target, thisArg, args);
