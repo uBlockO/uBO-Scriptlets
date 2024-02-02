@@ -456,7 +456,7 @@ function noBeaconIf(
         const extraArgs = safe.getExtraArgs(Array.from(arguments), 2);
         const reUrl = safe.patternToRegex(url);
         const reData = safe.patternToRegex(data);
-        const log = safe.makeLogPrefix('no-beacon', type, pattern);
+        const log = safe.makeLogPrefix('no-beacon', extraArgs);
         const trapBeacons = ( ) => {
            const beaconHandler = {
                 apply: (target, thisArg, args) => {
