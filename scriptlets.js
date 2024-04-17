@@ -510,6 +510,7 @@ function setAttr(
 			for ( const attr of tokens ) {
 			      if ( attr !== attrValue) { 
 				   node.setAttribute(attr, attrValue);
+				   break;   
 			      }	      
 			}
 		}
