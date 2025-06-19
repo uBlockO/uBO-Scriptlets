@@ -51,7 +51,7 @@ function removeNode(
             childList: true,
           });
           };
-          runAt(( ) => { start(); }, 'interactive');
+          runAt(( ) => { start(); }, 'loading');
 }
 
 /// rename-attr.js
