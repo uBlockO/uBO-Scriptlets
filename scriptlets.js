@@ -18,7 +18,7 @@ function removeNode(
 				if ( nodes.length > 0 ) {
 					for (const node of nodes) {
 						if (reNeedle.test(node.outerHTML)) {
-						    node.remove(); 
+						    node.textContent = ''; 
 					   }     
 					}
 				}	
@@ -51,7 +51,7 @@ function removeNode(
             childList: true,
           });
           };
-          runAt(( ) => { start(); }, 'loading');
+          runAt(( ) => { start(); }, 'interactive');
 }
 
 /// rename-attr.js
