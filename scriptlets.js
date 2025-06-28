@@ -47,7 +47,7 @@ function removeNode(
           const start = ( ) => {
           if ( removenode() === false ) { return; }
           observer = new MutationObserver(onDomChanged);
-          observer.observe(document.body, {
+          observer.observe(document.documentElement, {
             subtree: true,
             childList: true,
           });
