@@ -15,14 +15,12 @@ function removeNode(
 	  const removenode = () => {
 		        try {
 				const nodes = document.querySelectorAll(element);
-				if ( nodes.length > 0 ) {
-					for (const node of nodes) {
-						if (reNeedle.test(node.outerHTML)) {
-						    node.textContent = '';
-						    node.remove();	
-					   }     
-					}
-				}	
+				for (const node of nodes) {
+					if (reNeedle.test(node.outerHTML)) {
+					    node.textContent = '';
+					    node.remove();	
+					}     
+				}
 			} catch { }
           };
 	  let observer, timer;
