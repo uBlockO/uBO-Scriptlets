@@ -350,26 +350,6 @@ function insertChildAfter(
 	runAt(( ) => { start(); }, /\bcomplete\b/.test(run) ? 'idle' : 'interactive');
 }
 
-/// set-inner-html.js
-/// alias sih.js
-/// dependency run-at.fn
-/// world ISOLATED
-function setInnerHTML(
-         selector = '',
-         text = ''    
-) {
-    if ( selector === '' || text === '' ) { return; }
-    const innerHTML = ( ) => {
-          const nodes = document.querySelectorAll(selector);
-          try {
-		 for ( const node of nodes ) {
-		      if ( node ) { node.innerHTML = text; }
-		 }
-	  } catch { }
-    };
-    runAt(( ) => { innerHTML(); }, 'interactive');
-}
-
 /// move-attr-prop.js
 /// alias map.js
 /// dependency run-at.fn
