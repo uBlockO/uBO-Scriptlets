@@ -45,7 +45,7 @@ function renameAttr(
         const start = ( ) => {
         if ( renameattr() === false ) { return; }
         observer = new MutationObserver(onDomChanged);
-        observer.observe(document.body, {
+        observer.observe(document.documentElement, {
             subtree: true,
             childList: true,
         });
