@@ -6,7 +6,7 @@
 /// dependency run-at.fn
 /// dependency safe-self.fn
 //  example.com##+js(rde, .ads)
-function removeElement(
+function removeDOMElement(
     selector = ''
 ) {
     const safe = safeSelf();
