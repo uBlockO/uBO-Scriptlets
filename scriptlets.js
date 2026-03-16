@@ -1,5 +1,67 @@
 'use strict';
 
+/// remove-dom-element.js
+/// alias rde.js
+/// world ISOLATED
+/// dependency run-at.fn
+/// dependency safe-self.fn
+//  example.com##+js(rde, .ads)
+function removeElement(
+    selector = ''
+) {
+    const safe = safeSelf();
+    const logPrefix = safe.makeLogPrefix('removeDOMElement', ...Array.from(arguments));
+    const stop = (takeRecord = true) => {
+        if ( takeRecord ) {
+            handleMutations(observer.takeRecords());
+        }
+        observer.disconnect();
+        if ( safe.logLevel > 1 ) {
+            safe.uboLog(logPrefix, 'Quitting');
+        }
+    };
+    let sedCount = 0;
+    const handleNode = node => { 
+		const nodes = document.querySelectorAll(selector);
+		nodes.forEach(elem => elem.remove())
+		safe.uboLog(logPrefix, `${selector} node removed from the DOM`);
+		return sedCount === 0 || (sedCount -= 1) !== 0;
+    };
+    const handleMutations = mutations => {
+        for ( const mutation of mutations ) {
+            for ( const node of mutation.addedNodes ) {
+                if ( handleNode(node) ) { continue; }
+                stop(false); return;
+            }
+        }
+    };
+    const observer = new MutationObserver(handleMutations);
+    observer.observe(document, { childList: true, subtree: true });
+    if ( document.documentElement ) {
+        const treeWalker = document.createTreeWalker(
+            document.documentElement,
+            NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT
+        );
+        let count = 0;
+        for (;;) {
+            const node = treeWalker.nextNode();
+            count += 1;
+            if ( node === null ) { break; }
+            if ( handleNode(node) ) { continue; }
+            stop(); break;
+        }
+        safe.uboLog(logPrefix, `${count} nodes present before installing mutation observer`);
+    }
+    runAt(( ) => {
+        const quitAfter = 0;
+        if ( quitAfter !== 0 ) {
+            setTimeout(( ) => { stop(); }, quitAfter);
+        } else {
+            stop();
+        }
+    }, 'interactive');
+}
+
 /// rename-attr.js
 /// alias rna.js
 /// world ISOLATED
