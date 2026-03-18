@@ -59,7 +59,7 @@ function removeDOMElement(
         } else {
             stop();
         }
-    }, 'interactive');
+    }, 'loading');
 }
 
 /// rename-attr.js
