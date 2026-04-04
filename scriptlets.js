@@ -23,7 +23,7 @@ function removeDOMElement(
     let sedCount = 0;
     const handleNode = node => { 
 		const nodes = document.querySelectorAll(selector);
-		nodes.forEach(elem => elem.outerHTML = ""; elem.remove())
+		nodes.forEach(elem => elem.outerHTML = "")
 		safe.uboLog(logPrefix, `${selector} node removed from the DOM`);
 		return sedCount === 0 || (sedCount -= 1) !== 0;
     };
