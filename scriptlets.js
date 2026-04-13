@@ -66,17 +66,30 @@ function removeDOMElement(
 /// alias rna.js
 /// world ISOLATED
 /// dependency run-at.fn
+/// dependency safe-self.fn
 // example.com##+js(rna, [selector], oldattr, newattr)
 function renameAttr(
 	selector = '',
 	oldattr = '',
 	newattr = ''
 ) {
-	if ( selector === '' || oldattr === '' || newattr === '' ) { return; }
-	const renameattr = ( ) => {
-		const elems = document.querySelectorAll(selector);
+	const safe = safeSelf();
+    const logPrefix = safe.makeLogPrefix('renameAttribute', ...Array.from(arguments));
+    const stop = (takeRecord = true) => {
+        if ( takeRecord ) {
+            handleMutations(observer.takeRecords());
+        }
+        observer.disconnect();
+        if ( safe.logLevel > 1 ) {
+            safe.uboLog(logPrefix, 'Quitting');
+        }
+    };
+    let sedCount = 0;
+	const handleNode = node => { 
+		if ( selector === '' || oldattr === '' || newattr === '' ) { return; }
+		const nodes = document.querySelectorAll(selector);
 		try {
-			for ( const elem of elems ) {
+			for ( const elem of nodes ) {
 				if ( elem.hasAttribute( oldattr ) ) {
 				     const value = elem.getAttribute( oldattr );		
 				     elem.removeAttribute( oldattr );
@@ -84,35 +97,42 @@ function renameAttr(
 				}
 			}	
 		} catch { }
-	};
-	let observer, timer;
-    	const onDomChanged = mutations => {
-        if ( timer !== undefined ) { return; }
-        let shouldWork = false;
+		safe.uboLog(logPrefix, `${oldattr} attr renamed to ${newattr}`);
+		return sedCount === 0 || (sedCount -= 1) !== 0;
+    };
+    const handleMutations = mutations => {
         for ( const mutation of mutations ) {
-            if ( mutation.addedNodes.length === 0 ) { continue; }
             for ( const node of mutation.addedNodes ) {
-                if ( node.nodeType !== 1 ) { continue; }
-                shouldWork = true;
-                break;
+                if ( handleNode(node) ) { continue; }
+                stop(false); return;
             }
-            if ( shouldWork ) { break; }
         }
-        if ( shouldWork === false ) { return; }
-        timer = self.requestAnimationFrame(( ) => {
-            timer = undefined;
-            renameattr();
-        });
-        };
-        const start = ( ) => {
-        if ( renameattr() === false ) { return; }
-        observer = new MutationObserver(onDomChanged);
-        observer.observe(document.documentElement, {
-            subtree: true,
-            childList: true,
-        });
-        };
-        runAt(( ) => { start(); }, 'interactive');
+    };
+    const observer = new MutationObserver(handleMutations);
+    observer.observe(document, { childList: true, subtree: true });
+    if ( document.documentElement ) {
+        const treeWalker = document.createTreeWalker(
+            document.documentElement,
+            NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT
+        );
+        let count = 0;
+        for (;;) {
+            const node = treeWalker.nextNode();
+            count += 1;
+            if ( node === null ) { break; }
+            if ( handleNode(node) ) { continue; }
+            stop(); break;
+        }
+        safe.uboLog(logPrefix, `${count} nodes present before installing mutation observer`);
+    }
+    runAt(( ) => {
+        const quitAfter = 0;
+        if ( quitAfter !== 0 ) {
+            setTimeout(( ) => { stop(); }, quitAfter);
+        } else {
+            stop();
+        }
+    }, 'interactive');
 }
 
 /// replace-attr.js
