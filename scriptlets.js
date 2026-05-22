@@ -11,7 +11,6 @@ function removeDOMElement(
 ) {
     const safe = safeSelf();
     const logPrefix = safe.makeLogPrefix('removeDOMElement', ...Array.from(arguments));
-	const extraArgs = safe.getExtraArgs(Array.from(arguments), 3);
 	const stop = (takeRecord = true) => {
         if ( takeRecord ) {
             handleMutations(observer.takeRecords());
@@ -21,7 +20,7 @@ function removeDOMElement(
             safe.uboLog(logPrefix, 'Quitting');
         }
     };
-    let sedCount = extraArgs.sedCount || 0;
+    let sedCount = 0;
     const handleNode = node => { 
 		const nodes = document.querySelectorAll(selector);
 		try {
@@ -61,7 +60,7 @@ function removeDOMElement(
         safe.uboLog(logPrefix, `${count} nodes present before installing mutation observer`);
     }
     runAt(( ) => {
-        const quitAfter = extraArgs.quitAfter || 0;
+        const quitAfter = 0;
         if ( quitAfter !== 0 ) {
             setTimeout(( ) => { stop(); }, quitAfter);
         } else {
