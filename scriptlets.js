@@ -60,7 +60,6 @@ function removeDOMElement(
         }
         safe.uboLog(logPrefix, `${count} nodes present before installing mutation observer`);
     }
-	if ( extraArgs.stay ) { return; }
     runAt(( ) => {
         const quitAfter = extraArgs.quitAfter || 0;
         if ( quitAfter !== 0 ) {
