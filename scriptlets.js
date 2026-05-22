@@ -12,13 +12,7 @@ function removeDOMElement(
     const safe = safeSelf();
     const logPrefix = safe.makeLogPrefix('removeDOMElement', ...Array.from(arguments));
 	const extraArgs = safe.getExtraArgs(Array.from(arguments), 3);
-	const reIncludes = extraArgs.includes || extraArgs.condition
-        ? safe.patternToRegex(extraArgs.includes || extraArgs.condition, 'ms')
-        : null;
-    const reExcludes = extraArgs.excludes
-        ? safe.patternToRegex(extraArgs.excludes, 'ms')
-        : null;
-    const stop = (takeRecord = true) => {
+	const stop = (takeRecord = true) => {
         if ( takeRecord ) {
             handleMutations(observer.takeRecords());
         }
@@ -30,14 +24,6 @@ function removeDOMElement(
     let sedCount = extraArgs.sedCount || 0;
     const handleNode = node => { 
 		const nodes = document.querySelectorAll(selector);
-		if ( reIncludes ) {
-            reIncludes.lastIndex = 0;
-            if ( safe.RegExp_test.call(reIncludes, before) === false ) { return true; }
-        }
-		if ( reExcludes ) {
-            reExcludes.lastIndex = 0;
-            if ( safe.RegExp_test.call(reExcludes, before) ) { return true; }
-        }
 		try {
 			  for ( const elem of nodes ) {
 				  if ( elem ) {
