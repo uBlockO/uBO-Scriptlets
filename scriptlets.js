@@ -69,7 +69,6 @@ function removeDOMElement(
             const node = treeWalker.nextNode();
             count += 1;
             if ( node === null ) { break; }
-			if ( node === document.currentScript ) { continue; }
             if ( handleNode(node) ) { continue; }
             stop(); break;
         }
