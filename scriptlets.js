@@ -5,14 +5,16 @@
 /// world ISOLATED
 /// dependency run-at.fn
 /// dependency safe-self.fn
-//  example.com##+js(rde, .ads)
+//  example.com##+js(rde, .ads, /text/)
 function removeDOMElement(
     selector = '',
+	string = '',
 	...varargs
 ) {
     const safe = safeSelf();
     const logPrefix = safe.makeLogPrefix('removeDOMElement', ...Array.from(arguments));
 	const extraArgs = safe.parseVarargs(varargs);
+	const pattern = safe.patternToRegex(string);
 	const stop = (takeRecord = true) => {
         if ( takeRecord ) {
             handleMutations(observer.takeRecords());
@@ -26,7 +28,7 @@ function removeDOMElement(
     const handleNode = node => { 
 		const nodes = document.querySelectorAll(selector);
 		for ( const elem of nodes ) {
-				  if ( elem ) {
+				  if ( pattern.test(elem.outerHTML) ) {
 				       elem.outerHTML= '';
 				  }
 		}	
