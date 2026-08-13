@@ -7,7 +7,8 @@
 /// dependency safe-self.fn
 //  example.com##+js(rde, .ads)
 function removeDOMElement(
-    selector = ''
+    selector = '',
+	...varargs
 ) {
     const safe = safeSelf();
     const logPrefix = safe.makeLogPrefix('removeDOMElement', ...Array.from(arguments));
