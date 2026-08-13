@@ -11,7 +11,7 @@ function removeDOMElement(
 ) {
     const safe = safeSelf();
     const logPrefix = safe.makeLogPrefix('removeDOMElement', ...Array.from(arguments));
-	const extraArgs = safe.getExtraArgs(Array.from(arguments), 1);
+	const extraArgs = safe.parseVarargs(varargs);
 	const stop = (takeRecord = true) => {
         if ( takeRecord ) {
             handleMutations(observer.takeRecords());
