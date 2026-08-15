@@ -32,7 +32,7 @@ function removeDOMElement(
 				       elem.outerHTML= '';
 				  }
 		}	
-		safe.uboLog(logPrefix, `${selector} node found with ${string} text removed from the DOM`);
+		safe.uboLog(logPrefix, `${selector} node matching ${string} string removed from the DOM`);
 		return sedCount === 0 || (sedCount -= 1) !== 0;
     };
     const handleMutations = mutations => {
