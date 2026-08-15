@@ -1,20 +1,21 @@
 'use strict';
 
-/// remove-dom-element.js
-/// alias rde.js
+/// remove-dom-node.js
+/// alias rdn.js
 /// world ISOLATED
 /// dependency run-at.fn
 /// dependency safe-self.fn
-//  example.com##+js(rde, .ads, /text/)
+//  example.com##+js(rdn, .ads, /text/)
 function removeDOMElement(
     selector = '',
 	string = '',
 	...varargs
 ) {
     const safe = safeSelf();
-    const logPrefix = safe.makeLogPrefix('removeDOMElement', ...Array.from(arguments));
+    const logPrefix = safe.makeLogPrefix('removeDOMNode', ...Array.from(arguments));
 	const extraArgs = safe.parseVarargs(varargs);
 	const pattern = safe.patternToRegex(string);
+	if ( string === '' ) { return; }
 	const stop = (takeRecord = true) => {
         if ( takeRecord ) {
             handleMutations(observer.takeRecords());
