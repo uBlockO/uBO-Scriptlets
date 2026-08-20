@@ -15,7 +15,8 @@ function removeDOMElement(
     const logPrefix = safe.makeLogPrefix('removeDOMNode', ...Array.from(arguments));
 	const extraArgs = safe.parseVarargs(varargs);
 	const pattern = safe.patternToRegex(string);
-	if ( string === '' ) { string === '.+' }
+	if ( selector === '' ) { return; }
+	if ( string === '' ) { string === '/.+/' }
 	const stop = (takeRecord = true) => {
         if ( takeRecord ) {
             handleMutations(observer.takeRecords());
