@@ -73,56 +73,79 @@ function removeDOMElement(
     }, 'interactive');
 }
 
-/// add-class.js
-/// alias ac.js
-/// dependency run-at.fn
+/// insertClass.js
+/// alias isc.js
 /// world ISOLATED
-// example.com##+js(ac, class, [selector])
-function addClass(
-	needle = '',
-	selector = '' 
+/// dependency run-at.fn
+/// dependency safe-self.fn
+//  example.com##+js(isc, class, [selector])
+function insertClass(
+    needle = '',
+	selector = '',
+	...varargs
 ) {
+    const safe = safeSelf();
+    const logPrefix = safe.makeLogPrefix('insertClass', ...Array.from(arguments));
+	const extraArgs = safe.parseVarargs(varargs);
 	if ( needle === '' ) { return; }
 	const needles = needle.split(/\s*\|\s*/);
 	if ( selector === '' ) { selector = '.' + needles.map(a => CSS.escape(a)).join(',.'); }
-	const addclass = ( ) => {
+	const stop = (takeRecord = true) => {
+        if ( takeRecord ) {
+            handleMutations(observer.takeRecords());
+        }
+        observer.disconnect();
+        if ( safe.logLevel > 1 ) {
+            safe.uboLog(logPrefix, 'Quitting');
+        }
+    };
+    let sedCount = extraArgs.sedCount || 0;
+    const handleNode = node => { 
 		const nodes = document.querySelectorAll(selector);
 		try {
-			for ( const node of nodes ) {
-			      if ( !node.classList.contains(...needles) ) { 
-			           node.classList.add(...needles);
+			for ( const elem of nodes ) {
+			      if ( !elem.classList.contains(...needles) ) { 
+			           elem.classList.add(...needles);
 			      }	
 			}
-		} catch { }
-	};
-	let observer, timer;
-    	const onDomChanged = mutations => {
-        if ( timer !== undefined ) { return; }
-        let shouldWork = false;
+		} catch { }	
+		safe.uboLog(logPrefix, `${needles} added to the ${selector} in the DOM`);
+		return sedCount === 0 || (sedCount -= 1) !== 0;
+    };
+    const handleMutations = mutations => {
         for ( const mutation of mutations ) {
-            if ( mutation.addedNodes.length === 0 ) { continue; }
             for ( const node of mutation.addedNodes ) {
-                if ( node.nodeType !== 1 ) { continue; }
-                shouldWork = true;
-                break;
+                if ( handleNode(node) ) { continue; }
+                stop(false); return;
             }
-            if ( shouldWork ) { break; }
         }
-        if ( shouldWork === false ) { return; }
-        timer = self.requestAnimationFrame(( ) => {
-            timer = undefined;
-            addclass();
-        });
-        };
-        const start = ( ) => {
-        if ( addclass() === false ) { return; }
-        observer = new MutationObserver(onDomChanged);
-        observer.observe(document.body, {
-            subtree: true,
-            childList: true,
-        });
-        };
-        runAt(( ) => { start(); }, 'interactive');
+    };
+    const observer = new MutationObserver(handleMutations);
+    observer.observe(document, { childList: true, subtree: true });
+    if ( document.documentElement ) {
+        const treeWalker = document.createTreeWalker(
+            document.documentElement,
+            NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT
+        );
+        let count = 0;
+        for (;;) {
+            const node = treeWalker.nextNode();
+            count += 1;
+            if ( node === null ) { break; }
+            if ( handleNode(node) ) { continue; }
+            stop(); break;
+        }
+        safe.uboLog(logPrefix, `${count} nodes present before installing mutation observer`);
+    }
+	if ( extraArgs.stay ) { return; }
+    runAt(( ) => {
+        const quitAfter = extraArgs.quitAfter || 0;
+        if ( quitAfter !== 0 ) {
+            setTimeout(( ) => { stop(); }, quitAfter);
+        } else {
+            stop();
+        }
+    }, 'interactive');
 }
 
 /// replace-class.js
