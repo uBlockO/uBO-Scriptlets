@@ -64,9 +64,9 @@ function removeDOMElement(
     }
 	if ( extraArgs.loop ) { return; }
     runAt(( ) => {
-        const quitAfter = extraArgs.quitAfter || 0;
-        if ( quitAfter !== 0 ) {
-            setTimeout(( ) => { stop(); }, quitAfter);
+        const quit = extraArgs.quit || 0;
+        if ( quit !== 0 ) {
+            setTimeout(( ) => { stop(); }, quit);
         } else {
             stop();
         }
@@ -137,11 +137,11 @@ function insertClass(
         }
         safe.uboLog(logPrefix, `${count} nodes present before installing mutation observer`);
     }
-	if ( extraArgs.stay ) { return; }
+	if ( extraArgs.loop ) { return; }
     runAt(( ) => {
-        const quitAfter = extraArgs.quitAfter || 0;
-        if ( quitAfter !== 0 ) {
-            setTimeout(( ) => { stop(); }, quitAfter);
+        const quit = extraArgs.quit || 0;
+        if ( quit !== 0 ) {
+            setTimeout(( ) => { stop(); }, quit);
         } else {
             stop();
         }
