@@ -34,7 +34,7 @@ function removeDOMElement(
 				       elem.outerHTML= '';
 				  }
 		}	
-		safe.uboLog(logPrefix, `${selector} node matching ${string} string removed from the DOM`);
+		safe.uboLog(logPrefix, `${selector} node with matching ${string} string removed from the DOM`);
 		return sedCount === 0 || (sedCount -= 1) !== 0;
     };
     const handleMutations = mutations => {
@@ -62,7 +62,7 @@ function removeDOMElement(
         }
         safe.uboLog(logPrefix, `${count} nodes present before installing mutation observer`);
     }
-	if ( extraArgs.stay ) { return; }
+	if ( extraArgs.loop ) { return; }
     runAt(( ) => {
         const quitAfter = extraArgs.quitAfter || 0;
         if ( quitAfter !== 0 ) {
