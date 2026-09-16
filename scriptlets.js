@@ -12,7 +12,7 @@ function removeDOMElement(
 	...varargs
 ) {
     const safe = safeSelf();
-    const logPrefix = safe.makeLogPrefix('removeDOMNode', ...Array.from(arguments));
+    const logPrefix = safe.makeLogPrefix('removeDOMNode', ...Array.from(arguments), ...varargs);
 	const extraArgs = safe.parseVarargs(varargs);
 	const pattern = safe.patternToRegex(string);
 	if ( selector === '' ) { return; }
