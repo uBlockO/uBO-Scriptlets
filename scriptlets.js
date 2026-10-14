@@ -89,7 +89,6 @@ function removeStyleProperty(
 		const extraArgs = safe.parseVarargs(varargs);
 	    if ( property === '' || selector === '' ) { return; }
 	    const propsArray = Array.isArray(property) ? property : [property];
-        if ( propsArray.length === 0 ) { return; }
 		const stop = (takeRecord = true) => {
 	        if ( takeRecord ) {
 	            handleMutations(observer.takeRecords());
