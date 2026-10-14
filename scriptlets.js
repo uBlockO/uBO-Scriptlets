@@ -73,6 +73,77 @@ function removeDOMElement(
     }, 'interactive');
 }
 
+// remove-style-property.js
+/// alias rsp.js
+/// world ISOLATED
+/// dependency run-at.fn
+/// dependency safe-self.fn
+//  example.com##+js(rsp, .ads, prop)
+function removeStyleProperty(
+    selector = '',
+	  property = '',
+	  ...varargs
+) {
+    const safe = safeSelf();
+    const logPrefix = safe.makeLogPrefix('removeStyleProperty', ...Array.from(arguments), ...varargs);
+		const extraArgs = safe.parseVarargs(varargs);
+	    if ( property === '' || selector === '' ) { return; }
+		const stop = (takeRecord = true) => {
+	        if ( takeRecord ) {
+	            handleMutations(observer.takeRecords());
+	        }
+	        observer.disconnect();
+	        if ( safe.logLevel > 1 ) {
+	            safe.uboLog(logPrefix, 'Quitting');
+	        }
+	    };
+	    let sedCount = extraArgs.sedCount || 0;
+	    const handleNode = node => { 
+			const nodes = document.querySelectorAll(selector);
+			for ( const elem of nodes ) {
+					  if ( elem ) {
+					       elem.style.removeProperty(property);
+					  }
+			}	
+			safe.uboLog(logPrefix, `style ${property} property present in ${selector} removed from the DOM`);
+			return sedCount === 0 || (sedCount -= 1) !== 0;
+	    };
+	    const handleMutations = mutations => {
+	        for ( const mutation of mutations ) {
+	            for ( const node of mutation.addedNodes ) {
+	                if ( handleNode(node) ) { continue; }
+	                stop(false); return;
+	            }
+	        }
+	    };
+	    const observer = new MutationObserver(handleMutations);
+	    observer.observe(document, { childList: true, subtree: true });
+	    if ( document.documentElement ) {
+	        const treeWalker = document.createTreeWalker(
+	            document.documentElement,
+	            NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT
+	        );
+	        let count = 0;
+	        for (;;) {
+	            const node = treeWalker.nextNode();
+	            count += 1;
+	            if ( node === null ) { break; }
+	            if ( handleNode(node) ) { continue; }
+	            stop(); break;
+	        }
+	        safe.uboLog(logPrefix, `${count} nodes present before installing mutation observer`);
+	    }
+		  if ( extraArgs.loop ) { return; }
+	    runAt(( ) => {
+	        const quit = extraArgs.quit || 0;
+	        if ( quit !== 0 ) {
+	            setTimeout(( ) => { stop(); }, quit);
+	        } else {
+	            stop();
+	        }
+	    }, 'interactive');
+	}
+
 /// insertClass.js
 /// alias isc.js
 /// world ISOLATED
