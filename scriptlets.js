@@ -102,11 +102,11 @@ function removeStyleProperty(
 	    const handleNode = node => { 
 			const nodes = document.querySelectorAll(selector);
 			for ( const elem of nodes ) {
-					  if ( elem ) {
-						   for ( const prop of propsArray ) {
-					       		elem.style.removeProperty(prop);
-						   }
-					  }
+				 for ( const prop of propsArray ) {
+					   if ( elem ) {
+						    elem.style.removeProperty(prop);
+					   }
+				 }
 			}	
 			safe.uboLog(logPrefix, `style [${propsArray.join(', ')}] property present in ${selector} removed from the DOM`);
 			return sedCount === 0 || (sedCount -= 1) !== 0;
