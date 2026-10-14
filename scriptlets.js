@@ -81,13 +81,15 @@ function removeDOMElement(
 //  example.com##+js(rsp, .ads, prop)
 function removeStyleProperty(
     selector = '',
-	  property = '',
-	  ...varargs
+	property = '',
+	...varargs
 ) {
     const safe = safeSelf();
     const logPrefix = safe.makeLogPrefix('removeStyleProperty', ...Array.from(arguments), ...varargs);
 		const extraArgs = safe.parseVarargs(varargs);
 	    if ( property === '' || selector === '' ) { return; }
+	    const propsArray = Array.isArray(property) ? property : [property];
+        if ( propsArray.length === 0 ) { return; }
 		const stop = (takeRecord = true) => {
 	        if ( takeRecord ) {
 	            handleMutations(observer.takeRecords());
@@ -102,10 +104,12 @@ function removeStyleProperty(
 			const nodes = document.querySelectorAll(selector);
 			for ( const elem of nodes ) {
 					  if ( elem ) {
-					       elem.style.removeProperty(property);
+						   for ( const prop of propsArray ) {
+					       		elem.style.removeProperty(prop);
+						   }
 					  }
 			}	
-			safe.uboLog(logPrefix, `style ${property} property present in ${selector} removed from the DOM`);
+			safe.uboLog(logPrefix, `style [${propsArray.join(', ')}] property present in ${selector} removed from the DOM`);
 			return sedCount === 0 || (sedCount -= 1) !== 0;
 	    };
 	    const handleMutations = mutations => {
@@ -142,7 +146,7 @@ function removeStyleProperty(
 	            stop();
 	        }
 	    }, 'interactive');
-	}
+   }
 
 /// insertClass.js
 /// alias isc.js
