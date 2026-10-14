@@ -88,7 +88,6 @@ function removeStyleProperty(
     const logPrefix = safe.makeLogPrefix('removeStyleProperty', ...Array.from(arguments), ...varargs);
 		const extraArgs = safe.parseVarargs(varargs);
 	    if ( property === '' || selector === '' ) { return; }
-	    const propsArray = Array.isArray(property) ? property : [property];
 		const stop = (takeRecord = true) => {
 	        if ( takeRecord ) {
 	            handleMutations(observer.takeRecords());
@@ -102,13 +101,11 @@ function removeStyleProperty(
 	    const handleNode = node => { 
 			const nodes = document.querySelectorAll(selector);
 			for ( const elem of nodes ) {
-				 for ( const prop of propsArray ) {
 					   if ( elem ) {
-						    elem.style.removeProperty(prop);
+						    elem.style.removeProperty(property);
 					   }
-				 }
 			}	
-			safe.uboLog(logPrefix, `style [${propsArray.join(', ')}] property present in ${selector} removed from the DOM`);
+			safe.uboLog(logPrefix, `style ${property} property present in ${selector} removed from the DOM`);
 			return sedCount === 0 || (sedCount -= 1) !== 0;
 	    };
 	    const handleMutations = mutations => {
