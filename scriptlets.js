@@ -73,7 +73,7 @@ function removeDOMElement(
     }, 'interactive');
 }
 
-// remove-style-property.js
+/// remove-style-property.js
 /// alias rsp.js
 /// world ISOLATED
 /// dependency run-at.fn
