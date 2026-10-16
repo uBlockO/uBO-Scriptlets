@@ -78,17 +78,18 @@ function removeDOMElement(
 /// world ISOLATED
 /// dependency run-at.fn
 /// dependency safe-self.fn
-//  example.com##+js(rsp, .ads, prop)
+//  example.com##+js(rsp, [selector], /prop/)
 function removeStyleProperty(
     selector = '',
 	property = '',
 	...varargs
 ) {
-    const safe = safeSelf();
+    if ( property === '' || selector === '' ) { return; }
+	const safe = safeSelf();
     const logPrefix = safe.makeLogPrefix('removeStyleProperty', ...Array.from(arguments), ...varargs);
-		const extraArgs = safe.parseVarargs(varargs);
-	    if ( property === '' || selector === '' ) { return; }
-		const stop = (takeRecord = true) => {
+	const extraArgs = safe.parseVarargs(varargs);
+	const prop = safe.patternToRegex(property);
+	const stop = (takeRecord = true) => {
 	        if ( takeRecord ) {
 	            handleMutations(observer.takeRecords());
 	        }
@@ -102,10 +103,10 @@ function removeStyleProperty(
 			const nodes = document.querySelectorAll(selector);
 			for ( const elem of nodes ) {
 					   if ( elem ) {
-						    elem.style.removeProperty(property);
+						    elem.setAttribute('style', elem.getAttribute('style').replace(prop, ''););
 					   }
 			}	
-			safe.uboLog(logPrefix, `style ${property} property present in ${selector} removed from the DOM`);
+			safe.uboLog(logPrefix, `style ${prop} property present in ${selector} removed from the DOM`);
 			return sedCount === 0 || (sedCount -= 1) !== 0;
 	    };
 	    const handleMutations = mutations => {
@@ -142,8 +143,7 @@ function removeStyleProperty(
 	            stop();
 	        }
 	    }, 'interactive');
-   }
-
+  }
 /// insertClass.js
 /// alias isc.js
 /// world ISOLATED
