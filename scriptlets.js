@@ -101,12 +101,14 @@ function removeStyleProperty(
 	    let sedCount = extraArgs.sedCount || 0;
 	    const handleNode = node => { 
 			const nodes = document.querySelectorAll(selector);
+			try { 
 			for ( const elem of nodes ) {
 					   if ( elem ) {
 						    const value = elem.getAttribute('style').replace(prop, '');
 						    elem.setAttribute('style', value);
 					   }
-			}	
+			}
+			} catch { }
 			safe.uboLog(logPrefix, `style ${prop} property present in ${selector} removed from the DOM`);
 			return sedCount === 0 || (sedCount -= 1) !== 0;
 	    };
