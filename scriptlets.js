@@ -143,7 +143,8 @@ function removeStyleProperty(
 	            stop();
 	        }
 	    }, 'interactive');
-  }
+}
+
 /// insertClass.js
 /// alias isc.js
 /// world ISOLATED
