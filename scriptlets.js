@@ -103,7 +103,8 @@ function removeStyleProperty(
 			const nodes = document.querySelectorAll(selector);
 			for ( const elem of nodes ) {
 					   if ( elem ) {
-						    elem.setAttribute('style', elem.getAttribute('style').replace(prop, ''));
+						    const value = elem.getAttribute('style').replace(prop, '');
+						    elem.setAttribute('style', value);
 					   }
 			}	
 			safe.uboLog(logPrefix, `style ${prop} property present in ${selector} removed from the DOM`);
