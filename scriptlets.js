@@ -121,7 +121,12 @@ function removeStyleProperty(
 	        }
 	    };
 	    const observer = new MutationObserver(handleMutations);
-	    observer.observe(document, { childList: true, subtree: true });
+	    observer.observe(document, { 
+			childList: true, 
+			subtree: true, 
+			attributes: true, 
+			attributeFilter: ['style'] 
+		});
 	    if ( document.documentElement ) {
 	        const treeWalker = document.createTreeWalker(
 	            document.documentElement,
