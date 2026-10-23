@@ -122,10 +122,9 @@ function removeStyleProperty(
 	    };
 	    const observer = new MutationObserver(handleMutations);
 	    observer.observe(document, { 
+			attributeFilter: ['style'],
 			childList: true, 
-			subtree: true, 
-			attributes: true, 
-			attributeFilter: ['style'] 
+			subtree: true
 		});
 	    if ( document.documentElement ) {
 	        const treeWalker = document.createTreeWalker(
