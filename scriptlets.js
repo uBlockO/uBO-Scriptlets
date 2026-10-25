@@ -104,8 +104,7 @@ function removeStyleProperty(
 			try { 
 			for ( const elem of nodes ) {
 					   if ( elem ) {
-						    const value = elem.getAttribute('style').replace(prop, '');
-						    elem.setAttribute('style', value);
+						    elem.setAttribute('style', elem.getAttribute('style').replace(prop, ''));
 					   }
 			}
 			} catch { }
