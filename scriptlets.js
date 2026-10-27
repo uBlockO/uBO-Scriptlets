@@ -73,22 +73,21 @@ function removeDOMElement(
     }, 'interactive');
 }
 
-/// remove-style-property.js
+/// remove-style-propertys.js
 /// alias rsp.js
 /// world ISOLATED
 /// dependency run-at.fn
 /// dependency safe-self.fn
-//  example.com##+js(rsp, [selector], /prop/)
-function removeStyleProperty(
+//  example.com##+js(rsp, [selector], "prop")
+function removeStylePropertys(
     selector = '',
-	property = '',
+	props = '',
 	...varargs
 ) {
-    if ( property === '' || selector === '' ) { return; }
+    if ( props === '' || selector === '' ) { return; }
 	const safe = safeSelf();
-    const logPrefix = safe.makeLogPrefix('removeStyleProperty', ...Array.from(arguments), ...varargs);
+    const logPrefix = safe.makeLogPrefix('removeStylePropertys', ...Array.from(arguments), ...varargs);
 	const extraArgs = safe.parseVarargs(varargs);
-	const prop = safe.patternToRegex(property);
 	const stop = (takeRecord = true) => {
 	        if ( takeRecord ) {
 	            handleMutations(observer.takeRecords());
@@ -99,16 +98,22 @@ function removeStyleProperty(
 	        }
 	    };
 	    let sedCount = extraArgs.sedCount || 0;
-	    const handleNode = node => { 
+	    const handleNode = node => {
+			const removePropertyAll = (element, properties) => {
+				  if (!element.style) { return; }
+				  const removeStyles = properties.split(/[\s,;]+/).filter(Boolean);
+				  removeStyles.forEach(property => {
+				    const kebabProp = property.replace(/([A-Z])/g, "-$1").toLowerCase();
+				    element.style.removeProperty(kebabProp);
+				  });
+			};
 			const nodes = document.querySelectorAll(selector);
-			try { 
 			for ( const elem of nodes ) {
 					   if ( elem ) {
-						    elem.setAttribute('style', elem.getAttribute('style').replace(prop, ''));
+						    removePropertyAll(elem, props);
 					   }
-			}
-			} catch { }
-			safe.uboLog(logPrefix, `style ${prop} property present in ${selector} removed from the DOM`);
+			}	
+			safe.uboLog(logPrefix, `style ${props} property present in ${selector} removed from the DOM`);
 			return sedCount === 0 || (sedCount -= 1) !== 0;
 	    };
 	    const handleMutations = mutations => {
@@ -120,11 +125,7 @@ function removeStyleProperty(
 	        }
 	    };
 	    const observer = new MutationObserver(handleMutations);
-	    observer.observe(document, { 
-			attributeFilter: ['style'],
-			childList: true, 
-			subtree: true
-		});
+	    observer.observe(document, { attributeFilter: ['style'], childList: true, subtree: true });
 	    if ( document.documentElement ) {
 	        const treeWalker = document.createTreeWalker(
 	            document.documentElement,
@@ -141,14 +142,14 @@ function removeStyleProperty(
 	        safe.uboLog(logPrefix, `${count} nodes present before installing mutation observer`);
 	    }
 		  if ( extraArgs.loop ) { return; }
-	    runAt(( ) => {
+	      runAt(( ) => {
 	        const quit = extraArgs.quit || 0;
 	        if ( quit !== 0 ) {
 	            setTimeout(( ) => { stop(); }, quit);
 	        } else {
 	            stop();
 	        }
-	    }, 'interactive');
+	      }, 'interactive');
 }
 
 /// insertClass.js
