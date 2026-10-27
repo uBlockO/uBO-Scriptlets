@@ -108,11 +108,13 @@ function removeStylePropertys(
 				  });
 			};
 			const nodes = document.querySelectorAll(selector);
+			try { 
 			for ( const elem of nodes ) {
 					   if ( elem ) {
 						    removePropertyAll(elem, props);
 					   }
-			}	
+			}
+			} catch { }	
 			safe.uboLog(logPrefix, `style ${props} property present in ${selector} removed from the DOM`);
 			return sedCount === 0 || (sedCount -= 1) !== 0;
 	    };
