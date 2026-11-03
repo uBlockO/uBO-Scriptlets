@@ -82,7 +82,7 @@ function removeDOMElement(
 /// world ISOLATED
 /// dependency run-at.fn
 /// dependency safe-self.fn
-//  example.com##+js(rsp, [selector], "prop")
+//  example.com##+js(rsp, [selector], prop)
 function removeStylePropertys(
     selector = '',
 	props = '',
