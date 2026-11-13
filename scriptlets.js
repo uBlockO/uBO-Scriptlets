@@ -105,7 +105,7 @@ function removeStylePropertys(
 	    const handleNode = node => {
 			const removePropertyAll = (element, properties) => {
 				  if (!element.style) { return; }
-				  const removeStyles = properties.split(/[\s,;]+/).filter(Boolean);
+				  const removeStyles = properties.split(/[\s,;|]+/).filter(Boolean);
 				  removeStyles.forEach(property => {
 				    const kebabProp = property.replace(/([A-Z])/g, "-$1").toLowerCase();
 				    element.style.removeProperty(kebabProp);
