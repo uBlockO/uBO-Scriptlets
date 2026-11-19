@@ -107,7 +107,7 @@ function removeStylePropertys(
 				  if (!element.style) { return; }
 				  const removeStyles = properties.split(/[\s,;|]+/).filter(Boolean);
 				  removeStyles.forEach(property => {
-				    const kebabProp = property.replace(/([A-Z])/g, "-$1").toLowerCase();
+				    const kebabProp = property.startsWith('--') ? property : property.replace(/([A-Z])/g, "-$1").toLowerCase();
 				    element.style.removeProperty(kebabProp);
 				  });
 			};
